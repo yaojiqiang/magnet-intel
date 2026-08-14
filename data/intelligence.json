@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-14 07:49",
+  "lastUpdated": "2026-08-14 08:43",
   "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月14日中国稀土行业协会及包头稀土产品交易所数据更新。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
@@ -9,25 +9,25 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场整体呈现下行态势，轻稀土价格集体走低，重稀土镝铽系同步下滑。",
+    "marketSummary": "稀土市场整体呈现下行态势，轻稀土价格集体走低，重稀土镝铽系同步下滑。下游需求端表现偏弱，采购以按需为主，新增订单一般。",
     "currentPrices": [
       {
         "name": "金属镨",
         "category": "轻稀土",
-        "price": 99,
+        "price": 101.75,
         "unit": "万元/吨",
-        "change": -0.76,
-        "changeDesc": "较上次下跌0.76万元/吨",
+        "change": -0.75,
+        "changeDesc": "下跌7.5万元/吨",
         "date": "2026-08-14",
         "source": "我的钢铁网"
       },
       {
         "name": "金属钕",
         "category": "轻稀土",
-        "price": 98,
+        "price": 95.75,
         "unit": "万元/吨",
-        "change": -5000,
-        "changeDesc": "下滑5000元/吨",
+        "change": -0.5,
+        "changeDesc": "下跌5万元/吨",
         "date": "2026-08-14",
         "source": "我的钢铁网"
       },
@@ -44,20 +44,20 @@
       {
         "name": "氧化镨钕",
         "category": "轻稀土",
-        "price": 73.38,
+        "price": 71.5,
         "unit": "万元/吨",
-        "change": -0.23,
-        "changeDesc": "较上次下跌0.23万元/吨",
+        "change": -1.0,
+        "changeDesc": "下跌1万元/吨",
         "date": "2026-08-14",
         "source": "我的钢铁网"
       },
       {
         "name": "氧化钕",
         "category": "轻稀土",
-        "price": 78.25,
+        "price": 77.75,
         "unit": "万元/吨",
-        "change": -0.52,
-        "changeDesc": "较上次下跌0.52万元/吨",
+        "change": -1.0,
+        "changeDesc": "下跌1万元/吨",
         "date": "2026-08-14",
         "source": "我的钢铁网"
       },
@@ -1055,6 +1055,18 @@
       "description": "7月27日董事会审议通过股份回购方案：拟以自有资金5000万元至1亿元通过集中竞价回购A股，回购价不超过19.68元/股，股份全部用于员工持股计划，绑定核心人才、提振市场信心。8月4日披露首轮进展：累计回购26.4万股、支付金额282.09万元。",
       "source": "公司公告（上交所）",
       "sourceUrl": "https://www.cls.cn/detail/xk/84eb65dcac318418ff293f334ccf5ff6"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-07-27",
+      "title": "宁波韵升拟5000万-1亿元回购股份，用于员工持股计划",
+      "description": "宁波韵升拟回购股份用于员工持股计划，以增强员工对公司发展的信心。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.cninfo.com.cn/new/disclosure/stock?orgId=gssh0600366&stockCode=600366",
+      "id": "act-20260727-01"
     },
     {
       "id": "act-019",
