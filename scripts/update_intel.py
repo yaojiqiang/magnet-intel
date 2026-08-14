@@ -182,6 +182,16 @@ BANDS = {
 # 视为来源不可信，整条回退到上一交易日的可靠数据。
 SOURCE_WHITELIST = {"我的钢铁网", "亚洲金属网", "百川盈孚", "上海金属网", "上海钢联"}
 
+# 竞社动态（activities）每日增量更新相关
+ACTIVITY_REQUIRED = {"company", "companyName", "dimension", "dimensionName", "date", "title", "description", "source"}
+VALID_DIMENSIONS = {"market", "tech", "supply", "digital"}
+ACTIVITY_MAX = 50  # 动态列表上限：保留最新的 50 条
+
+
+def _norm(s):
+    """用于去重归一化：去空白、转小写。"""
+    return re.sub(r"\s+", "", (s or "").lower())
+
 
 def _source_in_whitelist(src):
     """宽松匹配：白名单任一名称是 src 的子串、或 src 是白名单名称的子串，均视为可信。"""
@@ -377,8 +387,106 @@ def safe_merge(existing, new):
         else:
             merged_re["forecast"] = v
 
-    # ★ 不处理 activities / companies / comparison / sources / news / meta / 其它：一律保留原值
+    # ★ 不处理 companies / comparison / sources / news / meta / 其它：一律保留原值
+    #   （activities 由专门的 update_activities() 增量更新，见下方）
     return merged, errors, critical_fail
+
+
+def merge_activities(existing, new_items):
+    """
+    竞社动态「增量合并」守卫（核心防写坏逻辑）：
+      - 仅接收模型返回的“新动态”列表；
+      - 逐条结构校验（必备字段、日期格式、维度合法性），非法项直接跳过；
+      - 自动过滤禁收录企业（正海磁材）；
+      - 去重：以 (company, 归一化标题) 为键，已收录的保留原值、不覆盖；
+      - 合并后按日期倒序，截断到最新的 ACTIVITY_MAX(50) 条；
+      - 若没有任何有效新增，则【原样返回 existing】（不重排、不改动），
+        从而 data_fingerprint 不变、lastUpdated 不无辜推进。
+    返回合并后的列表。
+    """
+    if not isinstance(new_items, list):
+        log("activities 新数据非数组，保留现有")
+        return existing if isinstance(existing, list) else []
+    existing = existing if isinstance(existing, list) else []
+
+    valid = []
+    for i, it in enumerate(new_items):
+        if not isinstance(it, dict):
+            continue
+        miss = ACTIVITY_REQUIRED - set(it.keys())
+        if miss:
+            log(f"activities 新项 {i} 缺字段 {sorted(miss)}，跳过")
+            continue
+        if "正海" in (it.get("companyName") or "") or str(it.get("company")).strip().lower() == "zhenghai":
+            log(f"activities 新项 {i} 命中禁收录企业（正海磁材），跳过")
+            continue
+        date = str(it.get("date", "")).strip()
+        if not re.match(r"^\d{4}-\d{1,2}-\d{1,2}$", date):
+            log(f"activities 新项 {i} 日期非法 {date!r}，跳过")
+            continue
+        dim = it.get("dimension")
+        if dim not in VALID_DIMENSIONS:
+            log(f"activities 新项 {i} 维度非法 {dim!r}，跳过")
+            continue
+        valid.append({
+            "company": str(it.get("company")).strip(),
+            "companyName": str(it.get("companyName")).strip(),
+            "dimension": dim,
+            "dimensionName": str(it.get("dimensionName")).strip() or dim,
+            "date": date,
+            "title": str(it.get("title")).strip(),
+            "description": str(it.get("description")).strip(),
+            "source": str(it.get("source")).strip() or "公开信息",
+            "sourceUrl": str(it.get("sourceUrl") or "").strip(),
+        })
+
+    if not valid:
+        log("activities 无有效新项，保留现有列表")
+        return existing
+
+    existing_keys = {(a.get("company"), _norm(a.get("title"))): True
+                     for a in existing if isinstance(a, dict)}
+    combined = list(existing)
+    added = 0
+    for rec in valid:
+        key = (rec["company"], _norm(rec["title"]))
+        if key in existing_keys:
+            continue
+        if any((rec["company"], _norm(rec["title"])) == (x.get("company"), _norm(x.get("title")))
+               for x in combined):
+            continue
+        rec["id"] = f"act-{rec['date'].replace('-', '')}-{added + 1:02d}"
+        combined.append(rec)
+        existing_keys[key] = True
+        added += 1
+
+    if added == 0:
+        log("activities 无新增（均为已收录或重复），保持原列表与顺序，不推进日期")
+        return existing
+
+    combined.sort(key=lambda a: a.get("date", ""), reverse=True)
+    if len(combined) > ACTIVITY_MAX:
+        combined = combined[:ACTIVITY_MAX]
+    log(f"activities 合并完成：原有 {len(existing)} + 新增 {added} = {len(combined)}（上限 {ACTIVITY_MAX}）")
+    return combined
+
+
+def update_activities(existing):
+    """每日增量更新竞社动态：联网找最新增量 → 校验 → 去重 → 合并 → 截断到 50。"""
+    prompt = build_activities_prompt(existing)
+    try:
+        raw = call_llm_activities(prompt)
+    except Exception as e:
+        log(f"activities LLM 调用失败，保留现有动态: {e}")
+        return existing.get("activities") if isinstance(existing, dict) else []
+    new = extract_json(raw)
+    if not new or "activities" not in new or not isinstance(new["activities"], list):
+        log("activities 未解析出有效 JSON（activities 数组），保留现有动态")
+        return existing.get("activities") if isinstance(existing, dict) else []
+    return merge_activities(
+        existing.get("activities") if isinstance(existing, dict) else [],
+        new["activities"],
+    )
 
 
 def build_prompt(existing):
@@ -409,6 +517,41 @@ def build_prompt(existing):
         "金属铽严禁用\"氧化铽+160.6\"估算，必须用上海钢联月报实际月均价或相邻月插值。\n"
         "forecast.months 为未来 3 个月，每个对象含 category / basis / confidence / logic 等字段。\n\n"
         "请仅返回符合上述结构的 JSON 对象，不要包含任何解释性文字或 Markdown 围栏。"
+    )
+
+
+def build_activities_prompt(existing):
+    """构建竞社动态的「增量」更新 prompt：让模型只找尚未收录的最新动态。"""
+    today = datetime.date.today().strftime("%Y-%m-%d")
+    existing_acts = existing.get("activities", []) if isinstance(existing, dict) else []
+    existing_summary = "\n".join(
+        f"- （已收录，勿重复）{a.get('companyName', '')} {a.get('date', '')}：{a.get('title', '')}"
+        for a in existing_acts
+    ) or "（暂无）"
+    return (
+        "你是一名磁材（钕铁硼永磁材料）行业情报分析师，负责跟踪A股稀土永磁企业的公开动态。\n"
+        "请使用下方【联网搜索参考信息】，找出最新的、尚未被收录的企业动态，输出增量"
+        "（不要重复已收录列表中的条目）。\n\n"
+        "【目标企业】（company 代码必须严格使用下列值）：\n"
+        "  金力永磁 → company=\"jinli\"\n"
+        "  宁波韵升 → company=\"yunsheng\"\n"
+        "  中科三环 → company=\"sanhuan\"\n"
+        "  大地熊   → company=\"dadi\"\n"
+        "  英洛华   → company=\"yingluohua\"\n"
+        "【严禁收录】正海磁材（含其任何动态，一律跳过）。\n\n"
+        "【维度 dimension 取值与对应 dimensionName】：\n"
+        "  market  → 市场\n  tech    → 工艺技术\n  supply  → 供应链\n  digital → 数字化\n\n"
+        "【已收录列表（请勿重复输出这些）】\n" + existing_summary + "\n\n"
+        "【输出要求】\n"
+        "仅输出 JSON：{\"activities\": [ 最多30条最新增量，按日期倒序（最新在前） ]}\n"
+        "每条对象必须包含字段：\n"
+        "  company(上述代码), companyName(企业中文名), dimension(上述4个值之一), dimensionName(对应中文),\n"
+        "  date(事件发生日期，格式 YYYY-MM-DD), title(动态标题), description(2-4句客观描述，含关键数字/金额/比例),\n"
+        "  source(真实来源，如 公司公告/证券时报/上证报/公司官网/国家知识产权局 等，严禁写“网络”等模糊来源),\n"
+        "  sourceUrl(可选，原文链接)\n"
+        "规则：只收录真实发生、可核实的动态；不得编造日期、金额或来源；同一事件不要拆成多条；"
+        "优先收录 2026年7月以来的最新动态，必要时可回溯更早以充实列表，但不要与已收录列表重复。\n"
+        "仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
     )
 
 
@@ -520,6 +663,27 @@ def gather_doubao_context(api_key):
     return "\n\n".join(blocks)
 
 
+def gather_doubao_context_activities(api_key):
+    """针对竞社动态（企业公开动态）的豆包搜索，返回参考上下文。"""
+    queries = [
+        "金力永磁 宁波韵升 中科三环 2026年8月 最新动态 公告 扩产 业绩 稀土永磁",
+        "大地熊 英洛华 2026年 最新动态 专利 公告 稀土永磁",
+        "稀土永磁 钕铁硼 行业 企业 最新新闻 2026年8月 产能 订单 合作",
+        "金力永磁 2026年 半年报 业绩 机构调研 合作 扩产",
+        "中科三环 宁波韵升 2026年 重组 收购 扩产 公告",
+    ]
+    blocks = []
+    for q in queries:
+        try:
+            r = _doubao_search_once(q, api_key)
+            if r:
+                blocks.append(f"查询「{q}」：\n{r}")
+        except Exception as e:
+            log(f"豆包搜索(activities)失败（{q}）：{e}")
+    log(f"豆包搜索(activities)：{len(blocks)}/{len(queries)} 个查询返回结果")
+    return "\n\n".join(blocks)
+
+
 def call_zhipu(prompt, model=None):
     """调用智谱 GLM（OpenAI 兼容），永久免费的 glm-4-flash。"""
     from openai import OpenAI
@@ -557,6 +721,23 @@ def call_llm(prompt):
         return call_gemini(prompt)
     if provider == "cn-free":
         return call_cn_free(prompt)
+    return call_openai(prompt)
+
+
+def call_llm_activities(prompt):
+    """竞社动态专用的 LLM 调用（与价格字段隔离，互不干扰）。"""
+    provider = (os.environ.get("LLM_PROVIDER") or "openai").lower()
+    if provider == "cn-free":
+        ctx = gather_doubao_context_activities(os.environ.get("DOUBAO_SEARCH_API_KEY"))
+        if ctx:
+            full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出真实可核实的增量动态）：\n" + ctx
+        else:
+            full = prompt + "\n\n（联网搜索未返回结果，请基于常识谨慎输出，无法核实的不要编造）"
+        return call_zhipu(full)
+    if provider == "perplexity":
+        return call_perplexity(prompt)
+    if provider == "gemini":
+        return call_gemini(prompt)
     return call_openai(prompt)
 
 
@@ -606,6 +787,13 @@ def main():
     merged, errors, critical_fail = safe_merge(existing, new)
     for e in errors:
         log(f"校验告警: {e}")
+
+    # 竞社动态每日增量更新（独立于价格字段，避免相互干扰；失败也不影响价格更新）
+    try:
+        merged["activities"] = update_activities(existing)
+    except Exception as e:
+        log(f"activities 更新异常，保留现有: {e}")
+        merged["activities"] = (existing.get("activities") if isinstance(existing, dict) else [])
 
     if critical_fail:
         # 关键字段（currentPrices）校验未通过：放弃本次更新，避免写入半截/错误数据。
