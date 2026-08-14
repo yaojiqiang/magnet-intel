@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-14 09:16",
+  "lastUpdated": "2026-08-14 09:19",
   "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月14日稀土产品每日价格及稀土市场行情分析，更新稀土及磁材市场价格数据。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场整体偏弱，镨钕系产品价格持续下跌，氧化镨钕跌幅明显，金属厂金属镨钕报价倒挂，商家观望情绪较重。",
+    "marketSummary": "稀土市场整体偏弱，镨钕系产品价格下跌，氧化镨钕跌幅明显，金属厂金属镨钕报价倒挂，商家观望情绪较重。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -1105,6 +1105,18 @@
       "id": "act-20260717-05"
     },
     {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-07-17",
+      "title": "大地熊获得实用新型专利授权：“一种烧结钕铁硼磁体的低损耗滚镀方法”",
+      "description": "大地熊获得一项名为“一种烧结钕铁硼磁体的低损耗滚镀方法”的实用新型专利授权。",
+      "source": "国家知识产权局",
+      "sourceUrl": "http://m.163.com/dy/article/L3NSG0450519QIKK.html",
+      "id": "act-20260717-01"
+    },
+    {
       "id": "act-008",
       "company": "yunsheng",
       "companyName": "宁波韵升",
@@ -1509,11 +1521,39 @@
       "url": "https://www.jiemian.com/article/14922140.html"
     },
     {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土价格上行直接增厚产业链企业经营收益 中国稀土逼近涨停",
+      "source": "财闻",
+      "url": "https://m.10jqka.com.cn/20260814/c678956736.shtml"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "禁令落地，日本妄锁死中国，中方祭出归零杀招，中日打响资源对决",
+      "source": "北极星哨",
+      "url": "https://m.sohu.com/a/1062731026_121797685/"
+    },
+    {
       "date": "2026-08-13",
       "company": "行业",
       "title": "中国稀土对日出口骤降51%，3种关键材料归零！高市还能硬撑多久？",
       "source": "王爷说财经v",
       "url": "k.sina.cn/article_6824064813_196bef72d00101oeus.html"
+    },
+    {
+      "date": "2026-08-13",
+      "company": "行业",
+      "title": "全球最大稀土矿扩产50%有何影响 触动西方敏感神经",
+      "source": "3g.china.com",
+      "url": "https://3g.china.com/act/redian/13004758/20260813/49673250.html"
+    },
+    {
+      "date": "2026-08-13",
+      "company": "行业",
+      "title": "对日出口暴跌81%，中国稀土出口管制见效！美日工厂还能撑多久？",
+      "source": "望海听澜",
+      "url": "https://m.sohu.com/a/1062509312_122572419/"
     },
     {
       "date": "2026-08-12",
@@ -1584,34 +1624,6 @@
       "title": "中科三环正在成为世界一流的磁性材料和器件供应商",
       "source": "东方财富",
       "url": "https://caifuhao.eastmoney.com/news/20260624200635364925010"
-    },
-    {
-      "date": "2026-06-12",
-      "company": "宁波韵升",
-      "title": "无重稀土技术破局，双赛道驱动千亿市值征程",
-      "source": "东方财富",
-      "url": "https://caifuhao.eastmoney.com/news/20260612151428667994730"
-    },
-    {
-      "date": "2026-06-05",
-      "company": "中科三环",
-      "title": "与盘毂动力联合推出PGH高性能磁钢，全球首次实现轴向磁通电机专用磁钢量产",
-      "source": "公司公告",
-      "url": ""
-    },
-    {
-      "date": "2026-04-11",
-      "company": "宁波韵升",
-      "title": "2025年净利润同比增长247.95%，高附加值业务占比提升",
-      "source": "上证报/东方财富",
-      "url": "https://caifuhao.eastmoney.com/news/20260412181111908142840"
-    },
-    {
-      "date": "2026-03-31",
-      "company": "正海磁材",
-      "title": "2025年净利润同比增长232.85%，产品销量同比增长21%",
-      "source": "中国证券报",
-      "url": "https://finance.eastmoney.com/a/202603313690132554.html"
     }
   ]
 }
