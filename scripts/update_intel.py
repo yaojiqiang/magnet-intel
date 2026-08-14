@@ -60,6 +60,14 @@ def save_data(data):
     log(f"已写入 {DATA_PATH}")
 
 
+def data_fingerprint(d):
+    """忽略 lastUpdated / updateNote 等元信息，仅对“实质内容”做指纹，用于判断是否真有更新。"""
+    if not isinstance(d, dict):
+        return json.dumps(d, ensure_ascii=False, sort_keys=True)
+    core = {k: v for k, v in d.items() if k not in ("lastUpdated", "updateNote")}
+    return json.dumps(core, ensure_ascii=False, sort_keys=True)
+
+
 def _repair_json(text):
     """尝试修复免费模型常见的非法 JSON：行/块注释、尾随逗号、Python 字面量。"""
     t = re.sub(r"//[^\n]*", "", text)
@@ -220,6 +228,35 @@ def reconcile_cp(new_cp, existing_cp):
     return new_cp
 
 
+def reconcile_cp_dates(new_cp, existing_cp):
+    """
+    日期一致性守卫（针对现价卡片的“报价日期”）：
+    若某品类价格相对上一交易日未变化（数值相等，容差内），则保留上一交易日的报价日期，
+    并把 change 重置为 0、changeDesc 改为“持平”，source/unit 沿用原值。
+    仅当价格确实变动时，才采用模型给出的新报价日期。
+    目的：避免“日期被推进到今天、但价格还是老的”这种日期与内容不匹配的情况。
+    """
+    old = {it.get("name"): it for it in existing_cp if isinstance(it, dict)} if isinstance(existing_cp, list) else {}
+    for it in new_cp:
+        name = it.get("name")
+        prev = old.get(name)
+        if not isinstance(prev, dict):
+            continue
+        prev_price = prev.get("price")
+        new_price = it.get("price")
+        if isinstance(prev_price, (int, float)) and isinstance(new_price, (int, float)) \
+                and abs(new_price - prev_price) <= 1e-6:
+            # 价格未变 → 保留原报价日期与来源，避免“日期先行”
+            it["date"] = prev.get("date", it.get("date"))
+            it["change"] = 0
+            it["changeDesc"] = "持平（较上一交易日，价格未变动）"
+            if prev.get("source"):
+                it["source"] = prev.get("source")
+            if prev.get("unit"):
+                it["unit"] = prev.get("unit")
+    return new_cp
+
+
 def safe_merge(existing, new):
     """
     把模型输出 new 合并进 existing，仅允许白名单字段且必须通过校验。
@@ -256,6 +293,7 @@ def safe_merge(existing, new):
             critical_fail = True
         else:
             v = reconcile_cp(v, existing_re.get("currentPrices"))
+            v = reconcile_cp_dates(v, existing_re.get("currentPrices"))
             merged_re["currentPrices"] = v
     else:
         errors.append("currentPrices 未返回（保留原值）")
@@ -520,9 +558,18 @@ def main():
         log("关键字段校验未通过，放弃本次更新以避免损坏数据；请检查模型输出或重试。运行失败（变红）。")
         sys.exit(1)
 
-    merged["lastUpdated"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-    save_data(merged)
-    log("更新完成")
+    # ★ 日期一致性守卫：仅当“实质内容”发生变化时才推进 lastUpdated；
+    #   内容未变化（如价格持平、模型仅复述）则保持原日期，不提交新版本，
+    #   避免“日期已更新但内容没更新”导致页面日期与内容对不上。
+    if existing and data_fingerprint(merged) == data_fingerprint(existing):
+        merged["lastUpdated"] = existing.get("lastUpdated")
+        merged["updateNote"] = existing.get("updateNote")
+        save_data(merged)
+        log("数据内容与上次一致，无实质更新：保留原 lastUpdated，不推进日期（git 不会产生新提交）")
+    else:
+        merged["lastUpdated"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+        save_data(merged)
+        log("更新完成（内容有变化，已推进 lastUpdated）")
 
 
 if __name__ == "__main__":
