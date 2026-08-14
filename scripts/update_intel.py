@@ -6,17 +6,25 @@ update_intel.py
 在 GitHub Actions（或本地）中运行：调用支持联网的 LLM 生成最新磁材竞社情报数据，
 写入 data/intelligence.json 并提交，从而让托管在 GitHub Pages 的网站自动获取最新数据。
 
-支持两种 provider（通过环境变量 LLM_PROVIDER 选择，默认 openai）：
-  - openai     : OpenAI Responses API，启用 web_search 工具联网（推荐，结构化输出稳定）
-  - perplexity : Perplexity sonar 模型，原生联网
+支持四种 provider（通过环境变量 LLM_PROVIDER 选择）：
+  - openai     : OpenAI Responses API，启用 web_search 工具联网（需付费 Key）
+  - perplexity : Perplexity sonar 模型，原生联网（需付费 Key）
+  - gemini     : Google Gemini（Google AI Studio 免费额度，gemini-2.5-flash 自带 Google Search 联网，
+                 单 Key、无需绑卡）★ 推荐免费方案（需能访问 Google）
+  - cn-free    : 国内免翻墙免费组合 = 豆包搜索（联网，每月500次免费）+ 智谱 GLM-4-Flash（永久免费，OpenAI 兼容）
+                 ★ 国内用户免翻墙首选
 
 环境变量：
-  LLM_PROVIDER       openai | perplexity（默认 openai）
-  OPENAI_API_KEY     OpenAI 密钥
-  PERPLEXITY_API_KEY Perplexity 密钥
-  LLM_BASE_URL       可选，OpenAI 兼容端点（如 DeepSeek / 通义 / 自建代理；注意需兼容 Responses API + web_search）
-  LLM_MODEL          可选，模型名（openai 默认 gpt-4o；perplexity 默认 sonar）
-  DATA_PATH          数据文件路径（默认 data/intelligence.json）
+  LLM_PROVIDER           openai | perplexity | gemini | cn-free
+  OPENAI_API_KEY         OpenAI 密钥
+  PERPLEXITY_API_KEY     Perplexity 密钥
+  GEMINI_API_KEY         Gemini 密钥（aistudio.google.com 免费获取）
+  DOUBAO_SEARCH_API_KEY  豆包搜索 API Key（火山引擎控制台获取，每月500次免费）
+  ZHIPU_API_KEY          智谱 API Key（open.bigmodel.cn 免费获取，glm-4-flash 永久免费）
+  LLM_BASE_URL           可选，OpenAI 兼容端点
+  LLM_MODEL              可选，模型名（gemini 默认 gemini-2.5-flash；cn-free 默认 glm-4-flash）
+  DOUBAO_SEARCH_ENDPOINT 可选，豆包搜索端点（默认 https://open.feedcoopapi.com/search_api/web_search）
+  DATA_PATH              数据文件路径（默认 data/intelligence.json）
 
 安全/健壮性：
   - 任何 LLM 调用或解析失败都不会破坏现有数据（保留原文件，退出码 0）。
@@ -91,7 +99,9 @@ def build_prompt(existing):
             "建议保持 20 条以上、描述充实；保留历史条目并按日期倒序。\n"
             "7) companies[].financials.quarterly 为 2026 分季度数据，新财报追加新期间并保留历史。\n"
             "8) 所有数字与事实以联网搜索到的原文为准，不得编造；无法核实的字段保留原值。\n"
-            "9) 返回完整 JSON（含全部历史字段），不要省略任何已有数组。\n"
+            "9) 返回 JSON 即可。说明：priceHistory、indexHistory、companies、comparison、sources、meta 等若无变化可省略不返回"
+            "（系统会自动保留原值，避免免费模型输出超限）；但 activities、news 必须保留全部历史条目并追加本期新增；"
+            "currentPrices、marketSummary、updateNote、forecast 必须返回最新值。\n"
         )
     else:
         structure_hint = (
@@ -154,16 +164,111 @@ def call_perplexity(prompt, model=None):
     return resp.json()["choices"][0]["message"]["content"]
 
 
+def call_gemini(prompt, model=None):
+    from google import genai
+    from google.genai import types
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        raise RuntimeError("未设置 GEMINI_API_KEY")
+    model = model or os.environ.get("LLM_MODEL") or "gemini-2.5-flash"
+    client = genai.Client(api_key=api_key)
+    log(f"调用 Gemini，模型={model}，启用 google_search 工具（免费联网）")
+    response = client.models.generate_content(
+        model=model,
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            tools=[types.Tool(google_search=types.GoogleSearch())],
+            temperature=0.3,
+            max_output_tokens=32768,
+        ),
+    )
+    return getattr(response, "text", "") or ""
+
+
+def _doubao_search_once(query, api_key, count=8):
+    """调用豆包搜索 Custom 版 API，返回拼接的检索结果文本。"""
+    import requests
+    endpoint = os.environ.get("DOUBAO_SEARCH_ENDPOINT") or "https://open.feedcoopapi.com/search_api/web_search"
+    resp = requests.post(
+        endpoint,
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+        json={"Query": query, "SearchType": "web", "Count": count, "NeedSummary": True},
+        timeout=60,
+    )
+    resp.raise_for_status()
+    data = resp.json()
+    lines = []
+    web = (data.get("Result") or {}).get("WebResults") or []
+    for it in web:
+        title = it.get("Title", "") or ""
+        summary = it.get("Summary", "") or ""
+        url = it.get("Url", "") or ""
+        if title or summary:
+            lines.append(f"- 【{title}】{summary}（来源：{url}）")
+    return "\n".join(lines)
+
+
+def gather_doubao_context(api_key):
+    """对若干查询调用豆包搜索，汇总为参考上下文。"""
+    queries = [
+        "稀土价格今日 氧化镨钕 金属镨钕 金属铽 我的钢铁网 2026年8月 报价",
+        "金属镨 金属钕 氧化镝 氧化铽 氧化钕 金属镝 最新价格 2026年8月",
+        "金力永磁 宁波韵升 中科三环 大地熊 英洛华 2026 最新动态 业绩 扩产 合作",
+        "钕铁硼 稀土永磁 行业 最新新闻 政策 2026年8月",
+    ]
+    blocks = []
+    for q in queries:
+        try:
+            r = _doubao_search_once(q, api_key)
+            if r:
+                blocks.append(f"查询「{q}」：\n{r}")
+        except Exception as e:
+            log(f"豆包搜索失败（{q}）：{e}")
+    return "\n\n".join(blocks)
+
+
+def call_zhipu(prompt, model=None):
+    """调用智谱 GLM（OpenAI 兼容），永久免费的 glm-4-flash。"""
+    from openai import OpenAI
+    api_key = os.environ.get("ZHIPU_API_KEY")
+    if not api_key:
+        raise RuntimeError("未设置 ZHIPU_API_KEY")
+    model = model or os.environ.get("LLM_MODEL") or "glm-4-flash"
+    client = OpenAI(api_key=api_key, base_url="https://open.bigmodel.cn/api/paas/v4/")
+    log(f"调用 智谱 GLM，模型={model}（合成 JSON）")
+    resp = client.chat.completions.create(
+        model=model,
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.3,
+        max_tokens=8192,
+    )
+    return getattr(resp.choices[0].message, "content", "") or ""
+
+
+def call_cn_free(prompt):
+    """国内免翻墙免费组合：豆包搜索（联网取数）+ 智谱 GLM-4-Flash（免费合成 JSON）。"""
+    ctx = gather_doubao_context(os.environ.get("DOUBAO_SEARCH_API_KEY"))
+    if ctx:
+        full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对并更新数据，数字以参考信息原文为准，不要编造）：\n" + ctx
+    else:
+        full = prompt + "\n\n（联网搜索未返回结果，请基于已有数据谨慎更新，无法核实的字段保留原值）"
+    return call_zhipu(full)
+
+
 def call_llm(prompt):
     provider = (os.environ.get("LLM_PROVIDER") or "openai").lower()
     if provider == "perplexity":
         return call_perplexity(prompt)
+    if provider == "gemini":
+        return call_gemini(prompt)
+    if provider == "cn-free":
+        return call_cn_free(prompt)
     return call_openai(prompt)
 
 
 # 关键字段保护：LLM 返回缺失/为空时回退保留原值
 PROTECTED_KEYS = ["priceHistory", "indexHistory", "activities", "news",
-                  "companies", "currentPrices", "forecast", "comparison", "sources"]
+                  "companies", "currentPrices", "forecast", "comparison", "sources", "meta"]
 
 
 def merge_protect(existing, new):
