@@ -119,6 +119,17 @@ def validate_currentPrices(v):
             return None, f"第 {i} 项 unit 为空或非法：{it.get('unit')!r}"
         if not isinstance(it.get("change"), (int, float)) or isinstance(it.get("change"), bool):
             return None, f"第 {i} 项 change 非数字：{it.get('change')!r}"
+    # 单位归一化：全站基准为“万元/吨”。若模型返回“元/吨”（price 量级 >1000），
+    # 自动换算为万元/吨，避免现价表与走势图（万元/吨）差 1 万倍。
+    for it in v:
+        unit = it.get("unit") or ""
+        price = it.get("price")
+        if isinstance(price, (int, float)) and (("元" in unit and "万" not in unit) or (price > 1000 and "万" not in unit)):
+            it["price"] = round(price / 10000, 2)
+            ch = it.get("change")
+            if isinstance(ch, (int, float)):
+                it["change"] = round(ch / 10000, 2)
+            it["unit"] = "万元/吨"
     return v, None
 
 
