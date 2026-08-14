@@ -186,6 +186,41 @@ SOURCE_WHITELIST = {"我的钢铁网", "亚洲金属网", "百川盈孚", "上�
 ACTIVITY_REQUIRED = {"company", "companyName", "dimension", "dimensionName", "date", "title", "description", "source"}
 VALID_DIMENSIONS = {"market", "tech", "supply", "digital"}
 ACTIVITY_MAX = 50  # 动态列表上限：保留最新的 50 条
+# 新闻动态（news）每日增量更新相关
+NEWS_REQUIRED = {"date", "company", "title", "source"}
+NEWS_MAX = 20  # 新闻列表上限：保留最新的 20 条
+
+# 竞社经营数据（companies）每日增量“报告刷新”相关
+KNOWN_COMPANY_IDS = {"jinli", "yunsheng", "sanhuan", "zhenghai"}
+FIN_BANDS = {
+    "revenue": (0, 1000), "revenueYoY": (-100, 2000),
+    "mainRevenue": (0, 1000), "mainRevenueYoY": (-100, 2000), "mainRevenuePct": (0, 100),
+    "netProfit": (-50, 300), "netProfitYoY": (-100, 10000),
+    "deductedNetProfit": (-50, 300), "deductedNetProfitYoY": (-100, 10000),
+    "grossMargin": (-20, 100), "grossMarginPrev": (-20, 100), "grossMarginChange": (-50, 50),
+    "eps": (-5, 15), "rdInvestment": (0, 60), "rdInvestmentYoY": (-100, 1000), "rdRevenuePct": (0, 50),
+    "operatingCF": (-50, 200), "operatingCFYoY": (-200, 500), "operatingCFPrev": (-50, 200),
+}
+PS_BANDS = {
+    "production": (0, 200000), "productionYoY": (-50, 200),
+    "sales": (0, 200000), "salesYoY": (-50, 200),
+    "inventory": (0, 100000), "inventoryYoY": (-50, 500),
+    "capacity": (0, 200000), "actualCapacity": (0, 200000), "utilizationRate": (0, 100),
+}
+GEO_BANDS = {
+    "domestic": (0, 500), "domesticPct": (0, 100),
+    "overseas": (0, 500), "overseasPct": (0, 100),
+    "usExport": (0, 200), "usExportYoY": (-100, 1000),
+    "overseasGrossMargin": (-20, 100), "overseasGrossMarginChange": (-50, 50),
+}
+Q_BANDS = {
+    "revenue": (0, 1000), "revenueYoY": (-100, 2000),
+    "netProfit": (-50, 300), "netProfitYoY": (-100, 10000),
+    "deductedNetProfit": (-50, 300), "deductedNetProfitYoY": (-100, 10000),
+    "grossMargin": (-20, 100), "grossMarginChange": (-50, 50),
+    "eps": (-5, 15), "operatingCF": (-50, 200),
+}
+
 
 
 def _norm(s):
@@ -487,6 +522,361 @@ def update_activities(existing):
         existing.get("activities") if isinstance(existing, dict) else [],
         new["activities"],
     )
+
+
+# ---------------------------------------------------------------------------
+# 新闻动态（news）每日增量更新
+# ---------------------------------------------------------------------------
+
+def validate_news_item(it):
+    """校验单条新闻；返回规范化字典或 None。"""
+    if not isinstance(it, dict):
+        return None
+    miss = NEWS_REQUIRED - set(it.keys())
+    if miss:
+        return None
+    date = str(it.get("date", "")).strip()
+    if not re.match(r"^\d{4}-\d{1,2}-\d{1,2}$", date):
+        return None
+    title = str(it.get("title", "")).strip()
+    if not title:
+        return None
+    return {
+        "date": date,
+        "company": str(it.get("company", "")).strip() or "行业",
+        "title": title,
+        "source": str(it.get("source", "")).strip() or "公开信息",
+        "url": str(it.get("url") or "").strip(),
+    }
+
+
+def merge_news(existing, new_items):
+    """新闻动态增量合并：校验 + 去重 + 按日期倒序 + 截断到 NEWS_MAX。"""
+    if not isinstance(new_items, list):
+        log("news 新数据非数组，保留现有")
+        return existing if isinstance(existing, list) else []
+    existing = existing if isinstance(existing, list) else []
+    valid = [v for v in (validate_news_item(x) for x in new_items) if v]
+    if not valid:
+        log("news 无有效新项，保留现有列表")
+        return existing
+    existing_keys = {(n.get("company"), _norm(n.get("title"))): True
+                     for n in existing if isinstance(n, dict)}
+    combined = list(existing)
+    added = 0
+    for rec in valid:
+        key = (rec["company"], _norm(rec["title"]))
+        if key in existing_keys:
+            continue
+        if any((rec["company"], _norm(rec["title"])) == (x.get("company"), _norm(x.get("title")))
+               for x in combined):
+            continue
+        combined.append(rec)
+        existing_keys[key] = True
+        added += 1
+    if added == 0:
+        log("news 无新增（均为已收录或重复），保持原列表与顺序，不推进日期")
+        return existing
+    combined.sort(key=lambda n: n.get("date", ""), reverse=True)
+    if len(combined) > NEWS_MAX:
+        combined = combined[:NEWS_MAX]
+    log(f"news 合并完成：原有 {len(existing)} + 新增 {added} = {len(combined)}（上限 {NEWS_MAX}）")
+    return combined
+
+
+def update_news(existing):
+    """每日增量更新新闻动态：联网找最新增量 → 校验 → 去重 → 合并 → 截断到 20。"""
+    prompt = build_news_prompt(existing)
+    try:
+        raw = call_llm_news(prompt)
+    except Exception as e:
+        log(f"news LLM 调用失败，保留现有新闻: {e}")
+        return existing.get("news") if isinstance(existing, dict) else []
+    new = extract_json(raw)
+    if not new or "news" not in new or not isinstance(new["news"], list):
+        log("news 未解析出有效 JSON（news 数组），保留现有新闻")
+        return existing.get("news") if isinstance(existing, dict) else []
+    return merge_news(existing.get("news") if isinstance(existing, dict) else [], new["news"])
+
+
+def build_news_prompt(existing):
+    today = datetime.date.today().strftime("%Y-%m-%d")
+    existing_news = existing.get("news", []) if isinstance(existing, dict) else []
+    existing_summary = "\n".join(
+        f"- （已收录，勿重复）{n.get('date', '')} {n.get('company', '')}：{n.get('title', '')}"
+        for n in existing_news
+    ) or "（暂无）"
+    return (
+        "你是一名磁材（钕铁硼永磁材料）行业情报分析师，负责跟踪稀土永磁行业与A股相关企业的最新新闻动态。\n"
+        "请使用下方【联网搜索参考信息】，找出最新的、尚未被收录的新闻，输出增量（不要重复已收录列表中的条目）。\n\n"
+        "【目标范围】稀土永磁行业政策/价格/供需新闻，以及 A股相关企业（金力永磁、宁波韵升、中科三环、"
+        "大地熊、英洛华、正海磁材等）的最新新闻。\n\n"
+        "【已收录列表（请勿重复输出这些）】\n" + existing_summary + "\n\n"
+        "【输出要求】\n"
+        "仅输出 JSON：{\"news\": [ 最多15条最新增量，按日期倒序（最新在前） ]}\n"
+        "每条对象必须包含字段：\n"
+        "  date(新闻日期，格式 YYYY-MM-DD), company(涉及企业名或\"行业\"), title(新闻标题), "
+        "source(真实来源，如 证券时报/财联社/我的钢铁网/公司公告/新浪财经 等，严禁写\"网络\"等模糊来源), "
+        "url(可选，原文链接；无则留空字符串)\n"
+        "规则：只收录真实发生、可核实的新闻；不得编造日期、标题或来源；同一事件不要拆成多条；"
+        "优先收录 2026年7月以来的最新新闻，必要时可回溯更早以充实列表，但不要与已收录列表重复。\n"
+        "仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
+    )
+
+
+def gather_doubao_context_news(api_key):
+    queries = [
+        "稀土永磁 行业 最新新闻 政策 价格 2026年8月 财联社 证券时报",
+        "金力永磁 宁波韵升 中科三环 大地熊 英洛华 正海磁材 2026年8月 最新新闻 公告",
+        "钕铁硼 稀土 出口管制 供需 最新动态 2026年8月",
+    ]
+    blocks = []
+    for q in queries:
+        try:
+            r = _doubao_search_once(q, api_key)
+            if r:
+                blocks.append(f"查询「{q}」：\n{r}")
+        except Exception as e:
+            log(f"豆包搜索(news)失败（{q}）：{e}")
+    log(f"豆包搜索(news)：{len(blocks)}/{len(queries)} 个查询返回结果")
+    return "\n\n".join(blocks)
+
+
+def call_llm_news(prompt):
+    provider = (os.environ.get("LLM_PROVIDER") or "openai").lower()
+    if provider == "cn-free":
+        ctx = gather_doubao_context_news(os.environ.get("DOUBAO_SEARCH_API_KEY"))
+        if ctx:
+            full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出真实可核实的增量新闻）：\n" + ctx
+        else:
+            full = prompt + "\n\n（联网搜索未返回结果，请基于常识谨慎输出，无法核实的不要编造）"
+        return call_zhipu(full)
+    if provider == "perplexity":
+        return call_perplexity(prompt)
+    if provider == "gemini":
+        return call_gemini(prompt)
+    return call_openai(prompt)
+
+
+# ---------------------------------------------------------------------------
+# 竞社经营数据（companies）每日增量“报告刷新”
+# ---------------------------------------------------------------------------
+
+def _is_num(v):
+    return isinstance(v, (int, float)) and not isinstance(v, bool)
+
+
+def _validate_quarterly_item(it):
+    """校验单个季度数据对象；返回 True 表示可纳入。"""
+    if not isinstance(it, dict) or not str(it.get("period", "")).strip():
+        return False
+    for k, v in it.items():
+        if k in ("period", "periodLabel", "type", "note", "source", "sourceUrl"):
+            continue
+        if _is_num(v):
+            if k in Q_BANDS and not (Q_BANDS[k][0] <= v <= Q_BANDS[k][1]):
+                return False
+        elif v is not None:
+            return False
+    return True
+
+
+def deep_merge_company(existing_company, upd):
+    """将单个公司的“已发布新数据”增量深度合并进原结构（数值越界/类型非法则整条放弃）。"""
+    cid = upd.get("company")
+    if cid not in KNOWN_COMPANY_IDS:
+        log(f"companies 更新含未知公司代码 {cid!r}，跳过")
+        return None
+    result = copy.deepcopy(existing_company)
+
+    fin = upd.get("financials")
+    if isinstance(fin, dict):
+        mfin = result.get("financials", {})
+        for k, v in fin.items():
+            if k in ("quarterly", "revenueStructure", "geo", "productionSales"):
+                continue
+            if _is_num(v):
+                if k in FIN_BANDS and not (FIN_BANDS[k][0] <= v <= FIN_BANDS[k][1]):
+                    log(f"companies[{cid}] financials.{k}={v} 超出合理区间，整条放弃")
+                    return None
+                mfin[k] = v
+            elif isinstance(v, str):
+                mfin[k] = v
+            else:
+                log(f"companies[{cid}] financials.{k} 类型非法，整条放弃")
+                return None
+        result["financials"] = mfin
+
+    ps = upd.get("productionSales")
+    if isinstance(ps, dict):
+        mps = result.get("productionSales", {})
+        for k, v in ps.items():
+            if _is_num(v):
+                if k in PS_BANDS and not (PS_BANDS[k][0] <= v <= PS_BANDS[k][1]):
+                    log(f"companies[{cid}] productionSales.{k}={v} 超出合理区间，整条放弃")
+                    return None
+                mps[k] = v
+            elif isinstance(v, str):
+                mps[k] = v
+            else:
+                log(f"companies[{cid}] productionSales.{k} 类型非法，整条放弃")
+                return None
+        result["productionSales"] = mps
+
+    g = upd.get("geo")
+    if isinstance(g, dict):
+        mg = result.get("geo", {})
+        for k, v in g.items():
+            if _is_num(v):
+                if k in GEO_BANDS and not (GEO_BANDS[k][0] <= v <= GEO_BANDS[k][1]):
+                    log(f"companies[{cid}] geo.{k}={v} 超出合理区间，整条放弃")
+                    return None
+                mg[k] = v
+            elif isinstance(v, str):
+                mg[k] = v
+            else:
+                log(f"companies[{cid}] geo.{k} 类型非法，整条放弃")
+                return None
+        result["geo"] = mg
+
+    rs = upd.get("revenueStructure")
+    if isinstance(rs, list) and rs:
+        valid_rs = [x for x in rs if isinstance(x, dict) and str(x.get("segment", "")).strip()]
+        if valid_rs:
+            result["revenueStructure"] = valid_rs
+
+    q = upd.get("quarterly")
+    if isinstance(q, list):
+        eq = list(result.get("quarterly", []))
+        periods = {x.get("period") for x in eq if isinstance(x, dict)}
+        for item in q:
+            if not _validate_quarterly_item(item):
+                log(f"companies[{cid}] quarterly 项校验失败，跳过该项")
+                continue
+            per = item.get("period")
+            if per in periods:
+                for ex in eq:
+                    if ex.get("period") == per:
+                        for kk, vv in item.items():
+                            if kk in ("period", "periodLabel", "type", "note", "source", "sourceUrl"):
+                                ex[kk] = vv
+                            elif _is_num(vv):
+                                ex[kk] = vv
+                        break
+            else:
+                eq.append(dict(item))
+                periods.add(per)
+        result["quarterly"] = eq
+
+    return result
+
+
+def update_companies(existing):
+    """每日增量刷新竞社经营数据：联网核对是否已发布更新的财报/产销量等，深度合并进原结构。"""
+    prompt = build_companies_prompt(existing)
+    try:
+        raw = call_llm_companies(prompt)
+    except Exception as e:
+        log(f"companies LLM 调用失败，保留现有经营数据: {e}")
+        return existing.get("companies") if isinstance(existing, dict) else []
+    new = extract_json(raw)
+    if not new or "companyUpdates" not in new or not isinstance(new["companyUpdates"], list):
+        log("companies 未解析出有效 JSON（companyUpdates 数组），保留现有经营数据")
+        return existing.get("companies") if isinstance(existing, dict) else []
+    existing_list = existing.get("companies") if isinstance(existing, dict) else []
+    by_id = {c.get("id"): c for c in existing_list if isinstance(c, dict)}
+    result = [c for c in existing_list]
+    changed = 0
+    for upd in new["companyUpdates"]:
+        if not isinstance(upd, dict):
+            continue
+        cid = upd.get("company")
+        if cid not in by_id:
+            log(f"companies 更新含未知公司 {cid!r}，跳过")
+            continue
+        merged = deep_merge_company(by_id[cid], upd)
+        if merged is None:
+            continue
+        for i, c in enumerate(result):
+            if c.get("id") == cid:
+                result[i] = merged
+                by_id[cid] = merged
+                changed += 1
+                break
+    if changed == 0:
+        log("companies 无有效新数据（均为非法/越界/重复），保留现有经营数据，不推进日期")
+        return existing_list
+    log(f"companies 刷新完成：{changed} 家公司经营数据有更新")
+    return result
+
+
+def build_companies_prompt(existing):
+    today = datetime.date.today().strftime("%Y-%m-%d")
+    comps = existing.get("companies", []) if isinstance(existing, dict) else []
+    summary = "\n".join(
+        f"- {c.get('name','')}（company=\"{c.get('id','')}\"）：最新已披露 {c.get('financials',{}).get('source','')}"
+        for c in comps
+    ) or "（暂无）"
+    return (
+        "你是一名磁材（钕铁硼永磁材料）行业情报分析师，负责跟踪A股稀土永磁上市公司的经营数据。\n"
+        "请使用下方【联网搜索参考信息】，核对各公司是否已发布【比现有数据更新的】经营数据"
+        "（如2026年半年度报告实际值、新的季度报告、修订后的业绩预告/快报、新披露的产销量/产能/收入结构/地区分布等）。\n\n"
+        "【目标公司】（company 代码必须严格使用下列值）：\n"
+        "  金力永磁 → company=\"jinli\"\n  宁波韵升 → company=\"yunsheng\"\n"
+        "  中科三环 → company=\"sanhuan\"\n  正海磁材 → company=\"zhenghai\"\n\n"
+        "【现有数据来源（仅供你判断是否有更新）】\n" + summary + "\n\n"
+        "【输出要求 — 极重要】\n"
+        "仅输出 JSON：{\"companyUpdates\": [ 仅包含【确实有新发布数据】的公司；若无任何公司有新数据，返回空数组 [] ]}\n"
+        "每个公司对象结构（只填你确认有更新的字段，不要编造、不要把旧值原样抄回）：\n"
+        "{\n"
+        "  \"company\": \"jinli\",\n"
+        "  \"financials\": { \"revenue\": 数字, \"netProfit\": 数字, \"grossMargin\": 数字, ... 仅变动的标量 },\n"
+        "  \"productionSales\": { \"production\": 数字, \"sales\": 数字, \"capacity\": 数字, ... 仅变动的标量 },\n"
+        "  \"geo\": { \"domestic\": 数字, \"overseas\": 数字, ... 仅变动的标量 },\n"
+        "  \"revenueStructure\": [ { \"segment\": \"...\", \"revenue\": 数字, \"salesYoY\": 数字, \"note\": \"...\" } ],\n"
+        "  \"quarterly\": [ { \"period\": \"2026H1\", \"type\": \"actual\", \"revenue\": 数字, \"netProfit\": 数字, ... } ]\n"
+        "}\n"
+        "规则：\n"
+        "1) 数字单位：营收/净利/经营现金流为【亿元】，毛利率/同比为【%】，产量为【吨】；\n"
+        "2) 仅报告真实发布的数据，并在对应字段旁用 source 注明来源（如\"2026年半年度报告\"）；\n"
+        "3) 严禁编造；若某字段无新数据，【不要】把它写进对象（深度合并会保留原值）；\n"
+        "4) revenueStructure 与 quarterly 仅在你确认整体有变/有新报告时才提供，否则省略。\n"
+        "仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
+    )
+
+
+def gather_doubao_context_companies(api_key):
+    queries = [
+        "金力永磁 宁波韵升 中科三环 正海磁材 2026年半年度报告 实际 营收 净利润 披露",
+        "稀土永磁 上市公司 2026年上半年 业绩 实际报告 产能 产销量 最新",
+        "金力永磁 中科三环 宁波韵升 2026 最新 经营数据 财报 公告 扩产",
+    ]
+    blocks = []
+    for q in queries:
+        try:
+            r = _doubao_search_once(q, api_key)
+            if r:
+                blocks.append(f"查询「{q}」：\n{r}")
+        except Exception as e:
+            log(f"豆包搜索(companies)失败（{q}）：{e}")
+    log(f"豆包搜索(companies)：{len(blocks)}/{len(queries)} 个查询返回结果")
+    return "\n\n".join(blocks)
+
+
+def call_llm_companies(prompt):
+    provider = (os.environ.get("LLM_PROVIDER") or "openai").lower()
+    if provider == "cn-free":
+        ctx = gather_doubao_context_companies(os.environ.get("DOUBAO_SEARCH_API_KEY"))
+        if ctx:
+            full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出确有新发布的经营数据增量）：\n" + ctx
+        else:
+            full = prompt + "\n\n（联网搜索未返回结果，若无新数据请返回 companyUpdates: []）"
+        return call_zhipu(full)
+    if provider == "perplexity":
+        return call_perplexity(prompt)
+    if provider == "gemini":
+        return call_gemini(prompt)
+    return call_openai(prompt)
 
 
 def build_prompt(existing):
@@ -794,6 +1184,20 @@ def main():
     except Exception as e:
         log(f"activities 更新异常，保留现有: {e}")
         merged["activities"] = (existing.get("activities") if isinstance(existing, dict) else [])
+    # 新闻动态每日增量更新（独立于价格字段；失败不影响其它更新）
+    try:
+        merged["news"] = update_news(existing)
+    except Exception as e:
+        log(f"news 更新异常，保留现有: {e}")
+        merged["news"] = (existing.get("news") if isinstance(existing, dict) else [])
+
+    # 竞社经营数据每日增量“报告刷新”（独立；失败不影响其它更新）
+    try:
+        merged["companies"] = update_companies(existing)
+    except Exception as e:
+        log(f"companies 更新异常，保留现有: {e}")
+        merged["companies"] = (existing.get("companies") if isinstance(existing, dict) else [])
+
 
     if critical_fail:
         # 关键字段（currentPrices）校验未通过：放弃本次更新，避免写入半截/错误数据。
