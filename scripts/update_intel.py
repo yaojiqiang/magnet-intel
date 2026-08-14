@@ -266,6 +266,29 @@ def call_llm(prompt):
     return call_openai(prompt)
 
 
+# provider -> 必需的环境变量（密钥）。缺失即“配置错误”，应让 Actions 运行失败（变红），
+# 而不是静默吞掉、误报“成功”。
+REQUIRED_KEYS = {
+    "openai": ["OPENAI_API_KEY"],
+    "perplexity": ["PERPLEXITY_API_KEY"],
+    "gemini": ["GEMINI_API_KEY"],
+    "cn-free": ["DOUBAO_SEARCH_API_KEY", "ZHIPU_API_KEY"],
+}
+
+
+def validate_provider():
+    """校验当前 provider 的必需密钥是否齐全；缺失则抛出 RuntimeError（配置错误）。"""
+    provider = (os.environ.get("LLM_PROVIDER") or "openai").lower()
+    need = REQUIRED_KEYS.get(provider, ["OPENAI_API_KEY"])
+    missing = [k for k in need if not os.environ.get(k)]
+    if missing:
+        raise RuntimeError(
+            f"缺少必需密钥（provider={provider}）：{', '.join(missing)}。"
+            f"请在仓库 Settings → Secrets and variables → Actions 中补充配置，"
+            f"然后重新运行。"
+        )
+
+
 # 关键字段保护：LLM 返回缺失/为空时回退保留原值
 PROTECTED_KEYS = ["priceHistory", "indexHistory", "activities", "news",
                   "companies", "currentPrices", "forecast", "comparison", "sources", "meta"]
@@ -292,8 +315,14 @@ def main():
     existing = load_existing()
     prompt = build_prompt(existing)
     try:
+        validate_provider()      # 配置校验：密钥缺失 => 配置错误，直接失败（运行变红）
         raw = call_llm(prompt)
+    except RuntimeError as e:
+        # 配置类错误（如密钥缺失）：明确失败，让 Actions 运行变红，避免“假成功”
+        log(f"配置错误，终止更新: {e}")
+        sys.exit(1)
     except Exception as e:
+        # 运行时错误（如网络抖动）：保留现有数据，温和退出
         log(f"LLM 调用失败，保留现有数据: {e}")
         sys.exit(0)
     new = extract_json(raw)
