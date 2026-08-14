@@ -174,8 +174,24 @@ REF_PRICES = {
 # 各品类绝对合理区间（万元/吨），用于拦截明显的量级/单位错误
 BANDS = {
     "金属镨": (80, 130), "金属钕": (70, 130), "金属镨钕": (70, 120), "氧化镨钕": (50, 110),
-    "氧化钕": (50, 120), "金属镝": (120, 260), "金属铽": (500, 1200), "氧化镝": (100, 220), "氧化铽": (450, 1000),
+    "氧化钕": (50, 120), "金属镝": (140, 185), "金属铽": (500, 1200), "氧化镝": (100, 220), "氧化铽": (450, 1000),
 }
+
+
+# 现货价格来源白名单（可信平台）。模型若返回白名单外的来源（如编造的“中国稀土行业协会”），
+# 视为来源不可信，整条回退到上一交易日的可靠数据。
+SOURCE_WHITELIST = {"我的钢铁网", "亚洲金属网", "百川盈孚", "上海金属网", "上海钢联"}
+
+
+def _source_in_whitelist(src):
+    """宽松匹配：白名单任一名称是 src 的子串、或 src 是白名单名称的子串，均视为可信。"""
+    if not isinstance(src, str) or not src.strip():
+        return False
+    s = src.strip()
+    for w in SOURCE_WHITELIST:
+        if w in s or s in w:
+            return True
+    return False
 
 
 def reconcile_cp(new_cp, existing_cp):
@@ -252,6 +268,46 @@ def reconcile_cp_dates(new_cp, existing_cp):
     return new_cp
 
 
+def reconcile_cp_sources(new_cp, existing_cp):
+    """
+    来源白名单守卫（用户明确要求）：
+    模型返回的来源若不在白名单内（如编造的“中国稀土行业协会”），则该条目来源不可信，
+    整条回退到上一交易日的可靠数据（价格/日期/涨跌/来源一并回退）；
+    若上一交易日来源也不可信或不存在，则来源默认“我的钢铁网”、价格回落到可靠基准 REF_PRICES。
+    目的：免费模型再也编不出假来源，且随之而来的可疑价格（如金属镝 192.5）也一并被校正。
+    """
+    old = {it.get("name"): it for it in existing_cp if isinstance(it, dict)} if isinstance(existing_cp, list) else {}
+    for i, it in enumerate(new_cp):
+        name = it.get("name")
+        src = it.get("source")
+        if _source_in_whitelist(src):
+            continue
+        prev = old.get(name)
+        prev_src = prev.get("source") if isinstance(prev, dict) else None
+        if isinstance(prev, dict) and _source_in_whitelist(prev_src):
+            # 上一交易日来源可信 → 整条回退到上一交易日（来源自然也是可信的）
+            new_cp[i] = dict(prev)
+            log(f"currentPrices[{name}] 来源“{src}”不在白名单，已回退至上一交易日可靠来源“{prev_src}”（价格/日期一并回退）")
+        else:
+            # 上一交易日来源也不可信或缺失 → 价格回落至可靠基准，来源默认我的钢铁网
+            ref = REF_PRICES.get(name)
+            log(f"currentPrices[{name}] 来源“{src}”不在白名单且无可靠上一交易日来源，已回退至可靠基准/默认来源“我的钢铁网”")
+            if isinstance(prev, dict):
+                it["price"] = prev.get("price")
+                it["unit"] = prev.get("unit", "万元/吨")
+                it["change"] = prev.get("change", 0)
+                it["changeDesc"] = prev.get("changeDesc", "")
+                it["date"] = prev.get("date")
+            elif ref is not None:
+                it["price"] = ref
+                it["unit"] = "万元/吨"
+                it["change"] = 0
+                it["changeDesc"] = "持平（模型来源不可信，已回退至可靠基准）"
+                it["date"] = it.get("date")
+            it["source"] = "我的钢铁网"
+    return new_cp
+
+
 def safe_merge(existing, new):
     """
     把模型输出 new 合并进 existing，仅允许白名单字段且必须通过校验。
@@ -288,6 +344,7 @@ def safe_merge(existing, new):
             critical_fail = True
         else:
             v = reconcile_cp(v, existing_re.get("currentPrices"))
+            v = reconcile_cp_sources(v, existing_re.get("currentPrices"))
             v = reconcile_cp_dates(v, existing_re.get("currentPrices"))
             merged_re["currentPrices"] = v
     else:
@@ -345,7 +402,9 @@ def build_prompt(existing):
         "每个对象必须包含字段：name(品类名), category(轻稀土/重稀土), price(数字, 单位万元/吨), "
         "unit(如\"万元/吨\"), change(数字, 较上次涨跌万元), changeDesc(文字说明), date(报价日期 "
         + today[:7] + "-xx), source(平台名, 如\"我的钢铁网\")。\n\n"
-        "价格来源优先级：我的钢铁网 → 亚洲金属网 → 百川盈孚；替代来源必须如实标注，不得虚标。\n"
+        "价格来源白名单（仅允许以下，严禁编造）：我的钢铁网、亚洲金属网、百川盈孚、上海金属网、上海钢联。\n"
+        "参考信息若来自其它平台，按优先级就近归入上述白名单之一并如实标注；"
+        "严禁填写白名单外的来源（如“中国稀土行业协会”“网络”等模糊或编造来源）。\n"
         "金属铽严禁用\"氧化铽+160.6\"估算，必须用上海钢联月报实际月均价或相邻月插值。\n"
         "forecast.months 为未来 3 个月，每个对象含 category / basis / confidence / logic 等字段。\n\n"
         "请仅返回符合上述结构的 JSON 对象，不要包含任何解释性文字或 Markdown 围栏。"
