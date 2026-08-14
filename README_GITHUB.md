@@ -13,10 +13,12 @@
 ## 一、前置条件
 
 1. 一个 **GitHub 账号**（免费）。
-2. 一个 **支持联网的 LLM API Key**（二选一）：
-   - **OpenAI**（推荐）：`OPENAI_API_KEY`，默认模型 `gpt-4o`，使用 Responses API 的 web_search 联网。
-   - **Perplexity**：`PERPLEXITY_API_KEY`，默认模型 `sonar`，原生联网。
-   - （可选）若用 OpenAI 兼容端点如 DeepSeek/通义，需额外配置 `LLM_BASE_URL` 与 `LLM_MODEL`，并确认其兼容 Responses API + web_search（否则建议用 OpenAI 或 Perplexity 官方）。
+2. 一个 **免费且支持联网的 LLM 方案**（二选一，均免费、无需绑卡）：
+   - **方案 A（国内免翻墙，推荐）**：`LLM_PROVIDER=cn-free`，需两个免费 Key：
+     - **豆包搜索 API Key**（火山引擎控制台获取，每月 500 次免费联网搜索）→ `DOUBAO_SEARCH_API_KEY`
+     - **智谱 GLM API Key**（`open.bigmodel.cn` 获取，`glm-4-flash` 永久免费）→ `ZHIPU_API_KEY`
+   - **方案 B（单 Key，最省事）**：`LLM_PROVIDER=gemini`，需 **Gemini API Key**（`aistudio.google.com` 免费获取，gemini-2.5-flash 自带 Google 搜索联网）→ `GEMINI_API_KEY`。注意：需能访问 Google（国内注册可能需翻墙）。
+   - （仍支持付费的 `openai` / `perplexity`，在 Secrets 设 `LLM_PROVIDER` 并填对应 Key 即可。）
 
 ---
 
@@ -68,15 +70,24 @@ git push -u origin main
 ### 步骤 4：配置 Secrets（LLM API Key）
 
 - 仓库 → **Settings → Secrets and variables → Actions → New repository secret**
-- 添加以下 Secret（按需，至少填一种 Provider 的 Key）：
+- 添加以下 Secret（选一种 Provider，填对应的 Key 即可）：
 
-| Name                 | 说明                                     | 示例                 |
-| -------------------- | -------------------------------------- | ------------------ |
-| `LLM_PROVIDER`       | `openai` 或 `perplexity`                | `openai`           |
-| `OPENAI_API_KEY`     | OpenAI 密钥（provider=openai 时必填）         | `sk-...`           |
-| `PERPLEXITY_API_KEY` | Perplexity 密钥（provider=perplexity 时必填） | `pplx-...`         |
-| `LLM_MODEL`          | 可选，覆盖默认模型                              | `gpt-4o` / `sonar` |
-| `LLM_BASE_URL`       | 可选，OpenAI 兼容端点                         | `https://...`      |
+**若用方案 A（cn-free，国内免翻墙，推荐）：**
+
+| Name                    | 说明                                        | 获取地址 |
+| ----------------------- | ----------------------------------------- | -------- |
+| `LLM_PROVIDER`          | 填 `cn-free`                                | —        |
+| `DOUBAO_SEARCH_API_KEY` | 豆包搜索 API Key（每月 500 次免费）              | 火山引擎控制台 → 豆包搜索 → 创建 API Key |
+| `ZHIPU_API_KEY`         | 智谱 API Key（`glm-4-flash` 永久免费）          | open.bigmodel.cn → 控制台 → API 密钥 |
+
+**若用方案 B（gemini，单 Key）：**
+
+| Name            | 说明                              | 获取地址 |
+| --------------- | ------------------------------- | -------- |
+| `LLM_PROVIDER`  | 填 `gemini`                       | —        |
+| `GEMINI_API_KEY` | Gemini API Key（免费，自带联网）    | aistudio.google.com → Get API Key |
+
+> Secrets 中 `LLM_PROVIDER` 留空时，workflow 默认使用 `cn-free`。
 
 ### 步骤 5：启用 Actions
 
@@ -133,4 +144,4 @@ GitHub Pages 自动用最新文件  →  网站 fetch 同源 data/intelligence.j
 
 - **更新时间**：编辑 `.github/workflows/daily-update.yml` 的 `cron: '0 4 * * *'`（UTC）。北京时间 = UTC + 8，故 `0 4 * * *` = 北京 12:00。
 - **模型**：在 Secrets 设 `LLM_MODEL`。
-- **Provider 切换**：在 Secrets 设 `LLM_PROVIDER` 为 `openai` 或 `perplexity`。
+- **Provider 切换**：在 Secrets 设 `LLM_PROVIDER` 为 `cn-free`（默认，国内免翻墙）、`gemini`（单 Key 免费）、`openai` 或 `perplexity`（付费）。
