@@ -60,8 +60,17 @@ def save_data(data):
     log(f"已写入 {DATA_PATH}")
 
 
+def _repair_json(text):
+    """尝试修复免费模型常见的非法 JSON：行/块注释、尾随逗号、Python 字面量。"""
+    t = re.sub(r"//[^\n]*", "", text)
+    t = re.sub(r"/\*.*?\*/", "", t, flags=re.DOTALL)
+    t = re.sub(r",(\s*[}\]])", r"\1", t)
+    t = t.replace("True", "true").replace("False", "false").replace("None", "null")
+    return t
+
+
 def extract_json(text):
-    """从 LLM 返回文本中提取 JSON 对象。"""
+    """从 LLM 返回文本中提取 JSON 对象，必要时尝试修复。"""
     if not text:
         return None
     text = text.strip()
@@ -75,8 +84,12 @@ def extract_json(text):
     try:
         return json.loads(text)
     except Exception as e:
-        log(f"JSON 解析失败: {e}")
-        return None
+        log(f"JSON 解析失败（首次）: {e}，尝试修复")
+        try:
+            return json.loads(_repair_json(text))
+        except Exception as e2:
+            log(f"JSON 修复后仍解析失败: {e2}")
+            return None
 
 
 def build_prompt(existing):
@@ -224,6 +237,7 @@ def gather_doubao_context(api_key):
                 blocks.append(f"查询「{q}」：\n{r}")
         except Exception as e:
             log(f"豆包搜索失败（{q}）：{e}")
+    log(f"豆包搜索：{len(blocks)}/{len(queries)} 个查询返回结果")
     return "\n\n".join(blocks)
 
 
@@ -240,7 +254,8 @@ def call_zhipu(prompt, model=None):
         model=model,
         messages=[{"role": "user", "content": prompt}],
         temperature=0.3,
-        max_tokens=8192,
+        max_tokens=16384,
+        response_format={"type": "json_object"},
     )
     return getattr(resp.choices[0].message, "content", "") or ""
 
@@ -327,8 +342,8 @@ def main():
         sys.exit(0)
     new = extract_json(raw)
     if not new:
-        log("未能解析出有效 JSON，保留现有数据")
-        sys.exit(0)
+        log("未能解析出有效 JSON，更新失败（请检查模型输出格式）")
+        sys.exit(1)   # 模型已返回内容但无法解析 => 明确失败，运行变红
     merged = merge_protect(existing, new)
     if not merged:
         sys.exit(0)
