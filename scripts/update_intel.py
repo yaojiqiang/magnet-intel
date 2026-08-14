@@ -158,6 +158,32 @@ def validate_forecast(v):
     return v, None
 
 
+def reconcile_cp(new_cp, existing_cp):
+    """
+    合理性守卫：将新 currentPrices 与昨日同品类逐项比对。
+    日度涨跌幅通常很小（<5%）；若某项偏离昨日 >±50%，视为模型量级/单位错误，
+    回退保留原值，避免网站显示离谱价格。返回（可能被修正的）列表。
+    """
+    if not isinstance(existing_cp, list):
+        return new_cp
+    old = {it.get("name"): it for it in existing_cp if isinstance(it, dict)}
+    for i, it in enumerate(new_cp):
+        name = it.get("name")
+        prev = old.get(name)
+        if not prev or not isinstance(prev.get("price"), (int, float)) or not prev["price"]:
+            continue
+        cur = it.get("price")
+        if not isinstance(cur, (int, float)):
+            continue
+        ratio = cur / prev["price"]
+        if ratio < 0.5 or ratio > 2.0:
+            log(f"currentPrices[{name}] 价格 {cur} 与昨日 {prev['price']} 偏离 {ratio:.2f}x，疑似量级错误，回退保留原值")
+            kept = dict(prev)
+            kept["category"] = it.get("category", prev.get("category"))
+            new_cp[i] = kept
+    return new_cp
+
+
 def safe_merge(existing, new):
     """
     把模型输出 new 合并进 existing，仅允许白名单字段且必须通过校验。
@@ -193,6 +219,7 @@ def safe_merge(existing, new):
             errors.append(f"currentPrices 校验失败：{err}")
             critical_fail = True
         else:
+            v = reconcile_cp(v, existing_re.get("currentPrices"))
             merged_re["currentPrices"] = v
     else:
         errors.append("currentPrices 未返回（保留原值）")
