@@ -353,6 +353,39 @@ def reconcile_cp_sources(new_cp, existing_cp):
     return new_cp
 
 
+def validate_strategies(items):
+    """
+    校验正海磁材应对建议（strategies）：
+      - 必须是列表，2~8 项；
+      - 每项可为 字符串，或 对象 {title, detail}（兼容 action/desc/rationale 别名）；
+      - title 非空且 ≤60 字，detail ≤300 字；
+      - 非法项跳过，有效项不足 2 条或整体异常 → 返回 (None, 错误) 让调用方保留原值。
+    """
+    if not isinstance(items, list):
+        return None, "非数组"
+    if not (2 <= len(items) <= 8):
+        return None, f"条数异常({len(items)})，应在2-8之间"
+    out = []
+    for it in items:
+        if isinstance(it, str):
+            t, d = it.strip(), ""
+        elif isinstance(it, dict):
+            t = str(it.get("title") or it.get("action") or "").strip()
+            d = str(it.get("detail") or it.get("desc") or it.get("rationale") or "").strip()
+            if not t and d:   # 只有说明没有标题时，把说明提升为标题
+                t, d = d, ""
+        else:
+            continue
+        if not t:
+            continue
+        if len(t) > 60 or len(d) > 300:
+            return None, "单项过长（title≤60字, detail≤300字）"
+        out.append({"title": t, "detail": d})
+    if len(out) < 2:
+        return None, "有效条数不足2条"
+    return out, None
+
+
 def safe_merge(existing, new):
     """
     把模型输出 new 合并进 existing，仅允许白名单字段且必须通过校验。
@@ -380,6 +413,14 @@ def safe_merge(existing, new):
     for k in ("marketSummary", "priceHistoryNote", "indexNote"):
         if k in new_re and isinstance(new_re[k], str):
             merged_re[k] = new_re[k]
+
+    # strategies（可选，正海磁材应对建议，结构校验）
+    if "strategies" in new_re:
+        v, err = validate_strategies(new_re["strategies"])
+        if err:
+            errors.append(f"strategies 校验失败：{err}（保留原值）")
+        else:
+            merged_re["strategies"] = v
 
     # currentPrices（关键字段）
     if "currentPrices" in new_re:
@@ -891,6 +932,7 @@ def build_prompt(existing):
         '  "updateNote": "本次更新说明（一句话，含数据来源与日期）",\n'
         '  "rareEarth": {\n'
         '    "marketSummary": "稀土及磁材市场综述（一段话）",\n'
+        '    "strategies": [ {"title":"对策短名(≤20字)","detail":"具体做法与理由(1-2句)"} ],\n'
         '    "currentPrices": [ 9 个品类对象，如下 ],\n'
         '    "priceHistory": [ 完整月度数组，必须包含全部历史月份（约20条）；若无法保证完整请勿返回此字段 ],\n'
         '    "forecast": { "horizon": "...", "forecastDate": "' + today + '", "basis": "...", "months": [3个月对象] }\n'
@@ -906,6 +948,11 @@ def build_prompt(existing):
         "严禁填写白名单外的来源（如“中国稀土行业协会”“网络”等模糊或编造来源）。\n"
         "金属铽严禁用\"氧化铽+160.6\"估算，必须用上海钢联月报实际月均价或相邻月插值。\n"
         "forecast.months 为未来 3 个月，每个对象含 category / basis / confidence / logic 等字段。\n\n"
+        "strategies 为正海磁材（钕铁硼永磁材料制造商，约70%成本来自稀土原料，属价格敏感型下游企业）的应对建议："
+        "结合当日稀土价格走势（涨跌方向、轻/重稀土分化、供给紧张度、成本传导难度），给出 4-6 条具体可执行的经营/采购/技术对策，"
+        "例如：原材料锁价长协与套期保值、战略库存择时调节、提高高毛利/高牌号产品占比、推进无重稀土与晶界扩散技术降低单耗、"
+        "回收料利用、向下游客户进行价格传导、拓展海外/非稀土业务对冲等。每条为对象 {\"title\":\"对策短名\",\"detail\":\"具体做法与理由（1-2句）\"}，"
+        "title 简洁有力（≤20字）、detail 说明做法与理由。若市场平稳，也须给出常态化稳健经营建议；对策须与当日市场实际相符，不得空泛。\n\n"
         "请仅返回符合上述结构的 JSON 对象，不要包含任何解释性文字或 Markdown 围栏。"
     )
 
