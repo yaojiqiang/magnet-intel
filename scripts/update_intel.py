@@ -344,8 +344,9 @@ def safe_merge(existing, new):
             critical_fail = True
         else:
             v = reconcile_cp(v, existing_re.get("currentPrices"))
-            v = reconcile_cp_sources(v, existing_re.get("currentPrices"))
             v = reconcile_cp_dates(v, existing_re.get("currentPrices"))
+            # 来源守卫必须最后执行，避免 reconcile_cp_dates 在价格持平时整条回退把被污染的旧来源又复制回来
+            v = reconcile_cp_sources(v, existing_re.get("currentPrices"))
             merged_re["currentPrices"] = v
     else:
         errors.append("currentPrices 未返回（保留原值）")
