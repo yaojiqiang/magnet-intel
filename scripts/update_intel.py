@@ -231,13 +231,14 @@ def reconcile_cp(new_cp, existing_cp):
 def reconcile_cp_dates(new_cp, existing_cp):
     """
     日期一致性守卫（针对现价卡片的“报价日期”）：
-    若某品类价格相对上一交易日未变化（数值相等，容差内），则保留上一交易日的报价日期，
-    并把 change 重置为 0、changeDesc 改为“持平”，source/unit 沿用原值。
-    仅当价格确实变动时，才采用模型给出的新报价日期。
-    目的：避免“日期被推进到今天、但价格还是老的”这种日期与内容不匹配的情况。
+    若某品类价格相对上一交易日未变化（数值相等，容差内），则【整条沿用】上一交易日的对象
+    （日期/涨跌/涨跌说明/来源/单位全部原样保留），不产生任何多余改动——
+    这样既避免“日期被推进到今天、但价格还是老的”这种日期与内容不匹配，
+    也避免仅因文案变化而误判“内容已更新”导致 lastUpdated 被无辜推进。
+    仅当价格确实变动时，才采用模型给出的新报价日期与涨跌信息。
     """
     old = {it.get("name"): it for it in existing_cp if isinstance(it, dict)} if isinstance(existing_cp, list) else {}
-    for it in new_cp:
+    for i, it in enumerate(new_cp):
         name = it.get("name")
         prev = old.get(name)
         if not isinstance(prev, dict):
@@ -246,14 +247,8 @@ def reconcile_cp_dates(new_cp, existing_cp):
         new_price = it.get("price")
         if isinstance(prev_price, (int, float)) and isinstance(new_price, (int, float)) \
                 and abs(new_price - prev_price) <= 1e-6:
-            # 价格未变 → 保留原报价日期与来源，避免“日期先行”
-            it["date"] = prev.get("date", it.get("date"))
-            it["change"] = 0
-            it["changeDesc"] = "持平（较上一交易日，价格未变动）"
-            if prev.get("source"):
-                it["source"] = prev.get("source")
-            if prev.get("unit"):
-                it["unit"] = prev.get("unit")
+            # 价格未变 → 整体沿用上一交易日对象，零多余改动
+            new_cp[i] = dict(prev)
     return new_cp
 
 
