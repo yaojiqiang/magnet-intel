@@ -1,0 +1,136 @@
+# 磁材竞社情报站 · 云端自动更新部署指南（GitHub Pages + Actions）
+
+本指南帮助你把现有网站迁移到 **GitHub Pages + GitHub Actions**，实现：
+
+- ✅ **网站读取数据完全在云端**（GitHub Pages 公网直链）
+- ✅ **每天自动抓取+更新数据完全在云端运行**（GitHub Actions 定时任务）
+- ✅ **不再依赖你本地电脑开机 / WorkBuddy 在线**
+
+> 迁移后，原 CloudStudio 分享链接可以下线，访问地址变为你的 GitHub Pages 链接。
+
+---
+
+## 一、前置条件
+
+1. 一个 **GitHub 账号**（免费）。
+2. 一个 **支持联网的 LLM API Key**（二选一）：
+   - **OpenAI**（推荐）：`OPENAI_API_KEY`，默认模型 `gpt-4o`，使用 Responses API 的 web_search 联网。
+   - **Perplexity**：`PERPLEXITY_API_KEY`，默认模型 `sonar`，原生联网。
+   - （可选）若用 OpenAI 兼容端点如 DeepSeek/通义，需额外配置 `LLM_BASE_URL` 与 `LLM_MODEL`，并确认其兼容 Responses API + web_search（否则建议用 OpenAI 或 Perplexity 官方）。
+
+---
+
+## 二、部署步骤
+
+### 步骤 1：在 GitHub 新建仓库
+
+- 登录 GitHub → 右上角 **New repository**
+- 仓库名随意（如 `magnet-intel`），**务必设为 Public**（免费版 GitHub Pages 需要公开仓库）
+- 不要勾选 "A dd a README"（我们已有文件），直接 Create repository
+
+### 步骤 2：上传本目录所有文件到仓库
+
+两种方式任选其一：
+
+**方式 A（最简单，无需本地 git）：GitHub 网页上传**
+
+- 进入刚建的空仓库 → 点击 **Add file → Upload files**
+- 把本目录（`magnet-companies`）下的 **全部内容** 拖进去上传，确保包含：
+  - `index.html`
+  - `data/intelligence.json`
+  - `scripts/update_intel.py`、`scripts/requirements.txt`
+  - `.github/workflows/daily-update.yml`
+  - `.gitignore`、`README_GITHUB.md`
+- 提交（Commit）
+
+**方式 B（本地 git push）：**
+
+```bash
+cd magnet-companies
+git init
+git remote add origin https://github.com/<你的用户名>/<仓库名>.git
+git add .
+git commit -m "init magnet intel site"
+git branch -M main
+git push -u origin main
+```
+
+### 步骤 3：启用 GitHub Pages
+
+- 仓库 → **Settings → Pages**
+- Source 选择 **Deploy from a branch**
+- Branch 选 **main**，目录选 **/ (root)**
+- 保存后，稍等 1~2 分钟，访问地址为：
+  ```
+  https://<你的用户名>.github.io/<仓库名>/
+  ```
+
+### 步骤 4：配置 Secrets（LLM API Key）
+
+- 仓库 → **Settings → Secrets and variables → Actions → New repository secret**
+- 添加以下 Secret（按需，至少填一种 Provider 的 Key）：
+
+| Name                 | 说明                                     | 示例                 |
+| -------------------- | -------------------------------------- | ------------------ |
+| `LLM_PROVIDER`       | `openai` 或 `perplexity`                | `openai`           |
+| `OPENAI_API_KEY`     | OpenAI 密钥（provider=openai 时必填）         | `sk-...`           |
+| `PERPLEXITY_API_KEY` | Perplexity 密钥（provider=perplexity 时必填） | `pplx-...`         |
+| `LLM_MODEL`          | 可选，覆盖默认模型                              | `gpt-4o` / `sonar` |
+| `LLM_BASE_URL`       | 可选，OpenAI 兼容端点                         | `https://...`      |
+
+### 步骤 5：启用 Actions
+
+- 仓库 → **Actions** 标签
+- 若提示 "Workflows aren't enabled"，点击 **I understand... enable** 启用
+- 找到 **Daily Magnet Intel Update** workflow
+
+### 步骤 6：手动触发一次测试
+
+- 在 Actions 页面，进入 **Daily Magnet Intel Update** → **Run workflow**
+- 观察运行日志：应能看到 LLM 调用、写入 `data/intelligence.json`、自动 commit & push
+- 约 1 分钟后，刷新 GitHub Pages 页面，确认数据日期已更新为当天
+
+---
+
+## 三、日常使用
+
+- **访问**：直接打开 GitHub Pages 链接即可，任何设备、任何时间都可访问，与你电脑无关。
+- **更新**：每天 **北京时间 12:00** 由 GitHub Actions 自动运行（UTC 04:00），无需你任何操作。
+- **手动更新**：随时可在 Actions 页面手动 Run workflow。
+- **下线旧链接**：原 CloudStudio 分享链接可在 WorkBuddy「设置 - 数据管理 - 我发布的应用」中下线。
+
+---
+
+## 四、工作原理
+
+```
+GitHub Actions (云端, 每天12:00)
+   │  运行 scripts/update_intel.py
+   │   ├─ 读取仓库中的 data/intelligence.json（保留历史结构）
+   │   ├─ 调用 LLM（联网 web_search）抓取最新稀土价格 + 竞社情报
+   │   └─ 生成完整 JSON 写回 data/intelligence.json
+   ▼
+git commit & push 到 main 分支
+   ▼
+GitHub Pages 自动用最新文件  →  网站 fetch 同源 data/intelligence.json
+```
+
+- 网站 `index.html` 优先 `fetch('data/intelligence.json')`（同源），失败时回退到内嵌兜底数据。
+- `update_intel.py` 对关键数组字段做缺失保护：LLM 返回异常时**不会破坏现有历史数据**。
+
+---
+
+## 五、费用与说明
+
+- **GitHub Actions / Pages**：公开仓库免费（每月额度远超本任务所需）。
+- **LLM API**：按调用量计费（每次更新约 1 次对话），量很小；如介意可在 Secrets 中调整模型或频率。
+- **兜底**：`index.html` 内嵌了最近一次数据，极端情况下 JSON 加载失败也不会白屏。
+- **过渡方案**：若暂时不想配置 LLM Key，可保留原 WorkBuddy 本地自动化，把它改为把更新后的 `data/intelligence.json` **push 到本仓库**（而非部署 CloudStudio），这样"读取"已云端化，仅"抓取"仍本地跑。
+
+---
+
+## 六、可调项
+
+- **更新时间**：编辑 `.github/workflows/daily-update.yml` 的 `cron: '0 4 * * *'`（UTC）。北京时间 = UTC + 8，故 `0 4 * * *` = 北京 12:00。
+- **模型**：在 Secrets 设 `LLM_MODEL`。
+- **Provider 切换**：在 Secrets 设 `LLM_PROVIDER` 为 `openai` 或 `perplexity`。
