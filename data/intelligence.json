@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-14 07:24",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月14日中国稀土行业协会数据更新",
+  "lastUpdated": "2026-08-14 07:49",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月14日中国稀土行业协会及包头稀土产品交易所数据更新。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土及磁材市场综述：稀土价格整体呈下行趋势，下游需求偏弱，市场交投氛围冷清。",
+    "marketSummary": "稀土市场整体呈现下行态势，轻稀土价格集体走低，重稀土镝铽系同步下滑。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -24,10 +24,10 @@
       {
         "name": "金属钕",
         "category": "轻稀土",
-        "price": 95.75,
+        "price": 98,
         "unit": "万元/吨",
-        "change": -0.5,
-        "changeDesc": "下跌5000元/吨",
+        "change": -5000,
+        "changeDesc": "下滑5000元/吨",
         "date": "2026-08-14",
         "source": "我的钢铁网"
       },
@@ -973,6 +973,18 @@
   },
   "activities": [
     {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-08-07",
+      "title": "宁波韵升2万吨高端无重稀土磁材新产线2026年Q2投产",
+      "description": "宁波韵升2万吨高端无重稀土磁材新产线于2026年第二季度投产，进一步扩大公司产能。",
+      "source": "公司公告",
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20260805144035870161430",
+      "id": "act-20260807-02"
+    },
+    {
       "id": "act-020",
       "company": "dadi",
       "companyName": "大地熊",
@@ -1009,6 +1021,30 @@
       "sourceUrl": "https://www.sohu.com/a/1058782848_114984"
     },
     {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-08-04",
+      "title": "中科三环拟现金收购宁波中电磁声控股权",
+      "description": "中科三环计划以现金形式收购宁波中电磁声电子有限公司控股权，标的公司是国内少数具备大规模消费电子磁组件组装核心技术能力的稀土永磁器件制造商。",
+      "source": "公司公告",
+      "sourceUrl": "https://data.eastmoney.com/notices/detail/000970/AN202608041827630002.html",
+      "id": "act-20260804-01"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-07-31",
+      "title": "大地熊与北方稀土及业内其他稀土供应商保持稳定合作",
+      "description": "大地熊与北方稀土及业内其他稀土供应商保持稳定合作，确保原材料供应。",
+      "source": "公司公告",
+      "sourceUrl": "https://finance.sina.com.cn/realstock/company/sh688077/nc.shtml",
+      "id": "act-20260731-04"
+    },
+    {
       "id": "act-017",
       "company": "yunsheng",
       "companyName": "宁波韵升",
@@ -1033,6 +1069,18 @@
       "sourceUrl": "https://basic.10jqka.com.cn/000970/"
     },
     {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-07-17",
+      "title": "英洛华磁材产能1.3万吨利用率70%-80%，5000吨扩产下半年投产",
+      "description": "英洛华磁材产能1.3万吨，利用率70%-80%，5000吨扩产项目预计下半年投产。",
+      "source": "公司公告",
+      "sourceUrl": "https://finance.sina.com.cn/realstock/company/sh688077/nc.shtml",
+      "id": "act-20260717-05"
+    },
+    {
       "id": "act-008",
       "company": "yunsheng",
       "companyName": "宁波韵升",
@@ -1055,6 +1103,18 @@
       "description": "7月15日接受2家机构调研：公司正配合世界知名科技公司开展具身机器人电机转子研发并已小批量交付；与北方稀土集团、中国稀土集团保持长期战略合作，控股银海新材（持股51%）布局上游稀土回收业务，构建多元化稀土资源保障体系。",
       "source": "投资者关系活动记录表",
       "sourceUrl": "https://m.10jqka.com.cn/20260716/c678225045.shtml"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-07-15",
+      "title": "金力永磁2026年新增3万吨高端磁材产能",
+      "description": "金力永磁新增3万吨高端磁材产能，全部适配新能源车、风电、机器人场景。",
+      "source": "公司公告",
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20260805144035870161430",
+      "id": "act-20260715-03"
     },
     {
       "id": "act-022",
