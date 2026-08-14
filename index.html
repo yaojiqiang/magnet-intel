@@ -76,6 +76,13 @@ a:hover{text-decoration:underline}
 /* Summary */
 .summary{background:linear-gradient(135deg,#e3f2fd 0%,#f3e5f5 100%);border-left:4px solid var(--primary);padding:16px 20px;border-radius:8px;margin-bottom:16px;font-size:14px;color:var(--text)}
 .summary strong{color:var(--primary)}
+.strategies-box{background:linear-gradient(135deg,#e8f5e9 0%,#f1f8e9 100%);border-left:4px solid var(--down);padding:16px 20px;border-radius:8px;margin-bottom:16px;font-size:14px;color:var(--text)}
+.strategies-box .s-head{font-weight:600;color:var(--down);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.strategies-box .s-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed #c8e6c9;line-height:1.5}
+.strategies-box .s-item:last-child{border-bottom:none}
+.strategies-box .s-num{color:var(--down);font-weight:700;flex:0 0 auto}
+.strategies-box .s-title{font-weight:600;color:var(--text);flex:0 0 auto}
+.strategies-box .s-detail{color:var(--text2);flex:1}
 
 /* Table */
 .table-wrap{overflow-x:auto;background:var(--card);border-radius:10px;box-shadow:var(--shadow);padding:20px;margin-bottom:16px}
@@ -176,6 +183,7 @@ tr:hover td{background:#fafbfc}
 <!-- ========== TAB 1: 原材料价格趋势 ========== -->
 <div class="tab-content active" id="tab-prices">
   <div class="summary" id="market-summary"></div>
+  <div class="strategies-box" id="strategies-box"></div>
   <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>稀土现货价格（最新报价）</div>
   <div class="grid grid-6" id="price-cards"></div>
   <div style="height:16px"></div>
@@ -335,6 +343,22 @@ function initPrices(){
 
   // Market summary
   document.getElementById('market-summary').innerHTML = '<strong>市场概况：</strong>' + re.marketSummary;
+
+  // 正海磁材应对建议（基于当日稀土市场）
+  const sb = document.getElementById('strategies-box');
+  const strs = Array.isArray(re.strategies) ? re.strategies : [];
+  if (strs.length) {
+    sb.innerHTML = '<div class="s-head"><span class="dot" style="background:var(--down)"></span>正海磁材应对建议（基于当日稀土市场）</div>' +
+      strs.map((s, i) => {
+        const t = (typeof s === 'string') ? s : (s.title || '');
+        const d = (typeof s === 'string') ? '' : (s.detail || '');
+        return '<div class="s-item"><span class="s-num">' + (i + 1) + '.</span>' +
+               (t ? '<span class="s-title">' + t + '</span>' : '') +
+               (d ? '<span class="s-detail">' + d + '</span>' : '') + '</div>';
+      }).join('');
+  } else {
+    sb.innerHTML = '';
+  }
 
   // Price cards
   const pc = document.getElementById('price-cards');
