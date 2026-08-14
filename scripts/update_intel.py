@@ -158,29 +158,65 @@ def validate_forecast(v):
     return v, None
 
 
+# 已知可靠基准价（2026-08-13 实际价，单位万元/吨）——用于基线被污染时的兜底
+REF_PRICES = {
+    "金属镨": 101.5, "金属钕": 94.25, "金属镨钕": 87.25, "氧化镨钕": 71.7,
+    "氧化钕": 77.0, "金属镝": 167.5, "金属铽": 820.5, "氧化镝": 138.5, "氧化铽": 662.0,
+}
+# 各品类绝对合理区间（万元/吨），用于拦截明显的量级/单位错误
+BANDS = {
+    "金属镨": (80, 130), "金属钕": (70, 130), "金属镨钕": (70, 120), "氧化镨钕": (50, 110),
+    "氧化钕": (50, 120), "金属镝": (120, 260), "金属铽": (500, 1200), "氧化镝": (100, 220), "氧化铽": (450, 1000),
+}
+
+
 def reconcile_cp(new_cp, existing_cp):
     """
-    合理性守卫：将新 currentPrices 与昨日同品类逐项比对。
-    日度涨跌幅通常很小（<5%）；若某项偏离昨日 >±50%，视为模型量级/单位错误，
-    回退保留原值，避免网站显示离谱价格。返回（可能被修正的）列表。
+    两层合理性守卫（保护稀土现价不被免费模型的量级/单位错误写崩）：
+      1) 绝对合理区间（BANDS）：区间内才可能被采纳；
+      2) 与“可信昨日价”比对，日度偏离 >±50% 视为跳变过大，信昨日价；
+      3) 若昨日价本身已被污染（不在区间），回退到已知可靠基准 REF_PRICES。
+    返回（已被校正的）列表。
     """
-    if not isinstance(existing_cp, list):
-        return new_cp
-    old = {it.get("name"): it for it in existing_cp if isinstance(it, dict)}
+    old = {it.get("name"): it for it in existing_cp if isinstance(it, dict)} if isinstance(existing_cp, list) else {}
     for i, it in enumerate(new_cp):
         name = it.get("name")
+        newp = it.get("price")
+        lo, hi = BANDS.get(name, (0, 1e9))
+        ref = REF_PRICES.get(name)
         prev = old.get(name)
-        if not prev or not isinstance(prev.get("price"), (int, float)) or not prev["price"]:
-            continue
-        cur = it.get("price")
-        if not isinstance(cur, (int, float)):
-            continue
-        ratio = cur / prev["price"]
-        if ratio < 0.5 or ratio > 2.0:
-            log(f"currentPrices[{name}] 价格 {cur} 与昨日 {prev['price']} 偏离 {ratio:.2f}x，疑似量级错误，回退保留原值")
-            kept = dict(prev)
-            kept["category"] = it.get("category", prev.get("category"))
-            new_cp[i] = kept
+        prevp = prev.get("price") if isinstance(prev, dict) else None
+
+        if isinstance(newp, (int, float)) and lo <= newp <= hi:
+            # 新值在合理区间
+            if isinstance(prevp, (int, float)) and lo <= prevp <= hi and prevp != 0:
+                trusted = newp if abs(newp - prevp) / prevp <= 0.5 else prevp
+            else:
+                trusted = newp  # 昨日价不可信，直接信新值（其已在合理区间）
+        else:
+            # 新值不合理 → 优先昨日价，其次可靠基准
+            if isinstance(prevp, (int, float)) and lo <= prevp <= hi:
+                trusted = prevp
+            elif ref is not None and lo <= ref <= hi:
+                trusted = ref
+            else:
+                trusted = newp  # 都没救，保留新值（总比崩好）
+
+        if trusted is not None and trusted != newp:
+            log(f"currentPrices[{name}] 价格 {newp} 不可信（区间 {lo}~{hi}），已校正为 {trusted}")
+            if trusted == prevp and isinstance(prev, dict):
+                it["price"] = prev.get("price")
+                it["unit"] = prev.get("unit", "万元/吨")
+                it["change"] = prev.get("change", 0)
+                it["changeDesc"] = prev.get("changeDesc", "")
+                it["date"] = prev.get("date")
+                it["source"] = prev.get("source", it.get("source"))
+            else:
+                it["price"] = trusted
+                it["unit"] = "万元/吨"
+                it["change"] = 0
+                it["changeDesc"] = "持平（模型数值疑似错误，已回退至可靠基准）"
+                it["source"] = "我的钢铁网"
     return new_cp
 
 
