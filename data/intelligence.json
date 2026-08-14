@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-14 08:43",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月14日中国稀土行业协会及包头稀土产品交易所数据更新。",
+  "lastUpdated": "2026-08-14 09:16",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月14日稀土产品每日价格及稀土市场行情分析，更新稀土及磁材市场价格数据。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场整体呈现下行态势，轻稀土价格集体走低，重稀土镝铽系同步下滑。下游需求端表现偏弱，采购以按需为主，新增订单一般。",
+    "marketSummary": "稀土市场整体偏弱，镨钕系产品价格持续下跌，氧化镨钕跌幅明显，金属厂金属镨钕报价倒挂，商家观望情绪较重。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -1035,6 +1035,18 @@
     {
       "company": "dadi",
       "companyName": "大地熊",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-08-04",
+      "title": "大地熊获得实用新型专利授权：“一种用于钕铁硼磁铁同极粘结的辅助工装”",
+      "description": "大地熊获得一项实用新型专利，用于钕铁硼磁铁同极粘结的辅助工装。",
+      "source": "新浪财经",
+      "sourceUrl": "http://finance.sina.com.cn/realstock/company/sh688077/nc.shtml",
+      "id": "act-20260804-01"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
       "dimension": "market",
       "dimensionName": "市场",
       "date": "2026-07-31",
@@ -1462,11 +1474,60 @@
   ],
   "news": [
     {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土再度涨价，稀土ETF易方达（159715）标的指数半日涨1.5%",
+      "source": "财联社",
+      "url": "https://www.cls.cn/detail/2454370"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "有研新材",
+      "title": "有研新材：每股派0.043元，股权登记日为8月20日",
+      "source": "南财智讯",
+      "url": "http://f10.eastmoney.com/NewsBulletin/index?code=SH600206"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土永磁概念震荡走强，中国稀土逼近涨停",
+      "source": "环球总财的微博",
+      "url": "https://m.weibo.cn/detail/5331759203878809"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土相关企业业绩集体报喜，稀土永磁板块拉升",
+      "source": "财闻",
+      "url": "http://m.163.com/dy/article/L49K0K4L0550WHYR.html"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土价格上行直接增厚产业链企业经营收益，稀土ETF嘉实(516150)把握稀土投资机遇",
+      "source": "有连云",
+      "url": "https://www.jiemian.com/article/14922140.html"
+    },
+    {
+      "date": "2026-08-13",
+      "company": "行业",
+      "title": "中国稀土对日出口骤降51%，3种关键材料归零！高市还能硬撑多久？",
+      "source": "王爷说财经v",
+      "url": "k.sina.cn/article_6824064813_196bef72d00101oeus.html"
+    },
+    {
       "date": "2026-08-12",
       "company": "行业",
       "title": "生意社8月11日稀土行情：走势下滑，轻稀土全线下调",
       "source": "生意社",
       "url": "https://www.100ppi.com/forecast/detail-20260812-204376.html"
+    },
+    {
+      "date": "2026-08-12",
+      "company": "行业",
+      "title": "中国管制稀土对日出口量腰斩，多个品类6月供应清零",
+      "source": "凤凰卫视资讯台",
+      "url": "https://news.ifeng.com/c/8vX0aYByCO5"
     },
     {
       "date": "2026-08-10",
@@ -1481,6 +1542,27 @@
       "title": "8月7日稀土市场：短期震荡为主，旺季行情仍待验证",
       "source": "新浪财经",
       "url": "https://cj.sina.com.cn/articles/view/7879996580/1d5af34a402001tl1k"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "氧化铒年内价格大幅上涨 8月以来多数稀土概念股获资金加仓",
+      "source": "人民财讯",
+      "url": "https://www.stcn.com/article/detail/4064600.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "稀土供需缺口持续扩大！稀土ETF易方达（159715）涨近3%，战略资源品属性凸显",
+      "source": "东方财富证券",
+      "url": "https://finance.eastmoney.com/a/202608073834936442.html"
+    },
+    {
+      "date": "2026-08-06",
+      "company": "行业",
+      "title": "出口管制强化、AI算力拉动，稀有金属“供需共振”格局强化，南方基金旗下稀有金属ETF南方(159062)跟踪标的指数中证稀有金属主题指数(930632.CSI) 昨日收涨4.93%",
+      "source": "南方基金",
+      "url": "https://www.cls.cn/detail/2446937"
     },
     {
       "date": "2026-07-27",
@@ -1530,34 +1612,6 @@
       "title": "2025年净利润同比增长232.85%，产品销量同比增长21%",
       "source": "中国证券报",
       "url": "https://finance.eastmoney.com/a/202603313690132554.html"
-    },
-    {
-      "date": "2026-03-27",
-      "company": "中科三环",
-      "title": "2025年净利润同比增长660.5%，深耕稀土永磁主业",
-      "source": "证券时报",
-      "url": "https://www.toutiao.com/article/7622685195791106595/"
-    },
-    {
-      "date": "2026-03-25",
-      "company": "金力永磁",
-      "title": "2025年产销再创新高，净利大增142%，经营现金流下滑超30%",
-      "source": "每日经济新闻",
-      "url": "https://finance.sina.cn/2026-03-25/detail-inhsfmmn0791569.d.html"
-    },
-    {
-      "date": "2026-03-26",
-      "company": "金力永磁",
-      "title": "投资者关系活动：2025年产销量、产能规划、机器人业务、原材料供应详解",
-      "source": "公司IR",
-      "url": "https://ir.jlmag.com.cn/upload/2026-04/177579244091547300.pdf"
-    },
-    {
-      "date": "2026-01-01",
-      "company": "行业",
-      "title": "稀土价格趋势历史与展望：氧化镨钕2026年预测72万元/吨",
-      "source": "东方财富",
-      "url": "https://caifuhao.eastmoney.com/news/20260101220154273343960"
     }
   ]
 }
