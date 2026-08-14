@@ -9,32 +9,32 @@ update_intel.py
 支持四种 provider（通过环境变量 LLM_PROVIDER 选择）：
   - openai     : OpenAI Responses API，启用 web_search 工具联网（需付费 Key）
   - perplexity : Perplexity sonar 模型，原生联网（需付费 Key）
-  - gemini     : Google Gemini（Google AI Studio 免费额度，gemini-2.5-flash 自带 Google Search 联网，
-                 单 Key、无需绑卡）★ 推荐免费方案（需能访问 Google）
-  - cn-free    : 国内免翻墙免费组合 = 豆包搜索（联网，每月500次免费）+ 智谱 GLM-4-Flash（永久免费，OpenAI 兼容）
-                 ★ 国内用户免翻墙首选
+  - gemini     : Google Gemini（Google AI Studio 免费额度，gemini-2.5-flash 自带 Google Search 联网）
+  - cn-free    : 国内免翻墙免费组合 = 豆包搜索（联网，每月500次免费）+ 智谱 GLM-4-Flash（永久免费）
 
 环境变量：
   LLM_PROVIDER           openai | perplexity | gemini | cn-free
   OPENAI_API_KEY         OpenAI 密钥
   PERPLEXITY_API_KEY     Perplexity 密钥
-  GEMINI_API_KEY         Gemini 密钥（aistudio.google.com 免费获取）
-  DOUBAO_SEARCH_API_KEY  豆包搜索 API Key（火山引擎控制台获取，每月500次免费）
-  ZHIPU_API_KEY          智谱 API Key（open.bigmodel.cn 免费获取，glm-4-flash 永久免费）
-  LLM_BASE_URL           可选，OpenAI 兼容端点
-  LLM_MODEL              可选，模型名（gemini 默认 gemini-2.5-flash；cn-free 默认 glm-4-flash）
-  DOUBAO_SEARCH_ENDPOINT 可选，豆包搜索端点（默认 https://open.feedcoopapi.com/search_api/web_search）
-  DATA_PATH              数据文件路径（默认 data/intelligence.json）
+  GEMINI_API_KEY         Gemini 密钥
+  DOUBAO_SEARCH_API_KEY  豆包搜索 API Key
+  ZHIPU_API_KEY          智谱 API Key
+  LLM_BASE_URL / LLM_MODEL / DOUBAO_SEARCH_ENDPOINT / DATA_PATH  可选
 
-安全/健壮性：
-  - 任何 LLM 调用或解析失败都不会破坏现有数据（保留原文件，退出码 0）。
-  - 对关键数组字段（priceHistory/indexHistory/activities/news/companies/currentPrices/forecast）
-    做缺失保护：若 LLM 返回中缺失或为空，则回退保留原值，避免历史数据丢失。
+【数据安全核心原则】—— 防止免费模型把整份文档写坏：
+  - LLM 只能修改“白名单字段”（updateNote、rareEarth 下的 marketSummary / currentPrices /
+    priceHistory / forecast / *Note / indexHistory）。activities / companies / comparison /
+    sources / news / meta 等“大块内容”一律不接收模型输出，始终保留原值。
+  - 每个白名单字段在写入前必须通过“结构校验”（项数、字段名、数字类型等）。
+    校验不通过的字段 → 保留原值并告警；关键字段（currentPrices）校验不通过 →
+    整个更新放弃并让运行变红（exit 1），避免“假成功”写入半截数据。
+  - 运行时错误（网络抖动、密钥缺失等配置错误）按既有规则处理（配置错误变红，网络错误保留原值）。
 """
 
 import os
 import sys
 import json
+import copy
 import datetime
 import re
 
@@ -92,44 +92,156 @@ def extract_json(text):
             return None
 
 
+# ---------------------------------------------------------------------------
+# 白名单 + 结构校验
+# ---------------------------------------------------------------------------
+
+# currentPrices 每个品类对象必须包含的字段
+_CP_REQUIRED = {"name", "category", "price", "unit", "change", "changeDesc", "date", "source"}
+# priceHistory / indexHistory 每个月份对象必须包含的字段
+_PH_REQUIRED = {"month", "prNdOxide", "dysprosiumOxide", "terbiumOxide", "ndOxide",
+                "metalPrNd", "metalNd", "metalPr", "metalDy", "metalTb"}
+
+
+def validate_currentPrices(v):
+    """currentPrices：必须是 9 个品类对象的数组，每个对象字段齐全、price 为数字、unit 非空。"""
+    if not isinstance(v, list) or len(v) != 9:
+        return None, f"应为 9 项数组，实际 {type(v).__name__}，len={len(v) if hasattr(v, '__len__') else 'n/a'}"
+    for i, it in enumerate(v):
+        if not isinstance(it, dict):
+            return None, f"第 {i} 项不是对象"
+        miss = _CP_REQUIRED - set(it.keys())
+        if miss:
+            return None, f"第 {i} 项缺字段 {sorted(miss)}"
+        if not isinstance(it.get("price"), (int, float)) or isinstance(it.get("price"), bool):
+            return None, f"第 {i} 项 price 非数字：{it.get('price')!r}"
+        if not isinstance(it.get("unit"), str) or not it.get("unit"):
+            return None, f"第 {i} 项 unit 为空或非法：{it.get('unit')!r}"
+        if not isinstance(it.get("change"), (int, float)) or isinstance(it.get("change"), bool):
+            return None, f"第 {i} 项 change 非数字：{it.get('change')!r}"
+    return v, None
+
+
+def validate_month_array(v, existing_len, name):
+    """priceHistory / indexHistory：必须是列表，且不允许缩短（防止模型截断历史）。"""
+    if not isinstance(v, list):
+        return None, f"应为数组，实际 {type(v).__name__}"
+    if len(v) < existing_len:
+        return None, f"长度 {len(v)} < 原有 {existing_len}（不允许缩短/截断）"
+    for i, it in enumerate(v):
+        if not isinstance(it, dict):
+            return None, f"第 {i} 项不是对象"
+        miss = _PH_REQUIRED - set(it.keys())
+        if miss:
+            return None, f"第 {i} 项缺字段 {sorted(miss)}"
+    return v, None
+
+
+def validate_forecast(v):
+    """forecast：字典，months 为 3 个月数组。"""
+    if not isinstance(v, dict):
+        return None, f"应为对象，实际 {type(v).__name__}"
+    months = v.get("months")
+    if not isinstance(months, list) or len(months) != 3:
+        return None, f"months 应为 3 项数组，实际 {type(months).__name__} len={len(months) if hasattr(months, '__len__') else 'n/a'}"
+    return v, None
+
+
+def safe_merge(existing, new):
+    """
+    把模型输出 new 合并进 existing，仅允许白名单字段且必须通过校验。
+    返回 (merged, errors, critical_fail)。
+    - errors: 校验未通过被跳过的字段说明列表
+    - critical_fail: 关键字段（currentPrices）校验未通过 → 应整体放弃更新
+    """
+    merged = copy.deepcopy(existing)
+    errors = []
+    critical_fail = False
+
+    # 顶层白名单：updateNote
+    if "updateNote" in new and isinstance(new["updateNote"], str):
+        merged["updateNote"] = new["updateNote"]
+
+    new_re = new.get("rareEarth")
+    if not isinstance(new_re, dict):
+        errors.append("rareEarth 缺失或非对象，跳过 rareEarth 下所有更新")
+        return merged, errors, critical_fail
+
+    merged_re = merged.setdefault("rareEarth", {})
+    existing_re = existing.get("rareEarth", {}) if isinstance(existing, dict) else {}
+
+    # marketSummary / *Note：纯字符串，直接采用
+    for k in ("marketSummary", "priceHistoryNote", "indexNote"):
+        if k in new_re and isinstance(new_re[k], str):
+            merged_re[k] = new_re[k]
+
+    # currentPrices（关键字段）
+    if "currentPrices" in new_re:
+        v, err = validate_currentPrices(new_re["currentPrices"])
+        if err:
+            errors.append(f"currentPrices 校验失败：{err}")
+            critical_fail = True
+        else:
+            merged_re["currentPrices"] = v
+    else:
+        errors.append("currentPrices 未返回（保留原值）")
+
+    # priceHistory（可选，禁止缩短）
+    if "priceHistory" in new_re:
+        v, err = validate_month_array(new_re["priceHistory"],
+                                      len(existing_re.get("priceHistory", [])), "priceHistory")
+        if err:
+            errors.append(f"priceHistory 校验失败：{err}（保留原值）")
+        else:
+            merged_re["priceHistory"] = v
+
+    # indexHistory（可选，禁止缩短）
+    if "indexHistory" in new_re:
+        v, err = validate_month_array(new_re["indexHistory"],
+                                      len(existing_re.get("indexHistory", [])), "indexHistory")
+        if err:
+            errors.append(f"indexHistory 校验失败：{err}（保留原值）")
+        else:
+            merged_re["indexHistory"] = v
+
+    # forecast（可选）
+    if "forecast" in new_re:
+        v, err = validate_forecast(new_re["forecast"])
+        if err:
+            errors.append(f"forecast 校验失败：{err}（保留原值）")
+        else:
+            merged_re["forecast"] = v
+
+    # ★ 不处理 activities / companies / comparison / sources / news / meta / 其它：一律保留原值
+    return merged, errors, critical_fail
+
+
 def build_prompt(existing):
     today = datetime.date.today().strftime("%Y-%m-%d")
-    if existing:
-        keys = list(existing.keys())
-        structure_hint = (
-            f"现有数据顶层字段为：{keys}。\n"
-            "请严格保持该 JSON 的【结构与字段】不变，仅更新各字段的【值】为最新（" + today + "）数据。\n"
-            "关键规则：\n"
-            "1) rareEarth.currentPrices 固定 9 个品类（金属镨/金属钕/金属镨钕/氧化镨钕/氧化钕/金属镝/金属铽/氧化镝/氧化铽），单位万元/吨，"
-            "source 字段如实标注平台与报价日期（如'我的钢铁网 2026-08-xx'）。\n"
-            "2) 价格来源优先级：我的钢铁网 → 亚洲金属网 → 百川盈孚；替代来源必须如实标注，不得虚标'我的钢铁网'。\n"
-            "3) 金属铽严禁用'氧化铽+160.6'估算，必须用上海钢联月报实际月均价或相邻月插值。\n"
-            "4) rareEarth.priceHistory 为月度数组（2025-01 起，每月 10 字段：month/prNdOxide/dysprosiumOxide/terbiumOxide/ndOxide/"
-            "metalPrNd/metalNd/metalPr/metalDy/metalTb），请保留全部历史月份并在末尾追加/更新当月条目，不得删除任何字段或历史月。\n"
-            "5) rareEarth.forecast 为未来 3 个月预测（以当月实际价为锚）：维护 horizon/forecastDate/basis/months，"
-            "forecastDate 更新为今天，months 为 3 个月，各品类 confidence/logic 逐月填写。\n"
-            "6) activities 竞社动态【不得收录正海磁材】；dimension 必须按实质归类为 digital/supply/market/tech（工艺技术归 tech）；"
-            "建议保持 20 条以上、描述充实；保留历史条目并按日期倒序。\n"
-            "7) companies[].financials.quarterly 为 2026 分季度数据，新财报追加新期间并保留历史。\n"
-            "8) 所有数字与事实以联网搜索到的原文为准，不得编造；无法核实的字段保留原值。\n"
-            "9) 返回 JSON 即可。说明：priceHistory、indexHistory、companies、comparison、sources、meta 等若无变化可省略不返回"
-            "（系统会自动保留原值，避免免费模型输出超限）；但 activities、news 必须保留全部历史条目并追加本期新增；"
-            "currentPrices、marketSummary、updateNote、forecast 必须返回最新值。\n"
-        )
-    else:
-        structure_hint = (
-            f"请生成完整的磁材竞社情报 JSON（" + today + "），结构包含：lastUpdated, updateNote, meta, "
-            "rareEarth{currentPrices, priceHistory, indexHistory, marketSummary, priceHistoryNote, indexNote, forecast}, "
-            "companies{financials.quarterly, productionSales, revenueStructure, geo}, comparison, activities, sources, news。"
-        )
     return (
-        "你是一名磁材（钕铁硼永磁材料）行业情报分析师。请使用联网搜索获取 "
-        + today
-        + " 最新的稀土价格行情（我的钢铁网 / 亚洲金属网 / 百川盈孚）与磁材上市公司"
-        "（金力永磁 300748、宁波韵升 600366、中科三环 000970、正海磁材 300224、大地熊 688077、英洛华 000795）"
-        "的最新竞社动态、财报、供应链、工艺技术等信息。\n\n"
-        + structure_hint
-        + "\n请仅返回符合上述结构的 JSON 对象，不要包含任何解释性文字或 Markdown 围栏。"
+        "你是一名磁材（钕铁硼永磁材料）行业情报分析师。请使用下方【联网搜索参考信息】核对并"
+        "更新最新数据，数字的来源与日期必须与参考信息一致，不得编造；无法核实的字段保留原描述即可。\n\n"
+        "【输出限制 — 极其重要】\n"
+        "你【只能】输出以下字段，严禁输出 activities / companies / comparison / sources / news / meta / "
+        "indexHistory 等其它字段（那些内容系统会保留原值，你写了也会被丢弃，且容易写坏结构）：\n"
+        "{\n"
+        '  "updateNote": "本次更新说明（一句话，含数据来源与日期）",\n'
+        '  "rareEarth": {\n'
+        '    "marketSummary": "稀土及磁材市场综述（一段话）",\n'
+        '    "currentPrices": [ 9 个品类对象，如下 ],\n'
+        '    "priceHistory": [ 完整月度数组，必须包含全部历史月份（约20条）；若无法保证完整请勿返回此字段 ],\n'
+        '    "forecast": { "horizon": "...", "forecastDate": "' + today + '", "basis": "...", "months": [3个月对象] }\n'
+        "  }\n"
+        "}\n\n"
+        "currentPrices 固定 9 个品类（顺序不限）：金属镨、金属钕、金属镨钕、氧化镨钕、氧化钕、"
+        "金属镝、金属铽、氧化镝、氧化铽。\n"
+        "每个对象必须包含字段：name(品类名), category(轻稀土/重稀土), price(数字, 单位万元/吨), "
+        "unit(如\"万元/吨\"), change(数字, 较上次涨跌万元), changeDesc(文字说明), date(报价日期 "
+        + today[:7] + "-xx), source(平台名, 如\"我的钢铁网\")。\n\n"
+        "价格来源优先级：我的钢铁网 → 亚洲金属网 → 百川盈孚；替代来源必须如实标注，不得虚标。\n"
+        "金属铽严禁用\"氧化铽+160.6\"估算，必须用上海钢联月报实际月均价或相邻月插值。\n"
+        "forecast.months 为未来 3 个月，每个对象含 category / basis / confidence / logic 等字段。\n\n"
+        "请仅返回符合上述结构的 JSON 对象，不要包含任何解释性文字或 Markdown 围栏。"
     )
 
 
@@ -304,28 +416,6 @@ def validate_provider():
         )
 
 
-# 关键字段保护：LLM 返回缺失/为空时回退保留原值
-PROTECTED_KEYS = ["priceHistory", "indexHistory", "activities", "news",
-                  "companies", "currentPrices", "forecast", "comparison", "sources", "meta"]
-
-
-def merge_protect(existing, new):
-    if not isinstance(new, dict):
-        log("LLM 返回非 JSON 对象，放弃更新")
-        return None
-    if not existing:
-        return new
-    merged = dict(existing)  # 以原数据为基底
-    for k, v in new.items():
-        merged[k] = v
-    for key in PROTECTED_KEYS:
-        if key in existing and (key not in new or not new.get(key)):
-            merged[key] = existing[key]
-            log(f"字段 '{key}' 在 LLM 返回中缺失/为空，已回退保留原值")
-    merged["lastUpdated"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-    return merged
-
-
 def main():
     existing = load_existing()
     prompt = build_prompt(existing)
@@ -340,13 +430,23 @@ def main():
         # 运行时错误（如网络抖动）：保留现有数据，温和退出
         log(f"LLM 调用失败，保留现有数据: {e}")
         sys.exit(0)
+
     new = extract_json(raw)
     if not new:
         log("未能解析出有效 JSON，更新失败（请检查模型输出格式）")
         sys.exit(1)   # 模型已返回内容但无法解析 => 明确失败，运行变红
-    merged = merge_protect(existing, new)
-    if not merged:
-        sys.exit(0)
+
+    merged, errors, critical_fail = safe_merge(existing, new)
+    for e in errors:
+        log(f"校验告警: {e}")
+
+    if critical_fail:
+        # 关键字段（currentPrices）校验未通过：放弃本次更新，避免写入半截/错误数据。
+        # 运行变红，提醒检查；原数据保持完好（不会被提交覆盖）。
+        log("关键字段校验未通过，放弃本次更新以避免损坏数据；请检查模型输出或重试。运行失败（变红）。")
+        sys.exit(1)
+
+    merged["lastUpdated"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
     save_data(merged)
     log("更新完成")
 
