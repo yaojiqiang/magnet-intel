@@ -1214,7 +1214,9 @@ def main():
         save_data(merged)
         log("数据内容与上次一致，无实质更新：保留原 lastUpdated，不推进日期（git 不会产生新提交）")
     else:
-        merged["lastUpdated"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+        # 写入带明确时区(UTC, Z)的 ISO8601，避免 GitHub Actions(UTC) 的裸时间被浏览器
+        # 当成访问者本地时间解析，导致“更新于”显示偏差 8 小时。
+        merged["lastUpdated"] = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         save_data(merged)
         log("更新完成（内容有变化，已推进 lastUpdated）")
 
