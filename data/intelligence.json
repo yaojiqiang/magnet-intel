@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-14 06:43",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月14日中国稀土行业协会数据更新",
+  "lastUpdated": "2026-08-14 07:20",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月14日中国稀土行业协会和包头稀土产品交易所数据更新。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,17 +9,17 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土及磁材市场综述：近期稀土市场价格整体呈现下行态势，轻稀土各品类价格集体走低，重稀土镝铽系同步下滑。",
+    "marketSummary": "稀土市场整体呈现下行态势，轻稀土价格集体走低，重稀土镝铽系同步下滑。",
     "currentPrices": [
       {
         "name": "金属镨",
         "category": "轻稀土",
-        "price": 101.75,
+        "price": 99,
         "unit": "万元/吨",
-        "change": -0.75,
-        "changeDesc": "下跌7500元/吨",
+        "change": -0.76,
+        "changeDesc": "较上次下跌0.76万元/吨",
         "date": "2026-08-14",
-        "source": "中国稀土行业协会"
+        "source": "我的钢铁网"
       },
       {
         "name": "金属钕",
@@ -44,40 +44,40 @@
       {
         "name": "氧化镨钕",
         "category": "轻稀土",
-        "price": 71.5,
+        "price": 73.38,
         "unit": "万元/吨",
-        "change": -1.0,
-        "changeDesc": "下跌1万元/吨",
+        "change": -0.23,
+        "changeDesc": "较上次下跌0.23万元/吨",
         "date": "2026-08-14",
-        "source": "中国稀土行业协会"
+        "source": "我的钢铁网"
       },
       {
         "name": "氧化钕",
         "category": "轻稀土",
-        "price": 77.75,
+        "price": 78.25,
         "unit": "万元/吨",
-        "change": -1.0,
-        "changeDesc": "下跌",
+        "change": -0.52,
+        "changeDesc": "较上次下跌0.52万元/吨",
         "date": "2026-08-14",
         "source": "我的钢铁网"
       },
       {
         "name": "金属镝",
         "category": "重稀土",
-        "price": 192.5,
+        "price": 167.5,
         "unit": "万元/吨",
-        "change": 0.0,
-        "changeDesc": "持平",
+        "change": 0,
+        "changeDesc": "持平（模型数值疑似错误，已回退至可靠基准）",
         "date": "2026-08-14",
         "source": "我的钢铁网"
       },
       {
         "name": "金属铽",
         "category": "重稀土",
-        "price": 820.5,
+        "price": 852.5,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（模型数值疑似错误，已回退至可靠基准）",
+        "change": -5,
+        "changeDesc": "较上次下跌5万元/吨",
         "date": "2026-08-14",
         "source": "我的钢铁网"
       },
@@ -94,10 +94,10 @@
       {
         "name": "氧化铽",
         "category": "重稀土",
-        "price": 662.0,
+        "price": 695,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（模型数值疑似错误，已回退至可靠基准）",
+        "change": -10,
+        "changeDesc": "较上次下跌10万元/吨",
         "date": "2026-08-14",
         "source": "我的钢铁网"
       }
