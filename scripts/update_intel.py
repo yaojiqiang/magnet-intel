@@ -1201,6 +1201,104 @@ def validate_provider():
         )
 
 
+def build_update_summary(existing, merged):
+    """对比“更新前 / 更新后”两份数据，生成人类可读的中文更新摘要。
+    只说明“哪些板块更新了、变动了多少”，不输出完整数据，方便邮件/日志快速浏览。"""
+
+    def re(d):
+        return (d.get("rareEarth") or {}) if isinstance(d, dict) else {}
+
+    re_old, re_new = re(existing), re(merged)
+    lines = []
+
+    # —— 稀土价格（逐品类对比涨跌/新增） ——
+    old_p = {p.get("name"): p for p in re_old.get("currentPrices", [])}
+    new_p = {p.get("name"): p for p in re_new.get("currentPrices", [])}
+    changes = []
+    for name, np_ in new_p.items():
+        op = old_p.get(name)
+        npv, opv = np_.get("price"), (op or {}).get("price")
+        if op is None:
+            changes.append(f"{name} 新增 {npv} {np_.get('unit','')}")
+        elif npv != opv:
+            arrow = "↑" if (float(npv or 0) > float(opv or 0)) else "↓"
+            changes.append(f"{name} {opv}→{npv} {np_.get('unit','')} {arrow}")
+    lines.append("【稀土价格】" + ("；".join(changes) if changes else "无变动"))
+
+    # —— 市场概况 / 应对建议 ——
+    lines.append("【市场概况】" + ("已更新" if re_old.get("marketSummary") != re_new.get("marketSummary") else "无变动"))
+    lines.append("【正海磁材应对建议】" + ("已更新" if re_old.get("strategies") != re_new.get("strategies") else "无变动"))
+
+    # —— 竞社动态（按标题去重找新增） ——
+    a_old = set(x.get("title", "") for x in (existing.get("activities") or []))
+    a_new = merged.get("activities") or []
+    a_added = [x for x in a_new if x.get("title", "") not in a_old]
+    if a_added:
+        lines.append("【竞社动态】新增 %d 条：" % len(a_added) + "；".join(x.get("title", "") for x in a_added[:8]))
+    else:
+        lines.append("【竞社动态】无变动（共 %d 条）" % len(a_new))
+
+    # —— 新闻动态 ——
+    n_old = set(x.get("title", "") for x in (existing.get("news") or []))
+    n_new = merged.get("news") or []
+    n_added = [x for x in n_new if x.get("title", "") not in n_old]
+    if n_added:
+        items = ["%s %s：%s" % (x.get("date", ""), x.get("company", ""), x.get("title", "")) for x in n_added[:8]]
+        lines.append("【新闻动态】新增 %d 条：" % len(n_added) + "；".join(items))
+    else:
+        lines.append("【新闻动态】无变动（共 %d 条）" % len(n_new))
+
+    # —— 竞社经营数据（按公司对比内容） ——
+    c_old = {c.get("id"): c for c in (existing.get("companies") or [])}
+    changed = [nc.get("name", cid) for cid, nc in
+               ((c.get("id"), c) for c in (merged.get("companies") or []))
+               if c_old.get(cid) != nc]
+    lines.append("【竞社经营数据】" + ("更新：" + "、".join(changed) if changed else "无变动"))
+
+    return "\n".join(lines)
+
+
+def send_email_report(summary, last_updated, to_addr):
+    """把更新摘要通过 SMTP 发送邮件。未配置 SMTP 凭据时安全跳过（不影响数据更新）。"""
+    host = os.environ.get("SMTP_HOST")
+    port = os.environ.get("SMTP_PORT")
+    user = os.environ.get("SMTP_USER")
+    pwd = os.environ.get("SMTP_PASS")
+    if not (host and port and user and pwd and to_addr):
+        log("未配置 SMTP 凭据（SMTP_HOST/PORT/USER/PASS/NOTIFY_EMAIL），跳过邮件发送；"
+            "今日更新摘要仅记录在运行日志中。")
+        return False
+    try:
+        import smtplib, ssl
+        from email.mime.text import MIMEText
+        from email.header import Header
+        subject = "磁材竞社情报 每日更新摘要（%s）" % (last_updated or "")
+        body = ("网站 https://yaojiqiang.github.io/magnet-intel/ 今日自动更新如下：\n\n"
+                "%s\n\n（本邮件由 GitHub Actions 每日自动发送，无需人工操作）" % summary)
+        msg = MIMEText(body, "plain", "utf-8")
+        msg["Subject"] = Header(subject, "utf-8")
+        msg["From"] = user
+        msg["To"] = to_addr
+        port_i = int(port)
+        if port_i == 465:
+            ctx = ssl.create_default_context()
+            with smtplib.SMTP_SSL(host, port_i, timeout=30) as s:
+                s.login(user, pwd)
+                s.send_message(msg)
+        else:
+            with smtplib.SMTP(host, port_i, timeout=30) as s:
+                s.ehlo()
+                if s.has_extn("starttls"):
+                    s.starttls()
+                s.login(user, pwd)
+                s.send_message(msg)
+        log("邮件已发送至 %s" % to_addr)
+        return True
+    except Exception as e:
+        log("邮件发送失败（不影响数据更新）：%s" % e)
+        return False
+
+
 def main():
     existing = load_existing()
     prompt = build_prompt(existing)
@@ -1266,6 +1364,16 @@ def main():
         merged["lastUpdated"] = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         save_data(merged)
         log("更新完成（内容有变化，已推进 lastUpdated）")
+
+    # ★ 生成“今日更新摘要”并打印到日志（无论是否配置邮件都会输出，
+    #   方便在 Actions 运行日志中直接查看“今天更新了哪些部分”）
+    summary = build_update_summary(existing, merged)
+    log("=== 今日更新摘要 ===")
+    for line in summary.split("\n"):
+        log(line)
+
+    # ★ 可选：把摘要通过邮件推送给指定邮箱（配置 SMTP 凭据后自动生效）
+    send_email_report(summary, merged.get("lastUpdated"), os.environ.get("NOTIFY_EMAIL"))
 
 
 if __name__ == "__main__":
