@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-15T06:45:20Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月10日稀土市场行情分析及8月11日稀土08价格涨跌榜，更新稀土价格数据。",
+  "lastUpdated": "2026-08-15T07:44:53Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：稀土及磁材市场综述（2026年8月15日，数据来源：我的钢铁网、亚洲金属网、百川盈孚、上海金属网、上海钢联）",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场整体偏弱，镨钕系产品价格下调，中重稀土价格维持弱稳。",
+    "marketSummary": "稀土市场整体呈现波动走势，轻稀土价格持续下跌，重稀土价格相对稳定。氧化镨钕、金属镨钕价格下跌，氧化镝、氧化铽价格小幅上涨。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -44,21 +44,21 @@
       {
         "name": "氧化镨钕",
         "category": "轻稀土",
-        "price": 71.0,
+        "price": 72.0,
         "unit": "万元/吨",
         "change": -1.0,
-        "changeDesc": "下跌",
-        "date": "2026-08-14",
+        "changeDesc": "下跌1万元/吨",
+        "date": "2026-08-15",
         "source": "我的钢铁网"
       },
       {
         "name": "氧化钕",
         "category": "轻稀土",
-        "price": 79.25,
+        "price": 79.5,
         "unit": "万元/吨",
-        "change": -0.5,
-        "changeDesc": "下跌",
-        "date": "2026-08-14",
+        "change": -0.25,
+        "changeDesc": "下跌2500元/吨",
+        "date": "2026-08-15",
         "source": "我的钢铁网"
       },
       {
@@ -469,57 +469,77 @@
     ],
     "indexNote": "稀土价格指数来源：我的钢铁网。指数基期为2025年1月试运行基准。2025年6月、7月数据为实际公布值，其余月度数据为估算值。",
     "forecast": {
-      "horizon": "2026-08-15",
+      "horizon": "近3个月（兜底）",
       "forecastDate": "2026-08-15",
-      "basis": "供需平衡，政策支持",
+      "basis": "基于近期价格趋势的轻度外推",
       "months": [
         {
           "month": "2026-09",
-          "category": "轻稀土",
-          "basis": "需求稳定，供给紧张",
-          "confidence": "高",
-          "logic": "下游需求稳定，供给受限，价格有望上涨。"
+          "basis": "基于近期价格趋势的轻度外推（模型未提供预测价时自动兜底）",
+          "confidence": "中",
+          "logic": "按近 3 个月走势线性外推，仅供参考",
+          "prNdOxide": 70.43,
+          "ndOxide": 75.49,
+          "dysprosiumOxide": 136.0,
+          "terbiumOxide": 652.67,
+          "metalPrNd": 85.75,
+          "metalNd": 92.16,
+          "metalPr": 99.75,
+          "metalDy": 162.93,
+          "metalTb": 839.0
         },
         {
           "month": "2026-10",
-          "category": "轻稀土",
-          "basis": "需求稳定，供给紧张",
-          "confidence": "高",
-          "logic": "下游需求稳定，供给受限，价格有望上涨。"
+          "basis": "基于近期价格趋势的轻度外推（模型未提供预测价时自动兜底）",
+          "confidence": "中",
+          "logic": "按近 3 个月走势线性外推，仅供参考",
+          "prNdOxide": 69.17,
+          "ndOxide": 73.97,
+          "dysprosiumOxide": 133.5,
+          "terbiumOxide": 643.33,
+          "metalPrNd": 84.24,
+          "metalNd": 90.08,
+          "metalPr": 97.99,
+          "metalDy": 158.37,
+          "metalTb": 857.5
         },
         {
           "month": "2026-11",
-          "category": "轻稀土",
-          "basis": "需求稳定，供给紧张",
-          "confidence": "高",
-          "logic": "下游需求稳定，供给受限，价格有望上涨。"
+          "basis": "基于近期价格趋势的轻度外推（模型未提供预测价时自动兜底）",
+          "confidence": "中",
+          "logic": "按近 3 个月走势线性外推，仅供参考",
+          "prNdOxide": 67.9,
+          "ndOxide": 72.46,
+          "dysprosiumOxide": 131.0,
+          "terbiumOxide": 634.0,
+          "metalPrNd": 82.74,
+          "metalNd": 87.99,
+          "metalPr": 96.24,
+          "metalDy": 153.8,
+          "metalTb": 876.0
         }
       ]
     },
     "strategies": [
       {
-        "title": "原材料锁价",
+        "title": "原材料锁定",
         "detail": "与供应商签订长协合同，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "库存调节",
-        "detail": "根据市场行情，适时调整库存水平，避免库存积压或短缺。"
+        "title": "库存管理",
+        "detail": "根据市场需求和价格走势，合理调整库存，避免库存积压。"
       },
       {
-        "title": "产品结构优化",
+        "title": "产品结构调整",
         "detail": "提高高毛利产品占比，优化产品结构，提升盈利能力。"
       },
       {
-        "title": "技术升级",
-        "detail": "推进无重稀土与晶界扩散技术，降低单耗，提高生产效率。"
+        "title": "技术创新",
+        "detail": "推进无重稀土与晶界扩散技术，降低单耗，提高产品竞争力。"
       },
       {
         "title": "成本传导",
-        "detail": "向下游客户传导成本上涨，保持利润空间。"
-      },
-      {
-        "title": "拓展业务",
-        "detail": "拓展海外市场或非稀土业务，降低对单一市场的依赖。"
+        "detail": "向下游客户传导成本，保持合理的利润空间。"
       }
     ]
   },
@@ -978,6 +998,42 @@
   },
   "activities": [
     {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-08-15",
+      "title": "金力永磁减持26.28万股",
+      "description": "金力永磁减持26.28万股，相关事件后剩余好仓1638.25万股。",
+      "source": "同花顺金融服务网",
+      "sourceUrl": "http://basic.10jqka.com.cn/176/HK6680/",
+      "id": "act-20260815-01"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-08-14",
+      "title": "金力永磁上半年营业收入同比增长约90%",
+      "description": "金力永磁2026年上半年公司在机器人及工业伺服电机领域营业收入同比增长约90%。",
+      "source": "同花顺金融服务网",
+      "sourceUrl": "http://basic.10jqka.com.cn/176/HK6680/",
+      "id": "act-20260814-02"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-08-11",
+      "title": "金力永磁董事会会议延期",
+      "description": "金力永磁董事会会议延期。",
+      "source": "同花顺金融服务网",
+      "sourceUrl": "http://basic.10jqka.com.cn/176/HK6680/",
+      "id": "act-20260811-03"
+    },
+    {
       "company": "sanhuan",
       "companyName": "中科三环",
       "dimension": "market",
@@ -1000,6 +1056,30 @@
       "source": "公司公告",
       "sourceUrl": "https://caifuhao.eastmoney.com/news/20260805144035870161430",
       "id": "act-20260807-02"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-08-07",
+      "title": "金力永磁终止认购澳大利亚上市稀土公司股权",
+      "description": "金力永磁自愿公告关于终止认购澳大利亚上市稀土公司 HASTINGS TECHNOLOGY METALS LIMITED股权。",
+      "source": "同花顺金融服务网",
+      "sourceUrl": "http://basic.10jqka.com.cn/176/HK6680/",
+      "id": "act-20260807-04"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-08-07",
+      "title": "金力永磁披露报表",
+      "description": "金力永磁翌日披露报表。",
+      "source": "同花顺金融服务网",
+      "sourceUrl": "http://basic.10jqka.com.cn/176/HK6680/",
+      "id": "act-20260807-05"
     },
     {
       "id": "act-020",
@@ -1206,6 +1286,18 @@
       "sourceUrl": ""
     },
     {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-07-02",
+      "title": "金力永磁上半年扣非净利预增超57% 多业务布局受关注",
+      "description": "金力永磁上半年扣非净利润预计大增57.26%-82.90%，其中机器人业务营收同比增约90%。",
+      "source": "经济观察网",
+      "sourceUrl": "https://jg-static.eeo.com.cn/article/info?channelUuid=13fc583f24f64b248fe42ebc71cdec87&id=94f028333ee9471f9bb5646812d1007c",
+      "id": "act-20260702-07"
+    },
+    {
       "id": "act-014",
       "company": "jinli",
       "companyName": "金力永磁",
@@ -1216,6 +1308,18 @@
       "description": "7月1日披露2026年半年度业绩预告：预计归母净利润4.0-4.6亿元，同比增长31.17%-50.84%；扣非净利3.68-4.28亿元，同比增长57%-83%。机器人及工业伺服电机领域营收同比增长约90%，具身机器人电机转子已小批量交付；按计划推进2万吨新产能建设。",
       "source": "2026年半年度业绩预告（巨潮资讯网）",
       "sourceUrl": "https://www.cnstock.com/commonDetail/737316"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-07-01",
+      "title": "金力永磁2026上半年净利猛增五成！二季度扣非净利润强势回暖",
+      "description": "金力永磁上半年归母净利润预计达4亿～4.6亿元，同比暴增31.17%～50.84%；更亮眼的是，扣非净利润预计3.68亿～4.28亿元，同比增长57.26%～82.9%。",
+      "source": "新浪财经",
+      "sourceUrl": "http://m.toutiao.com/group/7656771067016528418/?upstream_biz=VolcEngine",
+      "id": "act-20260701-08"
     },
     {
       "id": "act-007",
@@ -1288,6 +1392,30 @@
       "source": "上海证券交易所",
       "sourceUrl": "http://www.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-06-13/600366_20260613_UN8X.pdf",
       "id": "act-20260612-01"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-06-04",
+      "title": "金力永磁：电话会纪要；2026 年稀土永磁需求预计增 10%，镨钕氧化物价格景气向上",
+      "description": "公司2026年第一季度总收入同比增长约16%至约20亿元人民币，海外收入同比增长约22%。",
+      "source": "报告ify",
+      "sourceUrl": "https://reportify.cn/transcripts/1259913879421587456",
+      "id": "act-20260604-09"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-04-28",
+      "title": "金力永磁新兴赛道赋能结构升级，产能扩张驱动业绩增长",
+      "description": "公司2026年Q1实现营业收入20.36亿元，同比+16.05%，环比-13.17%；综合毛利率21.83%，同比+6.13pct；实现归母净利1.93亿元，同比+20.09%，环比+1.38%。",
+      "source": "国盛证券",
+      "sourceUrl": "http://m.hibor.com.cn/wap_detail.aspx?id=a76e944203af1021990a9ead819f04f1",
+      "id": "act-20260428-10"
     },
     {
       "id": "act-009",
@@ -1372,6 +1500,18 @@
       "description": "积极配合世界知名科技公司进行具身机器人电机转子研发并有小批量产品交付。墨西哥基地已开始向特斯拉墨西哥工厂小批量供应高端磁材；欧洲基地斩获宝马iX3定点订单。对美出口5.01亿元（+39.80%）。",
       "source": "投资者关系活动记录表+行业研报",
       "sourceUrl": "https://ir.jlmag.com.cn/upload/2026-04/177579244091547300.pdf"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-02-21",
+      "title": "金力永磁产能扩张与新兴业务布局引关注",
+      "description": "金力永磁正推进“年产2万吨高性能稀土永磁材料绿色智造项目”，并力争到2027年实现总产能6万吨的目标。",
+      "source": "经济观察网",
+      "sourceUrl": "http://m.eeo.com.cn/2026/0221/799144.shtml",
+      "id": "act-20260221-06"
     },
     {
       "id": "act-005",
@@ -1527,6 +1667,20 @@
   ],
   "news": [
     {
+      "date": "2026-08-15",
+      "company": "行业",
+      "title": "稀土预期大涨价",
+      "source": "东财网友9592513751903074",
+      "url": "https://caifuhao.eastmoney.com/news/20260815103717504265460"
+    },
+    {
+      "date": "2026-08-15",
+      "company": "行业",
+      "title": "彻底不装了！日本对华动手，中方可以全面反制，顺势打出关键底牌",
+      "source": "烽火巍观",
+      "url": "https://m.sohu.com/a/1063243770_122481544/"
+    },
+    {
       "date": "2026-08-14",
       "company": "行业",
       "title": "稀土再度涨价，稀土ETF易方达（159715）标的指数半日涨1.5%",
@@ -1590,6 +1744,34 @@
       "url": "https://www.cls.cn/detail/2454370"
     },
     {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "汇正财经：战略价值重塑，把握稀土结构性机会",
+      "source": "汇正财经",
+      "url": "https://caifuhao.eastmoney.com/news/20260814175638346348180"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土供需缺口持续扩大！稀土ETF易方达（159715）涨近3%，战略资源品属性凸显",
+      "source": "东方财富证券",
+      "url": "https://wap.eastmoney.com/a/202608073834936442.html"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "下周钨与稀土将成为主线",
+      "source": "汇正财经",
+      "url": "https://caifuhao.eastmoney.com/news/20260814191605936949830"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "CPO彻底火了！下一个机会在哪里？",
+      "source": "证券市场周刊",
+      "url": "https://c.m.163.com/news/a/L4CNR8MN0519L38V.html"
+    },
+    {
       "date": "2026-08-13",
       "company": "行业",
       "title": "中国稀土对日出口骤降51%，3种关键材料归零！高市还能硬撑多久？",
@@ -1625,6 +1807,13 @@
       "url": "https://emweb.eastmoney.com/NewsBulletin/index?code=SH600392"
     },
     {
+      "date": "2026-08-13",
+      "company": "行业",
+      "title": "7月稀土出口4223.5吨创年内新低",
+      "source": "市场资讯",
+      "url": "https://cj.sina.cn/article/norm_detail?url=http%3A%2F%2Ffinance.sina.cn%2F2026-08-13%2Fdetail-inincnux3559084.d.html"
+    },
+    {
       "date": "2026-08-12",
       "company": "行业",
       "title": "生意社8月11日稀土行情：走势下滑，轻稀土全线下调",
@@ -1646,6 +1835,34 @@
       "url": "https://xinsanban.eastmoney.com/Article/NoticeContent?id=AN202512191803782133&pageIndex=13"
     },
     {
+      "date": "2026-08-12",
+      "company": "行业",
+      "title": "稀土出口4223.5吨创年内新低",
+      "source": "矿权资源网",
+      "url": "https://m.toutiao.com/group/7673315474729419318/?upstream_biz=VolcEngine"
+    },
+    {
+      "date": "2026-08-12",
+      "company": "行业",
+      "title": "暴增660%，对美稀土出口为啥越来越多？中国稀土管制真的没用了？",
+      "source": "跳跳历史",
+      "url": "https://c.m.163.com/news/a/L4C5H57705568TH5.html"
+    },
+    {
+      "date": "2026-08-11",
+      "company": "行业",
+      "title": "稀土价格持续上行，供需格局偏紧，稀土ETF易方达（159715）关注度提升",
+      "source": "金融界",
+      "url": "http://m.163.com/dy/article/L49LV34O0519QIKK.html"
+    },
+    {
+      "date": "2026-08-11",
+      "company": "行业",
+      "title": "供应收紧预期与补库需求共振推动稀土价格反弹，稀土ETF嘉实(516150)备受市场关注",
+      "source": "有连云",
+      "url": "http://m.toutiao.com/group/7670382520361304627/?upstream_biz=VolcEngine"
+    },
+    {
       "date": "2026-08-10",
       "company": "行业",
       "title": "包头稀土产品交易所8月10日报价：氧化镨钕72.71万元/吨",
@@ -1665,6 +1882,34 @@
       "title": "盛和资源聚焦绿色低碳能源、高性能材料等领域",
       "source": "公司公告",
       "url": "https://emweb.eastmoney.com/NewsBulletin/index?code=SH600392"
+    },
+    {
+      "date": "2026-08-10",
+      "company": "行业",
+      "title": "美国加码稀土产业扶持叠加国内企业盈利高增，稀土ETF易方达（159715）景气度攀升",
+      "source": "金融界",
+      "url": "http://m.toutiao.com/group/7672283271085998633/?upstream_biz=VolcEngine"
+    },
+    {
+      "date": "2026-08-10",
+      "company": "行业",
+      "title": "稀土永磁概念震荡走强 中国稀土逼近涨停",
+      "source": "牧童论金",
+      "url": "https://m.weibo.cn/detail/5331771472482443"
+    },
+    {
+      "date": "2026-08-10",
+      "company": "行业",
+      "title": "稀土永磁概念异动拉升 中国稀土涨停",
+      "source": "东方财富Choice数据",
+      "url": "https://finance.eastmoney.com/a/202608073834876713.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "供需缺口持续存在！稀土永磁表现强势 2026高增长个股来了",
+      "source": "东方财富研究中心",
+      "url": "http://news.cnfol.com/zhengquanyaowen/20260807/32328361.shtml"
     }
   ]
 }
