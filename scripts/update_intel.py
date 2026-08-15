@@ -195,42 +195,44 @@ def _forecast_has_prices(fc):
 
 
 def _build_forecast_fallback(price_history):
-    """当模型未给出有效预测价时，基于 priceHistory 末值做轻度线性外推兜底，保证预测线不消失。"""
+    """应急兜底【仅在联网推理完全不可用时启用】：采用“近 6 月均值附近保守持平（轻微均值回复）”，
+    明确标注为非联网推理，避免被误认为据实推理的预测。正常情况下预测由 update_forecast() 联网推理生成。"""
     if not isinstance(price_history, list) or len(price_history) < 1:
         return None
     last = price_history[-1]
-    # 计算各价格的近 3 个月简单趋势（每月变化量），不足则取 0
     n = len(price_history)
-    span = min(3, n)
-    prev = price_history[n - span]
-    step = {}
+    window = price_history[-min(6, n):]
+    avg = {}
     for k in _FC_PRICE_KEYS:
-        lv = last.get(k)
-        pv = prev.get(k) if isinstance(prev, dict) else None
-        if isinstance(lv, (int, float)) and isinstance(pv, (int, float)) and span > 0:
-            s = (lv - pv) / span
-            # 限制单月漂移幅度，避免外推失控（±10% / 月）
-            s = max(min(s, abs(lv) * 0.1), -abs(lv) * 0.1)
-            step[k] = s
-        else:
-            step[k] = 0.0
-    # 未来 3 个月（基于最末月份 +1..+3）
+        vals = [w.get(k) for w in window if isinstance(w.get(k), (int, float))]
+        avg[k] = (sum(vals) / len(vals)) if vals else last.get(k)
     try:
         y, m = (int(x) for x in last.get("month", "2026-08").split("-"))
         base = datetime.date(y, m, 1)
     except Exception:
         base = datetime.date(2026, 8, 1)
     months = []
+    prev = {k: last.get(k) for k in _FC_PRICE_KEYS}
     for i in range(1, 4):
         d = base.replace(month=((base.month + i - 1) % 12) + 1, year=base.year + (base.month + i - 1) // 12)
-        obj = {"month": d.strftime("%Y-%m"), "basis": "基于近期价格趋势的轻度外推（模型未提供预测价时自动兜底）",
-               "confidence": "中", "logic": "按近 3 个月走势线性外推，仅供参考"}
+        obj = {"month": d.strftime("%Y-%m"),
+               "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
+               "confidence": "低", "logic": "数据不足，保守持平，非据实推理"}
         for k in _FC_PRICE_KEYS:
-            val = float(last.get(k, 0)) + step[k] * i
+            target = avg.get(k)
+            lv = prev.get(k)
+            if isinstance(lv, (int, float)) and isinstance(target, (int, float)) and lv:
+                # 向近 6 月均值轻微回复，单月幅度严格 ≤1%
+                step = (target - lv) * 0.3
+                step = max(min(step, abs(lv) * 0.01), -abs(lv) * 0.01)
+                val = lv + step
+            else:
+                val = lv if isinstance(lv, (int, float)) else 0
             obj[k] = round(val, 2) if isinstance(val, float) else val
+            prev[k] = obj[k]
         months.append(obj)
-    return {"horizon": "近3个月（兜底）", "forecastDate": datetime.date.today().strftime("%Y-%m-%d"),
-            "basis": "基于近期价格趋势的轻度外推", "months": months}
+    return {"horizon": "近3个月（应急兜底）", "forecastDate": datetime.date.today().strftime("%Y-%m-%d"),
+            "basis": "应急兜底：联网推理不可用，按近 6 月均值保守持平（非联网推理）", "months": months}
 
 
 
@@ -1032,8 +1034,7 @@ def build_prompt(existing):
         '    "marketSummary": "稀土及磁材市场综述（一段话）",\n'
         '    "strategies": [ {"title":"对策短名(≤20字)","detail":"具体做法与理由(1-2句)"} ],\n'
         '    "currentPrices": [ 9 个品类对象，如下 ],\n'
-        '    "priceHistory": [ 完整月度数组，必须包含全部历史月份（约20条）；若无法保证完整请勿返回此字段 ],\n'
-        '    "forecast": { "horizon": "...", "forecastDate": "' + today + '", "basis": "...", "months": [3个月对象] }\n'
+        '    "priceHistory": [ 完整月度数组，必须包含全部历史月份（约20条）；若无法保证完整请勿返回此字段 ]\n'
         "  }\n"
         "}\n\n"
         "currentPrices 固定 9 个品类（顺序不限）：金属镨、金属钕、金属镨钕、氧化镨钕、氧化钕、"
@@ -1045,12 +1046,8 @@ def build_prompt(existing):
         "参考信息若来自其它平台，按优先级就近归入上述白名单之一并如实标注；"
         "严禁填写白名单外的来源（如“中国稀土行业协会”“网络”等模糊或编造来源）。\n"
         "金属铽严禁用\"氧化铽+160.6\"估算，必须用上海钢联月报实际月均价或相邻月插值。\n"
-        "forecast.months 为未来 3 个月（month 依次为次月起的连续 3 个月，如 2026-09/2026-10/2026-11），"
-        "每个对象【必须】包含与 priceHistory 完全一致的 9 个价格字段及合理数值（单位：万元/吨）：\n"
-        "  prNdOxide(氧化镨钕), ndOxide(氧化钕), dysprosiumOxide(氧化镝), terbiumOxide(氧化铽),\n"
-        "  metalPrNd(金属镨钕), metalNd(金属钕), metalPr(金属镨), metalDy(金属镝), metalTb(金属铽)；\n"
-        "并可在每月对象附加可选字段 category(轻稀土/重稀土)、basis(预测依据)、confidence(高/中/低)、logic(简要理由)。\n"
-        "预测价应基于最新实际价与供需判断给出，不得与最新实际价相差过大（单月涨跌通常不超过 ±15%）。\n\n"
+        "（注：未来 3 个月稀土价格预测由独立模块基于【联网检索 + 多因子推理】生成，不在此处输出，"
+        "以免退化为对真实价格的简单线性外推。）\n\n"
         "strategies 为正海磁材（钕铁硼永磁材料制造商，约70%成本来自稀土原料，属价格敏感型下游企业）的应对建议："
         "结合当日稀土价格走势（涨跌方向、轻/重稀土分化、供给紧张度、成本传导难度），给出 4-6 条具体可执行的经营/采购/技术对策，"
         "例如：原材料锁价长协与套期保值、战略库存择时调节、提高高毛利/高牌号产品占比、推进无重稀土与晶界扩散技术降低单耗、"
@@ -1058,6 +1055,187 @@ def build_prompt(existing):
         "title 简洁有力（≤20字）、detail 说明做法与理由。若市场平稳，也须给出常态化稳健经营建议；对策须与当日市场实际相符，不得空泛。\n\n"
         "请仅返回符合上述结构的 JSON 对象，不要包含任何解释性文字或 Markdown 围栏。"
     )
+
+
+# ---------------------------------------------------------------------------
+# 未来 3 个月稀土价格预测（独立模块）
+#   核心目标：预测必须基于【联网检索的真实信息 + 多因子推理】，而【不是】对历史价格做
+#   简单线性外推。故单独成模块：针对“供需 / 政策与贸易 / 下游需求 / 宏观汇率 / 季节性”
+#   做定向联网检索，再把检索结果喂给模型做严格推理，最后用绝对区间 + 单月漂移上限做护栏。
+# ---------------------------------------------------------------------------
+
+# forecast 的 9 个价格字段 -> BANDS 的中文键（用于绝对合理区间校验）
+_FC_TO_BAND = {
+    "prNdOxide": "氧化镨钕", "ndOxide": "氧化钕", "dysprosiumOxide": "氧化镝",
+    "terbiumOxide": "氧化铽", "metalPrNd": "金属镨钕", "metalNd": "金属钕",
+    "metalPr": "金属镨", "metalDy": "金属镝", "metalTb": "金属铽",
+}
+# 9 个价格字段 -> 中文名（用于把基线价拼成可读文本）
+_FC_TO_NAME = {k: v for k, v in _FC_TO_BAND.items()}
+
+
+def build_forecast_prompt(existing):
+    """构建“未来 3 个月稀土价格预测”的专用 prompt：强调联网检索 + 多因子推理，并给出最新实际基线。"""
+    today = datetime.date.today()
+    today_s = today.strftime("%Y-%m-%d")
+    re_existing = (existing.get("rareEarth", {}) if isinstance(existing, dict) else {})
+    ph = re_existing.get("priceHistory") or []
+    n = len(ph)
+
+    def fmt_vals(rec):
+        return "、".join(
+            f"{_FC_TO_NAME[k]}{rec.get(k)}" for k in _FC_PRICE_KEYS if isinstance(rec.get(k), (int, float))
+        )
+
+    recent = ph[-3:] if ph else []
+    if recent:
+        base_text = "近期实际月均价（万元/吨）：\n" + "\n".join(
+            f"- {r.get('month')}：{fmt_vals(r)}" for r in recent
+        )
+    else:
+        base_text = "（无历史月均价数据，请基于联网检索到的当前报价作为基线）"
+
+    months_labels = []
+    for i in range(1, 4):
+        d = today.replace(month=(today.month + i - 1) % 12 + 1,
+                          year=today.year + (today.month + i - 1) // 12)
+        months_labels.append(d.strftime("%Y-%m"))
+
+    return (
+        "你是一名资深稀土 / 永磁行业价格预测分析师。请基于下方【联网检索参考信息】与你的专业知识，"
+        "对未来 3 个月（" + "、".join(months_labels) + "）的 9 个稀土品类月均价做出预测。\n\n"
+        "【预测方法 —— 必须严格执行】\n"
+        "1) 综合研判以下多因子，再给出方向（涨 / 跌 / 震荡）与幅度：\n"
+        "   · 下游需求：新能源汽车、风电、人形机器人、消费电子、工业电机等的景气与排产；\n"
+        "   · 供给端：国内稀土开采 / 冶炼分离配额与指标、中国稀土集团与北方稀土排产、"
+        "缅甸矿进口恢复/受限、海外 Lynas / MP Materials 供给；\n"
+        "   · 政策与贸易：出口管制 / 管制清单、关税、收储与放储、环保与能耗约束；\n"
+        "   · 库存与基差、宏观与汇率（美元指数、中美利差）、季节性"
+        "（金九银十、年末备货、春节前后）；\n"
+        "2) 对每一品类、每一未来月份，在 logic 字段给出【一句话推理依据】，说明驱动该方向的基本面原因；\n"
+        "3) 预测必须是上述多因子推理的结果，【严禁】仅对历史价格做线性外推；"
+        "即便你认为将延续趋势，也须在依据中写明驱动该趋势的基本面原因。\n\n"
+        "【最新实际基线】\n" + base_text + "\n\n"
+        "【输出要求 —— 仅输出 JSON】\n"
+        "{\"forecast\": {\"horizon\": \"近3个月\", \"forecastDate\": \"" + today_s + "\", "
+        "\"basis\": \"综合供需/政策/需求与价格走势的推理结论（1-2句）\", "
+        "\"months\": [ 3 个对象，月份依次为 " + "、".join(months_labels) + " ]}}\n"
+        "每个月份对象必须包含字段：\n"
+        "  month(如 \"" + months_labels[0] + "\"), category(轻稀土/重稀土), "
+        "confidence(高/中/低), basis(该月综合依据，1句), logic(该月推理要点，1句),\n"
+        "  以及 9 个价格字段(数字，万元/吨)：\n"
+        "  prNdOxide(氧化镨钕), ndOxide(氧化钕), dysprosiumOxide(氧化镝), terbiumOxide(氧化铽),\n"
+        "  metalPrNd(金属镨钕), metalNd(金属钕), metalPr(金属镨), metalDy(金属镝), metalTb(金属铽)\n"
+        "约束：预测价相对上一月（或最新实际价）的单月变化通常不超过 ±15%；数值须落在合理区间"
+        "（氧化镨钕/氧化钕 50-110、金属系 70-130、氧化镝 100-220、氧化铽 450-1000、"
+        "金属镝 140-185、金属铽 500-1200 万元/吨）。\n"
+        "仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
+    )
+
+
+def gather_doubao_context_forecast(api_key):
+    """针对“未来 3 个月稀土价格预测”的定向联网检索：覆盖供需、政策贸易、重稀土供给、下游需求、海外供给、季节性等。"""
+    queries = [
+        "稀土价格走势 2026年下半年 预测 氧化镨钕 镨钕金属 机构观点 分析",
+        "稀土 供需 2026下半年 北方稀土 中国稀土集团 开采配额 冶炼分离指标 排产",
+        "稀土 出口管制 2026 最新 影响 镝 铽 价格",
+        "缅甸 稀土矿 进口 2026 停产 恢复 重稀土 供应 影响",
+        "氧化镝 氧化铽 重稀土 价格 2026 后市 展望 预测",
+        "钕铁硼 永磁 需求 2026 新能源汽车 风电 人形机器人 对稀土价格拉动",
+        "Lynas MP Materials 稀土供应 2026 产能 价格影响",
+        "稀土 收储 放储 2026 政策 对价格影响",
+        "美元指数 汇率 2026 稀土价格 影响 分析",
+        "稀土 价格 2026年9月 10月 11月 走势 预测 金九银十 年末备货",
+    ]
+    blocks = []
+    for q in queries:
+        try:
+            r = _doubao_search_once(q, api_key, count=15)
+            if r:
+                blocks.append(f"查询「{q}」：\n{r}")
+        except Exception as e:
+            log(f"豆包搜索(forecast)失败（{q}）：{e}")
+    log(f"豆包搜索(forecast)：{len(blocks)}/{len(queries)} 个查询返回结果")
+    return "\n\n".join(blocks)
+
+
+def call_llm_forecast(prompt):
+    """预测专用 LLM 调用：cn-free 下用定向检索上下文 + 智谱合成；其它 provider 自带联网。"""
+    provider = (os.environ.get("LLM_PROVIDER") or "openai").lower()
+    if provider == "cn-free":
+        ctx = gather_doubao_context_forecast(os.environ.get("DOUBAO_SEARCH_API_KEY"))
+        if ctx:
+            full = (prompt + "\n\n以下是联网检索到的稀土市场参考信息"
+                    "（请据此严格推理未来 3 个月各品类价格，不要简单线性外推历史）：\n" + ctx)
+        else:
+            full = (prompt + "\n\n（联网检索未返回结果，请基于你的专业知识谨慎推理，"
+                    "并明确标注不确定性）")
+        return call_zhipu(full)
+    if provider == "perplexity":
+        return call_perplexity(prompt)
+    if provider == "gemini":
+        return call_gemini(prompt)
+    return call_openai(prompt)
+
+
+def reconcile_forecast(fc, existing):
+    """预测护栏：绝对合理区间 + 单月漂移上限（±18%），防止模型输出失控；保留推理出的合理差异。"""
+    ph = ((existing.get("rareEarth", {}) or {}).get("priceHistory")
+          if isinstance(existing, dict) else None) or []
+    last = ph[-1] if ph else {}
+    prev = {k: last.get(k) for k in _FC_PRICE_KEYS}
+    for i, m in enumerate(fc.get("months", [])):
+        if not isinstance(m, dict):
+            continue
+        for k in _FC_PRICE_KEYS:
+            val = m.get(k)
+            if not isinstance(val, (int, float)) or isinstance(val, bool):
+                val = prev.get(k) if isinstance(prev.get(k), (int, float)) else 0
+                m[k] = val
+            # 绝对合理区间
+            band_key = _FC_TO_BAND.get(k)
+            if band_key and band_key in BANDS:
+                lo, hi = BANDS[band_key]
+                if val < lo or val > hi:
+                    val = max(lo, min(hi, val))
+                    m[k] = round(val, 2)
+            # 单月漂移上限 ±18%（相对上一月或最新实际价），防止失控
+            ref = fc["months"][i - 1].get(k) if i > 0 else prev.get(k)
+            if isinstance(ref, (int, float)) and ref:
+                cap = abs(ref) * 0.18
+                if abs(val - ref) > cap:
+                    val = ref + max(-cap, min(cap, val - ref))
+                    m[k] = round(val, 2)
+            prev[k] = m[k]
+    return fc
+
+
+def update_forecast(existing):
+    """生成基于联网检索与多因子推理的 3 个月价格预测，覆盖 safe_merge 的结果（避免退化为纯价格外推）。"""
+    prompt = build_forecast_prompt(existing)
+    price_history = ((existing.get("rareEarth", {}) or {}).get("priceHistory")
+                     if isinstance(existing, dict) else None)
+    try:
+        raw = call_llm_forecast(prompt)
+    except Exception as e:
+        log(f"forecast LLM 调用失败，使用应急兜底: {e}")
+        return _build_forecast_fallback(price_history)
+    new = extract_json(raw)
+    fc = None
+    if isinstance(new, dict):
+        fc = new.get("forecast") if isinstance(new.get("forecast"), dict) else None
+        if fc is None and isinstance(new.get("months"), list):
+            fc = new  # 容错：模型直接返回了 {months:[...]}
+    if not isinstance(fc, dict):
+        log("forecast 未解析出有效 JSON，使用应急兜底")
+        return _build_forecast_fallback(price_history)
+    v, err = validate_forecast(fc)
+    if err:
+        log(f"forecast 校验失败：{err}，使用应急兜底")
+        return _build_forecast_fallback(price_history)
+    v = reconcile_forecast(v, existing)
+    log("forecast 已基于联网检索 + 多因子推理重新生成")
+    return v
 
 
 def build_activities_prompt(existing):
@@ -1505,6 +1683,16 @@ def main():
     except Exception as e:
         log(f"companies 更新异常，保留现有: {e}")
         merged["companies"] = (existing.get("companies") if isinstance(existing, dict) else [])
+
+
+    # 未来 3 个月价格预测：基于联网检索 + 多因子推理独立生成，覆盖 safe_merge 结果，
+    # 避免退化为“仅按真实价格线性外推”的兜底。失败则保留现有预测（或保守应急兜底）。
+    try:
+        fc = update_forecast(existing)
+        if fc:
+            merged.setdefault("rareEarth", {})["forecast"] = fc
+    except Exception as e:
+        log(f"forecast 更新异常，保留现有: {e}")
 
 
     if critical_fail:
