@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-14T10:36:15Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月14日金融界网站官方账号报道，稀土主流产品价格小幅反弹，数据来源于包头稀土产品交易所。",
+  "lastUpdated": "2026-08-15T04:40:50Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月15日市场公开信息综合整理研判。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场整体呈现小幅反弹态势，镨钕系产品价格延续上周行情持续下跌，氧化镨钕跌幅明显扩大，金属厂金属镨钕报价倒挂明显，商家观望情绪较重。",
+    "marketSummary": "稀土市场整体呈现弱稳态势，镨钕系产品价格持续下跌，中重稀土价格维持平稳。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -520,27 +520,31 @@
     "strategies": [
       {
         "title": "原材料锁价",
-        "detail": "与上游供应商签订长协合同，锁定原材料价格，降低成本波动风险。"
+        "detail": "与供应商签订长期合作协议，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "库存调节",
-        "detail": "根据市场行情，适时调整库存水平，避免库存积压或短缺。"
+        "title": "战略库存调节",
+        "detail": "根据市场行情，适时调整库存策略，避免库存积压。"
       },
       {
-        "title": "产品结构优化",
-        "detail": "提高高毛利/高牌号产品占比，提升盈利能力。"
+        "title": "提高高毛利产品占比",
+        "detail": "加大高毛利、高牌号产品的研发和生产，提升盈利能力。"
       },
       {
         "title": "技术升级",
-        "detail": "推进无重稀土与晶界扩散技术降低单耗，提高生产效率。"
+        "detail": "推进无重稀土与晶界扩散技术，降低单耗，提高产品竞争力。"
       },
       {
-        "title": "成本传导",
-        "detail": "向下游客户进行价格传导，缓解成本压力。"
+        "title": "回收料利用",
+        "detail": "加强回收料利用，降低生产成本，实现可持续发展。"
       },
       {
-        "title": "拓展业务",
-        "detail": "拓展海外/非稀土业务，降低对单一市场的依赖。"
+        "title": "价格传导",
+        "detail": "向下游客户传导成本上涨压力，保持利润空间。"
+      },
+      {
+        "title": "拓展海外业务",
+        "detail": "拓展海外市场，降低对国内市场的依赖，分散风险。"
       }
     ]
   },
@@ -1580,6 +1584,13 @@
       "url": "https://caibaobang.cn/sanpk/mh-zbs?code=300748&tag=NAPSADJ"
     },
     {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土永磁走强 融资客抢筹8股过亿",
+      "source": "财联社",
+      "url": "https://www.cls.cn/detail/2454370"
+    },
+    {
       "date": "2026-08-13",
       "company": "行业",
       "title": "中国稀土对日出口骤降51%，3种关键材料归零！高市还能硬撑多久？",
@@ -1606,6 +1617,13 @@
       "title": "中国稀土对日出口骤降51%，3种关键材料归零！高市还能硬撑多久？",
       "source": "王爷说财经v",
       "url": "https://k.sina.cn/article_6824064813_196bef72d00101oeus.html"
+    },
+    {
+      "date": "2026-08-13",
+      "company": "盛和资源",
+      "title": "大举增持“光”！ 超级牛散竟是地产大佬？",
+      "source": "证券时报",
+      "url": "https://emweb.eastmoney.com/NewsBulletin/index?code=SH600392"
     },
     {
       "date": "2026-08-12",
@@ -1636,32 +1654,18 @@
       "url": "https://www.toutiao.com/article/7672319100332278272/"
     },
     {
-      "date": "2026-08-07",
-      "company": "行业",
-      "title": "8月7日稀土市场：短期震荡为主，旺季行情仍待验证",
-      "source": "新浪财经",
-      "url": "https://cj.sina.com.cn/articles/view/7879996580/1d5af34a402001tl1k"
+      "date": "2026-08-10",
+      "company": "盛和资源",
+      "title": "盛和资源稳步拓展多元化有色金属及非金属矿产投资",
+      "source": "公司公告",
+      "url": "https://emweb.eastmoney.com/NewsBulletin/index?code=SH600392"
     },
     {
-      "date": "2026-08-07",
-      "company": "行业",
-      "title": "氧化铒年内价格大幅上涨 8月以来多数稀土概念股获资金加仓",
-      "source": "人民财讯",
-      "url": "https://www.stcn.com/article/detail/4064600.html"
-    },
-    {
-      "date": "2026-08-07",
-      "company": "行业",
-      "title": "稀土供需缺口持续扩大！稀土ETF易方达（159715）涨近3%，战略资源品属性凸显",
-      "source": "东方财富证券",
-      "url": "https://finance.eastmoney.com/a/202608073834936442.html"
-    },
-    {
-      "date": "2026-08-07",
-      "company": "行业",
-      "title": "中国稀土：2026年半年度净利润同比增长46.53%",
-      "source": "财联社",
-      "url": "https://www.cls.cn/detail/2448646"
+      "date": "2026-08-10",
+      "company": "盛和资源",
+      "title": "盛和资源聚焦绿色低碳能源、高性能材料等领域",
+      "source": "公司公告",
+      "url": "https://emweb.eastmoney.com/NewsBulletin/index?code=SH600392"
     }
   ]
 }
