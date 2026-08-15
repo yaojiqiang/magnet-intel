@@ -1288,6 +1288,23 @@ def append_update_history(summary, last_updated):
         log("更新记录写入失败（不影响主数据）：%s" % e)
 
 
+def _history_has_today(last_updated=None):
+    """判断 update-history.json 中今天（按 last_updated 的日期，缺省取本地日期）是否已有记录。"""
+    try:
+        base = os.path.dirname(DATA_PATH) or "."
+        hist_path = os.path.join(base, "update-history.json")
+        if not os.path.exists(hist_path):
+            return False
+        with open(hist_path, encoding="utf-8") as f:
+            history = json.load(f)
+        if not isinstance(history, list) or not history:
+            return False
+        today = (last_updated or "")[:10] if last_updated else datetime.date.today().isoformat()
+        return any(h.get("date") == today for h in history)
+    except Exception:
+        return False
+
+
 def send_email_report(summary, last_updated, to_addr):
     """把更新摘要通过 SMTP 发送邮件。未配置 SMTP 凭据时安全跳过（不影响数据更新）。"""
     host = os.environ.get("SMTP_HOST")
@@ -1404,10 +1421,16 @@ def main():
     for line in summary.split("\n"):
         log(line)
 
-    # ★ 内容有变化时，把摘要写入 data/update-history.json，供网站「每日更新记录」标签页展示
-    #   （无需任何邮件/授权码配置，打开网站即可查看每日变化）
+    # ★ 把摘要写入 data/update-history.json，供网站「每日更新记录」标签页展示。
+    #   无论内容有无变化都写一条：有变化写真实摘要，无变化写“已自动检查、无实质更新”，
+    #   避免某天数据持平导致标签页空白、让人误以为自动化没运行。
+    #   注意：当天若已有真实更新记录（双触发场景），“无变化”提示不覆盖它。
     if changed:
         append_update_history(summary, merged.get("lastUpdated"))
+    else:
+        if not _history_has_today(merged.get("lastUpdated")):
+            no_change_note = "【自动检查】今日已自动检查，数据与昨日一致，无实质更新。"
+            append_update_history(no_change_note, merged.get("lastUpdated"))
 
     # ★ 可选：把摘要通过邮件推送给指定邮箱（配置 SMTP 凭据后自动生效）
     send_email_report(summary, merged.get("lastUpdated"), os.environ.get("NOTIFY_EMAIL"))
