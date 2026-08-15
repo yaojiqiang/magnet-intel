@@ -185,10 +185,10 @@ SOURCE_WHITELIST = {"我的钢铁网", "亚洲金属网", "百川盈孚", "上�
 # 竞社动态（activities）每日增量更新相关
 ACTIVITY_REQUIRED = {"company", "companyName", "dimension", "dimensionName", "date", "title", "description", "source"}
 VALID_DIMENSIONS = {"market", "tech", "supply", "digital"}
-ACTIVITY_MAX = 50  # 动态列表上限：保留最新的 50 条
+ACTIVITY_MAX = 150  # 动态列表上限：保留最新的 150 条（竞社动态本就应是较长的信息流）
 # 新闻动态（news）每日增量更新相关
 NEWS_REQUIRED = {"date", "company", "title", "source"}
-NEWS_MAX = 20  # 新闻列表上限：保留最新的 20 条
+NEWS_MAX = 60  # 新闻列表上限：保留最新的 60 条（新闻流应尽可能覆盖多源信息）
 
 # 竞社经营数据（companies）每日增量“报告刷新”相关
 KNOWN_COMPANY_IDS = {"jinli", "yunsheng", "sanhuan", "zhenghai"}
@@ -641,46 +641,66 @@ def update_news(existing):
 
 
 def build_news_prompt(existing):
-    today = datetime.date.today().strftime("%Y-%m-%d")
-    existing_news = existing.get("news", []) if isinstance(existing, dict) else []
-    existing_summary = "\n".join(
-        f"- （已收录，勿重复）{n.get('date', '')} {n.get('company', '')}：{n.get('title', '')}"
-        for n in existing_news
-    ) or "（暂无）"
+    """构建新闻抽取的 prompt：让模型从【联网搜索参考信息】中抽出所有相关条目，
+    去重交由代码完成（不再把已收录列表喂给模型让其'勿重复'，避免模型自我审查导致漏报）。
+    回填模式(BACKFILL=1)放宽时间窗至 2025 年至今以充实历史。"""
+    backfill = str(os.environ.get("BACKFILL", "")).lower() in ("1", "true", "yes", "backfill")
+    window = (
+        "请尽可能覆盖 2025 年至今（含 2025 全年及 2026 年）有重要行业/公司影响力的新闻，"
+        "优先 2026 年，并回溯补齐 2025 年的关键事件，以充实历史列表。"
+        if backfill else
+        "优先收录 2026 年以来的最新新闻，必要时可回溯至 2025 年末以充实列表。"
+    )
     return (
-        "你是一名磁材（钕铁硼永磁材料）行业情报分析师，负责跟踪稀土永磁行业与A股相关企业的最新新闻动态。\n"
-        "请使用下方【联网搜索参考信息】，找出最新的、尚未被收录的新闻，输出增量（不要重复已收录列表中的条目）。\n\n"
-        "【目标范围】稀土永磁行业政策/价格/供需新闻，以及 A股相关企业（金力永磁、宁波韵升、中科三环、"
-        "大地熊、英洛华、正海磁材等）的最新新闻。\n\n"
-        "【已收录列表（请勿重复输出这些）】\n" + existing_summary + "\n\n"
+        "你是一名磁材（钕铁硼永磁材料）行业情报分析师，负责从下方【联网搜索参考信息】中抽取稀土永磁行业与 A股相关企业的新闻。\n"
+        "下方已提供联网检索到的原始结果，请从中【提取所有相关、真实可核实的新闻条目】"
+        "（不要遗漏，也不要编造；不同媒体对同一事件的报道请合并为一条，取最权威来源）。\n\n"
+        "【目标范围】稀土永磁行业政策/价格/供需/出口新闻，以及 A股相关企业（金力永磁、宁波韵升、中科三环、"
+        "大地熊、英洛华、正海磁材等）的新闻。\n\n"
+        "【时间范围】" + window + "\n\n"
         "【输出要求】\n"
-        "仅输出 JSON：{\"news\": [ 最多15条最新增量，按日期倒序（最新在前） ]}\n"
+        "仅输出 JSON：{\"news\": [ 最多40条，按日期倒序（最新在前） ]}\n"
         "每条对象必须包含字段：\n"
         "  date(新闻日期，格式 YYYY-MM-DD), company(涉及企业名或\"行业\"), title(新闻标题), "
         "source(真实来源，如 证券时报/财联社/我的钢铁网/公司公告/新浪财经 等，严禁写\"网络\"等模糊来源), "
         "url(可选，原文链接；无则留空字符串)\n"
-        "规则：只收录真实发生、可核实的新闻；不得编造日期、标题或来源；同一事件不要拆成多条；"
-        "优先收录 2026年7月以来的最新新闻，必要时可回溯更早以充实列表，但不要与已收录列表重复。\n"
+        "规则：只收录真实发生、可核实的新闻；不得编造日期、标题或来源；同一事件不要拆成多条。\n"
         "仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
     )
 
 
 def gather_doubao_context_news(api_key):
+    """新闻联网搜索：按『每家公司 + 行业多维』拆细查询，覆盖面远大于原先 3 个泛查询。"""
     queries = [
-        "稀土永磁 行业 最新新闻 政策 价格 2026年8月 财联社 证券时报",
-        "金力永磁 宁波韵升 中科三环 大地熊 英洛华 正海磁材 2026年8月 最新新闻 公告",
-        "钕铁硼 稀土 出口管制 供需 最新动态 2026年8月",
+        "稀土永磁 行业 新闻 政策 价格 2026年8月 财联社 证券时报",
+        "稀土 出口管制 供需 最新动态 2026年",
+        "钕铁硼 稀土永磁 专利 技术 突破 2026",
+        "金力永磁 2026 最新新闻 公告 业绩 扩产",
+        "宁波韵升 2026 最新新闻 公告 业绩 扩产",
+        "中科三环 2026 最新新闻 公告 业绩 重组",
+        "大地熊 2026 最新新闻 公告 专利",
+        "英洛华 2026 最新新闻 公告 业绩",
+        "稀土永磁 企业 合作 订单 2026年",
+        "正海磁材 稀土永磁 行业 新闻 2026年",
     ]
     blocks = []
     for q in queries:
         try:
-            r = _doubao_search_once(q, api_key)
+            r = _doubao_search_once(q, api_key, count=15)
             if r:
                 blocks.append(f"查询「{q}」：\n{r}")
         except Exception as e:
             log(f"豆包搜索(news)失败（{q}）：{e}")
-    log(f"豆包搜索(news)：{len(blocks)}/{len(queries)} 个查询返回结果")
-    return "\n\n".join(blocks)
+    # 上下文长度保护：按整块累积，最多约 32000 字，避免单次输入过长
+    kept, total = [], 0
+    for b in blocks:
+        if total + len(b) > 32000:
+            break
+        kept.append(b)
+        total += len(b)
+    ctx = "\n\n".join(kept)
+    log(f"豆包搜索(news)：{len(blocks)}/{len(queries)} 个查询返回结果，上下文 {len(ctx)} 字")
+    return ctx
 
 
 def call_llm_news(prompt):
@@ -958,17 +978,19 @@ def build_prompt(existing):
 
 
 def build_activities_prompt(existing):
-    """构建竞社动态的「增量」更新 prompt：让模型只找尚未收录的最新动态。"""
-    today = datetime.date.today().strftime("%Y-%m-%d")
-    existing_acts = existing.get("activities", []) if isinstance(existing, dict) else []
-    existing_summary = "\n".join(
-        f"- （已收录，勿重复）{a.get('companyName', '')} {a.get('date', '')}：{a.get('title', '')}"
-        for a in existing_acts
-    ) or "（暂无）"
+    """构建竞社动态抽取 prompt：让模型从【联网搜索参考信息】中抽出所有相关动态，
+    去重交由代码完成（不再让模型'勿重复已收录'，避免漏报）。回填模式放宽时间窗。"""
+    backfill = str(os.environ.get("BACKFILL", "")).lower() in ("1", "true", "yes", "backfill")
+    window = (
+        "请尽可能覆盖 2025 年至今（含 2025 全年及 2026 年）的企业公开动态，优先 2026 年，"
+        "并回溯补齐 2025 年有影响力的事件（产能/订单/合作/业绩/专利/数字化等），以充实历史列表。"
+        if backfill else
+        "优先收录 2026 年以来的最新动态，必要时可回溯至 2025 年末以充实列表。"
+    )
     return (
-        "你是一名磁材（钕铁硼永磁材料）行业情报分析师，负责跟踪A股稀土永磁企业的公开动态。\n"
-        "请使用下方【联网搜索参考信息】，找出最新的、尚未被收录的企业动态，输出增量"
-        "（不要重复已收录列表中的条目）。\n\n"
+        "你是一名磁材（钕铁硼永磁材料）行业情报分析师，负责从下方【联网搜索参考信息】中抽取 A股稀土永磁企业的公开动态。\n"
+        "下方已提供联网检索到的原始结果，请从中【提取所有相关、真实可核实的动态条目】"
+        "（不要遗漏，也不要编造；不同来源报道同一事件请合并为一条）。\n\n"
         "【目标企业】（company 代码必须严格使用下列值）：\n"
         "  金力永磁 → company=\"jinli\"\n"
         "  宁波韵升 → company=\"yunsheng\"\n"
@@ -978,16 +1000,15 @@ def build_activities_prompt(existing):
         "【严禁收录】正海磁材（含其任何动态，一律跳过）。\n\n"
         "【维度 dimension 取值与对应 dimensionName】：\n"
         "  market  → 市场\n  tech    → 工艺技术\n  supply  → 供应链\n  digital → 数字化\n\n"
-        "【已收录列表（请勿重复输出这些）】\n" + existing_summary + "\n\n"
+        "【时间范围】" + window + "\n\n"
         "【输出要求】\n"
-        "仅输出 JSON：{\"activities\": [ 最多30条最新增量，按日期倒序（最新在前） ]}\n"
+        "仅输出 JSON：{\"activities\": [ 最多60条，按日期倒序（最新在前） ]}\n"
         "每条对象必须包含字段：\n"
         "  company(上述代码), companyName(企业中文名), dimension(上述4个值之一), dimensionName(对应中文),\n"
         "  date(事件发生日期，格式 YYYY-MM-DD), title(动态标题), description(2-4句客观描述，含关键数字/金额/比例),\n"
         "  source(真实来源，如 公司公告/证券时报/上证报/公司官网/国家知识产权局 等，严禁写“网络”等模糊来源),\n"
         "  sourceUrl(可选，原文链接)\n"
-        "规则：只收录真实发生、可核实的动态；不得编造日期、金额或来源；同一事件不要拆成多条；"
-        "优先收录 2026年7月以来的最新动态，必要时可回溯更早以充实列表，但不要与已收录列表重复。\n"
+        "规则：只收录真实发生、可核实的动态；不得编造日期、金额或来源；同一事件不要拆成多条。\n"
         "仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
     )
 
@@ -1057,7 +1078,7 @@ def call_gemini(prompt, model=None):
     return getattr(response, "text", "") or ""
 
 
-def _doubao_search_once(query, api_key, count=8):
+def _doubao_search_once(query, api_key, count=15):
     """调用豆包搜索 Custom 版 API，返回拼接的检索结果文本。"""
     import requests
     endpoint = os.environ.get("DOUBAO_SEARCH_ENDPOINT") or "https://open.feedcoopapi.com/search_api/web_search"
@@ -1101,24 +1122,36 @@ def gather_doubao_context(api_key):
 
 
 def gather_doubao_context_activities(api_key):
-    """针对竞社动态（企业公开动态）的豆包搜索，返回参考上下文。"""
+    """竞社动态联网搜索：按『每家公司 + 维度/行业』拆细查询，覆盖面远大于原先 5 个泛查询。"""
     queries = [
-        "金力永磁 宁波韵升 中科三环 2026年8月 最新动态 公告 扩产 业绩 稀土永磁",
-        "大地熊 英洛华 2026年 最新动态 专利 公告 稀土永磁",
-        "稀土永磁 钕铁硼 行业 企业 最新新闻 2026年8月 产能 订单 合作",
-        "金力永磁 2026年 半年报 业绩 机构调研 合作 扩产",
-        "中科三环 宁波韵升 2026年 重组 收购 扩产 公告",
+        "金力永磁 2026 公告 扩产 业绩 稀土永磁 合作 订单",
+        "宁波韵升 2026 公告 扩产 业绩 稀土永磁 合作",
+        "中科三环 2026 公告 重组 收购 扩产 业绩",
+        "大地熊 2026 公告 专利 业绩 稀土永磁",
+        "英洛华 2026 公告 业绩 重组 稀土永磁",
+        "稀土永磁 钕铁硼 行业 企业 产能 订单 合作 2026年",
+        "稀土永磁 企业 专利 技术 突破 国家知识产权局 2026",
+        "稀土永磁 企业 机构调研 数字化 2026年",
+        "钕铁硼 稀土 出口 企业 供应链 2026年",
+        "金力永磁 2026 半年报 业绩 机构调研",
     ]
     blocks = []
     for q in queries:
         try:
-            r = _doubao_search_once(q, api_key)
+            r = _doubao_search_once(q, api_key, count=15)
             if r:
                 blocks.append(f"查询「{q}」：\n{r}")
         except Exception as e:
             log(f"豆包搜索(activities)失败（{q}）：{e}")
-    log(f"豆包搜索(activities)：{len(blocks)}/{len(queries)} 个查询返回结果")
-    return "\n\n".join(blocks)
+    kept, total = [], 0
+    for b in blocks:
+        if total + len(b) > 32000:
+            break
+        kept.append(b)
+        total += len(b)
+    ctx = "\n\n".join(kept)
+    log(f"豆包搜索(activities)：{len(blocks)}/{len(queries)} 个查询返回结果，上下文 {len(ctx)} 字")
+    return ctx
 
 
 def call_zhipu(prompt, model=None):

@@ -5,6 +5,15 @@ on:
   schedule:
     - cron: '0 4 * * *'
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'daily=日常增量更新；backfill=一次性回填历史(放宽时间窗充实列表)'
+        required: false
+        default: 'daily'
+        type: choice
+        options:
+          - daily
+          - backfill
 
 permissions:
   contents: write   # 允许 workflow 提交并推送数据更新
@@ -36,6 +45,9 @@ jobs:
           LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           DATA_PATH: data/intelligence.json
+          # 回填模式：在 Actions 页面手动触发并选择 mode=backfill 时设为 1，
+          # 脚本会放宽时间窗(2025至今)以一次性补齐历史动态/新闻，使列表立刻丰富。
+          BACKFILL: ${{ github.event.inputs.mode == 'backfill' && '1' || '' }}
           # 每日更新摘要：主推网站内「每日更新记录」标签页（脚本自动写入 data/update-history.json，免配置、免授权码）
           # 邮件推送为可选项：仅当配置了 SMTP_* / NOTIFY_EMAIL 时才发信（当前未启用，且各邮箱需各自授权码）
           # 发件方默认 163 邮箱（smtp.163.com:465 SSL）；收件人默认 yaojiqiang@zhmag.com

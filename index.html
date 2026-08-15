@@ -270,6 +270,7 @@ tr:hover td{background:#fafbfc}
   <div class="table-wrap">
     <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>近期行业新闻与公司公告</div>
     <div id="news-list"></div>
+    <div class="pagination" id="news-pagination"></div>
   </div>
 </div>
 
@@ -656,7 +657,9 @@ function initFinancials(){
 // ========== TAB 3: Activities ==========
 let actFilters = { company:'all', dimension:'all' };
 let actPage = 1;
-const ACT_PAGE_SIZE = 6; // 每页展示条数
+const ACT_PAGE_SIZE = 9; // 每页展示条数
+let newsPage = 1;
+const NEWS_PAGE_SIZE = 12; // 新闻每页展示条数
 
 function initActivities(){
   const fb = document.getElementById('filter-bar');
@@ -767,8 +770,24 @@ function initSources(){
 
 // ========== TAB 5: News ==========
 function initNews(){
+  newsPage = 1;
+  renderNews();
+}
+
+function renderNews(){
   const nl = document.getElementById('news-list');
-  nl.innerHTML = DATA.news.map(n=>{
+  const pager = document.getElementById('news-pagination');
+  const all = (DATA.news||[]).slice().sort((a,b)=> b.date.localeCompare(a.date));
+  if(all.length===0){
+    nl.innerHTML = '<div class="card" style="text-align:center;padding:24px;color:var(--text2)">暂无新闻动态</div>';
+    pager.innerHTML = '';
+    return;
+  }
+  const totalPages = Math.max(1, Math.ceil(all.length/NEWS_PAGE_SIZE));
+  if(newsPage > totalPages) newsPage = totalPages;
+  const start = (newsPage-1)*NEWS_PAGE_SIZE;
+  const pageItems = all.slice(start, start+NEWS_PAGE_SIZE);
+  nl.innerHTML = pageItems.map(n=>{
     let color = '#666';
     if(n.company==='金力永磁') color=COMPANY_COLORS.jinli;
     else if(n.company==='宁波韵升') color=COMPANY_COLORS.yunsheng;
@@ -782,6 +801,26 @@ function initNews(){
       <span style="font-size:11px;color:var(--text2);margin-left:4px">[${n.source}]</span>
     </div>`;
   }).join('');
+  // 分页控件（与 activities 一致）
+  let ph = `<span class="page-info">共 ${all.length} 条 · 第 ${newsPage}/${totalPages} 页</span>`;
+  ph += `<button class="page-btn" data-pg="${newsPage-1}" ${newsPage<=1?'disabled':''}>‹ 上一页</button>`;
+  const pages = [];
+  for(let i=1;i<=totalPages;i++){
+    if(totalPages<=7 || i===1 || i===totalPages || Math.abs(i-newsPage)<=2) pages.push(i);
+    else if(pages[pages.length-1]!=='…') pages.push('…');
+  }
+  pages.forEach(p=>{
+    if(p==='…') ph += '<span class="page-info">…</span>';
+    else ph += `<button class="page-btn ${p===newsPage?'active':''}" data-pg="${p}">${p}</button>`;
+  });
+  ph += `<button class="page-btn" data-pg="${newsPage+1}" ${newsPage>=totalPages?'disabled':''}>下一页 ›</button>`;
+  pager.innerHTML = ph;
+  pager.querySelectorAll('.page-btn:not(:disabled)').forEach(b=>{
+    b.addEventListener('click',()=>{
+      newsPage = parseInt(b.dataset.pg,10);
+      renderNews();
+    });
+  });
 }
 
 // ========== Start ==========
