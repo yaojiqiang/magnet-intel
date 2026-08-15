@@ -157,13 +157,81 @@ def validate_month_array(v, existing_len, name):
 
 
 def validate_forecast(v):
-    """forecast：字典，months 为 3 个月数组。"""
+    """forecast：字典，months 为未来 3 个月数组；每个月对象须含与 priceHistory 一致的 9 个价格字段。"""
     if not isinstance(v, dict):
         return None, f"应为对象，实际 {type(v).__name__}"
     months = v.get("months")
     if not isinstance(months, list) or len(months) != 3:
         return None, f"months 应为 3 项数组，实际 {type(months).__name__} len={len(months) if hasattr(months, '__len__') else 'n/a'}"
+    price_keys = {"prNdOxide", "ndOxide", "dysprosiumOxide", "terbiumOxide",
+                  "metalPrNd", "metalNd", "metalPr", "metalDy", "metalTb"}
+    for i, m in enumerate(months):
+        if not isinstance(m, dict):
+            return None, f"months[{i}] 应为对象"
+        miss = price_keys - set(m.keys())
+        if miss:
+            return None, f"months[{i}] 缺价格字段 {sorted(miss)}（每月必须含 9 个品类预测价）"
+        for k in price_keys:
+            if not isinstance(m.get(k), (int, float)) or isinstance(m.get(k), bool):
+                return None, f"months[{i}].{k} 应为数字"
+        if not m.get("month"):
+            return None, f"months[{i}] 缺 month 字段"
     return v, None
+
+
+_FC_PRICE_KEYS = ["prNdOxide", "ndOxide", "dysprosiumOxide", "terbiumOxide",
+                  "metalPrNd", "metalNd", "metalPr", "metalDy", "metalTb"]
+
+
+def _forecast_has_prices(fc):
+    """判断现有 forecast.months 是否含可绘制的 9 个价格字段。"""
+    if not isinstance(fc, dict):
+        return False
+    months = fc.get("months")
+    if not isinstance(months, list) or len(months) == 0:
+        return False
+    return all(isinstance(m, dict) and all(k in m and isinstance(m[k], (int, float)) for k in _FC_PRICE_KEYS)
+               for m in months)
+
+
+def _build_forecast_fallback(price_history):
+    """当模型未给出有效预测价时，基于 priceHistory 末值做轻度线性外推兜底，保证预测线不消失。"""
+    if not isinstance(price_history, list) or len(price_history) < 1:
+        return None
+    last = price_history[-1]
+    # 计算各价格的近 3 个月简单趋势（每月变化量），不足则取 0
+    n = len(price_history)
+    span = min(3, n)
+    prev = price_history[n - span]
+    step = {}
+    for k in _FC_PRICE_KEYS:
+        lv = last.get(k)
+        pv = prev.get(k) if isinstance(prev, dict) else None
+        if isinstance(lv, (int, float)) and isinstance(pv, (int, float)) and span > 0:
+            s = (lv - pv) / span
+            # 限制单月漂移幅度，避免外推失控（±10% / 月）
+            s = max(min(s, abs(lv) * 0.1), -abs(lv) * 0.1)
+            step[k] = s
+        else:
+            step[k] = 0.0
+    # 未来 3 个月（基于最末月份 +1..+3）
+    try:
+        y, m = (int(x) for x in last.get("month", "2026-08").split("-"))
+        base = datetime.date(y, m, 1)
+    except Exception:
+        base = datetime.date(2026, 8, 1)
+    months = []
+    for i in range(1, 4):
+        d = base.replace(month=((base.month + i - 1) % 12) + 1, year=base.year + (base.month + i - 1) // 12)
+        obj = {"month": d.strftime("%Y-%m"), "basis": "基于近期价格趋势的轻度外推（模型未提供预测价时自动兜底）",
+               "confidence": "中", "logic": "按近 3 个月走势线性外推，仅供参考"}
+        for k in _FC_PRICE_KEYS:
+            val = float(last.get(k, 0)) + step[k] * i
+            obj[k] = round(val, 2) if isinstance(val, float) else val
+        months.append(obj)
+    return {"horizon": "近3个月（兜底）", "forecastDate": datetime.date.today().strftime("%Y-%m-%d"),
+            "basis": "基于近期价格趋势的轻度外推", "months": months}
+
 
 
 # 已知可靠基准价（2026-08-13 实际价，单位万元/吨）——用于基线被污染时的兜底
@@ -455,13 +523,23 @@ def safe_merge(existing, new):
         else:
             merged_re["indexHistory"] = v
 
-    # forecast（可选）
+    # forecast（可选）：失败则用 priceHistory 兜底生成，确保预测线始终存在
     if "forecast" in new_re:
         v, err = validate_forecast(new_re["forecast"])
         if err:
-            errors.append(f"forecast 校验失败：{err}（保留原值）")
+            errors.append(f"forecast 校验失败：{err}（尝试兜底生成）")
+            fb = _build_forecast_fallback(merged_re.get("priceHistory"))
+            if fb:
+                merged_re["forecast"] = fb
         else:
             merged_re["forecast"] = v
+    else:
+        # 模型未返回 forecast：若现有 forecast 也缺价格字段，则兜底生成
+        cur = merged_re.get("forecast")
+        if not cur or not _forecast_has_prices(cur):
+            fb = _build_forecast_fallback(merged_re.get("priceHistory"))
+            if fb:
+                merged_re["forecast"] = fb
 
     # ★ 不处理 companies / comparison / sources / news / meta / 其它：一律保留原值
     #   （activities 由专门的 update_activities() 增量更新，见下方）
@@ -967,7 +1045,12 @@ def build_prompt(existing):
         "参考信息若来自其它平台，按优先级就近归入上述白名单之一并如实标注；"
         "严禁填写白名单外的来源（如“中国稀土行业协会”“网络”等模糊或编造来源）。\n"
         "金属铽严禁用\"氧化铽+160.6\"估算，必须用上海钢联月报实际月均价或相邻月插值。\n"
-        "forecast.months 为未来 3 个月，每个对象含 category / basis / confidence / logic 等字段。\n\n"
+        "forecast.months 为未来 3 个月（month 依次为次月起的连续 3 个月，如 2026-09/2026-10/2026-11），"
+        "每个对象【必须】包含与 priceHistory 完全一致的 9 个价格字段及合理数值（单位：万元/吨）：\n"
+        "  prNdOxide(氧化镨钕), ndOxide(氧化钕), dysprosiumOxide(氧化镝), terbiumOxide(氧化铽),\n"
+        "  metalPrNd(金属镨钕), metalNd(金属钕), metalPr(金属镨), metalDy(金属镝), metalTb(金属铽)；\n"
+        "并可在每月对象附加可选字段 category(轻稀土/重稀土)、basis(预测依据)、confidence(高/中/低)、logic(简要理由)。\n"
+        "预测价应基于最新实际价与供需判断给出，不得与最新实际价相差过大（单月涨跌通常不超过 ±15%）。\n\n"
         "strategies 为正海磁材（钕铁硼永磁材料制造商，约70%成本来自稀土原料，属价格敏感型下游企业）的应对建议："
         "结合当日稀土价格走势（涨跌方向、轻/重稀土分化、供给紧张度、成本传导难度），给出 4-6 条具体可执行的经营/采购/技术对策，"
         "例如：原材料锁价长协与套期保值、战略库存择时调节、提高高毛利/高牌号产品占比、推进无重稀土与晶界扩散技术降低单耗、"
