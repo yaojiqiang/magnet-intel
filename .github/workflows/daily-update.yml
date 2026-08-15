@@ -37,9 +37,11 @@ jobs:
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           DATA_PATH: data/intelligence.json
           # 每日更新摘要邮件推送（SMTP 凭据；未配置则仅输出日志摘要）
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
+          # 发件方默认使用 163 邮箱（smtp.163.com:465 SSL）；收件人默认 yaojiqiang@zhmag.com
+          # 注意：163 发信密码不是登录密码，必须是「客户端授权码」，请存为仓库 Secret：SMTP_PASS
+          SMTP_HOST: ${{ secrets.SMTP_HOST || 'smtp.163.com' }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT || '465' }}
+          SMTP_USER: ${{ secrets.SMTP_USER || 'yaojiq@163.com' }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL || 'yaojiqiang@zhmag.com' }}
         run: python scripts/update_intel.py
