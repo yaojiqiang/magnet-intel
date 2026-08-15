@@ -1205,6 +1205,8 @@ def build_update_summary(existing, merged):
     """对比“更新前 / 更新后”两份数据，生成人类可读的中文更新摘要。
     只说明“哪些板块更新了、变动了多少”，不输出完整数据，方便邮件/日志快速浏览。"""
 
+    if not isinstance(existing, dict):
+        existing = {}
     def re(d):
         return (d.get("rareEarth") or {}) if isinstance(d, dict) else {}
 
@@ -1256,6 +1258,34 @@ def build_update_summary(existing, merged):
     lines.append("【竞社经营数据】" + ("更新：" + "、".join(changed) if changed else "无变动"))
 
     return "\n".join(lines)
+
+
+def append_update_history(summary, last_updated):
+    """把今日更新摘要写入 data/update-history.json（按日期去重：同一天多次运行只保留最新一条）。
+    供网站「每日更新记录」标签页展示，无需任何邮件/授权码配置。"""
+    try:
+        base = os.path.dirname(DATA_PATH) or "."
+        hist_path = os.path.join(base, "update-history.json")
+        day = (last_updated or "")[:10]   # 取日期部分用于去重
+        try:
+            with open(hist_path, encoding="utf-8") as f:
+                history = json.load(f)
+        except Exception:
+            history = []
+        if not isinstance(history, list):
+            history = []
+        entry = {"date": day, "updated_at": last_updated, "summary": summary}
+        # 同一天已存在则替换，否则追加（避免双触发产生重复条目）
+        if history and history[-1].get("date") == day:
+            history[-1] = entry
+        else:
+            history.append(entry)
+        history = history[-60:]   # 仅保留最近 60 条，避免无限增长
+        with open(hist_path, "w", encoding="utf-8") as f:
+            json.dump(history, f, ensure_ascii=False, indent=2)
+        log("已写入每日更新记录：%s（共 %d 条）" % (hist_path, len(history)))
+    except Exception as e:
+        log("更新记录写入失败（不影响主数据）：%s" % e)
 
 
 def send_email_report(summary, last_updated, to_addr):
@@ -1357,12 +1387,14 @@ def main():
         merged["lastUpdated"] = existing.get("lastUpdated")
         merged["updateNote"] = existing.get("updateNote")
         save_data(merged)
+        changed = False
         log("数据内容与上次一致，无实质更新：保留原 lastUpdated，不推进日期（git 不会产生新提交）")
     else:
         # 写入带明确时区(UTC, Z)的 ISO8601，避免 GitHub Actions(UTC) 的裸时间被浏览器
         # 当成访问者本地时间解析，导致“更新于”显示偏差 8 小时。
         merged["lastUpdated"] = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         save_data(merged)
+        changed = True
         log("更新完成（内容有变化，已推进 lastUpdated）")
 
     # ★ 生成“今日更新摘要”并打印到日志（无论是否配置邮件都会输出，
@@ -1371,6 +1403,11 @@ def main():
     log("=== 今日更新摘要 ===")
     for line in summary.split("\n"):
         log(line)
+
+    # ★ 内容有变化时，把摘要写入 data/update-history.json，供网站「每日更新记录」标签页展示
+    #   （无需任何邮件/授权码配置，打开网站即可查看每日变化）
+    if changed:
+        append_update_history(summary, merged.get("lastUpdated"))
 
     # ★ 可选：把摘要通过邮件推送给指定邮箱（配置 SMTP 凭据后自动生效）
     send_email_report(summary, merged.get("lastUpdated"), os.environ.get("NOTIFY_EMAIL"))

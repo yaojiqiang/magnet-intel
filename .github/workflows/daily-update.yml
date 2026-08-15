@@ -36,9 +36,9 @@ jobs:
           LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           DATA_PATH: data/intelligence.json
-          # 每日更新摘要邮件推送（SMTP 凭据；未配置则仅输出日志摘要）
-          # 发件方默认使用 163 邮箱（smtp.163.com:465 SSL）；收件人默认 yaojiqiang@zhmag.com
-          # 注意：163 发信密码不是登录密码，必须是「客户端授权码」，请存为仓库 Secret：SMTP_PASS
+          # 每日更新摘要：主推网站内「每日更新记录」标签页（脚本自动写入 data/update-history.json，免配置、免授权码）
+          # 邮件推送为可选项：仅当配置了 SMTP_* / NOTIFY_EMAIL 时才发信（当前未启用，且各邮箱需各自授权码）
+          # 发件方默认 163 邮箱（smtp.163.com:465 SSL）；收件人默认 yaojiqiang@zhmag.com
           SMTP_HOST: ${{ secrets.SMTP_HOST || 'smtp.163.com' }}
           SMTP_PORT: ${{ secrets.SMTP_PORT || '465' }}
           SMTP_USER: ${{ secrets.SMTP_USER || 'yaojiq@163.com' }}
@@ -50,7 +50,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/intelligence.json
+          git add data/intelligence.json data/update-history.json
           if git diff --cached --quiet; then
             echo "无数据变化，跳过提交"
           else

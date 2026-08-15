@@ -49,6 +49,10 @@ a:hover{text-decoration:underline}
 .grid-3{grid-template-columns:repeat(auto-fill,minmax(380px,1fr))}
 
 .card{background:var(--card);border-radius:10px;box-shadow:var(--shadow);padding:20px;transition:box-shadow .2s}
+.history-card{border-left:4px solid var(--primary);margin-bottom:14px}
+.h-date{font-size:15px;font-weight:700;color:var(--primary);margin-bottom:8px}
+.h-body{font-size:13px;color:var(--text);line-height:1.9}
+.h-line{white-space:pre-wrap;word-break:break-word}
 .card:hover{box-shadow:var(--shadow-lg)}
 .card-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .card-title .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
@@ -176,6 +180,7 @@ tr:hover td{background:#fafbfc}
   <div class="tab" data-tab="activities">竞社动态</div>
   <div class="tab" data-tab="sources">数据来源</div>
   <div class="tab" data-tab="news">新闻动态</div>
+  <div class="tab" data-tab="history">每日更新记录</div>
 </div>
 
 <div class="main">
@@ -268,6 +273,14 @@ tr:hover td{background:#fafbfc}
   </div>
 </div>
 
+<!-- ========== TAB 6: 每日更新记录 ========== -->
+<div class="tab-content" id="tab-history">
+  <div class="summary">
+    网站每日 12:00 自动更新后，会把「当天更新了哪些部分」记录在此，方便你随时回顾每日变化，<strong>无需配置任何邮箱或授权码</strong>。
+  </div>
+  <div id="history-list"></div>
+</div>
+
 </div>
 
 <div class="footer">
@@ -327,6 +340,32 @@ function init(){
   initActivities();
   initSources();
   initNews();
+  initHistory();
+}
+
+// ========== TAB 6: 每日更新记录 ==========
+async function initHistory(){
+  const box = document.getElementById('history-list');
+  if(!box) return;
+  try{
+    const ctrl = new AbortController();
+    const timer = setTimeout(()=>ctrl.abort(), 4000); // 4s 超时兜底
+    const resp = await fetch('data/update-history.json?v=' + Date.now(), {signal:ctrl.signal});
+    clearTimeout(timer);
+    if(resp.ok){
+      const hist = await resp.json();
+      if(Array.isArray(hist) && hist.length){
+        // 倒序展示（最新在上）
+        box.innerHTML = hist.slice().reverse().map(e=>{
+          const safe = (e.summary||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+          const lines = safe.split('\n').map(l=>'<div class="h-line">'+l+'</div>').join('');
+          return '<div class="card history-card"><div class="h-date">'+ (e.date||'') +'</div><div class="h-body">'+ lines +'</div></div>';
+        }).join('');
+        return;
+      }
+    }
+  }catch(e){ console.warn('history fetch failed:', e.message); }
+  box.innerHTML = '<div class="card" style="text-align:center;padding:24px;color:var(--text2)">暂无更新记录</div>';
 }
 
 // ========== Chart defaults ==========
