@@ -3,7 +3,7 @@ name: Daily Magnet Intel Update
 # 每天北京时间 12:00（UTC 04:00）自动运行；也可在 Actions 页面手动触发
 on:
   schedule:
-    - cron: '0 4 * * *'
+    - cron: '30 3 * * *'
   workflow_dispatch:
     inputs:
       mode:
