@@ -1,6 +1,6 @@
 name: Daily Magnet Intel Update
 
-# 每天北京时间 12:00（UTC 04:00）自动运行；也可在 Actions 页面手动触发
+# 每天北京时间 11:30（UTC 03:30）兜底触发（GitHub 定时会漂移，精确 12:00 由 cron-job.org 负责）；也可在 Actions 页面手动触发
 on:
   schedule:
     - cron: '30 3 * * *'
