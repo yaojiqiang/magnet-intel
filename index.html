@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>磁材行业竞社情报监测站</title>
+<link rel="icon" type="image/png" href="favicon.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
 :root{
@@ -22,7 +23,8 @@ a:hover{text-decoration:underline}
 .header{background:linear-gradient(135deg,#1a237e 0%,#0d47a1 50%,#1565c0 100%);color:#fff;padding:28px 0 0;position:relative;overflow:hidden}
 .header::after{content:"";position:absolute;top:-50%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);border-radius:50%}
 .header-inner{max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
-.header h1{font-size:26px;font-weight:700;margin-bottom:4px}
+.header h1{font-size:26px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.header-logo{height:36px;width:auto;object-fit:contain}
 .header .subtitle{font-size:14px;color:rgba(255,255,255,.8);margin-bottom:16px}
 .header-bar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-size:13px;color:rgba(255,255,255,.9);margin-bottom:18px}
 .header-bar .badge{background:rgba(255,255,255,.15);padding:4px 10px;border-radius:4px;backdrop-filter:blur(4px)}
@@ -163,7 +165,7 @@ tr:hover td{background:#fafbfc}
 
 <div class="header">
   <div class="header-inner">
-    <h1>磁材行业竞社情报监测站</h1>
+    <h1><img src="favicon.png" alt="ZHmag" class="header-logo">磁材行业竞社情报监测站</h1>
     <div class="subtitle">稀土永磁材料行业上市公司竞争情报可视化看板 · 覆盖金力永磁 / 宁波韵升 / 中科三环 / 正海磁材</div>
     <div class="header-bar">
       <span class="badge live">● 自动更新</span>
