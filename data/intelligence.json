@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-16T05:15:36Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：2026年8月14日，数据来源于包头稀土产品交易所、生意社、稀土网。",
+  "lastUpdated": "2026-08-17T04:08:12Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月14日包头稀土产品交易所、生意社、稀土网、稀土行业协会数据更新。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场价格整体呈现波动上涨态势，轻稀土价格上涨明显，重稀土价格相对稳定。",
+    "marketSummary": "稀土市场整体呈现弱势盘整态势，轻稀土价格小幅下跌，中重稀土价格保持稳定。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -470,7 +470,7 @@
     "indexNote": "稀土价格指数来源：我的钢铁网。指数基期为2025年1月试运行基准。2025年6月、7月数据为实际公布值，其余月度数据为估算值。",
     "forecast": {
       "horizon": "近3个月（应急兜底）",
-      "forecastDate": "2026-08-16",
+      "forecastDate": "2026-08-17",
       "basis": "应急兜底：联网推理不可用，按近 6 月均值保守持平（非联网推理）",
       "months": [
         {
@@ -522,24 +522,24 @@
     },
     "strategies": [
       {
-        "title": "原材料锁价",
-        "detail": "与供应商签订长期合作协议，锁定原材料价格，降低成本波动风险。"
+        "title": "原材料锁定",
+        "detail": "与上游供应商签订长协合同，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "战略库存",
-        "detail": "根据市场趋势，适时调整库存策略，避免库存积压。"
+        "title": "库存管理",
+        "detail": "根据市场需求和价格走势，合理调整库存水平，避免库存积压。"
       },
       {
         "title": "技术升级",
-        "detail": "研发新技术，提高生产效率，降低单位产品成本。"
+        "detail": "研发新技术，提高材料利用率，降低生产成本。"
       },
       {
         "title": "拓展市场",
-        "detail": "积极拓展海外市场，降低国内市场波动风险。"
+        "detail": "积极拓展海外市场，降低对国内市场的依赖。"
       },
       {
         "title": "成本传导",
-        "detail": "将原材料成本上涨压力传导至下游客户，保持利润水平。"
+        "detail": "将原材料价格上涨压力传导至下游客户，保持利润空间。"
       }
     ]
   },
@@ -1444,6 +1444,18 @@
     {
       "company": "jinli",
       "companyName": "金力永磁",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-04-30",
+      "title": "金力永磁(300748)：新兴赛道赋能结构升级 产能扩张驱动业绩增长",
+      "description": "公司2026年第一季度总收入同比增长约16%，海外收入同比增长约22%。",
+      "source": "国盛证券",
+      "sourceUrl": "http://stock.finance.sina.com.cn/stock/view/paper.php?autocallup=no&isfromsina=no&reportid=830853343323&symbol=sh000001",
+      "id": "act-20260430-01"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
       "dimension": "market",
       "dimensionName": "市场",
       "date": "2026-04-28",
@@ -1703,6 +1715,13 @@
   ],
   "news": [
     {
+      "date": "2026-08-17",
+      "company": "行业",
+      "title": "中国稀土管制见效——全球供应链洗牌加速",
+      "source": "李砍柴",
+      "url": "http://m.163.com/dy/article/L4FS70O00521DC6R.html"
+    },
+    {
       "date": "2026-08-16",
       "company": "行业",
       "title": "韩国从俄罗斯手里，买到了中国严管的稀土？这可给中国提了个醒",
@@ -1850,6 +1869,20 @@
       "url": "https://finance.eastmoney.com/a/202608143841499950.html"
     },
     {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "中方铁了心断供稀土，被逼到墙角的美日，企图靠捡垃圾自救",
+      "source": "亿点点财识",
+      "url": "http://news.qq.com/rain/a/20260814A07BK900"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "禁令生效，日本妄想锁死中国，中方出杀招稀土归零，中日打响资源对决",
+      "source": "安静文艺范儿",
+      "url": "https://k.sina.cn/article_7879996653_1d5af34ed02001l0w8.html"
+    },
+    {
       "date": "2026-08-13",
       "company": "行业",
       "title": "中国稀土对日出口骤降51%，3种关键材料归零！高市还能硬撑多久？",
@@ -1890,6 +1923,13 @@
       "title": "7月稀土出口4223.5吨创年内新低",
       "source": "市场资讯",
       "url": "https://cj.sina.cn/article/norm_detail?url=http%3A%2F%2Ffinance.sina.cn%2F2026-08-13%2Fdetail-inincnux3559084.d.html"
+    },
+    {
+      "date": "2026-08-13",
+      "company": "行业",
+      "title": "下半年进入汽车、工业机器人等磁材下游产销旺季，稀土ETF嘉实(516150)有望受益",
+      "source": "有连云",
+      "url": "https://www.jiemian.com/article/14916612.html"
     },
     {
       "date": "2026-08-12",
@@ -1941,6 +1981,13 @@
       "url": "https://caifuhao.eastmoney.com/news/20260812134000335158830"
     },
     {
+      "date": "2026-08-12",
+      "company": "行业",
+      "title": "8月中下旬有望重启下游备库推动稀土价格企稳向上，稀土ETF嘉实(516150)一键布局国内稀土产业链",
+      "source": "有连云",
+      "url": "https://www.jiemian.com/article/14910908.html"
+    },
+    {
       "date": "2026-08-11",
       "company": "行业",
       "title": "稀土价格持续上行，供需格局偏紧，稀土ETF易方达（159715）关注度提升",
@@ -1953,6 +2000,13 @@
       "title": "供应收紧预期与补库需求共振推动稀土价格反弹，稀土ETF嘉实(516150)备受市场关注",
       "source": "有连云",
       "url": "http://m.toutiao.com/group/7670382520361304627/?upstream_biz=VolcEngine"
+    },
+    {
+      "date": "2026-08-11",
+      "company": "行业",
+      "title": "稀土出口暴跌81%，中国稀土出口管制见效！美日工厂还能撑多久？",
+      "source": "安静文艺范儿",
+      "url": "https://k.sina.cn/article_7879996653_1d5af34ed02001kxb6.html"
     },
     {
       "date": "2026-08-10",
@@ -2058,6 +2112,27 @@
       "title": "8月中下旬下游或开启补库有望带动稀土价格企稳上行，稀土ETF嘉实(516150)备受市场资金关注",
       "source": "界面新闻",
       "url": "https://www.jiemian.com/article/14888762.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "稀土永磁概念异动拉升 中科磁业涨超10%",
+      "source": "东方财富Choice数据",
+      "url": "https://finance.eastmoney.com/a/202608073834876713.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "2026年以来稀土供需偏紧，稀土板块交投升温！稀土ETF华泰柏瑞（516780）连续4个交易日累计“吸金”1.53亿元",
+      "source": "新浪基金",
+      "url": "http://finance.sina.cn/2026-08-07/detail-inimnkum3291801.d.html"
+    },
+    {
+      "date": "2026-08-06",
+      "company": "中科三环",
+      "title": "稀土产业集约化提速：中科三环控股中电磁声，打通国产磁材终端闭环",
+      "source": "证券时报网",
+      "url": "https://stcn.com/article/detail/4061875.html"
     }
   ]
 }
