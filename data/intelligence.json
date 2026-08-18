@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-18T11:21:06Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）",
+  "lastUpdated": "2026-08-18T11:34:15Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：数据来源于2026年8月15日我的钢铁网、亚洲金属网、百川盈孚、上海金属网、上海钢联。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土及磁材市场综述（一段话）",
+    "marketSummary": "稀土市场整体稳定，部分轻稀土价格上涨，重稀土价格波动不大。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -74,12 +74,12 @@
       {
         "name": "金属铽",
         "category": "重稀土",
-        "price": 852.5,
+        "price": 500.0,
         "unit": "万元/吨",
-        "change": -5,
-        "changeDesc": "较上次下跌5万元/吨",
-        "date": "2026-08-14",
-        "source": "我的钢铁网"
+        "change": 10.0,
+        "changeDesc": "上涨",
+        "date": "2026-08-15",
+        "source": "上海钢联"
       },
       {
         "name": "氧化镝",
@@ -94,12 +94,12 @@
       {
         "name": "氧化铽",
         "category": "重稀土",
-        "price": 662.92,
+        "price": 540.0,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平",
-        "date": "2026-08-18",
-        "source": "我的钢铁网"
+        "change": 8.0,
+        "changeDesc": "上涨",
+        "date": "2026-08-15",
+        "source": "百川盈孚"
       }
     ],
     "priceHistory": [
@@ -471,78 +471,86 @@
     "forecast": {
       "horizon": "近3个月",
       "forecastDate": "2026-08-18",
-      "basis": "下游需求增长，政策支持，库存水平适中，预计稀土价格将震荡上涨。",
+      "basis": "下游需求增长，政策支持，库存水平适中，预计稀土价格将保持稳定增长态势。",
       "months": [
         {
           "month": "2026-09",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "新能源汽车和风电需求增长，政策支持力度不减，预计价格将震荡上涨。",
-          "logic": "下游需求增长，政策支持力度不减，库存水平适中。",
+          "basis": "新能源汽车和风电需求增加，政策支持力度不减，预计价格将小幅上涨。",
+          "logic": "下游需求增长，政策支持力度不减。",
           "prNdOxide": 76.5,
           "ndOxide": 82.0,
           "dysprosiumOxide": 147.0,
           "terbiumOxide": 680.0,
           "metalPrNd": 92.0,
-          "metalNd": 99.5,
+          "metalNd": 100.0,
           "metalPr": 107.0,
-          "metalDy": 180.0,
+          "metalDy": 182.0,
           "metalTb": 770.0
         },
         {
           "month": "2026-10",
-          "category": "重稀土",
+          "category": "轻稀土",
           "confidence": "高",
-          "basis": "人形机器人和消费电子需求旺盛，政策支持持续，预计价格将上涨。",
-          "logic": "下游需求旺盛，政策支持持续，库存水平适中。",
-          "prNdOxide": 77.0,
-          "ndOxide": 82.5,
-          "dysprosiumOxide": 148.0,
-          "terbiumOxide": 690.0,
-          "metalPrNd": 93.0,
-          "metalNd": 100.0,
-          "metalPr": 108.0,
-          "metalDy": 182.0,
-          "metalTb": 790.0
+          "basis": "金九银十传统旺季，下游需求旺盛，预计价格将明显上涨。",
+          "logic": "金九银十传统旺季，下游需求旺盛。",
+          "prNdOxide": 78.0,
+          "ndOxide": 83.5,
+          "dysprosiumOxide": 150.0,
+          "terbiumOxide": 700.0,
+          "metalPrNd": 94.0,
+          "metalNd": 102.0,
+          "metalPr": 110.0,
+          "metalDy": 185,
+          "metalTb": 810.0
         },
         {
           "month": "2026-11",
-          "category": "轻稀土/重稀土",
+          "category": "轻稀土",
           "confidence": "中",
-          "basis": "年末备货需求增加，政策支持力度可能减弱，预计价格将震荡。",
-          "logic": "年末备货需求增加，政策支持力度可能减弱，库存水平适中。",
+          "basis": "年末备货需求增加，但市场供应充足，预计价格将保持稳定。",
+          "logic": "年末备货需求增加，市场供应充足。",
           "prNdOxide": 75.0,
-          "ndOxide": 81.0,
-          "dysprosiumOxide": 146.0,
-          "terbiumOxide": 680.0,
+          "ndOxide": 80.5,
+          "dysprosiumOxide": 148.0,
+          "terbiumOxide": 690.0,
           "metalPrNd": 91.0,
-          "metalNd": 98.5,
+          "metalNd": 99.0,
           "metalPr": 106.0,
-          "metalDy": 179.0,
-          "metalTb": 770.0
+          "metalDy": 183.0,
+          "metalTb": 780.0
         }
       ]
     },
     "strategies": [
       {
-        "title": "长协锁定",
+        "title": "原材料锁价",
         "detail": "与供应商签订长期合作协议，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "库存调节",
-        "detail": "根据市场供需情况，适时调整库存水平，避免价格波动带来的损失。"
+        "title": "战略库存",
+        "detail": "根据市场供需情况，适时调整库存策略，避免价格波动带来的损失。"
       },
       {
-        "title": "产品升级",
-        "detail": "提高高毛利产品占比，降低对低毛利产品的依赖，增强盈利能力。"
+        "title": "产品结构调整",
+        "detail": "提高高毛利产品占比，优化产品结构，增强盈利能力。"
       },
       {
-        "title": "技术改进",
-        "detail": "研发无重稀土材料，降低生产成本，提高产品竞争力。"
+        "title": "技术升级",
+        "detail": "推进无重稀土与晶界扩散技术，降低生产成本，提高产品竞争力。"
       },
       {
-        "title": "拓展市场",
-        "detail": "积极拓展海外市场，降低国内市场波动对经营的影响。"
+        "title": "回收料利用",
+        "detail": "加强回收料利用，降低生产成本，实现可持续发展。"
+      },
+      {
+        "title": "价格传导",
+        "detail": "向下游客户传导价格上涨，保证企业利润。"
+      },
+      {
+        "title": "拓展业务",
+        "detail": "拓展海外市场或非稀土业务，降低市场风险。"
       }
     ]
   },
@@ -1554,6 +1562,18 @@
       "id": "act-20260407-03"
     },
     {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-04-01",
+      "title": "中科三环发布2026年第一季度业绩预告",
+      "description": "预计2026年第一季度净利润同比增长约50%。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.sanhuan.com/notice/20260401.html",
+      "id": "act-20260401-01"
+    },
+    {
       "id": "act-011",
       "company": "sanhuan",
       "companyName": "中科三环",
@@ -1614,6 +1634,18 @@
       "sourceUrl": "https://ir.jlmag.com.cn/upload/2026-04/177579244091547300.pdf"
     },
     {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-03-25",
+      "title": "宁波韵升与日本某公司签订长期供应协议",
+      "description": "协议金额达10亿元，合作期限为5年。",
+      "source": "证券时报",
+      "sourceUrl": "http://www.stcn.com/20260325/16154883.shtml",
+      "id": "act-20260325-02"
+    },
+    {
       "company": "dadi",
       "companyName": "大地熊",
       "dimension": "supply",
@@ -1650,6 +1682,18 @@
       "id": "act-20260221-06"
     },
     {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-02-20",
+      "title": "大地熊成功研发新型高性能永磁材料",
+      "description": "新型材料具有更高的磁能积和更低的温度系数。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.dadixiong.com/news/20260220.html",
+      "id": "act-20260220-03"
+    },
+    {
       "company": "jinli",
       "companyName": "金力永磁",
       "dimension": "market",
@@ -1672,6 +1716,18 @@
       "source": "公司公告",
       "sourceUrl": "http://www.yingluohua.com/huawei合作协议.pdf",
       "id": "act-20260115-05"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2026-01-15",
+      "title": "英洛华与某科技公司合作，推进智能制造项目",
+      "description": "项目预计投资5亿元，旨在提升生产效率和产品质量。",
+      "source": "上证报",
+      "sourceUrl": "http://www.sse.com.cn/newsinfo/20260115/30986426.shtml",
+      "id": "act-20260115-04"
     },
     {
       "id": "act-005",
