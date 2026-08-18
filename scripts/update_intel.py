@@ -898,7 +898,20 @@ def deep_merge_company(existing_company, upd):
             if per in periods:
                 for ex in eq:
                     if ex.get("period") == per:
-                        if item.get("type") == "actual":
+                        item_is_actual = (item.get("type") == "actual")
+                        existing_is_actual = (ex.get("type") == "actual")
+                        if existing_is_actual and not item_is_actual:
+                            # 已发布实际报告的季度，不允许 LLM 回退为预告/占位；仅补充新给出的实际数值
+                            log(f"companies[{cid}] {per} 已为 actual，忽略回退为 forecast 的更新")
+                            for kk, vv in item.items():
+                                if kk in ("period", "type", "periodLabel", "note", "source", "sourceUrl",
+                                          "netProfitMin", "netProfitMax", "netProfitMid",
+                                          "deductedNetProfitMin", "deductedNetProfitMax"):
+                                    continue
+                                elif _is_num(vv):
+                                    ex[kk] = vv
+                            break
+                        if item_is_actual:
                             for _kdel in ("netProfitMin", "netProfitMax", "netProfitMid",
                                           "deductedNetProfitMin", "deductedNetProfitMax"):
                                 ex.pop(_kdel, None)
@@ -1020,10 +1033,10 @@ def call_llm_companies(prompt):
     provider = (os.environ.get("LLM_PROVIDER") or "openai").lower()
     if provider == "cn-free":
         ctx = gather_doubao_context_companies(os.environ.get("DOUBAO_SEARCH_API_KEY"))
-        if ctx:
-            full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出确有新发布的经营数据增量）：\n" + ctx
-        else:
-            full = prompt + "\n\n（联网搜索未返回结果，若无新数据请返回 companyUpdates: []）"
+        if not ctx:
+            log("companies 联网搜索无结果，缺少依据，跳过 LLM 以免幻觉写入占位数据")
+            return '{"companyUpdates": []}'
+        full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出确有新发布的经营数据增量）：\n" + ctx
         return call_zhipu(full)
     if provider == "perplexity":
         return call_perplexity(prompt)
