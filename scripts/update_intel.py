@@ -898,6 +898,10 @@ def deep_merge_company(existing_company, upd):
             if per in periods:
                 for ex in eq:
                     if ex.get("period") == per:
+                        if item.get("type") == "actual":
+                            for _kdel in ("netProfitMin", "netProfitMax", "netProfitMid",
+                                          "deductedNetProfitMin", "deductedNetProfitMax"):
+                                ex.pop(_kdel, None)
                         for kk, vv in item.items():
                             if kk in ("period", "periodLabel", "type", "note", "source", "sourceUrl"):
                                 ex[kk] = vv
@@ -982,15 +986,23 @@ def build_companies_prompt(existing):
         "2) 仅报告真实发布的数据，并在对应字段旁用 source 注明来源（如\"2026年半年度报告\"）；\n"
         "3) 严禁编造；若某字段无新数据，【不要】把它写进对象（深度合并会保留原值）；\n"
         "4) revenueStructure 与 quarterly 仅在你确认整体有变/有新报告时才提供，否则省略。\n"
+        "5) 若某公司已正式发布 2026 年半年度报告（非预告），必须将 financials.quarterly 中 period=\"2026H1\" 的对象 type 由 \"forecast\" 改为 \"actual\"，"
+        "并按正式报告填入实际营收/净利/经营现金流等数值（不要保留 netProfitMin/Max 等预告区间字段）；"
+        "同时据正式半年报修正 financials 顶层与 revenueStructure/geo 的半年口径，并将 financials.source 注明\"2026年半年度报告\"。\n"
         "仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
     )
 
 
 def gather_doubao_context_companies(api_key):
     queries = [
-        "金力永磁 宁波韵升 中科三环 正海磁材 2026年半年度报告 实际 营收 净利润 披露",
-        "稀土永磁 上市公司 2026年上半年 业绩 实际报告 产能 产销量 最新",
-        "金力永磁 中科三环 宁波韵升 2026 最新 经营数据 财报 公告 扩产",
+        "宁波韵升 600366 2026年半年度报告 营业收入 归母净利润 经营现金流 实际数据",
+        "宁波韵升 2026半年报 分产品收入 海外收入 毛利率 产能",
+        "金力永磁 300748 2026年半年度报告 营业收入 归母净利润 经营现金流",
+        "金力永磁 2026半年报 分产品收入 海外收入 毛利率",
+        "中科三环 000970 2026年半年度报告 营业收入 归母净利润 经营现金流",
+        "中科三环 2026半年报 分产品收入 海外收入 毛利率",
+        "正海磁材 300224 2026年半年度报告 营业收入 归母净利润 经营现金流",
+        "正海磁材 2026半年报 分产品收入 海外收入 毛利率",
     ]
     blocks = []
     for q in queries:
