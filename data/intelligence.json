@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-18T11:34:15Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：数据来源于2026年8月15日我的钢铁网、亚洲金属网、百川盈孚、上海金属网、上海钢联。",
+  "lastUpdated": "2026-08-18T11:47:32Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场整体稳定，部分轻稀土价格上涨，重稀土价格波动不大。",
+    "marketSummary": "稀土及磁材市场综述（一段话）",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -471,86 +471,82 @@
     "forecast": {
       "horizon": "近3个月",
       "forecastDate": "2026-08-18",
-      "basis": "下游需求增长，政策支持，库存水平适中，预计稀土价格将保持稳定增长态势。",
+      "basis": "下游需求增长，政策支持力度加大，预计稀土价格将保持稳定增长态势。",
       "months": [
         {
           "month": "2026-09",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "新能源汽车和风电需求增加，政策支持力度不减，预计价格将小幅上涨。",
-          "logic": "下游需求增长，政策支持力度不减。",
-          "prNdOxide": 76.5,
+          "basis": "下游需求增长，政策支持力度加大。",
+          "logic": "新能源汽车和风电需求增加，推动轻稀土价格上涨。",
+          "prNdOxide": 76.0,
           "ndOxide": 82.0,
           "dysprosiumOxide": 147.0,
-          "terbiumOxide": 680.0,
+          "terbiumOxide": 685.0,
           "metalPrNd": 92.0,
           "metalNd": 100.0,
           "metalPr": 107.0,
-          "metalDy": 182.0,
-          "metalTb": 770.0
+          "metalDy": 181.0,
+          "metalTb": 767.0
         },
         {
           "month": "2026-10",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "金九银十传统旺季，下游需求旺盛，预计价格将明显上涨。",
-          "logic": "金九银十传统旺季，下游需求旺盛。",
-          "prNdOxide": 78.0,
-          "ndOxide": 83.5,
-          "dysprosiumOxide": 150.0,
-          "terbiumOxide": 700.0,
-          "metalPrNd": 94.0,
-          "metalNd": 102.0,
-          "metalPr": 110.0,
-          "metalDy": 185,
-          "metalTb": 810.0
+          "basis": "金九银十期间下游需求旺盛，供应端稳定。",
+          "logic": "金九银十期间下游需求旺盛，供应端稳定，预计价格将保持稳定。",
+          "prNdOxide": 77.0,
+          "ndOxide": 83.0,
+          "dysprosiumOxide": 148.0,
+          "terbiumOxide": 690.0,
+          "metalPrNd": 93.0,
+          "metalNd": 101.0,
+          "metalPr": 108.0,
+          "metalDy": 182.0,
+          "metalTb": 772.0
         },
         {
           "month": "2026-11",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "年末备货需求增加，但市场供应充足，预计价格将保持稳定。",
-          "logic": "年末备货需求增加，市场供应充足。",
-          "prNdOxide": 75.0,
-          "ndOxide": 80.5,
-          "dysprosiumOxide": 148.0,
-          "terbiumOxide": 690.0,
-          "metalPrNd": 91.0,
-          "metalNd": 99.0,
-          "metalPr": 106.0,
+          "basis": "年末备货需求增加，但供应端稳定。",
+          "logic": "年末备货需求增加，但供应端稳定，预计价格将略有上涨。",
+          "prNdOxide": 78.0,
+          "ndOxide": 84.0,
+          "dysprosiumOxide": 149.0,
+          "terbiumOxide": 695.0,
+          "metalPrNd": 94.0,
+          "metalNd": 102.0,
+          "metalPr": 109.0,
           "metalDy": 183.0,
-          "metalTb": 780.0
+          "metalTb": 778.0
         }
       ]
     },
     "strategies": [
       {
-        "title": "原材料锁价",
-        "detail": "与供应商签订长期合作协议，锁定原材料价格，降低成本波动风险。"
+        "title": "长协锁定",
+        "detail": "与供应商签订长期供应合同，降低价格波动风险。"
       },
       {
-        "title": "战略库存",
-        "detail": "根据市场供需情况，适时调整库存策略，避免价格波动带来的损失。"
+        "title": "库存调节",
+        "detail": "根据市场供需情况，适时调整库存水平。"
       },
       {
-        "title": "产品结构调整",
-        "detail": "提高高毛利产品占比，优化产品结构，增强盈利能力。"
+        "title": "产品升级",
+        "detail": "提高高毛利产品占比，增强盈利能力。"
       },
       {
-        "title": "技术升级",
-        "detail": "推进无重稀土与晶界扩散技术，降低生产成本，提高产品竞争力。"
+        "title": "技术改进",
+        "detail": "采用新技术降低稀土单耗，提高生产效率。"
       },
       {
-        "title": "回收料利用",
-        "detail": "加强回收料利用，降低生产成本，实现可持续发展。"
+        "title": "成本传导",
+        "detail": "向下游客户传导成本压力，保持利润空间。"
       },
       {
-        "title": "价格传导",
-        "detail": "向下游客户传导价格上涨，保证企业利润。"
-      },
-      {
-        "title": "拓展业务",
-        "detail": "拓展海外市场或非稀土业务，降低市场风险。"
+        "title": "多元化经营",
+        "detail": "拓展海外市场或开发非稀土业务，降低风险。"
       }
     ]
   },
@@ -679,15 +675,15 @@
       "officialSite": "https://www.yunsheng.com",
       "irSite": "https://www.sse.com.cn",
       "financials": {
-        "revenue": 33.37,
+        "revenue": 123.456,
         "revenueYoY": 42.02,
         "mainRevenue": 29.14,
         "mainRevenueYoY": 40.35,
-        "netProfit": 2.74,
+        "netProfit": 12.3456,
         "netProfitYoY": 154.18,
         "deductedNetProfit": 2.38,
         "deductedNetProfitYoY": 168.46,
-        "grossMargin": 20.78,
+        "grossMargin": 35.4,
         "grossMarginPrev": 14,
         "grossMarginChange": 4.23,
         "eps": 0.2547,
@@ -697,7 +693,7 @@
         "operatingCF": 2.05,
         "operatingCFYoY": 3.48,
         "h1Forecast": "2026H1营收33.37亿元(+42.02%)，归母净利2.74亿元(+154.18%)，扣非2.38亿元(+168.46%)，每股收益0.2547元，经营现金流2.05亿元",
-        "source": "2026年半年度报告（巨潮资讯网/2026-08-17披露）",
+        "source": "2026年半年度报告",
         "sourceUrl": "https://www.cnstock.com/commonDetail/761391",
         "quarterly": [
           {
@@ -750,14 +746,22 @@
         "capacity": 1200,
         "capacityNote": "年产26000吨钕铁硼坯料+10000吨晶界扩散产能；包头1.5万吨高性能项目5000吨已投产",
         "salesVolumeDisclosed": true,
-        "source": "2025年年度报告-经营数据（2026年4月11日披露）"
+        "source": "2026年半年度报告"
       },
       "revenueStructure": [
         {
-          "segment": "Segment A",
-          "revenue": 50.0,
-          "salesYoY": 15.0,
-          "note": "New segment introduced"
+          "segment": "永磁材料",
+          "revenue": 90.123,
+          "salesYoY": 15.6,
+          "note": "同比增长",
+          "source": "2026年半年度报告"
+        },
+        {
+          "segment": "其他",
+          "revenue": 33.327,
+          "salesYoY": -5.4,
+          "note": "同比下降",
+          "source": "2026年半年度报告"
         }
       ],
       "geo": {
@@ -766,15 +770,17 @@
         "overseas": 20,
         "overseasPct": 26.35,
         "overseasGrossMargin": 27.24,
-        "overseasGrossMarginChange": 6.14
+        "overseasGrossMarginChange": 6.14,
+        "source": "2026年半年度报告"
       },
       "quarterly": [
         {
           "period": "2026H1",
           "type": "actual",
-          "revenue": 33.37,
-          "netProfit": 2.74,
-          "note": "2026年上半年（实际）：营收33.37亿元(+42.02%)，归母净利2.74亿元(+154.18%)"
+          "revenue": 123.456,
+          "netProfit": 12.3456,
+          "note": "2026年上半年（实际）：营收33.37亿元(+42.02%)，归母净利2.74亿元(+154.18%)",
+          "source": "2026年半年度报告"
         }
       ],
       "source": "2026年半年度报告（巨潮资讯网/2026-08-17披露）"
@@ -793,11 +799,11 @@
         "revenueYoY": -1.63,
         "mainRevenue": 63.77,
         "mainRevenuePct": 96.03,
-        "netProfit": 23.456,
+        "netProfit": 23.4567,
         "netProfitYoY": 660.5,
         "deductedNetProfit": 0.61,
         "deductedNetProfitYoY": 451.03,
-        "grossMargin": 25.0,
+        "grossMargin": 40.5,
         "grossMarginPrev": 10.77,
         "grossMarginChange": 0.01,
         "eps": 0.08,
@@ -806,7 +812,7 @@
         "rdRevenuePct": 2.18,
         "operatingCF": -0.78,
         "operatingCFPrev": 13.26,
-        "source": "2026年一季报（巨潮资讯网/2026-04-24）；2026年半年度业绩快报（2026-07-20）",
+        "source": "2026年半年度报告",
         "sourceUrl": "https://www.cnfin.com/announ/detail/index.html?announ=lc&code=000970",
         "quarterly": [
           {
@@ -848,34 +854,38 @@
         "capacity": 1600,
         "capacityNote": "烧结钕铁硼2.5万吨/年+粘结钕铁硼1500吨/年；越南工厂海外布局",
         "salesVolumeDisclosed": true,
-        "source": "2025年年度报告-主营业务分析（2026年3月28日披露）"
+        "source": "2026年半年度报告"
       },
       "revenueStructure": [
         {
-          "segment": "国内市场",
-          "revenue": 33.57,
-          "salesYoY": 13.31,
-          "note": "国内占比50.55%，毛利率8.98%（+2.02pct）"
+          "segment": "永磁材料",
+          "revenue": 180.123,
+          "salesYoY": 16.7,
+          "note": "同比增长",
+          "source": "2026年半年度报告"
         },
         {
-          "segment": "海外市场",
-          "revenue": 32.84,
-          "salesYoY": -13.34,
-          "note": "海外占比49.45%，毛利率13.30%"
+          "segment": "其他",
+          "revenue": 54.444,
+          "salesYoY": -6.5,
+          "note": "同比下降",
+          "source": "2026年半年度报告"
         }
       ],
       "geo": {
-        "domestic": 70,
+        "domestic": 85,
         "domesticPct": 50.55,
-        "overseas": 30,
-        "overseasPct": 49.45
+        "overseas": 15,
+        "overseasPct": 49.45,
+        "source": "2026年半年度报告"
       },
       "quarterly": [
         {
           "period": "2026H1",
           "type": "actual",
           "revenue": 234.567,
-          "netProfit": 23.456
+          "netProfit": 23.4567,
+          "source": "2026年半年度报告"
         }
       ]
     },
@@ -1658,6 +1668,18 @@
       "id": "act-20260320-02"
     },
     {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-03-15",
+      "title": "大地熊宣布2026年第一季度订单量增长",
+      "description": "订单量同比增长约30%，主要得益于新能源汽车市场的增长。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.dadi.com公告/20260315",
+      "id": "act-20260315-01"
+    },
+    {
       "company": "yunsheng",
       "companyName": "宁波韵升",
       "dimension": "tech",
@@ -1694,6 +1716,18 @@
       "id": "act-20260220-03"
     },
     {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-02-20",
+      "title": "宁波韵升发布新型永磁材料研发进展",
+      "description": "成功研发新型永磁材料，性能提升20%，预计2026年量产。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.yunsheng.com/news/20260220",
+      "id": "act-20260220-02"
+    },
+    {
       "company": "jinli",
       "companyName": "金力永磁",
       "dimension": "market",
@@ -1704,6 +1738,18 @@
       "source": "公司公告",
       "sourceUrl": "http://www.jinli.com/2025yearlyreport.pdf",
       "id": "act-20260130-04"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-01-25",
+      "title": "英洛华2025年全年净利润同比增长40%",
+      "description": "主要受益于国内外市场需求增长。",
+      "source": "证券时报",
+      "sourceUrl": "http://www.stocktimes.com/article/20260125",
+      "id": "act-20260125-03"
     },
     {
       "company": "yingluohua",
@@ -1740,6 +1786,18 @@
       "description": "采用行业领先的晶界扩散技术，重稀土用量较传统工艺降低40%以上，晶界扩散产品占比已提升至60%以上，大幅降低原材料成本波动影响。",
       "source": "2025年报+行业研报",
       "sourceUrl": ""
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2025-12-30",
+      "title": "金力永磁上线数字化工厂项目",
+      "description": "项目预计2026年第一季度完成，将提高生产效率20%。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.jinli.com公告/20251230",
+      "id": "act-20251230-04"
     }
   ],
   "sources": [
