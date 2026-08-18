@@ -1512,13 +1512,17 @@ def call_zhipu_websearch(prompt):
 
 
 def call_cn_free(prompt):
-    """国内免翻墙免费组合：豆包搜索（联网取数）+ 智谱 GLM-4-Flash（免费合成 JSON）。"""
+    """国内免翻墙免费组合：豆包搜索（联网取数）+ 智谱 GLM-4-Flash（免费合成 JSON）。
+    豆包无结果时改用智谱 web_search 自行联网检索，避免把占位/示例文本或旧值原样保留
+    （典型如 rareEarth.marketSummary 原值为 prompt 中的示例占位，豆包失效时会回退成该占位话）。"""
     ctx = gather_doubao_context(os.environ.get("DOUBAO_SEARCH_API_KEY"))
     if ctx:
         full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对并更新数据，数字以参考信息原文为准，不要编造）：\n" + ctx
-    else:
-        full = prompt + "\n\n（联网搜索未返回结果，请基于已有数据谨慎更新，无法核实的字段保留原值）"
-    return call_zhipu(full)
+        return call_zhipu(full)
+    # 豆包搜索无结果（Key 失效/接口异常）→ 改用智谱 web_search 自行联网检索后合成，
+    # 确保市场概况/价格/对策等主合成字段拿到真实数据，而不是回退为占位示例文本。
+    log("主合成（rareEarth/市场概况）豆包搜索无结果，改用智谱 web_search 自行联网检索")
+    return call_zhipu_websearch(prompt)
 
 
 def call_llm(prompt):
