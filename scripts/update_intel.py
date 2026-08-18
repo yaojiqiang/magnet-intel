@@ -497,7 +497,7 @@ def safe_merge(existing, new):
         v, err = validate_currentPrices(new_re["currentPrices"])
         if err:
             errors.append(f"currentPrices 校验失败：{err}")
-            critical_fail = True
+            errors.append("currentPrices 校验失败：保留现有值，不阻断更新")
         else:
             v = reconcile_cp(v, existing_re.get("currentPrices"))
             v = reconcile_cp_dates(v, existing_re.get("currentPrices"))
@@ -1438,7 +1438,7 @@ def call_zhipu(prompt, model=None):
     log(f"调用 智谱 GLM，模型={model}（合成 JSON）")
     import time as _t
     last_exc = None
-    for _attempt in range(1, 4):
+    for _attempt in range(1, 6):
         try:
             resp = client.chat.completions.create(
                 model=model,
@@ -1454,7 +1454,7 @@ def call_zhipu(prompt, model=None):
             _msg = str(e)
             _status = getattr(e, "status_code", None) or getattr(getattr(e, "response", None), "status_code", None)
             _is_429 = (_status == 429) or ("429" in _msg) or ("访问量过大" in _msg) or ("rate limit" in _msg.lower())
-            if _is_429 and _attempt < 3:
+            if _is_429 and _attempt < 5:
                 _wait = 30 * _attempt
                 log(f"智谱 GLM 返回 429 限流（第 {_attempt} 次），{_wait}s 后重试")
                 _t.sleep(_wait); last_exc = e; continue
@@ -1730,10 +1730,9 @@ def main():
 
 
     if critical_fail:
-        # 关键字段（currentPrices）校验未通过：放弃本次更新，避免写入半截/错误数据。
-        # 运行变红，提醒检查；原数据保持完好（不会被提交覆盖）。
-        log("关键字段校验未通过，放弃本次更新以避免损坏数据；请检查模型输出或重试。运行失败（变红）。")
-        sys.exit(1)
+        # 关键字段校验未通过：保留现有值后继续提交其余已成功更新的段落，
+        # 不再整轮作废（避免单段坏输出让整轮变红、啥都不提交）。
+        log("关键字段校验未通过，已保留现有值并继续提交其余更新；请检查模型输出。")
 
     # ★ 日期一致性守卫：仅当“实质内容”发生变化时才推进 lastUpdated；
     #   内容未变化（如价格持平、模型仅复述）则保持原日期，不提交新版本，
