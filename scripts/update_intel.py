@@ -1733,8 +1733,10 @@ def main():
     # （无变化时 lastUpdated 会被保留为昨日，否则 _history_has_today 误判→漏写“已自动检查”）
     today_iso = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     today_day = today_iso[:10]
-    if changed:/r/n        append_update_history(summary, merged.get("lastUpdated"))
-    else:/r/n        if not _history_has_today(today_day):
+    if changed:
+        append_update_history(summary, merged.get("lastUpdated"))
+    else:
+        if not _history_has_today(today_day):
             no_change_note = "【自动检查】今日已自动检查，数据与昨日一致，无实质更新。"
             append_update_history(no_change_note, today_iso)
 
