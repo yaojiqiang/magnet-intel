@@ -36,7 +36,7 @@ jobs:
 
       - name: Run update script (LLM fetch + generate)
         env:
-          LLM_PROVIDER: ${{ secrets.LLM_PROVIDER || 'gemini' }}
+          LLM_PROVIDER: ${{ secrets.LLM_PROVIDER || 'cn-free' }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
