@@ -1321,35 +1321,22 @@ def call_perplexity(prompt, model=None):
 def call_gemini(prompt, model=None):
     from google import genai
     from google.genai import types
-    import time as _t
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         raise RuntimeError("未设置 GEMINI_API_KEY")
     model = model or os.environ.get("LLM_MODEL") or "gemini-2.5-flash"
     client = genai.Client(api_key=api_key)
     log(f"调用 Gemini，模型={model}，启用 google_search 工具（免费联网）")
-    last_exc = None
-    for _attempt in range(1, 4):
-        try:
-            response = client.models.generate_content(
-                model=model,
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    tools=[types.Tool(google_search=types.GoogleSearch())],
-                    temperature=0.3,
-                    max_output_tokens=32768,
-                ),
-            )
-            return getattr(response, "text", "") or ""
-        except Exception as e:
-            _msg = str(e)
-            _is_limit = ("429" in _msg) or ("Too Many Requests" in _msg) or ("RESOURCE_EXHAUSTED" in _msg) or ("quota" in _msg.lower()) or ("rate" in _msg.lower())
-            if _is_limit and _attempt < 3:
-                _wait = 30 * _attempt
-                log(f"Gemini 返回限流（第 {_attempt} 次），{_wait}s 后重试")
-                _t.sleep(_wait); last_exc = e; continue
-            raise
-    raise last_exc or RuntimeError("Gemini 重试后仍失败")
+    response = client.models.generate_content(
+        model=model,
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            tools=[types.Tool(google_search=types.GoogleSearch())],
+            temperature=0.3,
+            max_output_tokens=32768,
+        ),
+    )
+    return getattr(response, "text", "") or ""
 
 
 def _doubao_search_once(query, api_key, count=15):
