@@ -671,26 +671,26 @@
       "officialSite": "https://www.yunsheng.com",
       "irSite": "https://www.sse.com.cn",
       "financials": {
-        "revenue": 123.456,
-        "revenueYoY": 8.39,
-        "mainRevenue": 48.33,
-        "mainRevenueYoY": 6.08,
-        "netProfit": 12.345,
-        "netProfitYoY": 247.95,
-        "deductedNetProfit": 2.79,
-        "deductedNetProfitYoY": 185.27,
-        "grossMargin": 30.0,
+        "revenue": 33.37,
+        "revenueYoY": 42.02,
+        "mainRevenue": 29.14,
+        "mainRevenueYoY": 40.35,
+        "netProfit": 2.74,
+        "netProfitYoY": 154.18,
+        "deductedNetProfit": 2.38,
+        "deductedNetProfitYoY": 168.46,
+        "grossMargin": 20.78,
         "grossMarginPrev": 14,
-        "grossMarginChange": 3.81,
-        "eps": 0.31,
+        "grossMarginChange": 4.23,
+        "eps": 0.2547,
         "rdInvestment": 2.76,
         "rdInvestmentYoY": 34.19,
         "rdRevenuePct": 5.05,
-        "operatingCF": 3.49,
-        "operatingCFYoY": -59.21,
-        "h1Forecast": "2026H1归母净利预计2.4-3.1亿元，同比增长122.56%-187.48%",
-        "source": "2026年一季报（巨潮资讯网/2026-04-23）；2026年半年度业绩预增公告（2026-07-15）",
-        "sourceUrl": "https://newzzbcx.cs.com.cn/cxnews.html?name=new20260411112047frahukdj",
+        "operatingCF": 2.05,
+        "operatingCFYoY": 3.48,
+        "h1Forecast": "2026H1营收33.37亿元(+42.02%)，归母净利2.74亿元(+154.18%)，扣非2.38亿元(+168.46%)，每股收益0.2547元，经营现金流2.05亿元",
+        "source": "2026年半年度报告（巨潮资讯网/2026-08-17披露）",
+        "sourceUrl": "https://www.cnstock.com/commonDetail/761391",
         "quarterly": [
           {
             "period": "2026Q1",
@@ -710,16 +710,23 @@
           },
           {
             "period": "2026H1",
-            "periodLabel": "2026年上半年（预告）",
-            "type": "forecast",
-            "netProfitMin": 2.4,
-            "netProfitMax": 3.1,
-            "netProfitMid": 2.75,
-            "netProfitYoY": "122.56%—187.48%",
-            "deductedNetProfitMin": 2.1,
-            "deductedNetProfitMax": 2.8,
-            "note": "深耕新能源车、消费电子、工业应用，提高海外收入比例，毛利率提升；2026年6月已递交H股上市申请",
-            "source": "2026年半年度业绩预增公告（2026-07-15）"
+            "periodLabel": "2026年上半年（实际）",
+            "type": "actual",
+            "netProfitYoY": 154.18,
+            "note": "钕铁硼收入29.14亿元(+40.35%，占87.33%)；磁组件收入4.43亿元(+66.54%)；钕铁硼成品销量7190吨(+11.61%)；毛利率20.78%(+4.23pp)",
+            "source": "2026年半年度报告（巨潮资讯网/2026-08-17披露）",
+            "revenue": 33.37,
+            "revenueYoY": 42.02,
+            "netProfit": 2.74,
+            "deductedNetProfit": 2.38,
+            "deductedNetProfitYoY": 168.46,
+            "eps": 0.2547,
+            "operatingCF": 2.05,
+            "operatingCFYoY": 3.48,
+            "grossMargin": 20.78,
+            "grossMarginChange": 4.23,
+            "mainRevenue": 29.14,
+            "mainRevenueYoY": 40.35
           }
         ]
       },
@@ -757,11 +764,12 @@
         {
           "period": "2026H1",
           "type": "actual",
-          "revenue": 123.456,
-          "netProfit": 12.345,
-          "note": "Actual revenue and net profit for the first half of 2026."
+          "revenue": 33.37,
+          "netProfit": 2.74,
+          "note": "2026年上半年（实际）：营收33.37亿元(+42.02%)，归母净利2.74亿元(+154.18%)"
         }
-      ]
+      ],
+      "source": "2026年半年度报告（巨潮资讯网/2026-08-17披露）"
     },
     {
       "id": "sanhuan",
