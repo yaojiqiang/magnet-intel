@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-17T04:08:12Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月14日包头稀土产品交易所、生意社、稀土网、稀土行业协会数据更新。",
+  "lastUpdated": "2026-08-18T10:21:55Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：2026年8月18日，数据来源于中国稀土行业协会、生意社、上海金属网。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,56 +9,56 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场整体呈现弱势盘整态势，轻稀土价格小幅下跌，中重稀土价格保持稳定。",
+    "marketSummary": "稀土市场整体呈现弱势盘整，轻稀土价格小幅下跌，中重稀土价格保持稳定。",
     "currentPrices": [
       {
         "name": "金属镨",
         "category": "轻稀土",
-        "price": 101.75,
+        "price": 99,
         "unit": "万元/吨",
-        "change": 0.0,
+        "change": 0,
         "changeDesc": "持平",
-        "date": "2026-08-14",
+        "date": "2026-08-18",
         "source": "我的钢铁网"
       },
       {
         "name": "金属钕",
         "category": "轻稀土",
-        "price": 95.75,
+        "price": 96.25,
         "unit": "万元/吨",
-        "change": -0.5,
-        "changeDesc": "下跌5万元/吨",
-        "date": "2026-08-14",
+        "change": 0,
+        "changeDesc": "持平",
+        "date": "2026-08-18",
         "source": "我的钢铁网"
       },
       {
         "name": "金属镨钕",
         "category": "轻稀土",
-        "price": 88.0,
+        "price": 88.5,
         "unit": "万元/吨",
-        "change": -1.25,
-        "changeDesc": "下跌",
-        "date": "2026-08-14",
+        "change": 0,
+        "changeDesc": "持平",
+        "date": "2026-08-18",
         "source": "我的钢铁网"
       },
       {
         "name": "氧化镨钕",
         "category": "轻稀土",
-        "price": 72.0,
+        "price": 72.26,
         "unit": "万元/吨",
-        "change": -1.0,
-        "changeDesc": "下跌1万元/吨",
-        "date": "2026-08-15",
+        "change": -0.46,
+        "changeDesc": "下跌",
+        "date": "2026-08-18",
         "source": "我的钢铁网"
       },
       {
         "name": "氧化钕",
         "category": "轻稀土",
-        "price": 79.5,
+        "price": 77.15,
         "unit": "万元/吨",
-        "change": -0.25,
-        "changeDesc": "下跌2500元/吨",
-        "date": "2026-08-15",
+        "change": -0.28,
+        "changeDesc": "下跌",
+        "date": "2026-08-18",
         "source": "我的钢铁网"
       },
       {
@@ -84,21 +84,21 @@
       {
         "name": "氧化镝",
         "category": "重稀土",
-        "price": 196.0,
+        "price": 138.07,
         "unit": "万元/吨",
-        "change": 0.0,
+        "change": 0,
         "changeDesc": "持平",
-        "date": "2026-08-14",
+        "date": "2026-08-18",
         "source": "我的钢铁网"
       },
       {
         "name": "氧化铽",
         "category": "重稀土",
-        "price": 695,
+        "price": 662.92,
         "unit": "万元/吨",
-        "change": -10,
-        "changeDesc": "较上次下跌10万元/吨",
-        "date": "2026-08-14",
+        "change": 0,
+        "changeDesc": "持平",
+        "date": "2026-08-18",
         "source": "我的钢铁网"
       }
     ],
@@ -469,77 +469,80 @@
     ],
     "indexNote": "稀土价格指数来源：我的钢铁网。指数基期为2025年1月试运行基准。2025年6月、7月数据为实际公布值，其余月度数据为估算值。",
     "forecast": {
-      "horizon": "近3个月（应急兜底）",
-      "forecastDate": "2026-08-17",
-      "basis": "应急兜底：联网推理不可用，按近 6 月均值保守持平（非联网推理）",
+      "horizon": "近3个月",
+      "forecastDate": "2026-08-18",
+      "basis": "供需双紧平衡，政策支持，需求增长，价格稳中有升",
       "months": [
         {
           "month": "2026-09",
-          "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
-          "confidence": "低",
-          "logic": "数据不足，保守持平，非据实推理",
-          "prNdOxide": 72.42,
-          "ndOxide": 77.77,
-          "dysprosiumOxide": 139.88,
-          "terbiumOxide": 668.62,
-          "metalPrNd": 88.12,
-          "metalNd": 95.19,
-          "metalPr": 102.52,
-          "metalDy": 169.18,
-          "metalTb": 812.29
+          "category": "轻稀土",
+          "confidence": "高",
+          "basis": "金九银十传统旺季，下游备货需求增加",
+          "logic": "下游需求旺季，库存低位，价格有望上涨",
+          "prNdOxide": 82.0,
+          "ndOxide": 86.0,
+          "dysprosiumOxide": 150.0,
+          "terbiumOxide": 680.0,
+          "metalPrNd": 92.0,
+          "metalNd": 99.0,
+          "metalPr": 107.0,
+          "metalDy": 180.0,
+          "metalTb": 830.0
         },
         {
           "month": "2026-10",
-          "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
-          "confidence": "低",
-          "logic": "数据不足，保守持平，非据实推理",
-          "prNdOxide": 73.14,
-          "ndOxide": 78.55,
-          "dysprosiumOxide": 141.28,
-          "terbiumOxide": 675.03,
-          "metalPrNd": 89.0,
-          "metalNd": 96.14,
-          "metalPr": 103.55,
-          "metalDy": 170.87,
-          "metalTb": 804.17
+          "category": "轻稀土",
+          "confidence": "高",
+          "basis": "下游需求持续增长，政策支持，价格有望维持高位",
+          "logic": "下游需求旺季，政策支持，价格有望维持高位",
+          "prNdOxide": 84.0,
+          "ndOxide": 88.0,
+          "dysprosiumOxide": 152.0,
+          "terbiumOxide": 690.0,
+          "metalPrNd": 94.0,
+          "metalNd": 101.0,
+          "metalPr": 109.0,
+          "metalDy": 182.0,
+          "metalTb": 840.0
         },
         {
           "month": "2026-11",
-          "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
-          "confidence": "低",
-          "logic": "数据不足，保守持平，非据实推理",
-          "prNdOxide": 73.87,
-          "ndOxide": 79.34,
-          "dysprosiumOxide": 142.69,
-          "terbiumOxide": 679.52,
-          "metalPrNd": 89.89,
-          "metalNd": 97.1,
-          "metalPr": 104.59,
-          "metalDy": 172.58,
-          "metalTb": 796.37
+          "category": "轻稀土",
+          "confidence": "高",
+          "basis": "下游需求旺季结束，但政策支持，价格有望稳中有升",
+          "logic": "下游需求旺季结束，但政策支持，价格有望稳中有升",
+          "prNdOxide": 86.0,
+          "ndOxide": 90.0,
+          "dysprosiumOxide": 154.0,
+          "terbiumOxide": 710.0,
+          "metalPrNd": 96.0,
+          "metalNd": 104.0,
+          "metalPr": 112.0,
+          "metalDy": 184.0,
+          "metalTb": 850.0
         }
       ]
     },
     "strategies": [
       {
-        "title": "原材料锁定",
-        "detail": "与上游供应商签订长协合同，锁定原材料价格，降低成本波动风险。"
+        "title": "原材料锁价",
+        "detail": "与供应商签订长协合同，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "库存管理",
-        "detail": "根据市场需求和价格走势，合理调整库存水平，避免库存积压。"
+        "title": "库存调节",
+        "detail": "根据市场行情，适时调整库存水平，避免库存积压或短缺。"
       },
       {
         "title": "技术升级",
-        "detail": "研发新技术，提高材料利用率，降低生产成本。"
+        "detail": "推进无重稀土与晶界扩散技术，降低生产成本，提高产品竞争力。"
       },
       {
         "title": "拓展市场",
-        "detail": "积极拓展海外市场，降低对国内市场的依赖。"
+        "detail": "积极拓展海外市场，降低对国内市场的依赖，分散风险。"
       },
       {
         "title": "成本传导",
-        "detail": "将原材料价格上涨压力传导至下游客户，保持利润空间。"
+        "detail": "向下游客户传导成本上涨压力，保持利润空间。"
       }
     ]
   },
@@ -668,15 +671,15 @@
       "officialSite": "https://www.yunsheng.com",
       "irSite": "https://www.sse.com.cn",
       "financials": {
-        "revenue": 54.64,
+        "revenue": 33.37,
         "revenueYoY": 8.39,
         "mainRevenue": 48.33,
         "mainRevenueYoY": 6.08,
-        "netProfit": 3.31,
+        "netProfit": 2.74,
         "netProfitYoY": 247.95,
         "deductedNetProfit": 2.79,
         "deductedNetProfitYoY": 185.27,
-        "grossMargin": 17.81,
+        "grossMargin": 20.78,
         "grossMarginPrev": 14,
         "grossMarginChange": 3.81,
         "eps": 0.31,
@@ -721,47 +724,50 @@
         ]
       },
       "productionSales": {
-        "production": 14856,
+        "production": 7190,
         "productionUnit": "吨（钕铁硼成品）",
         "productionYoY": 11.01,
-        "sales": 14197,
+        "sales": 29.14,
         "salesUnit": "吨（钕铁硼成品）",
         "salesYoY": 10.29,
         "inventory": 2055,
         "inventoryYoY": 47.21,
-        "capacity": 26000,
+        "capacity": 15000,
         "capacityNote": "年产26000吨钕铁硼坯料+10000吨晶界扩散产能；包头1.5万吨高性能项目5000吨已投产",
         "salesVolumeDisclosed": true,
         "source": "2025年年度报告-经营数据（2026年4月11日披露）"
       },
       "revenueStructure": [
         {
-          "segment": "新能源汽车",
-          "revenue": 25.52,
-          "salesYoY": 9.66,
-          "note": "国内主驱配套295.19万套，市占率23.06%"
+          "segment": "Neodymium Iron Boron Permanent Magnet",
+          "revenue": 29.14,
+          "salesYoY": 40.35,
+          "note": "Sales increased by 40.35% compared to the previous year."
         },
         {
-          "segment": "消费电子",
-          "revenue": 13.07,
-          "salesYoY": 0.77,
-          "note": "智能应用领域战略布局"
-        },
-        {
-          "segment": "工业及其他",
-          "revenue": 9.73,
-          "salesYoY": 4.51,
-          "note": "人形机器人/eVTOL小批量供货"
+          "segment": "High-value-added Magnetic Components",
+          "revenue": 4.43,
+          "salesYoY": 66.54,
+          "note": "Sales of high-value-added magnetic components increased by 66.54% compared to the previous year."
         }
       ],
       "geo": {
-        "domestic": 33.93,
+        "domestic": 18.91,
         "domesticPct": 62.09,
-        "overseas": 14.4,
+        "overseas": 10.23,
         "overseasPct": 26.35,
         "overseasGrossMargin": 27.24,
         "overseasGrossMarginChange": 6.14
-      }
+      },
+      "quarterly": [
+        {
+          "period": "2026H1",
+          "type": "actual",
+          "revenue": 33.37,
+          "netProfit": 2.74,
+          "note": "Actual revenue and net profit for the first half of 2026."
+        }
+      ]
     },
     {
       "id": "sanhuan",
@@ -1322,6 +1328,18 @@
       "id": "act-20260702-03"
     },
     {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-07-02",
+      "title": "金力永磁2026半年报炸了！净利狂增50%，机器人磁材杀疯了",
+      "description": "金力永磁上半年归母净利润预计达4亿～4.6亿元，同比暴增31.17%～50.84%；更亮眼的是，扣非净利润预计3.68亿～4.28亿元。",
+      "source": "搜狐财经",
+      "sourceUrl": "https://m.sohu.com/a/1044448050_121956424/",
+      "id": "act-20260702-02"
+    },
+    {
       "id": "act-014",
       "company": "jinli",
       "companyName": "金力永磁",
@@ -1356,6 +1374,18 @@
       "source": "洞见繁华",
       "sourceUrl": "https://m.sohu.com/a/1044448139_121956424/",
       "id": "act-20260701-02"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-07-01",
+      "title": "金力永磁上半年净利猛增五成！二季度扣非净利润强势回暖，稀土永磁龙头正加速狂奔",
+      "description": "金力永磁上半年归母净利润预计达4亿～4.6亿元，同比暴增31.17%～50.84%；更亮眼的是，扣非净利润预计3.68亿～4.28亿元。",
+      "source": "搜狐财经",
+      "sourceUrl": "https://m.sohu.com/a/1044448139_121956424/",
+      "id": "act-20260701-01"
     },
     {
       "id": "act-007",
@@ -1488,6 +1518,18 @@
       "description": "与上海盘毂动力签署战略合作框架协议，共建联合研发中心，建立五年战略采购供应关系。6月5日联合推出PGH高性能磁钢，全球首次实现轴向磁通电机专用磁钢批量生产。需求清单来自eVTOL和人形机器人。",
       "source": "公司公告",
       "sourceUrl": "https://caifuhao.eastmoney.com/news/20260624200635364925010"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-04-07",
+      "title": "金力永磁(300748.SZ)",
+      "description": "金力永磁构建了多元化的稀土资源保障体系，与北方稀土、中国稀土等建立了长期战略合作关系。",
+      "source": "新浪财经",
+      "sourceUrl": "http://m.toutiao.com/group/7656771067016528418/?upstream_biz=VolcEngine",
+      "id": "act-20260407-03"
     },
     {
       "id": "act-011",
@@ -1932,6 +1974,13 @@
       "url": "https://www.jiemian.com/article/14916612.html"
     },
     {
+      "date": "2026-08-13",
+      "company": "盛和资源",
+      "title": "盛和资源2026年半年度业绩预增的主要原因",
+      "source": "证券时报",
+      "url": "https://emweb.eastmoney.com/NewsBulletin/index?code=SH600392"
+    },
+    {
       "date": "2026-08-12",
       "company": "行业",
       "title": "生意社8月11日稀土行情：走势下滑，轻稀土全线下调",
@@ -2126,13 +2175,6 @@
       "title": "2026年以来稀土供需偏紧，稀土板块交投升温！稀土ETF华泰柏瑞（516780）连续4个交易日累计“吸金”1.53亿元",
       "source": "新浪基金",
       "url": "http://finance.sina.cn/2026-08-07/detail-inimnkum3291801.d.html"
-    },
-    {
-      "date": "2026-08-06",
-      "company": "中科三环",
-      "title": "稀土产业集约化提速：中科三环控股中电磁声，打通国产磁材终端闭环",
-      "source": "证券时报网",
-      "url": "https://stcn.com/article/detail/4061875.html"
     }
   ]
 }
