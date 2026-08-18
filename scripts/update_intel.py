@@ -1424,14 +1424,30 @@ def call_zhipu(prompt, model=None):
     model = model or os.environ.get("LLM_MODEL") or "glm-4-flash"
     client = OpenAI(api_key=api_key, base_url="https://open.bigmodel.cn/api/paas/v4/")
     log(f"调用 智谱 GLM，模型={model}（合成 JSON）")
-    resp = client.chat.completions.create(
-        model=model,
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.3,
-        max_tokens=16384,
-        response_format={"type": "json_object"},
-    )
-    return getattr(resp.choices[0].message, "content", "") or ""
+    import time as _t
+    last_exc = None
+    for _attempt in range(1, 4):
+        try:
+            resp = client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.3,
+                max_tokens=16384,
+                response_format={"type": "json_object"},
+            )
+            return getattr(resp.choices[0].message, "content", "") or ""
+        except Exception as e:
+            # 智谱 GLM 免费档经常返回 429（该模型当前访问量过大）。做有限次退避重试，
+            # 避免一次限流就把整轮更新打成“假成功”（sys.exit(0) 且页面无更新）。
+            _msg = str(e)
+            _status = getattr(e, "status_code", None) or getattr(getattr(e, "response", None), "status_code", None)
+            _is_429 = (_status == 429) or ("429" in _msg) or ("访问量过大" in _msg) or ("rate limit" in _msg.lower())
+            if _is_429 and _attempt < 3:
+                _wait = 30 * _attempt
+                log(f"智谱 GLM 返回 429 限流（第 {_attempt} 次），{_wait}s 后重试")
+                _t.sleep(_wait); last_exc = e; continue
+            raise
+    raise last_exc or RuntimeError("智谱 GLM 重试后仍失败")
 
 
 def call_cn_free(prompt):
@@ -1651,8 +1667,14 @@ def main():
         log(f"配置错误，终止更新: {e}")
         sys.exit(1)
     except Exception as e:
-        # 运行时错误（如网络抖动）：保留现有数据，温和退出
+        # 运行时错误（如 LLM 限流/网络抖动）：保留现有数据，温和退出；
+        # 但仍写一条“检查过但失败”的每日记录，避免「每日更新记录」标签页空白、让人误以为自动化没运行。
         log(f"LLM 调用失败，保留现有数据: {e}")
+        try:
+            _iso = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            append_update_history("【自动检查】LLM 调用失败（限流/网络抖动），保留现有数据，本次未更新。", _iso)
+        except Exception as _he:
+            log(f"写入失败记录时也出错（忽略）：{_he}")
         sys.exit(0)
 
     new = extract_json(raw)
