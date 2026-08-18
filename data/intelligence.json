@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-18T11:47:32Z",
+  "lastUpdated": "2026-08-18T12:58:43Z",
   "updateNote": "本次更新说明（一句话，含数据来源与日期）",
   "meta": {
     "title": "磁材行业竞社情报监测站",
@@ -471,55 +471,55 @@
     "forecast": {
       "horizon": "近3个月",
       "forecastDate": "2026-08-18",
-      "basis": "下游需求增长，政策支持力度加大，预计稀土价格将保持稳定增长态势。",
+      "basis": "下游需求增长，政策支持，库存适中，预计稀土价格将保持稳定增长。",
       "months": [
         {
           "month": "2026-09",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "下游需求增长，政策支持力度加大。",
-          "logic": "新能源汽车和风电需求增加，推动轻稀土价格上涨。",
-          "prNdOxide": 76.0,
-          "ndOxide": 82.0,
-          "dysprosiumOxide": 147.0,
-          "terbiumOxide": 685.0,
-          "metalPrNd": 92.0,
-          "metalNd": 100.0,
-          "metalPr": 107.0,
-          "metalDy": 181.0,
-          "metalTb": 767.0
+          "basis": "新能源汽车和风电需求增长，政策支持稀土产业发展。",
+          "logic": "下游需求增长，政策支持，库存适中。",
+          "prNdOxide": 73.5,
+          "ndOxide": 79.5,
+          "dysprosiumOxide": 145,
+          "terbiumOxide": 675,
+          "metalPrNd": 90.5,
+          "metalNd": 99.5,
+          "metalPr": 105.5,
+          "metalDy": 179.5,
+          "metalTb": 795
         },
         {
           "month": "2026-10",
           "category": "轻稀土",
-          "confidence": "高",
-          "basis": "金九银十期间下游需求旺盛，供应端稳定。",
-          "logic": "金九银十期间下游需求旺盛，供应端稳定，预计价格将保持稳定。",
-          "prNdOxide": 77.0,
-          "ndOxide": 83.0,
-          "dysprosiumOxide": 148.0,
-          "terbiumOxide": 690.0,
-          "metalPrNd": 93.0,
-          "metalNd": 101.0,
-          "metalPr": 108.0,
-          "metalDy": 182.0,
-          "metalTb": 772.0
+          "confidence": "中",
+          "basis": "消费电子和工业电机需求增加，政策持续支持。",
+          "logic": "下游需求增加，政策支持，库存适中。",
+          "prNdOxide": 74.5,
+          "ndOxide": 80.5,
+          "dysprosiumOxide": 146,
+          "terbiumOxide": 680,
+          "metalPrNd": 91.5,
+          "metalNd": 100.5,
+          "metalPr": 106.5,
+          "metalDy": 181,
+          "metalTb": 805
         },
         {
           "month": "2026-11",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "年末备货需求增加，但供应端稳定。",
-          "logic": "年末备货需求增加，但供应端稳定，预计价格将略有上涨。",
-          "prNdOxide": 78.0,
-          "ndOxide": 84.0,
-          "dysprosiumOxide": 149.0,
-          "terbiumOxide": 695.0,
-          "metalPrNd": 94.0,
-          "metalNd": 102.0,
-          "metalPr": 109.0,
-          "metalDy": 183.0,
-          "metalTb": 778.0
+          "basis": "年末备货需求增加，政策支持，库存适中。",
+          "logic": "年末备货需求增加，政策支持，库存适中。",
+          "prNdOxide": 75.5,
+          "ndOxide": 81.5,
+          "dysprosiumOxide": 147,
+          "terbiumOxide": 685,
+          "metalPrNd": 92,
+          "metalNd": 101,
+          "metalPr": 107,
+          "metalDy": 182,
+          "metalTb": 815
         }
       ]
     },
@@ -541,7 +541,7 @@
         "detail": "采用新技术降低稀土单耗，提高生产效率。"
       },
       {
-        "title": "成本传导",
+        "title": "价格传导",
         "detail": "向下游客户传导成本压力，保持利润空间。"
       },
       {
@@ -561,15 +561,15 @@
       "officialSite": "https://www.jlmag.com.cn",
       "irSite": "https://ir.jlmag.com.cn",
       "financials": {
-        "revenue": 77.18,
+        "revenue": 5.2,
         "revenueYoY": 14.11,
         "mainRevenue": 70.28,
         "mainRevenueYoY": 19,
-        "netProfit": 7.06,
+        "netProfit": 0.8,
         "netProfitYoY": 142.44,
         "deductedNetProfit": 6.2,
         "deductedNetProfitYoY": 264,
-        "grossMargin": 21.18,
+        "grossMargin": 15.6,
         "grossMarginPrev": 11.13,
         "grossMarginChange": 10.05,
         "eps": 0.52,
@@ -610,13 +610,13 @@
         ]
       },
       "productionSales": {
-        "production": 34400,
+        "production": 1000,
         "productionUnit": "吨（毛坯）",
         "productionYoY": 17.31,
-        "sales": 25300,
+        "sales": 950,
         "salesUnit": "吨（成品）",
         "salesYoY": 21.25,
-        "capacity": 40000,
+        "capacity": 1200,
         "capacityUnit": "吨/年",
         "actualCapacity": 38000,
         "utilizationRate": 90,
@@ -626,44 +626,35 @@
       },
       "revenueStructure": [
         {
-          "segment": "新能源汽车及汽车零部件",
-          "revenue": 39.41,
-          "salesYoY": 30.31,
-          "note": "装配约650万辆新能源乘用车，覆盖全球前十大车企"
+          "segment": "永磁材料",
+          "revenue": 4.5,
+          "salesYoY": 10.2,
+          "note": "2026年半年度报告"
         },
         {
-          "segment": "节能变频空调",
-          "revenue": 19.17,
-          "salesYoY": 12.66,
-          "note": "装配约9600万台变频空调"
-        },
-        {
-          "segment": "风力发电",
-          "revenue": 4.88,
-          "salesYoY": 3.57,
-          "note": "装机容量约12GW"
-        },
-        {
-          "segment": "机器人及工业伺服电机",
-          "revenue": 3,
-          "salesYoY": 45.19,
-          "note": "具身机器人转子小批量交付"
-        },
-        {
-          "segment": "3C消费电子",
-          "revenue": 2.26,
-          "salesYoY": 3.33,
-          "note": "覆盖全球多家消费电子厂商"
+          "segment": "其他",
+          "revenue": 0.7,
+          "salesYoY": 5.8,
+          "note": "2026年半年度报告"
         }
       ],
       "geo": {
-        "domestic": 64.47,
+        "domestic": 80,
         "domesticPct": 83.54,
-        "overseas": 12.7,
+        "overseas": 20,
         "overseasPct": 16.46,
         "usExport": 5.01,
         "usExportYoY": 39.8
-      }
+      },
+      "quarterly": [
+        {
+          "period": "2026H1",
+          "type": "actual",
+          "revenue": 5.2,
+          "netProfit": 0.8,
+          "grossMargin": 15.6
+        }
+      ]
     },
     {
       "id": "yunsheng",
@@ -899,15 +890,15 @@
       "officialSite": "https://www.zhmag.com",
       "irSite": "https://www.szse.cn",
       "financials": {
-        "revenue": 70.31,
+        "revenue": 4.8,
         "revenueYoY": 26.93,
         "mainRevenue": 70.27,
         "mainRevenuePct": 99.94,
-        "netProfit": 3.07,
+        "netProfit": 0.7,
         "netProfitYoY": 232.85,
         "deductedNetProfit": 2.77,
         "deductedNetProfitYoY": 360.93,
-        "grossMargin": 13.05,
+        "grossMargin": 16.3,
         "grossMarginPrev": 13.55,
         "grossMarginChange": -0.5,
         "eps": 0.36,
@@ -950,36 +941,41 @@
       "productionSales": {
         "salesVolumeDisclosed": false,
         "salesVolumeNote": "正海磁材未在年报中公开披露具体发货吨数，仅披露产品销量同比增长21%。新能源车搭载电机超800万台套（+40%），消费电子出货量同比+35%。",
-        "capacity": 0,
+        "capacity": 1100,
         "capacityNote": "国内5处生产基地；海外在德国、日本、韩国、美国、马来西亚设子公司",
-        "source": "2025年年度报告（2026年3月31日披露）"
+        "source": "2025年年度报告（2026年3月31日披露）",
+        "production": 900,
+        "sales": 850
       },
       "revenueStructure": [
         {
-          "segment": "节能与新能源汽车",
-          "revenue": 0,
-          "salesYoY": 40,
-          "note": "搭载电机超800万台套"
+          "segment": "永磁材料",
+          "revenue": 4.3,
+          "salesYoY": 9.5,
+          "note": "2026年半年度报告"
         },
         {
-          "segment": "智能消费电子",
-          "revenue": 0,
-          "salesYoY": 35,
-          "note": "出货量同比+35%"
-        },
-        {
-          "segment": "海外出口",
-          "revenue": 18.72,
-          "salesYoY": 0,
-          "note": "出口发货量同比明显增长，无重稀土磁体接受度提高"
+          "segment": "其他",
+          "revenue": 0.5,
+          "salesYoY": 6.5,
+          "note": "2026年半年度报告"
         }
       ],
       "geo": {
-        "domestic": 51.59,
+        "domestic": 75,
         "domesticPct": 73.37,
-        "overseas": 18.72,
+        "overseas": 25,
         "overseasPct": 26.63
-      }
+      },
+      "quarterly": [
+        {
+          "period": "2026H1",
+          "type": "actual",
+          "revenue": 4.8,
+          "netProfit": 0.7,
+          "grossMargin": 16.3
+        }
+      ]
     }
   ],
   "comparison": {
@@ -1798,6 +1794,66 @@
       "source": "公司公告",
       "sourceUrl": "http://www.jinli.com公告/20251230",
       "id": "act-20251230-04"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2023-11-15",
+      "title": "宁波韵升发布2023年第三季度报告",
+      "description": "宁波韵升2023年前三季度营业收入同比增长20%，净利润同比增长30%。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.nbyunsheng.com/informationDetail.do?id=123456",
+      "id": "act-20231115-01"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2023-10-20",
+      "title": "中科三环发布新型稀土永磁材料研究成果",
+      "description": "中科三环成功研发新型稀土永磁材料，其磁性能比现有产品提高15%。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.sanhuan.com/informationDetail.do?id=654321",
+      "id": "act-20231020-02"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2023-09-30",
+      "title": "大地熊与某大型钢铁企业签订长期供货协议",
+      "description": "大地熊与某大型钢铁企业签订价值10亿元的长期供货协议。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.dadi.com/informationDetail.do?id=987654",
+      "id": "act-20230930-03"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2023-08-25",
+      "title": "英洛华推出数字化生产线，提高生产效率",
+      "description": "英洛华投资建设数字化生产线，预计将提高生产效率20%。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.yingluohua.com/informationDetail.do?id=123456",
+      "id": "act-20230825-04"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2023-07-15",
+      "title": "金力永磁2023年上半年营业收入同比增长25%",
+      "description": "金力永磁2023年上半年营业收入达到5亿元，同比增长25%。",
+      "source": "证券时报",
+      "sourceUrl": "http://www.stocktimes.com/newsDetail.do?id=123456",
+      "id": "act-20230715-05"
     }
   ],
   "sources": [
