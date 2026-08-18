@@ -789,9 +789,10 @@ def call_llm_news(prompt):
         ctx = gather_doubao_context_news(os.environ.get("DOUBAO_SEARCH_API_KEY"))
         if ctx:
             full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出真实可核实的增量新闻）：\n" + ctx
-        else:
-            full = prompt + "\n\n（联网搜索未返回结果，请基于常识谨慎输出，无法核实的不要编造）"
-        return call_zhipu(full)
+            return call_zhipu(full)
+        # 豆包搜索无结果（Key 失效/接口异常）→ 改用智谱 web_search 自行联网检索，确保新闻段不靠幻觉
+        log("news 豆包搜索无结果，改用智谱 web_search 自行联网检索最新新闻")
+        return call_zhipu_websearch(prompt)
     if provider == "perplexity":
         return call_perplexity(prompt)
     if provider == "gemini":
@@ -1194,10 +1195,10 @@ def call_llm_forecast(prompt):
         if ctx:
             full = (prompt + "\n\n以下是联网检索到的稀土市场参考信息"
                     "（请据此严格推理未来 3 个月各品类价格，不要简单线性外推历史）：\n" + ctx)
-        else:
-            full = (prompt + "\n\n（联网检索未返回结果，请基于你的专业知识谨慎推理，"
-                    "并明确标注不确定性）")
-        return call_zhipu(full)
+            return call_zhipu(full)
+        # 豆包搜索无结果 → 改用智谱 web_search 自行联网检索稀土市场信息后推理
+        log("forecast 豆包搜索无结果，改用智谱 web_search 自行联网检索稀土市场信息")
+        return call_zhipu_websearch(prompt)
     if provider == "perplexity":
         return call_perplexity(prompt)
     if provider == "gemini":
@@ -1538,9 +1539,10 @@ def call_llm_activities(prompt):
         ctx = gather_doubao_context_activities(os.environ.get("DOUBAO_SEARCH_API_KEY"))
         if ctx:
             full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出真实可核实的增量动态）：\n" + ctx
-        else:
-            full = prompt + "\n\n（联网搜索未返回结果，请基于常识谨慎输出，无法核实的不要编造）"
-        return call_zhipu(full)
+            return call_zhipu(full)
+        # 豆包搜索无结果 → 改用智谱 web_search 自行联网检索，确保动态段不靠幻觉
+        log("activities 豆包搜索无结果，改用智谱 web_search 自行联网检索最新动态")
+        return call_zhipu_websearch(prompt)
     if provider == "perplexity":
         return call_perplexity(prompt)
     if provider == "gemini":
