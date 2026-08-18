@@ -1729,12 +1729,14 @@ def main():
     #   无论内容有无变化都写一条：有变化写真实摘要，无变化写“已自动检查、无实质更新”，
     #   避免某天数据持平导致标签页空白、让人误以为自动化没运行。
     #   注意：当天若已有真实更新记录（双触发场景），“无变化”提示不覆盖它。
-    if changed:
-        append_update_history(summary, merged.get("lastUpdated"))
-    else:
-        if not _history_has_today(merged.get("lastUpdated")):
+        # 无变化当天：更新记录用“今天”日期，而非沿用的旧 lastUpdated
+    # （无变化时 lastUpdated 会被保留为昨日，否则 _history_has_today 误判→漏写“已自动检查”）
+    today_iso = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    today_day = today_iso[:10]
+    if changed:/r/n        append_update_history(summary, merged.get("lastUpdated"))
+    else:/r/n        if not _history_has_today(today_day):
             no_change_note = "【自动检查】今日已自动检查，数据与昨日一致，无实质更新。"
-            append_update_history(no_change_note, merged.get("lastUpdated"))
+            append_update_history(no_change_note, today_iso)
 
     # ★ 可选：把摘要通过邮件推送给指定邮箱（配置 SMTP 凭据后自动生效）
     send_email_report(summary, merged.get("lastUpdated"), os.environ.get("NOTIFY_EMAIL"))
