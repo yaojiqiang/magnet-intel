@@ -1033,11 +1033,13 @@ def call_llm_companies(prompt):
     provider = (os.environ.get("LLM_PROVIDER") or "openai").lower()
     if provider == "cn-free":
         ctx = gather_doubao_context_companies(os.environ.get("DOUBAO_SEARCH_API_KEY"))
-        if not ctx:
-            log("companies 联网搜索无结果，缺少依据，跳过 LLM 以免幻觉写入占位数据")
-            return '{"companyUpdates": []}'
-        full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出确有新发布的经营数据增量）：\n" + ctx
-        return call_zhipu(full)
+        if ctx:
+            full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出确有新发布的经营数据增量）：\n" + ctx
+            return call_zhipu(full)
+        # 豆包搜索无结果（Key 失效或接口异常）→ 改用智谱自带 web_search 自行联网检索，
+        # 确保竞社经营数据在豆包不可用时仍能更新，而不是整段空白。
+        log("companies 豆包搜索无结果，改用智谱 web_search 自行联网检索最新经营数据")
+        return call_zhipu_websearch(prompt)
     if provider == "perplexity":
         return call_perplexity(prompt)
     if provider == "gemini":
@@ -1473,6 +1475,39 @@ def call_zhipu(prompt, model=None):
                 _t.sleep(_wait); last_exc = e; continue
             raise
     raise last_exc or RuntimeError("智谱 GLM 重试后仍失败")
+
+
+def call_zhipu_websearch(prompt):
+    """调用智谱 GLM 并启用 web_search 工具，让模型自行联网检索后合成 JSON（不依赖豆包搜索）。"""
+    from openai import OpenAI
+    api_key = os.environ.get("ZHIPU_API_KEY")
+    if not api_key:
+        raise RuntimeError("未设置 ZHIPU_API_KEY")
+    model = os.environ.get("LLM_MODEL") or "glm-4-flash"
+    client = OpenAI(api_key=api_key, base_url="https://open.bigmodel.cn/api/paas/v4/")
+    log(f"调用 智谱 GLM（web_search 联网检索），模型={model}")
+    import time as _t
+    last_exc = None
+    for _attempt in range(1, 6):
+        try:
+            resp = client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.3,
+                max_tokens=16384,
+                tools=[{"type": "web_search", "web_search": {"enable": True, "search_result": True}}],
+            )
+            return getattr(resp.choices[0].message, "content", "") or ""
+        except Exception as e:
+            _msg = str(e)
+            _status = getattr(e, "status_code", None) or getattr(getattr(e, "response", None), "status_code", None)
+            _is_429 = (_status == 429) or ("429" in _msg) or ("访问量过大" in _msg) or ("rate limit" in _msg.lower())
+            if _is_429 and _attempt < 5:
+                _wait = 30 * _attempt
+                log(f"智谱 web_search 返回 429 限流（第 {_attempt} 次），{_wait}s 后重试")
+                _t.sleep(_wait); last_exc = e; continue
+            raise
+    raise last_exc or RuntimeError("智谱 web_search 重试后仍失败")
 
 
 def call_cn_free(prompt):
