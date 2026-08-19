@@ -214,7 +214,7 @@ tr:hover td{background:#fafbfc}
 <!-- ========== TAB 2: 竞社经营数据 ========== -->
 <div class="tab-content" id="tab-financials">
   <div class="summary">
-    竞社经营数据以 <strong>2026 年分季度</strong> 口径展示（A股磁材公司不按月披露经营数据，故采用季度数据）。目前已披露：<strong>Q1 一季报（实际）</strong> + <strong>H1 半年度业绩预告/快报</strong>。待 Q3 季报披露后自动补充。
+    竞社经营数据以 <strong>2026 年分季度</strong> 口径展示（A股磁材公司不按月披露经营数据，故采用季度数据）。目前已披露：<strong>Q1 一季报（实际）</strong> + <strong>H1 半年度业绩预告/快报</strong> + <strong>Q2（由 H1−Q1 推算，标注"推算"）</strong>。待 Q3 季报披露后自动补充。
   </div>
   <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>2026年分季度经营数据对比</div>
   <div class="grid grid-2">
@@ -237,6 +237,16 @@ tr:hover td{background:#fafbfc}
       <div class="chart-title" style="text-align:center">2026H1 归母净利润预告/快报区间（亿元）</div>
       <div class="chart-desc">柱形为预告区间；中科三环为业绩快报实际值</div>
       <div class="chart-canvas-wrap"><canvas id="chart-h1-profit"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title" style="text-align:center">2026Q2 营业总收入对比（亿元，推算）</div>
+      <div class="chart-desc">二季度=上半年-一季度（推算）</div>
+      <div class="chart-canvas-wrap"><canvas id="chart-q2-revenue"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title" style="text-align:center">2026Q2 归母净利润对比（亿元，推算）</div>
+      <div class="chart-desc">二季度=上半年-一季度（推算）</div>
+      <div class="chart-canvas-wrap"><canvas id="chart-q2-profit"></canvas></div>
     </div>
   </div>
   <div class="table-wrap">
@@ -581,6 +591,21 @@ function initFinancials(){
     }}}},scales:{y:{grid:{color:'#f0f0f0'},title:{display:true,text:'亿元'}},x:{grid:{display:false}}}}
   });
 
+  // ---- Chart: 2026Q2 revenue (推算) ----
+  const q2rev = (c, f) => { const q=getQ(c,'2026Q2'); return q&&q[f]!=null ? q[f] : 0; };
+  CHARTS['q2-revenue'] = new Chart(document.getElementById('chart-q2-revenue'),{
+    type:'bar',
+    data:{labels:names,datasets:[{label:'2026Q2营收(推算)',data:companies.map(c=>q2rev(c,'revenue')),backgroundColor:colors,borderRadius:6,maxBarThickness:60}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' 亿元'}}},scales:{y:{grid:{color:'#f0f0f0'},title:{display:true,text:'亿元'}},x:{grid:{display:false}}}}
+  });
+  // ---- Chart: 2026Q2 net profit (推算) ----
+  const q2v = (c) => { const q=getQ(c,'2026Q2'); if(!q) return 0; if(q.type==='preliminary'||q.type==='actual') return q.netProfit; if(q.netProfitMin!=null) return (q.netProfitMin+q.netProfitMax)/2; return 0; };
+  CHARTS['q2-profit'] = new Chart(document.getElementById('chart-q2-profit'),{
+    type:'bar',
+    data:{labels:names,datasets:[{label:'2026Q2净利(推算)',data:companies.map(c=>q2v(c)),backgroundColor:colors.map(c=>c+'cc'),borderRadius:6,maxBarThickness:60}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const q=getQ(companies[c.dataIndex],'2026Q2'); if(!q) return '未披露'; if(q.type==='preliminary'||q.type==='actual') return q.netProfit+' 亿元'; return '推算区间 '+q.netProfitMin+' ~ '+q.netProfitMax+' 亿元';}}}},scales:{y:{grid:{color:'#f0f0f0'},title:{display:true,text:'亿元'}},x:{grid:{display:false}}}}
+  });
+
   // ---- Financial table (quarterly) ----
   const ft = document.getElementById('fin-table');
   let html = '<thead><tr><th>指标</th>';
@@ -615,6 +640,23 @@ function initFinancials(){
   companies.forEach(c=>{ const q=getQ(c,'2026Q1'); html += `<td style="font-size:12px;text-align:left">${q&&q.note?q.note:'—'}</td>`; });
   html += '</tr>';
 
+  // Q2 revenue (推算)
+  html += '<tr><td>2026Q2 营收(亿元,推算)</td>';
+  companies.forEach(c=>{ const q=getQ(c,'2026Q2'); html += cell(q&&q.revenue!=null?q.revenue:'—'); });
+  html += '</tr>';
+  // Q2 net profit (推算)
+  html += '<tr><td>2026Q2 净利(亿元,推算)</td>';
+  companies.forEach(c=>{
+    const q=getQ(c,'2026Q2'); let v='—';
+    if(q){ v = (q.type==='preliminary'||q.type==='actual') ? q.netProfit : (q.netProfitMin!=null?`预告 ${q.netProfitMin}~${q.netProfitMax}`:'—'); }
+    html += `<td class="num" style="font-size:12px">${v}</td>`;
+  });
+  html += '</tr>';
+  // Q2 note
+  html += '<tr><td>Q2 经营要点</td>';
+  companies.forEach(c=>{ const q=getQ(c,'2026Q2'); html += `<td style="font-size:12px;text-align:left">${q&&q.note?q.note:'—'}</td>`; });
+  html += '</tr>';
+
   // H1 forecast
   html += '<tr><td>2026H1 净利(亿元)</td>';
   companies.forEach(c=>{
@@ -634,11 +676,18 @@ function initFinancials(){
   html += '<tr><td>H1 业绩要点</td>';
   companies.forEach(c=>{ const q=getQ(c,'2026H1'); html += `<td style="font-size:12px;text-align:left">${q&&q.note?q.note:'—'}</td>`; });
   html += '</tr>';
-  // Source
+  // Source (clickable 巨潮 link)
   html += '<tr><td>数据来源</td>';
-  companies.forEach(c=>{ const q1=getQ(c,'2026Q1'), h1=getQ(c,'2026H1');
-    const src = (q1?q1.source:'') + (h1?('<br>'+h1.source):'');
-    html += `<td style="font-size:11px;color:var(--text2)">${src}</td>`; });
+  companies.forEach(c=>{ const q1=getQ(c,'2026Q1'), h1=getQ(c,'2026H1'), q2=getQ(c,'2026Q2');
+    const parts=[];
+    if(q1&&q1.source) parts.push(q1.source);
+    if(h1&&h1.source) parts.push(h1.source);
+    if(q2&&q2.source) parts.push(q2.source);
+    const url=(q1&&q1.sourceUrl)||(h1&&h1.sourceUrl)||(q2&&q2.sourceUrl)||'';
+    let src=parts.join('<br>');
+    if(url) src+=` <a href="${url}" target="_blank" style="color:var(--primary)">查看原文↗</a>`;
+    html += `<td style="font-size:11px;color:var(--text2)">${src}</td>`;
+  });
   html += '</tr>';
 
   html += '</tbody>';
