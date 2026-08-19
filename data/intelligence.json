@@ -574,7 +574,7 @@
         "operatingCF": 3.53,
         "operatingCFYoY": -30.5,
         "source": "2026年一季报（巨潮资讯网/2026-04-29）；2026年半年度业绩预告（2026-07-01）",
-        "sourceUrl": "https://ir.jlmag.com.cn/upload/2026-04/177579244091547300.pdf",
+        "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-07-01/1225402727.PDF",
         "quarterly": [
           {
             "period": "2026Q1",
@@ -590,8 +590,8 @@
             "eps": 0.14,
             "operatingCF": 3.58,
             "note": "出口收入3.81亿元(+22.16%)，占18.7%；机器人及工业伺服电机领域收入1.18亿元(+81.84%)，具身机器人电机转子小批量交付；扣除股份支付影响后净利2.35亿元(+44.57%)",
-            "source": "2026年一季报（巨潮资讯网/2026-04-29）",
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=300748"
+            "source": "巨潮资讯网·2026年一季度报告（2026-04披露）",
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-04-29/1225229744.PDF"
           },
           {
             "period": "2026H1",
@@ -602,8 +602,8 @@
             "netProfitMid": 4.3,
             "netProfitYoY": "31.17%—50.84%",
             "note": "新能源汽车及汽车零部件领域收入同比+约30%；机器人及工业伺服电机领域收入同比+约90%，具身机器人电机转子小批量交付",
-            "source": "巨潮资讯网·2026年半年度业绩预告（2026-07-01）",
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=300748"
+            "source": "巨潮资讯网·2026年半年度业绩预告（2026-07披露）",
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-07-01/1225402727.PDF"
           },
           {
             "period": "2026Q2",
@@ -612,7 +612,7 @@
             "netProfitMax": 2.67,
             "type": "forecast",
             "source": "二季度为上半年减一季度推算（非单独披露）",
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=300748",
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-07-01/1225402727.PDF",
             "note": "二季度数据由上半年（H1）减一季度（Q1）推算，仅供参考"
           }
         ]
@@ -693,7 +693,7 @@
         "operatingCFYoY": 3.48,
         "h1Forecast": "2026H1营收33.37亿元(+42.02%)，归母净利2.74亿元(+154.18%)，扣非2.38亿元(+168.46%)，每股收益0.2547元，经营现金流2.05亿元",
         "source": "巨潮资讯网·2026年半年度报告",
-        "sourceUrl": "https://www.cnstock.com/commonDetail/761391",
+        "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-08-18/1225476495.PDF",
         "quarterly": [
           {
             "period": "2026Q1",
@@ -709,8 +709,8 @@
             "eps": 0.106,
             "operatingCF": 0.57,
             "note": "分领域：新能源汽车磁材6.58亿元(+14.63%)、消费电子磁材3.82亿元(+49.22%)、工业及其他磁材2.79亿元(+37.44%)",
-            "source": "2026年一季报（巨潮资讯网/2026-04-23）",
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=600366"
+            "source": "巨潮资讯网·2026年一季度报告（2026-04披露）",
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-04-23/1225147136.PDF"
           },
           {
             "period": "2026H1",
@@ -718,7 +718,7 @@
             "type": "actual",
             "netProfitYoY": 154.18,
             "note": "钕铁硼收入29.14亿元(+40.35%，占87.33%)；磁组件收入4.43亿元(+66.54%)；钕铁硼成品销量7190吨(+11.61%)；毛利率20.78%(+4.23pp)",
-            "source": "2026年半年度报告（巨潮资讯网/2026-08-17披露）",
+            "source": "巨潮资讯网·2026年半年度报告（2026-08披露）",
             "revenue": 33.37,
             "revenueYoY": 42.02,
             "netProfit": 2.74,
@@ -731,7 +731,7 @@
             "grossMarginChange": 4.23,
             "mainRevenue": 29.14,
             "mainRevenueYoY": 40.35,
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=600366"
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-08-18/1225476495.PDF"
           },
           {
             "period": "2026Q2",
@@ -739,7 +739,7 @@
             "revenue": 18.39,
             "netProfit": 1.57,
             "source": "二季度为上半年减一季度推算（非单独披露）",
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=600366",
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-08-18/1225476495.PDF",
             "note": "二季度数据由上半年（H1）减一季度（Q1）推算，仅供参考"
           }
         ]
@@ -823,7 +823,7 @@
         "operatingCF": -0.78,
         "operatingCFPrev": 13.26,
         "source": "巨潮资讯网·2026年半年度报告",
-        "sourceUrl": "https://www.cnfin.com/announ/detail/index.html?announ=lc&code=000970",
+        "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-07-21/1225433702.PDF",
         "quarterly": [
           {
             "period": "2026Q1",
@@ -834,8 +834,8 @@
             "netProfitYoY": 21.54,
             "grossMargin": 12.84,
             "note": "经营现金流-555.49万元，由正转负；财务费用4859.83万元(+270.13%)，汇兑净损失增加",
-            "source": "2026年一季报（巨潮资讯网/2026-04-24）",
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=000970"
+            "source": "巨潮资讯网·2026年一季度报告（2026-04披露）",
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-04-25/1225176953.PDF"
           },
           {
             "period": "2026H1",
@@ -849,8 +849,8 @@
             "deductedNetProfitYoY": 2.25,
             "eps": 0.0409,
             "note": "核心产品销量增长、优化配方工艺降低重稀土用量提升毛利率，子公司减亏/扭亏；人民币升值致汇兑损失增加（Q2净利约0.33亿，环比+100%）",
-            "source": "巨潮资讯网·2026年半年度业绩快报（2026-07-20）",
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=000970"
+            "source": "巨潮资讯网·2026年半年度业绩快报（2026-07披露）",
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-07-21/1225433702.PDF"
           },
           {
             "period": "2026Q2",
@@ -858,7 +858,7 @@
             "revenue": 19.37,
             "netProfit": 0.33,
             "source": "二季度为上半年减一季度推算（非单独披露）",
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=000970",
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-07-21/1225433702.PDF",
             "note": "二季度数据由上半年（H1）减一季度（Q1）推算，仅供参考"
           }
         ]
@@ -938,7 +938,7 @@
         "operatingCF": 1.22,
         "operatingCFYoY": -62.92,
         "source": "2026年一季报（巨潮资讯网/2026-04-21）；2026年半年度业绩预告（2026-07-06）",
-        "sourceUrl": "https://finance.eastmoney.com/a/202603313690132554.html",
+        "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-04-22/1225134331.PDF",
         "quarterly": [
           {
             "period": "2026Q1",
@@ -953,8 +953,8 @@
             "eps": 0.05,
             "operatingCF": 2.77,
             "note": "汇兑损失增加致营收净利双降；应收账款-37%，货币资金+46.85%，经营现金流2.77亿元(+217.25%)",
-            "source": "2026年一季报（巨潮资讯网/2026-04-21）",
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=300224"
+            "source": "巨潮资讯网·2026年一季度报告（2026-04披露）",
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-04-22/1225134331.PDF"
           },
           {
             "period": "2026H1",
@@ -964,9 +964,9 @@
             "netProfitMax": 2.6,
             "netProfitMid": 2.35,
             "netProfitYoY": "92%—135%",
-            "note": "依据巨潮资讯网披露的2026年半年度业绩预告：归母净利润2.1~2.6亿元，同比+92%~135%",
-            "source": "巨潮资讯网·2026年半年度业绩预告（2026-07-06）",
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=300224"
+            "note": "依据巨潮资讯网披露的2026年半年度业绩预告：归母净利润2.1~2.6亿元，同比+92%~135%；未在巨潮资讯网检索到该业绩预告的原始公告，请谨慎参考",
+            "source": "未在巨潮资讯网检索到官方公告，数据源自第三方聚合，仅供参考",
+            "sourceUrl": "https://h5detail.yiyouliao.com/rivers/newsfeed/1536235174142947329/ID2BBU91KREMSPU.html"
           },
           {
             "period": "2026Q2",
@@ -975,8 +975,8 @@
             "netProfitMax": 2.13,
             "type": "forecast",
             "source": "二季度为上半年减一季度推算（非单独披露）",
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=300224",
-            "note": "二季度数据由上半年（H1）减一季度（Q1）推算，仅供参考"
+            "sourceUrl": "https://h5detail.yiyouliao.com/rivers/newsfeed/1536235174142947329/ID2BBU91KREMSPU.html",
+            "note": "二季度数据由上半年（H1）减一季度（Q1）推算；因H1来源未在巨潮检索到原始公告，推算值仅供参考"
           }
         ]
       },
