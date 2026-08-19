@@ -679,13 +679,12 @@ function initFinancials(){
   // Source (clickable 巨潮 link)
   html += '<tr><td>数据来源</td>';
   companies.forEach(c=>{ const q1=getQ(c,'2026Q1'), h1=getQ(c,'2026H1'), q2=getQ(c,'2026Q2');
+    const link=(txt,url)=> url ? `<a href="${url}" target="_blank" style="color:var(--primary)">${txt}↗</a>` : txt;
     const parts=[];
-    if(q1&&q1.source) parts.push(q1.source);
-    if(h1&&h1.source) parts.push(h1.source);
-    if(q2&&q2.source) parts.push(q2.source);
-    const url=(q1&&q1.sourceUrl)||(h1&&h1.sourceUrl)||(q2&&q2.sourceUrl)||'';
-    let src=parts.join('<br>');
-    if(url) src+=` <a href="${url}" target="_blank" style="color:var(--primary)">查看原文↗</a>`;
+    if(q1&&q1.source) parts.push(link(q1.source, q1.sourceUrl));
+    if(h1&&h1.source) parts.push(link(h1.source, h1.sourceUrl));
+    if(q2&&q2.source) parts.push(link(q2.source, q2.sourceUrl));
+    const src=parts.join('<br>');
     html += `<td style="font-size:11px;color:var(--text2)">${src}</td>`;
   });
   html += '</tr>';
