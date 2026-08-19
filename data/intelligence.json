@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-18T13:42:52Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：2026年8月18日，根据中国稀土行业协会、生意社、包头稀土产品交易所等平台数据更新。",
+  "lastUpdated": "2026-08-19T04:18:00Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月18日北方有色网数据更新稀土价格。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场价格整体呈下跌趋势，轻稀土价格下滑明显，重稀土价格相对稳定。",
+    "marketSummary": "稀土市场整体呈现弱势盘整态势，轻稀土价格小幅下跌，中重稀土价格保持稳定。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -469,72 +469,73 @@
     ],
     "indexNote": "稀土价格指数来源：我的钢铁网。指数基期为2025年1月试运行基准。2025年6月、7月数据为实际公布值，其余月度数据为估算值。",
     "forecast": {
-      "horizon": "近3个月",
-      "forecastDate": "2026-08-18",
-      "basis": "供给刚性增强，需求回暖，政策支持，价格中枢有望上移",
+      "horizon": "近3个月（应急兜底）",
+      "forecastDate": "2026-08-19",
+      "basis": "应急兜底：联网推理不可用，按近 6 月均值保守持平（非联网推理）",
       "months": [
         {
           "month": "2026-09",
-          "category": "轻稀土",
-          "confidence": "高",
-          "basis": "金九银十旺季预期，下游备货需求增加",
-          "logic": "下游需求旺季，库存低位，价格有望上涨",
-          "prNdOxide": 82.5,
-          "ndOxide": 81.5,
-          "dysprosiumOxide": 143.5,
-          "terbiumOxide": 690,
-          "metalPrNd": 102.5,
-          "metalNd": 101.5,
-          "metalPr": 106.5,
-          "metalDy": 173.5,
-          "metalTb": 875
+          "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
+          "confidence": "低",
+          "logic": "数据不足，保守持平，非据实推理",
+          "prNdOxide": 72.42,
+          "ndOxide": 77.77,
+          "dysprosiumOxide": 139.88,
+          "terbiumOxide": 668.62,
+          "metalPrNd": 88.12,
+          "metalNd": 95.19,
+          "metalPr": 102.52,
+          "metalDy": 169.18,
+          "metalTb": 812.29
         },
         {
           "month": "2026-10",
-          "category": "轻稀土",
-          "confidence": "高",
-          "basis": "旺季需求持续，库存消耗，价格有望维持高位",
-          "logic": "旺季需求持续，库存消耗，价格有望维持高位",
-          "prNdOxide": 83.5,
-          "ndOxide": 82.5,
-          "dysprosiumOxide": 145,
-          "terbiumOxide": 710,
-          "metalPrNd": 103.5,
-          "metalNd": 102.5,
-          "metalPr": 107.5,
-          "metalDy": 175.5,
-          "metalTb": 900
+          "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
+          "confidence": "低",
+          "logic": "数据不足，保守持平，非据实推理",
+          "prNdOxide": 73.14,
+          "ndOxide": 78.55,
+          "dysprosiumOxide": 141.28,
+          "terbiumOxide": 675.03,
+          "metalPrNd": 89.0,
+          "metalNd": 96.14,
+          "metalPr": 103.55,
+          "metalDy": 170.87,
+          "metalTb": 804.17
         },
         {
           "month": "2026-11",
-          "category": "轻稀土",
-          "confidence": "高",
-          "basis": "旺季需求尾声，库存逐渐恢复，价格有望小幅回落",
-          "logic": "旺季需求尾声，库存逐渐恢复，价格有望小幅回落",
-          "prNdOxide": 83,
-          "ndOxide": 82,
-          "dysprosiumOxide": 147,
-          "terbiumOxide": 730,
-          "metalPrNd": 104,
-          "metalNd": 103,
-          "metalPr": 108,
-          "metalDy": 177,
-          "metalTb": 925
+          "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
+          "confidence": "低",
+          "logic": "数据不足，保守持平，非据实推理",
+          "prNdOxide": 73.87,
+          "ndOxide": 79.34,
+          "dysprosiumOxide": 142.69,
+          "terbiumOxide": 679.52,
+          "metalPrNd": 89.89,
+          "metalNd": 97.1,
+          "metalPr": 104.59,
+          "metalDy": 172.58,
+          "metalTb": 796.37
         }
       ]
     },
     "strategies": [
       {
         "title": "原材料锁定",
-        "detail": "与供应商签订长协合同，锁定原材料价格，降低成本波动风险。"
+        "detail": "与上游供应商签订长协合同，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "库存调节",
-        "detail": "根据市场行情，适时调整库存，避免库存积压或短缺。"
+        "title": "库存管理",
+        "detail": "根据市场需求和价格走势，合理调整库存水平，避免库存积压或短缺。"
+      },
+      {
+        "title": "产品结构调整",
+        "detail": "提高高毛利产品占比，优化产品结构，提升盈利能力。"
       },
       {
         "title": "技术升级",
-        "detail": "推进无重稀土与晶界扩散技术，降低单耗，提高产品竞争力。"
+        "detail": "推进无重稀土与晶界扩散技术，降低单耗，提高生产效率。"
       },
       {
         "title": "成本传导",
@@ -542,7 +543,7 @@
       },
       {
         "title": "拓展市场",
-        "detail": "积极拓展海外市场，降低国内政策与稀土价格波动的风险。"
+        "detail": "积极拓展海外市场，降低国内市场波动风险。"
       }
     ]
   },
@@ -1420,6 +1421,18 @@
       "id": "act-20260701-02"
     },
     {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-07-01",
+      "title": "金力永磁二季度净利预增超43%，具身机器人电机转子产品已有小批量交付",
+      "description": "预计2026年第二季度净利润为2.07亿元到2.67亿元，同比增长43.48%～85.02%。",
+      "source": "财闻",
+      "sourceUrl": "https://m.10jqka.com.cn/20260701/c677869742.shtml",
+      "id": "act-20260701-01"
+    },
+    {
       "id": "act-007",
       "company": "yunsheng",
       "companyName": "宁波韵升",
@@ -2017,6 +2030,41 @@
   ],
   "news": [
     {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "稀土永磁：新能源+机器人双轮驱动 中国主导的万亿级战略赛道",
+      "source": "东方财富AI妙想",
+      "url": "https://finance.eastmoney.com/a/202608193845228439.html"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "2026稀土出口数据解读：量缩价涨，出口管制重塑全球格局",
+      "source": "看点资讯",
+      "url": "https://cj.sina.com.cn/articles/view/7879776975/1d5abdacf06801p98o?froms=ttmp"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "7月稀土出口10314吨，量缩价涨释放什么信号？",
+      "source": "看点资讯",
+      "url": "https://cj.sina.com.cn/articles/view/7879776488/1d5abd8e806801h1rm?froms=ttmp"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "7月稀土出口10314吨，量缩价涨的原因是什么？",
+      "source": "看点资讯",
+      "url": "https://cj.sina.com.cn/articles/view/7879776488/1d5abd8e806801h1rq?froms=ttmp"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "没了中国就不行了？稀土涨价140倍！日本找替代品30年仍无果",
+      "source": "王二哥老搞笑",
+      "url": "https://www.163.com/dy/article/L4LI3L450553TEXM.html"
+    },
+    {
       "date": "2026-08-18",
       "company": "行业",
       "title": "稀土价格上行叠加供给约束收紧，稀土ETF易方达（159715）热度攀升",
@@ -2073,6 +2121,41 @@
       "url": "https://www.163.com/dy/article/L4IVHL190553TKKM.html"
     },
     {
+      "date": "2026-08-18",
+      "company": "行业",
+      "title": "日本关键稀土进口为何暴跌八成 供应链难题凸显",
+      "source": "网易",
+      "url": "https://military.china.com/news/13004177/20260818/49683822.html"
+    },
+    {
+      "date": "2026-08-18",
+      "company": "行业",
+      "title": "2026稀土出口数据解读：7月出口量降29.54%均价涨103%，供需博弈下价格能否稳住？",
+      "source": "新浪财富汇",
+      "url": "https://k.sina.com.cn/article_7879922977_1d5ae152106801ig8e.html"
+    },
+    {
+      "date": "2026-08-18",
+      "company": "行业",
+      "title": "大的要来了？美日政府签字，就等废掉中国王牌，中方先断货金属钇",
+      "source": "草叶君",
+      "url": "https://m.sohu.com/a/1064564992_122453767/"
+    },
+    {
+      "date": "2026-08-18",
+      "company": "行业",
+      "title": "大的要来了？美日合作意图打破中国资源优势，中方先断货金属钇",
+      "source": "大学生小青年",
+      "url": "https://k.sina.com.cn/article_7879996580_1d5af34a402001tzy8.html"
+    },
+    {
+      "date": "2026-08-18",
+      "company": "行业",
+      "title": "稀土出口量下降对国内稀土企业利润有何影响？",
+      "source": "看点资讯",
+      "url": "https://cj.sina.com.cn/articles/view/7879849006/1d5acf42e06801dlvo?froms=ttmp"
+    },
+    {
       "date": "2026-08-17",
       "company": "行业",
       "title": "中国稀土管制见效——全球供应链洗牌加速",
@@ -2085,6 +2168,13 @@
       "title": "韩国从俄罗斯手里，买到了中国严管的稀土？这可给中国提了个醒",
       "source": "大国迷雾",
       "url": "https://m.sohu.com/a/1063397645_122159872/"
+    },
+    {
+      "date": "2026-08-16",
+      "company": "行业",
+      "title": "很长时间，市场低估了稀土战略资源全产业链管控升级的长期影响",
+      "source": "东方财富网",
+      "url": "https://caifuhao.eastmoney.com/news/20260816135257415854540"
     },
     {
       "date": "2026-08-15",
@@ -2358,83 +2448,6 @@
       "title": "银河磁体（300127）随稀土永磁板块拉升，大股东提前终止减持",
       "source": "经观智讯",
       "url": "http://www.eeo.com.cn/2026/0812/995884.shtml"
-    },
-    {
-      "date": "2026-08-12",
-      "company": "行业",
-      "title": "供给收缩与旺季预期共振：稀土板块行情能否持续？",
-      "source": "前海联合先进制造混合型基金",
-      "url": "https://caifuhao.eastmoney.com/news/20260812134000335158830"
-    },
-    {
-      "date": "2026-08-12",
-      "company": "行业",
-      "title": "8月中下旬有望重启下游备库推动稀土价格企稳向上，稀土ETF嘉实(516150)一键布局国内稀土产业链",
-      "source": "有连云",
-      "url": "https://www.jiemian.com/article/14910908.html"
-    },
-    {
-      "date": "2026-08-11",
-      "company": "行业",
-      "title": "稀土价格持续上行，供需格局偏紧，稀土ETF易方达（159715）关注度提升",
-      "source": "金融界",
-      "url": "http://m.163.com/dy/article/L49LV34O0519QIKK.html"
-    },
-    {
-      "date": "2026-08-11",
-      "company": "行业",
-      "title": "供应收紧预期与补库需求共振推动稀土价格反弹，稀土ETF嘉实(516150)备受市场关注",
-      "source": "有连云",
-      "url": "http://m.toutiao.com/group/7670382520361304627/?upstream_biz=VolcEngine"
-    },
-    {
-      "date": "2026-08-11",
-      "company": "行业",
-      "title": "稀土出口暴跌81%，中国稀土出口管制见效！美日工厂还能撑多久？",
-      "source": "安静文艺范儿",
-      "url": "https://k.sina.cn/article_7879996653_1d5af34ed02001kxb6.html"
-    },
-    {
-      "date": "2026-08-10",
-      "company": "行业",
-      "title": "包头稀土产品交易所8月10日报价：氧化镨钕72.71万元/吨",
-      "source": "包头稀土产品交易所",
-      "url": "https://www.toutiao.com/article/7672319100332278272/"
-    },
-    {
-      "date": "2026-08-10",
-      "company": "盛和资源",
-      "title": "盛和资源稳步拓展多元化有色金属及非金属矿产投资",
-      "source": "公司公告",
-      "url": "https://emweb.eastmoney.com/NewsBulletin/index?code=SH600392"
-    },
-    {
-      "date": "2026-08-10",
-      "company": "盛和资源",
-      "title": "盛和资源聚焦绿色低碳能源、高性能材料等领域",
-      "source": "公司公告",
-      "url": "https://emweb.eastmoney.com/NewsBulletin/index?code=SH600392"
-    },
-    {
-      "date": "2026-08-10",
-      "company": "行业",
-      "title": "美国加码稀土产业扶持叠加国内企业盈利高增，稀土ETF易方达（159715）景气度攀升",
-      "source": "金融界",
-      "url": "http://m.toutiao.com/group/7672283271085998633/?upstream_biz=VolcEngine"
-    },
-    {
-      "date": "2026-08-10",
-      "company": "行业",
-      "title": "稀土永磁概念震荡走强 中国稀土逼近涨停",
-      "source": "牧童论金",
-      "url": "https://m.weibo.cn/detail/5331771472482443"
-    },
-    {
-      "date": "2026-08-10",
-      "company": "行业",
-      "title": "稀土永磁概念异动拉升 中国稀土涨停",
-      "source": "东方财富Choice数据",
-      "url": "https://finance.eastmoney.com/a/202608073834876713.html"
     }
   ]
 }
