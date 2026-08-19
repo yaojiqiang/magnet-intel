@@ -930,6 +930,67 @@ def deep_merge_company(existing_company, upd):
     return result
 
 
+
+def _cninfo_url(code):
+    """返回该公司巨潮资讯网公告页（正规、可点击直达）。"""
+    import re as _re
+    num = _re.sub(r'[^0-9]', '', code or '')
+    if not num:
+        return ''
+    return f'https://www.cninfo.com.cn/new/disclosure/stock?stockCode={num}'
+
+
+def _normalize_company_sources(companies):
+    """竞社经营数据来源统一指向巨潮资讯网，并补全可点击 sourceUrl。"""
+    for c in companies:
+        if not isinstance(c, dict):
+            continue
+        url = _cninfo_url(c.get('code'))
+        fin = c.setdefault('financials', {})
+        if url and not fin.get('sourceUrl'):
+            fin['sourceUrl'] = url
+        s = fin.get('source') or ''
+        if url and '巨潮' not in s and 'cninfo' not in s:
+            fin['source'] = ('巨潮资讯网·' + s) if s else '巨潮资讯网'
+        for q in fin.get('quarterly', []):
+            if url and not q.get('sourceUrl'):
+                q['sourceUrl'] = url
+            qs = q.get('source') or ''
+            if url and '巨潮' not in qs and 'cninfo' not in qs:
+                q['source'] = ('巨潮资讯网·' + qs) if qs else '巨潮资讯网'
+    return companies
+
+
+def _add_q2_to_company(c):
+    """由上半年(H1)减一季度(Q1)推算二季度数据并写入 quarterly。"""
+    fin = c.get('financials') or {}
+    qs = {q.get('period'): q for q in fin.get('quarterly', []) if isinstance(q, dict)}
+    q1 = qs.get('2026Q1'); h1 = qs.get('2026H1')
+    if not q1 or not h1 or '2026Q2' in qs:
+        return
+    url = _cninfo_url(c.get('code'))
+    q2 = {'period': '2026Q2', 'periodLabel': '2026年二季度（推算）'}
+    if _is_num(q1.get('revenue')) and _is_num(h1.get('revenue')):
+        q2['revenue'] = round(float(h1['revenue']) - float(q1['revenue']), 2)
+    if _is_num(q1.get('netProfit')) and _is_num(h1.get('netProfit')):
+        q2['netProfit'] = round(float(h1['netProfit']) - float(q1['netProfit']), 2)
+    elif _is_num(q1.get('netProfit')) and _is_num(h1.get('netProfitMin')) and _is_num(h1.get('netProfitMax')):
+        q2['netProfitMin'] = round(float(h1['netProfitMin']) - float(q1['netProfit']), 2)
+        q2['netProfitMax'] = round(float(h1['netProfitMax']) - float(q1['netProfit']), 2)
+        q2['type'] = 'forecast'
+    q2['source'] = '二季度为上半年减一季度推算（非单独披露）'
+    q2['sourceUrl'] = url
+    q2['note'] = '二季度数据由上半年（H1）减一季度（Q1）推算，仅供参考'
+    fin['quarterly'].append(q2)
+
+
+def _add_q2_all(companies):
+    for c in companies:
+        if isinstance(c, dict):
+            _add_q2_to_company(c)
+    return companies
+
+
 def update_companies(existing):
     """每日增量刷新竞社经营数据：联网核对是否已发布更新的财报/产销量等，深度合并进原结构。"""
     prompt = build_companies_prompt(existing)
@@ -966,6 +1027,9 @@ def update_companies(existing):
         log("companies 无有效新数据（均为非法/越界/重复），保留现有经营数据，不推进日期")
         return existing_list
     log(f"companies 刷新完成：{changed} 家公司经营数据有更新")
+    # 统一来源为巨潮资讯网可点击链接，并补齐二季度（H1-Q1 推算）
+    result = _normalize_company_sources(result)
+    result = _add_q2_all(result)
     return result
 
 
