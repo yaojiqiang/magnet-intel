@@ -37,6 +37,8 @@ import json
 import copy
 import datetime
 import re
+import urllib.parse
+import urllib.request
 
 DATA_PATH = os.environ.get("DATA_PATH", "data/intelligence.json")
 
@@ -931,33 +933,165 @@ def deep_merge_company(existing_company, upd):
 
 
 
+_CNINFO_ORGID_CACHE = {}
+
+
 def _cninfo_url(code):
     """返回该公司巨潮资讯网公告页（正规、可点击直达）。"""
-    import re as _re
-    num = _re.sub(r'[^0-9]', '', code or '')
+    num = re.sub(r'[^0-9]', '', code or '')
     if not num:
         return ''
     return f'https://www.cninfo.com.cn/new/disclosure/stock?stockCode={num}'
 
 
+def _cninfo_column(code):
+    """根据股票代码判断交易所板块：600/688/689 为 sse，其余为 szse。"""
+    num = re.sub(r'[^0-9]', '', code or '')
+    if num.startswith(('6', '688', '689')):
+        return 'sse'
+    return 'szse'
+
+
+def _cninfo_orgid(code):
+    """通过巨潮 topSearch 查询公司 orgId，结果缓存。"""
+    global _CNINFO_ORGID_CACHE
+    if code in _CNINFO_ORGID_CACHE:
+        return _CNINFO_ORGID_CACHE[code]
+    num = re.sub(r'[^0-9]', '', code or '')
+    if not num:
+        return None
+    try:
+        params = {"keyWord": num, "maxNum": "10"}
+        req = urllib.request.Request(
+            "https://www.cninfo.com.cn/new/information/topSearch/query",
+            data=urllib.parse.urlencode(params).encode(),
+            method="POST",
+            headers={
+                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                "User-Agent": "Mozilla/5.0",
+            },
+        )
+        r = urllib.request.urlopen(req, timeout=15)
+        data = json.loads(r.read().decode("utf-8"))
+        for item in data or []:
+            if item.get("code") == num:
+                org_id = item.get("orgId")
+                if org_id:
+                    _CNINFO_ORGID_CACHE[code] = org_id
+                    return org_id
+    except Exception as e:
+        log(f"cninfo orgId 查询失败 {code}: {e}")
+    return None
+
+
+def _cninfo_search_pdf(code, org_id, keyword, after_date=None, before_date=None):
+    """在巨潮历史公告中按标题关键词搜索，返回直接 PDF 链接。"""
+    try:
+        num = re.sub(r'[^0-9]', '', code or '')
+        after = after_date or "2026-01-01"
+        before = before_date or "2026-12-31"
+        params = {
+            "pageNum": "1",
+            "pageSize": "100",
+            "tabName": "fulltext",
+            "column": _cninfo_column(code),
+            "stock": f"{num},{org_id}",
+            "searchkey": "",
+            "secid": "",
+            "plate": _cninfo_column(code),
+            "category": "category_all",
+            "trade": "",
+            "sortName": "",
+            "sortType": "",
+            "limit": "",
+            "seDate": f"{after}~{before}",
+        }
+        req = urllib.request.Request(
+            "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+            data=urllib.parse.urlencode(params).encode(),
+            method="POST",
+            headers={
+                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleKit/537.36",
+            },
+        )
+        r = urllib.request.urlopen(req, timeout=20)
+        anns = json.loads(r.read().decode("utf-8")).get("announcements") or []
+        for a in anns:
+            title = a.get("announcementTitle") or ""
+            if keyword in title:
+                adjunct = a.get("adjunctUrl")
+                if adjunct:
+                    return f"http://static.cninfo.com.cn/{adjunct}"
+    except Exception as e:
+        log(f"cninfo PDF 查询失败 {code} {keyword}: {e}")
+    return None
+
+
+def _cninfo_direct_url(code, period, qtype=None):
+    """返回指定期别/类型的巨潮原始 PDF 链接；找不到返回 None。"""
+    org_id = _cninfo_orgid(code)
+    if not org_id:
+        return None
+    if period == "2026Q1":
+        return _cninfo_search_pdf(code, org_id, "一季度报告", "2026-03-01", "2026-05-31")
+    if period == "2026H1":
+        if qtype == "actual":
+            return _cninfo_search_pdf(code, org_id, "半年度报告", "2026-07-01", "2026-09-30")
+        if qtype == "preliminary":
+            return _cninfo_search_pdf(code, org_id, "半年度业绩快报", "2026-07-01", "2026-08-31")
+        if qtype == "forecast":
+            return _cninfo_search_pdf(code, org_id, "半年度业绩预告", "2026-06-01", "2026-08-15")
+    return None
+
+
 def _normalize_company_sources(companies):
-    """竞社经营数据来源统一指向巨潮资讯网，并补全可点击 sourceUrl。"""
+    """竞社经营数据来源统一指向巨潮资讯网，并补全可点击 sourceUrl。
+
+    优先使用巨潮原始公告 PDF 链接；找不到时保留已存在的特定来源链接；
+    最后回退到巨潮公告列表页。
+    """
     for c in companies:
         if not isinstance(c, dict):
             continue
-        url = _cninfo_url(c.get('code'))
+        code = c.get('code', '')
+        list_url = _cninfo_url(code)
         fin = c.setdefault('financials', {})
-        if url and not fin.get('sourceUrl'):
-            fin['sourceUrl'] = url
+        # 顶层 sourceUrl：优先用 H1/Q1 的原始 PDF，否则保留已有，最后回退列表页
+        if list_url and not fin.get('sourceUrl'):
+            fin['sourceUrl'] = list_url
         s = fin.get('source') or ''
-        if url and '巨潮' not in s and 'cninfo' not in s:
+        if list_url and '巨潮' not in s and 'cninfo' not in s:
             fin['source'] = ('巨潮资讯网·' + s) if s else '巨潮资讯网'
+        # 逐季度设置 sourceUrl
+        h1_q = None
         for q in fin.get('quarterly', []):
-            if url and not q.get('sourceUrl'):
-                q['sourceUrl'] = url
+            if not isinstance(q, dict):
+                continue
+            per = q.get('period')
+            if per == '2026H1':
+                h1_q = q
+            existing_url = q.get('sourceUrl') or ''
+            # 如果已经是巨潮原始 PDF，不再重复查询
+            direct_url = None
+            if 'static.cninfo.com.cn/finalpage' not in existing_url:
+                direct_url = _cninfo_direct_url(code, per, q.get('type'))
+            if direct_url:
+                q['sourceUrl'] = direct_url
+            elif existing_url:
+                # 保留已有具体来源（如公司 IR、东方财富等）
+                pass
+            elif list_url:
+                q['sourceUrl'] = list_url
+            # source 文本加巨潮前缀（未核实的数据不覆盖）
             qs = q.get('source') or ''
-            if url and '巨潮' not in qs and 'cninfo' not in qs:
+            if '巨潮' not in qs and 'cninfo' not in qs and '未在巨潮' not in qs:
                 q['source'] = ('巨潮资讯网·' + qs) if qs else '巨潮资讯网'
+        # Q2 为推算，继承 H1 的 sourceUrl
+        if h1_q:
+            for q in fin.get('quarterly', []):
+                if isinstance(q, dict) and q.get('period') == '2026Q2' and h1_q.get('sourceUrl'):
+                    q['sourceUrl'] = h1_q['sourceUrl']
     return companies
 
 
@@ -979,7 +1113,7 @@ def _add_q2_to_company(c):
         q2['netProfitMax'] = round(float(h1['netProfitMax']) - float(q1['netProfit']), 2)
         q2['type'] = 'forecast'
     q2['source'] = '二季度为上半年减一季度推算（非单独披露）'
-    q2['sourceUrl'] = url
+    q2['sourceUrl'] = h1.get('sourceUrl') or url
     q2['note'] = '二季度数据由上半年（H1）减一季度（Q1）推算，仅供参考'
     fin['quarterly'].append(q2)
 
