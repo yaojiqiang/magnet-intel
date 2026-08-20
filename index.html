@@ -214,9 +214,9 @@ tr:hover td{background:#fafbfc}
 <!-- ========== TAB 2: 竞社经营数据 ========== -->
 <div class="tab-content" id="tab-financials">
   <div class="summary">
-    竞社经营数据以 <strong>2026 年分季度</strong> 口径展示（A股磁材公司不按月披露经营数据，故采用季度数据）。目前已披露：<strong>Q1 一季报（实际）</strong> + <strong>H1 半年度业绩预告/快报</strong> + <strong>Q2（由 H1−Q1 推算，标注"推算"）</strong>。待 Q3 季报披露后自动补充。
+    竞社经营数据按报告类型拆分为 <strong>季报</strong>、<strong>半年报</strong>、<strong>年报</strong> 三张横向对比表（公司逐列对比）。A股磁材公司不按月披露：目前 <strong>季报</strong> 展示 Q1 一季报（实际）+ Q2（由 H1−Q1 推算，标注"推算"），Q3/Q4 待披露；<strong>半年报</strong> 展示 H1 业绩预告/快报/半年报；<strong>年报</strong> 展示分应用领域收入结构（年报口径）。
   </div>
-  <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>2026年分季度经营数据对比</div>
+  <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>竞社经营数据可视化对比（季报 · 半年报）</div>
   <div class="grid grid-2">
     <div class="chart-box">
       <div class="chart-title" style="text-align:center">2026Q1 营业总收入对比（亿元）</div>
@@ -250,12 +250,16 @@ tr:hover td{background:#fafbfc}
     </div>
   </div>
   <div class="table-wrap">
-    <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>2026年分季度经营数据明细表</div>
-    <table id="fin-table"></table>
+    <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>季报对比（2026 分季度：Q1 实际 / Q2 由 H1−Q1 推算；Q3、Q4 待披露）</div>
+    <table id="fin-table-quarter"></table>
   </div>
   <div class="table-wrap">
-    <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>分应用领域收入结构（2025年报口径，最新披露）</div>
-    <table id="segment-table"></table>
+    <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>半年报对比（2026 H1：业绩预告 / 快报 / 半年报）</div>
+    <table id="fin-table-half"></table>
+  </div>
+  <div class="table-wrap">
+    <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>年报对比（分应用领域收入结构 · 年报口径）</div>
+    <table id="fin-table-year"></table>
   </div>
 </div>
 
@@ -606,102 +610,99 @@ function initFinancials(){
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const q=getQ(companies[c.dataIndex],'2026Q2'); if(!q) return '未披露'; if(q.type==='preliminary'||q.type==='actual') return q.netProfit+' 亿元'; return '推算区间 '+q.netProfitMin+' ~ '+q.netProfitMax+' 亿元';}}}},scales:{y:{grid:{color:'#f0f0f0'},title:{display:true,text:'亿元'}},x:{grid:{display:false}}}}
   });
 
-  // ---- Financial table (quarterly) ----
-  const ft = document.getElementById('fin-table');
-  let html = '<thead><tr><th>指标</th>';
-  companies.forEach(c=> html += `<th>${c.name}<br><span style="font-weight:400;font-size:11px;color:var(--text2)">${c.code}</span></th>`);
-  html += '</tr></thead><tbody>';
-
+  // ---- 季报 / 半年报 / 年报 三张横向对比表 ----
   const fmtYoY = v => (v==null||v==='') ? '—' : (typeof v==='number' ? (v>=0?'+':'')+v+'%' : v);
   const cell = (v, cls='') => `<td class="num ${cls}">${v}</td>`;
+  const link=(txt,url)=> url ? `<a href="${url}" target="_blank" style="color:var(--primary)">${txt}↗</a>` : txt;
+  const tableHead = () => {
+    let h = '<thead><tr><th>指标</th>';
+    companies.forEach(c=> h += `<th>${c.name}<br><span style="font-weight:400;font-size:11px;color:var(--text2)">${c.code}</span></th>`);
+    return h + '</tr></thead>';
+  };
+  // 归母净利润单元格（处理 实际 / 快报 / 预告区间）
+  const npCell = (q) => {
+    if(!q) return '—';
+    if(q.type==='preliminary'||q.type==='actual') return (q.netProfit!=null? q.netProfit : '—') + (q.type==='actual'?'（半年报）':'（快报）');
+    if(q.netProfitMin!=null) return `预告 ${q.netProfitMin}~${q.netProfitMax}`;
+    if(q.netProfit!=null) return q.netProfit;
+    return '—';
+  };
+  // 跨列小标题
+  const sectionRow = (label, ncols) => `<tr><td colspan="${ncols+1}" style="background:#eef2f7;font-weight:600;color:var(--primary);font-size:12px;padding:8px 12px">${label}</td></tr>`;
+  // 某期的指标行（营收/同比/净利/净利同比/毛利/要点/来源）
+  const periodRows = (p) => {
+    let s = '';
+    s += '<tr><td>营收(亿元)</td>';
+    companies.forEach(c=>{ const q=getQ(c,p); s += cell(q&&q.revenue!=null?q.revenue:'—'); });
+    s += '</tr>';
+    s += '<tr><td>营收同比</td>';
+    companies.forEach(c=>{ const q=getQ(c,p); const y=q?q.revenueYoY:null; s += cell(fmtYoY(y), y!=null&&y<0?'neg':'pos'); });
+    s += '</tr>';
+    s += '<tr><td>归母净利润(亿元)</td>';
+    companies.forEach(c=>{ const q=getQ(c,p); s += `<td class="num" style="font-size:12px">${npCell(q)}</td>`; });
+    s += '</tr>';
+    s += '<tr><td>净利同比</td>';
+    companies.forEach(c=>{ const q=getQ(c,p); const y=q?q.netProfitYoY:null; s += cell(fmtYoY(y), y!=null&&y<0?'neg':'pos'); });
+    s += '</tr>';
+    s += '<tr><td>毛利率(%)</td>';
+    companies.forEach(c=>{ const q=getQ(c,p); s += cell(q&&q.grossMargin!=null?q.grossMargin:'—'); });
+    s += '</tr>';
+    s += '<tr><td>经营要点</td>';
+    companies.forEach(c=>{ const q=getQ(c,p); s += `<td style="font-size:12px;text-align:left">${q&&q.note?q.note:'—'}</td>`; });
+    s += '</tr>';
+    s += '<tr><td>数据来源</td>';
+    companies.forEach(c=>{ const q=getQ(c,p);
+      const txt = q&&q.source ? q.source : '—';
+      const u = q&&q.sourceUrl;
+      s += `<td style="font-size:11px;color:var(--text2)">${link(txt,u)}</td>`; });
+    s += '</tr>';
+    return s;
+  };
 
-  // Q1 revenue
-  html += '<tr><td>2026Q1 营收(亿元)</td>';
-  companies.forEach(c=>{ const q=getQ(c,'2026Q1'); html += cell(q?q.revenue:'—'); });
-  html += '</tr>';
-  // Q1 revenue YoY
-  html += '<tr><td>Q1 营收同比</td>';
-  companies.forEach(c=>{ const q=getQ(c,'2026Q1'); const y=q?q.revenueYoY:null; html += cell(fmtYoY(y), y!=null&&y<0?'neg':'pos'); });
-  html += '</tr>';
-  // Q1 net profit
-  html += '<tr><td>2026Q1 净利(亿元)</td>';
-  companies.forEach(c=>{ const q=getQ(c,'2026Q1'); html += cell(q?q.netProfit:'—'); });
-  html += '</tr>';
-  // Q1 net profit YoY
-  html += '<tr><td>Q1 净利同比</td>';
-  companies.forEach(c=>{ const q=getQ(c,'2026Q1'); const y=q?q.netProfitYoY:null; html += cell(fmtYoY(y), y!=null&&y<0?'neg':'pos'); });
-  html += '</tr>';
-  // Q1 gross margin
-  html += '<tr><td>2026Q1 毛利率(%)</td>';
-  companies.forEach(c=>{ const q=getQ(c,'2026Q1'); html += cell(q&&q.grossMargin!=null?q.grossMargin:'—'); });
-  html += '</tr>';
-  // Q1 note
-  html += '<tr><td>Q1 经营要点</td>';
-  companies.forEach(c=>{ const q=getQ(c,'2026Q1'); html += `<td style="font-size:12px;text-align:left">${q&&q.note?q.note:'—'}</td>`; });
-  html += '</tr>';
+  // ===== 季报对比表 =====
+  const ftQ = document.getElementById('fin-table-quarter');
+  {
+    let html = tableHead() + '<tbody>';
+    const quarters = [
+      {p:'2026Q1', label:'2026 Q1 · 一季报（实际）'},
+      {p:'2026Q2', label:'2026 Q2 · 二季度（H1−Q1 推算，非单独披露）'},
+      {p:'2026Q3', label:'2026 Q3 · 三季报（待披露）'},
+      {p:'2026Q4', label:'2026 Q4 · 四季报（待披露）'},
+    ];
+    quarters.forEach(({p,label})=>{
+      html += sectionRow(label, companies.length);
+      const any = companies.some(c=>getQ(c,p));
+      if(!any){
+        html += '<tr><td>数据（待披露）</td>' + companies.map(()=>'<td class="num">—</td>').join('') + '</tr>';
+        return;
+      }
+      html += periodRows(p);
+    });
+    html += '</tbody>';
+    ftQ.innerHTML = html;
+  }
 
-  // Q2 revenue (推算)
-  html += '<tr><td>2026Q2 营收(亿元,推算)</td>';
-  companies.forEach(c=>{ const q=getQ(c,'2026Q2'); html += cell(q&&q.revenue!=null?q.revenue:'—'); });
-  html += '</tr>';
-  // Q2 net profit (推算)
-  html += '<tr><td>2026Q2 净利(亿元,推算)</td>';
-  companies.forEach(c=>{
-    const q=getQ(c,'2026Q2'); let v='—';
-    if(q){ v = (q.type==='preliminary'||q.type==='actual') ? q.netProfit : (q.netProfitMin!=null?`预告 ${q.netProfitMin}~${q.netProfitMax}`:'—'); }
-    html += `<td class="num" style="font-size:12px">${v}</td>`;
-  });
-  html += '</tr>';
-  // Q2 note
-  html += '<tr><td>Q2 经营要点</td>';
-  companies.forEach(c=>{ const q=getQ(c,'2026Q2'); html += `<td style="font-size:12px;text-align:left">${q&&q.note?q.note:'—'}</td>`; });
-  html += '</tr>';
+  // ===== 半年报对比表 =====
+  const ftH = document.getElementById('fin-table-half');
+  {
+    let html = tableHead() + '<tbody>';
+    html += sectionRow('2026 H1 · 半年度（业绩预告 / 快报 / 半年报）', companies.length);
+    html += periodRows('2026H1');
+    html += '</tbody>';
+    ftH.innerHTML = html;
+  }
 
-  // H1 forecast
-  html += '<tr><td>2026H1 净利(亿元)</td>';
-  companies.forEach(c=>{
-    const q=getQ(c,'2026H1'); let v='—';
-    if(q){ v = (q.type==='preliminary'||q.type==='actual') ? q.netProfit+'（快报）' : `预告 ${q.netProfitMin}~${q.netProfitMax}`; }
-    html += `<td class="num" style="font-size:12px">${v}</td>`;
-  });
-  html += '</tr>';
-  // H1 YoY
-  html += '<tr><td>H1 净利同比</td>';
-  companies.forEach(c=>{ const q=getQ(c,'2026H1'); let v='—', cls='';
-    if(q){ v = (q.type==='preliminary'||q.type==='actual') ? fmtYoY(q.netProfitYoY) : q.netProfitYoY; }
-    html += cell(v);
-  });
-  html += '</tr>';
-  // H1 note
-  html += '<tr><td>H1 业绩要点</td>';
-  companies.forEach(c=>{ const q=getQ(c,'2026H1'); html += `<td style="font-size:12px;text-align:left">${q&&q.note?q.note:'—'}</td>`; });
-  html += '</tr>';
-  // Source (clickable 巨潮 link)
-  html += '<tr><td>数据来源</td>';
-  companies.forEach(c=>{ const q1=getQ(c,'2026Q1'), h1=getQ(c,'2026H1'), q2=getQ(c,'2026Q2');
-    const link=(txt,url)=> url ? `<a href="${url}" target="_blank" style="color:var(--primary)">${txt}↗</a>` : txt;
-    const parts=[];
-    if(q1&&q1.source) parts.push(link(q1.source, q1.sourceUrl));
-    if(h1&&h1.source) parts.push(link(h1.source, h1.sourceUrl));
-    if(q2&&q2.source) parts.push(link(q2.source, q2.sourceUrl));
-    const src=parts.join('<br>');
-    html += `<td style="font-size:11px;color:var(--text2)">${src}</td>`;
-  });
-  html += '</tr>';
-
-  html += '</tbody>';
-  ft.innerHTML = html;
-
-  // ---- Segment table (2025 annual, latest disclosure) ----
-  const st = document.getElementById('segment-table');
-  let shtml = '<thead><tr><th>公司</th><th>应用领域</th><th>收入(亿元)</th><th>销量同比</th><th>备注</th></tr></thead><tbody>';
+  // ---- 年报对比表（分应用领域收入结构，年报口径）----
+  const ftY = document.getElementById('fin-table-year');
+  let yhtml = '<thead><tr><th>公司</th><th>应用领域</th><th>收入(亿元)</th><th>销量同比</th><th>备注</th></tr></thead><tbody>';
   companies.forEach(c=>{
     (c.revenueStructure||[]).forEach((s,i)=>{
-      shtml += `<tr><td>${i===0?c.name:''}</td><td>${s.segment}</td><td class="num">${s.revenue||'—'}</td><td class="num">${s.salesYoY?s.salesYoY+'%':'—'}</td><td style="font-size:12px;color:var(--text2)">${s.note||''}</td></tr>`;
+      yhtml += `<tr><td>${i===0?c.name:''}</td><td>${s.segment}</td><td class="num">${s.revenue||'—'}</td><td class="num">${s.salesYoY?s.salesYoY+'%':'—'}</td><td style="font-size:12px;color:var(--text2)">${s.note||''}</td></tr>`;
     });
   });
-  shtml += '</tbody>';
-  st.innerHTML = shtml;
+  yhtml += '</tbody>';
+  ftY.innerHTML = yhtml;
+
 }
 
 // ========== TAB 3: Activities ==========
