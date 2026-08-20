@@ -258,7 +258,7 @@ tr:hover td{background:#fafbfc}
     <table id="fin-table-half"></table>
   </div>
   <div class="table-wrap">
-    <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>年报对比（分应用领域收入结构 · 年报口径）</div>
+    <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>年报对比（2025 年报 · 最新已披露年度报告；2026 年报尚未发布）</div>
     <table id="fin-table-year"></table>
   </div>
 </div>
@@ -692,16 +692,38 @@ function initFinancials(){
     ftH.innerHTML = html;
   }
 
-  // ---- 年报对比表（分应用领域收入结构，年报口径）----
+  // ---- 年报对比表（2025 年报 · 最新已披露年度报告；2026 年报尚未发布）----
   const ftY = document.getElementById('fin-table-year');
-  let yhtml = '<thead><tr><th>公司</th><th>应用领域</th><th style="text-align:center">收入(亿元)</th><th style="text-align:center">销量同比</th><th>备注</th></tr></thead><tbody>';
-  companies.forEach(c=>{
-    (c.revenueStructure||[]).forEach((s,i)=>{
-      yhtml += `<tr><td>${i===0?c.name:''}</td><td>${s.segment}</td><td class="num">${s.revenue||'—'}</td><td class="num">${s.salesYoY?s.salesYoY+'%':'—'}</td><td style="font-size:12px;color:var(--text2)">${s.note||''}</td></tr>`;
-    });
-  });
-  yhtml += '</tbody>';
-  ftY.innerHTML = yhtml;
+  {
+    let yhtml = '<thead><tr><th style="text-align:left">指标</th>';
+    companies.forEach(c=> yhtml += `<th style="text-align:center;vertical-align:middle">${c.name}<br><span style="font-weight:400;font-size:11px;color:var(--text2)">${c.code}</span></th>`);
+    yhtml += '</tr></thead><tbody>';
+    const ann = c => ((c.financials||{}).annual) || {};
+    const ycell = (v, cls='') => `<td class="num ${cls}">${v}</td>`;
+    yhtml += '<tr><td>营业总收入(亿元)</td>';
+    companies.forEach(c=>{ const x=ann(c); yhtml += ycell(x.revenue!=null?x.revenue:'—'); });
+    yhtml += '</tr>';
+    yhtml += '<tr><td>营收同比</td>';
+    companies.forEach(c=>{ const y=(ann(c).revenueYoY); yhtml += ycell(y!=null?fmtYoY(y):'—', y!=null&&y<0?'neg':'pos'); });
+    yhtml += '</tr>';
+    yhtml += '<tr><td>归母净利润(亿元)</td>';
+    companies.forEach(c=>{ const x=ann(c); yhtml += ycell(x.netProfit!=null?x.netProfit:'—'); });
+    yhtml += '</tr>';
+    yhtml += '<tr><td>净利同比</td>';
+    companies.forEach(c=>{ const y=(ann(c).netProfitYoY); yhtml += ycell(y!=null?fmtYoY(y):'—', y!=null&&y<0?'neg':'pos'); });
+    yhtml += '</tr>';
+    yhtml += '<tr><td>销售毛利率(%)</td>';
+    companies.forEach(c=>{ const x=ann(c); yhtml += ycell(x.grossMargin!=null?x.grossMargin:'—'); });
+    yhtml += '</tr>';
+    yhtml += '<tr><td>基本每股收益(元)</td>';
+    companies.forEach(c=>{ const x=ann(c); yhtml += ycell(x.eps!=null?x.eps:'—'); });
+    yhtml += '</tr>';
+    yhtml += '<tr><td>数据来源</td>';
+    companies.forEach(c=>{ const x=ann(c); const txt=x.source||'—'; const u=x.sourceUrl; yhtml += `<td style="font-size:11px;color:var(--text2)">${link(txt,u)}</td>`; });
+    yhtml += '</tr>';
+    yhtml += '</tbody>';
+    ftY.innerHTML = yhtml;
+  }
 
 }
 
