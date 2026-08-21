@@ -216,39 +216,6 @@ tr:hover td{background:#fafbfc}
   <div class="summary">
     竞社经营数据按报告类型拆分为 <strong>季报</strong>、<strong>半年报</strong>、<strong>年报</strong> 三张横向对比表（公司逐列对比）。A股磁材公司不按月披露：目前 <strong>季报</strong> 展示 Q1 一季报（实际）+ Q2（由 H1−Q1 推算，标注"推算"），Q3/Q4 待披露；<strong>半年报</strong> 展示 H1 业绩预告/快报/半年报；<strong>年报</strong> 展示分应用领域收入结构（年报口径）。
   </div>
-  <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>竞社经营数据可视化对比（季报 · 半年报）</div>
-  <div class="grid grid-2">
-    <div class="chart-box">
-      <div class="chart-title" style="text-align:center">2026Q1 营业总收入对比（亿元）</div>
-      <div class="chart-desc">数据来源：各公司2026年一季报</div>
-      <div class="chart-canvas-wrap"><canvas id="chart-revenue"></canvas></div>
-    </div>
-    <div class="chart-box">
-      <div class="chart-title" style="text-align:center">2026Q1 归母净利润对比（亿元）</div>
-      <div class="chart-desc">数据来源：各公司2026年一季报</div>
-      <div class="chart-canvas-wrap"><canvas id="chart-profit"></canvas></div>
-    </div>
-    <div class="chart-box">
-      <div class="chart-title" style="text-align:center">2026Q1 综合毛利率对比（%）</div>
-      <div class="chart-desc">数据来源：各公司2026年一季报</div>
-      <div class="chart-canvas-wrap"><canvas id="chart-margin"></canvas></div>
-    </div>
-    <div class="chart-box">
-      <div class="chart-title" style="text-align:center">2026H1 归母净利润预告/快报区间（亿元）</div>
-      <div class="chart-desc">柱形为预告区间；中科三环为业绩快报实际值</div>
-      <div class="chart-canvas-wrap"><canvas id="chart-h1-profit"></canvas></div>
-    </div>
-    <div class="chart-box">
-      <div class="chart-title" style="text-align:center">2026Q2 营业总收入对比（亿元，推算）</div>
-      <div class="chart-desc">二季度=上半年-一季度（推算）</div>
-      <div class="chart-canvas-wrap"><canvas id="chart-q2-revenue"></canvas></div>
-    </div>
-    <div class="chart-box">
-      <div class="chart-title" style="text-align:center">2026Q2 归母净利润对比（亿元，推算）</div>
-      <div class="chart-desc">二季度=上半年-一季度（推算）</div>
-      <div class="chart-canvas-wrap"><canvas id="chart-q2-profit"></canvas></div>
-    </div>
-  </div>
   <div class="table-wrap">
     <div class="card-title" style="margin-bottom:12px"><span class="dot" style="background:var(--primary)"></span>季报对比（2026 分季度：Q1 实际 / Q2 由 H1−Q1 推算；Q3、Q4 待披露）</div>
     <table id="fin-table-quarter"></table>
@@ -554,61 +521,6 @@ function initFinancials(){
   const companies = DATA.companies;
   const names = companies.map(c=>c.name);
   const colors = companies.map(c=>COMPANY_COLORS[c.id]);
-
-  // helper: Q1 value or fallback '—'
-  const q1v = (c, f) => { const q=getQ(c,'2026Q1'); return q&&q[f]!=null ? q[f] : 0; };
-
-  // ---- Chart: 2026Q1 revenue ----
-  CHARTS['revenue'] = new Chart(document.getElementById('chart-revenue'),{
-    type:'bar',
-    data:{labels:names,datasets:[{label:'2026Q1营收',data:companies.map(c=>q1v(c,'revenue')),backgroundColor:colors,borderRadius:6,maxBarThickness:60}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' 亿元'}}},scales:{y:{grid:{color:'#f0f0f0'},title:{display:true,text:'亿元'}},x:{grid:{display:false}}}}
-  });
-
-  // ---- Chart: 2026Q1 net profit ----
-  CHARTS['profit'] = new Chart(document.getElementById('chart-profit'),{
-    type:'bar',
-    data:{labels:names,datasets:[{label:'2026Q1净利',data:companies.map(c=>q1v(c,'netProfit')),backgroundColor:colors,borderRadius:6,maxBarThickness:60}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' 亿元'}}},scales:{y:{grid:{color:'#f0f0f0'},title:{display:true,text:'亿元'}},x:{grid:{display:false}}}}
-  });
-
-  // ---- Chart: 2026Q1 gross margin ----
-  CHARTS['margin'] = new Chart(document.getElementById('chart-margin'),{
-    type:'bar',
-    data:{labels:names,datasets:[{label:'2026Q1毛利率',data:companies.map(c=>q1v(c,'grossMargin')),backgroundColor:colors,borderRadius:6,maxBarThickness:60}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+'%'}}},scales:{y:{grid:{color:'#f0f0f0'},title:{display:true,text:'%'},min:0,max:30},x:{grid:{display:false}}}}
-  });
-
-  // ---- Chart: 2026H1 profit forecast range ----
-  const h1Data = companies.map(c=>{
-    const q=getQ(c,'2026H1'); if(!q) return null;
-    if(q.type==='preliminary' || q.type==='actual') return q.netProfit; // single value
-    return [q.netProfitMin, q.netProfitMax]; // range
-  });
-  CHARTS['h1-profit'] = new Chart(document.getElementById('chart-h1-profit'),{
-    type:'bar',
-    data:{labels:names,datasets:[{label:'2026H1净利',data:h1Data,backgroundColor:colors.map(c=>c+'cc'),borderRadius:6,maxBarThickness:60}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{
-      const v=c.parsed; const q=getQ(companies[c.dataIndex],'2026H1'); if(!q) return '未披露';
-      if(q.type==='preliminary'||q.type==='actual') return q.netProfit+' 亿元（快报）';
-      return '预告区间 '+q.netProfitMin+' ~ '+q.netProfitMax+' 亿元';
-    }}}},scales:{y:{grid:{color:'#f0f0f0'},title:{display:true,text:'亿元'}},x:{grid:{display:false}}}}
-  });
-
-  // ---- Chart: 2026Q2 revenue (推算) ----
-  const q2rev = (c, f) => { const q=getQ(c,'2026Q2'); return q&&q[f]!=null ? q[f] : 0; };
-  CHARTS['q2-revenue'] = new Chart(document.getElementById('chart-q2-revenue'),{
-    type:'bar',
-    data:{labels:names,datasets:[{label:'2026Q2营收(推算)',data:companies.map(c=>q2rev(c,'revenue')),backgroundColor:colors,borderRadius:6,maxBarThickness:60}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' 亿元'}}},scales:{y:{grid:{color:'#f0f0f0'},title:{display:true,text:'亿元'}},x:{grid:{display:false}}}}
-  });
-  // ---- Chart: 2026Q2 net profit (推算) ----
-  const q2v = (c) => { const q=getQ(c,'2026Q2'); if(!q) return 0; if(q.type==='preliminary'||q.type==='actual') return q.netProfit; if(q.netProfitMin!=null) return (q.netProfitMin+q.netProfitMax)/2; return 0; };
-  CHARTS['q2-profit'] = new Chart(document.getElementById('chart-q2-profit'),{
-    type:'bar',
-    data:{labels:names,datasets:[{label:'2026Q2净利(推算)',data:companies.map(c=>q2v(c)),backgroundColor:colors.map(c=>c+'cc'),borderRadius:6,maxBarThickness:60}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const q=getQ(companies[c.dataIndex],'2026Q2'); if(!q) return '未披露'; if(q.type==='preliminary'||q.type==='actual') return q.netProfit+' 亿元'; return '推算区间 '+q.netProfitMin+' ~ '+q.netProfitMax+' 亿元';}}}},scales:{y:{grid:{color:'#f0f0f0'},title:{display:true,text:'亿元'}},x:{grid:{display:false}}}}
-  });
 
   // ---- 季报 / 半年报 / 年报 三张横向对比表 ----
   const fmtYoY = v => (v==null||v==='') ? '—' : (typeof v==='number' ? (v>=0?'+':'')+v+'%' : v);
