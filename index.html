@@ -622,7 +622,8 @@ function initFinancials(){
   // 归母净利润单元格（处理 实际 / 快报 / 预告区间）
   const npCell = (q) => {
     if(!q) return '—';
-    if(q.type==='preliminary'||q.type==='actual') return (q.netProfit!=null? q.netProfit : '—') + (q.type==='actual'?'（半年报）':'（快报）');
+    if(q.type==='preliminary') return (q.netProfit!=null? q.netProfit : '—') + '（快报）';
+    if(q.type==='actual') return (q.netProfit!=null? q.netProfit : '—') + (q.period==='2026H1'?'（半年报）':'');
     if(q.netProfitMin!=null) return `预告 ${q.netProfitMin}~${q.netProfitMax}`;
     if(q.netProfit!=null) return q.netProfit;
     return '—';
