@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-22T02:33:52Z",
+  "lastUpdated": "2026-08-22T02:50:27Z",
   "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月21日包头稀土产品交易所及我的钢铁网行情，稀土主流产品价格止跌反弹，镨钕系与中重稀土普遍上涨。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
@@ -1515,6 +1515,78 @@
       "description": "公司制定2026年度“提质增效重回报”行动方案：坚持技术引领、优化低成本制造工艺，深化内功、夯实管理基础，推进管理流程优化和组织增效，开展费用精细化管理，以降低成本、提升效率；同时强化“关键少数”责任，完善激励与约束并重的管理体系，推动公司与全体股东利益长期绑定。",
       "source": "2026年度“提质增效重回报”行动方案（上交所/2026-04-23）",
       "sourceUrl": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-04-23/600366_20260423_IAOQ.pdf"
+    },
+    {
+      "id": "act-20260401-digital-01",
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2026-04-01",
+      "title": "中科三环发布信息化三年规划，总部ERP项目进入蓝图设计",
+      "description": "2025年，公司建立由董事长任组长的公司级信息化工作组，编制《中科三环信息化三年规划》，明确以国科控股信息化要求为指引、通过三年左右时间逐步推动下属企业实现采购、销售、存货与财务管理一体贯通；启动总部ERP项目，完成核心模块蓝图设计，经贸分公司销售与采购管理系统进入UAT测试阶段；深化飞书OA应用，完成HR系统一期核心功能上线，初步构建一体化数字化协同体系。",
+      "source": "中科三环2025年度环境、社会及管治报告（巨潮资讯网/2026-04-01）",
+      "sourceUrl": "https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000970&id=12029839"
+    },
+    {
+      "id": "act-20260821-digital-01",
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2026-08-21",
+      "title": "金力永磁构建以数字化为基座的『三化协同』战略体系",
+      "description": "公司系统性构建以数字化为基座、以智能化为引擎、以自动化为抓手的『三化协同』战略体系，将精益化理念全面融入技术创新与制造升级；包头黑灯工厂每批磁钢拥有专属数字身份证，可追溯产品生产全过程数据，并加速生产自动化、数字化、智能化升级。",
+      "source": "金力永磁官网（标普全球《可持续发展年鉴（中国版）2026》）+ 2026年半年度报告（巨潮资讯网/2026-08-21）",
+      "sourceUrl": "https://www.jlmag.com.cn/newsshow.php?cid=13&id=4093"
+    },
+    {
+      "id": "act-20260411-digital-01",
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2026-04-11",
+      "title": "宁波韵升2025年报：建立数字化、精益化制造体系",
+      "description": "公司基于精益理念推进精益智能化工厂的规划建设，结合科技部、工信部专项及Andon等项目的实施，对厂区实施数字化升级和工艺、设备改进，建立数字化、精益化、低周转、快交付、高质量的制造体系；加大推进精益数字化力度，提升生产效率、替换高能耗设备，践行低碳发展。",
+      "source": "宁波韵升2025年年度报告（上海证券报/2026-04-11）",
+      "sourceUrl": "https://paper.cnstock.com/html/2026-04/11/content_2198699.htm"
+    },
+    {
+      "id": "act-20260331-digital-01",
+      "company": "zhenghai",
+      "companyName": "正海磁材",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2026-03-31",
+      "title": "正海磁材推进『数字正海工程』，5+2+3数字化战略指引转型",
+      "description": "公司持续在5+2+3数字化转型战略指引下，有序推进从传统制造向智能制造转变；持续推进数字正海工程建设，巩固数字化系统基础，保持数字化管理平台稳定运行，并在部分业务环节探索数据化应用场景。自2023年数字正海工程启动以来，公司引入数字化管理系统，对人力资源、生产流程、质量管理、供应链管理等环节全面优化升级；2025年加快推进数智化转型，依托核心业务系统深度应用，构建高效协同、规范统一的数智化管理体系。",
+      "source": "正海磁材2025年年度报告 + 2025环境、社会及公司治理（ESG）报告（巨潮资讯网/2026-03-31）",
+      "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/detail?announcementId=1225060089&announcementTime=2026-03-31&orgId=9900019287&plate=szse&stockCode=300224"
+    },
+    {
+      "id": "act-20260320-digital-01",
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2026-03-20",
+      "title": "英洛华永磁事业部引入MES，生产数据自动采集率超98%",
+      "description": "公司永磁事业部持续推进车间智能化与数字化建设，引入MES生产管理系统，实现生产过程的自动数据采集、实时分析与精准调控；下属浙江英洛华磁业钕铁硼磁体数字化车间此前入选浙江省数字化车间/智能工厂名单，生产线自动化率达92%以上、数据自动采集率达98%以上。公司2024可持续发展报告同时披露：利用MES系统完善数据仓建设以实现智慧化管理，并建立AI智能助手与办公效率可视化看板推进办公数字化。",
+      "source": "东阳日报（2026-03-20）+ 英洛华2024可持续发展报告 + 横店集团官网",
+      "sourceUrl": "https://dyrb.dynews.zj.cn/html/2026-03/20/content_122727_3245926.htm"
+    },
+    {
+      "id": "act-20251105-digital-01",
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2025-11-05",
+      "title": "大地熊获评安徽省数字化车间、合肥市智能工厂",
+      "description": "在2025年第三季度业绩说明会上，公司披露已获得安徽省绿色工厂、安徽省数字化车间、合肥市智能工厂认定，标志着公司在生产过程的数字化、智能化改造方面取得阶段性成果。",
+      "source": "大地熊2025年第三季度业绩说明会（上证路演中心/2025-11-05）",
+      "sourceUrl": "https://roadshow.sseinfo.com/activityDetails/36119"
     }
   ],
   "sources": [
