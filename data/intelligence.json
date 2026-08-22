@@ -1589,6 +1589,142 @@
       "sourceUrl": "https://roadshow.sseinfo.com/activityDetails/36119"
     }
   ],
+  "recruitment": {
+    "lastCheck": "2026-08-22",
+    "note": "数据来自各公司 2025 秋招季至 2026 春招公开发布招聘简章/公告（高校就业网、官方招聘渠道），为公开列明岗位，非实时总职位数；不同平台所列岗位口径可能重叠，仅供趋势研判参考。",
+    "companies": [
+      {
+        "company": "jinli",
+        "companyName": "金力永磁",
+        "code": "300748.SZ",
+        "stat": 70,
+        "statLabel": "校招公开岗位（南昌大学站简章）",
+        "source": "南昌大学/北京科技大学就业网 · 2026届校园招聘简章（2025秋招季）",
+        "sourceUrl": "https://jy.ncu.edu.cn/detail/online?id=3416944&menu_id=",
+        "categories": [
+          {"cat": "rd", "count": 10, "note": "研发/项目工程师"},
+          {"cat": "auto", "count": 12, "note": "机械/电气/ME工程师"},
+          {"cat": "prod", "count": 17, "note": "工艺/涂装/粘胶/质量"},
+          {"cat": "sales", "count": 10, "note": "储备销售经理"},
+          {"cat": "func", "count": 21, "note": "项目助理/采购/会计/HR/安全"}
+        ],
+        "tags": [
+          {"t": "厂区扩充", "c": "#e65100"},
+          {"t": "自动化升级", "c": "#00838f"},
+          {"t": "研发强化", "c": "#6a1b9a"}
+        ],
+        "trend": "<b>产能大幅扩张 + 自动化升级。</b>官宣包头“年产2万吨稀土永磁材料绿色智造项目”，建设期2年、建成后总产能达6万吨；校招中机械/电气/自动化（含ME）合计占比高，印证产线智能化与黑灯工厂建设，研发持续高强度（晶界扩散/无重稀土工艺）。"
+      },
+      {
+        "company": "yunsheng",
+        "companyName": "宁波韵升",
+        "code": "600366.SH",
+        "stat": 153,
+        "statLabel": "春招公开岗位（宣讲会简章）",
+        "source": "应届生求职网 · 宁波韵升2026届春招宣讲会（2025秋–2026春）",
+        "sourceUrl": "https://m.yingjiesheng.com/xuanjianghui/xjh_5767397",
+        "categories": [
+          {"cat": "rd", "count": 72, "note": "材料/产品/材料研发工程师"},
+          {"cat": "auto", "count": 21, "note": "机械化电气/系统运维开发"},
+          {"cat": "prod", "count": 23, "note": "生产管理/电镀/土建/生产计划"},
+          {"cat": "sales", "count": 24, "note": "销售工程师"},
+          {"cat": "func", "count": 13, "note": "人事/物流/会计/审计/采购/安全"}
+        ],
+        "tags": [
+          {"t": "厂区扩充", "c": "#e65100"},
+          {"t": "研发强化", "c": "#6a1b9a"},
+          {"t": "销售扩张", "c": "#1565c0"}
+        ],
+        "trend": "<b>研发与销售双扩张、包头基地同步扩产。</b>春招材料/研发类岗位达72人、销售24人，反映产品结构与客户拓展；简章单列包头基地“机械化(电气)工程师15人、生产管理14人”，印证宁波+包头双基地产能扩张与产线自动化改造。"
+      },
+      {
+        "company": "sanhuan",
+        "companyName": "中科三环",
+        "code": "000970.SZ",
+        "stat": 2,
+        "statLabel": "校招公开列明岗位（高端研发）",
+        "source": "北京科技大学就业网 · 中科三环26届校园招聘（2025-10）",
+        "sourceUrl": "https://job.ustb.edu.cn/f/recruitmentinfo/show?recruitmentId=3ea49d48bca24b8b95644dacd6c60fd9",
+        "categories": [
+          {"cat": "rd", "count": 2, "note": "应用工程师/研发工程师（硕士）"},
+          {"cat": "auto", "count": 0, "note": ""},
+          {"cat": "prod", "count": 0, "note": ""},
+          {"cat": "sales", "count": 0, "note": ""},
+          {"cat": "func", "count": 0, "note": ""}
+        ],
+        "tags": [
+          {"t": "研发导向", "c": "#6a1b9a"},
+          {"t": "人员精简", "c": "#757575"}
+        ],
+        "trend": "<b>研发密集型、人员精简。</b>26届校招公开简章仅列应用工程师、研发工程师各1人（均硕士，永磁电机电磁/热仿真方向），春招延续高端研发导向；公开渠道未见大规模产线/扩产类招聘，扩产信号弱，聚焦高端永磁材料与应用技术。"
+      },
+      {
+        "company": "zhenghai",
+        "companyName": "正海磁材",
+        "code": "300224.SZ",
+        "stat": 72,
+        "statLabel": "校招公开岗位（2026届）",
+        "source": "北京/黑龙江高校就业网 · 正海磁材2026届管培生（2025秋招季）",
+        "sourceUrl": "https://jobs.bjbys.net.cn/f/bilateralchosefair/orderShow?orderId=329f4974cb1740beade7b70d579d083f",
+        "categories": [
+          {"cat": "rd", "count": 2, "note": "研发工程师（博士）"},
+          {"cat": "auto", "count": 25, "note": "机械/电气/加工工程师"},
+          {"cat": "prod", "count": 40, "note": "生产管理/质量/工艺"},
+          {"cat": "sales", "count": 3, "note": "销售工程师"},
+          {"cat": "func", "count": 2, "note": "人力/行政"}
+        ],
+        "tags": [
+          {"t": "厂区扩充", "c": "#e65100"},
+          {"t": "自动化升级", "c": "#00838f"},
+          {"t": "质量体系", "c": "#c2185b"}
+        ],
+        "trend": "<b>产线扩充 + 自动化/质量体系建设。</b>校招中生产管理20人、质量15人、机械/电气/加工25人合计占比约80%，直接对应南通基地（全球最大单体钕铁硼基地）投产后的产线扩充与自动化、质量体系建设；研发以博士为主，定位高端。"
+      },
+      {
+        "company": "yingluohua",
+        "companyName": "英洛华",
+        "code": "000795.SZ",
+        "stat": 125,
+        "statLabel": "校招公开岗位（简章列明）",
+        "source": "东北林业大学就业网 · 英洛华2026届校园招聘（2025秋招季）",
+        "sourceUrl": "https://nefu.gxbys.org.cn/teachin/view/id/10067",
+        "categories": [
+          {"cat": "rd", "count": 55, "note": "研发/信息技术/运动控制/算法/项目"},
+          {"cat": "auto", "count": 10, "note": "设备工程师"},
+          {"cat": "prod", "count": 40, "note": "工艺/生产管理/生产计划"},
+          {"cat": "sales", "count": 10, "note": "销售工程师"},
+          {"cat": "func", "count": 10, "note": "采购/职能管理"}
+        ],
+        "tags": [
+          {"t": "研发强化", "c": "#6a1b9a"},
+          {"t": "自动化升级", "c": "#00838f"},
+          {"t": "数字化", "c": "#7b1fa2"}
+        ],
+        "trend": "<b>研发与智能化产线并进。</b>校招研发/信息技术/运动控制/控制算法类约55人、工艺与生产管理约40人，反映横店基地智能化产线建设与研发强化；公司MES数据自动采集率达98%、浙江省数字化车间认定，佐证“设备自动化+数字化”双线推进。"
+      },
+      {
+        "company": "dadi",
+        "companyName": "大地熊",
+        "code": "688077.SH",
+        "stat": 44,
+        "statLabel": "包头+合肥基地公开岗位（约数）",
+        "source": "内蒙古人才网/万企千校/宿州学院 · 大地熊包头及合肥基地招聘（2025–2026）",
+        "sourceUrl": "https://www.nmgcyrc.com/article/6094.html",
+        "categories": [
+          {"cat": "rd", "count": 20, "note": "包头技术研发/合肥材料研发工艺"},
+          {"cat": "auto", "count": 3, "note": "电工/机修"},
+          {"cat": "prod", "count": 19, "note": "成型操作工/工艺/技术/检验"},
+          {"cat": "sales", "count": 2, "note": "外贸销售"},
+          {"cat": "func", "count": 0, "note": ""}
+        ],
+        "tags": [
+          {"t": "产能爬坡", "c": "#e65100"},
+          {"t": "产线为主", "c": "#757575"}
+        ],
+        "trend": "<b>产能释放期、以产线操作岗为主。</b>包头基地（年产8000吨）招聘中成型操作工单类达12人，产线/技术岗占比最高，反映基地达产用工；同步补强研发（包头技术研发工程师10人、合肥材料研发/工艺/设备10人），为后续扩能与升级储备。"
+      }
+    ]
+  },
   "sources": [
     {
       "category": "财报与公告",
