@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-21T13:09:38Z",
+  "lastUpdated": "2026-08-22T02:19:28Z",
   "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月21日包头稀土产品交易所及我的钢铁网行情，稀土主流产品价格止跌反弹，镨钕系与中重稀土普遍上涨。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
@@ -958,8 +958,8 @@
         "rdRevenuePct": 5.71,
         "operatingCF": 1.22,
         "operatingCFYoY": -62.92,
-        "source": "2026年一季报（巨潮资讯网/2026-04-21）；2026年半年度业绩预告（2026-07-06）",
-        "sourceUrl": "https://finance.eastmoney.com/a/202603313690132554.html",
+        "source": "2025年年度报告（巨潮资讯网/2026-03-31）",
+        "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225060090.PDF",
         "quarterly": [
           {
             "period": "2026Q1",
@@ -978,14 +978,14 @@
           },
           {
             "period": "2026H1",
-            "periodLabel": "2026年上半年（预告）",
+            "periodLabel": "2026年上半年（业绩预告）",
             "type": "forecast",
-            "netProfitMin": 2.5,
-            "netProfitMax": 2.9,
-            "netProfitMid": 2.7,
-            "netProfitYoY": "120.78%—156.11%",
-            "note": "区间系按2025H1归母净利1.13亿元及披露增幅推算；海外业务回暖、800V高压车型渗透加速、无重稀土产品占比提升",
-            "source": "2026年半年度业绩预告（2026-07-06）"
+            "netProfitMin": 2.1,
+            "netProfitMax": 2.6,
+            "netProfitMid": 2.35,
+            "netProfitYoY": "92%—135%",
+            "note": "公司正式披露的2026年半年度业绩预告区间（以2025H1归母净利1.13亿元为基数）。正式半年报预约2026-08-28披露，届时以半年报实际数据替换本预告。",
+            "source": "2026年半年度业绩预告（巨潮资讯网）"
           }
         ],
         "annual": {
