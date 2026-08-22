@@ -203,6 +203,7 @@ tr:hover td{background:#fafbfc}
   <div class="tab active" data-tab="prices">原材料价格趋势</div>
   <div class="tab" data-tab="financials">竞社经营数据</div>
   <div class="tab" data-tab="activities">竞社动态</div>
+  <div class="tab" data-tab="recruitment">人才招聘画像</div>
   <div class="tab" data-tab="sources">数据来源</div>
   <div class="tab" data-tab="news">新闻动态</div>
   <div class="tab" data-tab="history">每日更新记录</div>
@@ -256,21 +257,20 @@ tr:hover td{background:#fafbfc}
 <!-- ========== TAB 3: 竞社动态 ========== -->
 <div class="tab-content" id="tab-activities">
   <div class="summary">
-    竞社近期动态覆盖六大维度：<strong style="color:#7b1fa2">数字化</strong>（信息系统/数据平台/数字化管理）、<strong style="color:#00838f">智能制造</strong>（智能产线/工业机器人/自动化装备/智能车间）、<strong style="color:#c2185b">精益</strong>（精益生产/降本增效/质量管理/TPM）、<strong style="color:#1565c0">供应链</strong>（扩产/原材料锁价/海外布局/回收）、<strong style="color:#e65100">市场</strong>（新客户拓展/订单公告/战略合作）、<strong style="color:#00695c">工艺技术</strong>（晶界扩散/无重稀土/磁能积/绿色制造）。数据来源标注于每条动态下方。页面下方另设 <strong style="color:#d81b60">第七维度 · 人才招聘需求画像</strong>，按岗位类别统计各竞社当前招聘需求并研判发展趋势（厂区扩充/设备自动化/研发强化等）。
+    竞社近期动态覆盖六大维度：<strong style="color:#7b1fa2">数字化</strong>（信息系统/数据平台/数字化管理）、<strong style="color:#00838f">智能制造</strong>（智能产线/工业机器人/自动化装备/智能车间）、<strong style="color:#c2185b">精益</strong>（精益生产/降本增效/质量管理/TPM）、<strong style="color:#1565c0">供应链</strong>（扩产/原材料锁价/海外布局/回收）、<strong style="color:#e65100">市场</strong>（新客户拓展/订单公告/战略合作）、<strong style="color:#00695c">工艺技术</strong>（晶界扩散/无重稀土/磁能积/绿色制造）。数据来源标注于每条动态下方。各竞社的<strong style="color:#d81b60">人才招聘需求画像与发展趋势研判</strong>见顶部菜单「人才招聘画像」独立页签。
   </div>
   <div class="filter-bar" id="filter-bar"></div>
   <div class="grid grid-3" id="activity-list"></div>
   <div class="pagination" id="activity-pagination"></div>
+</div>
 
-  <!-- ===== 第七维度：人才招聘需求画像（独立格式，非活动卡片） ===== -->
-  <div class="recruit-section">
-    <div class="card-title" style="margin-bottom:6px"><span class="dot" style="background:#d81b60"></span>人才招聘需求画像 · 发展趋势研判<span style="font-size:12px;color:var(--text2);font-weight:400;margin-left:8px">（第七维度）</span></div>
-    <div class="summary" style="background:linear-gradient(135deg,#fce4ec 0%,#f3e5f5 100%);border-left-color:#d81b60">
-      本模块统计各竞社<strong style="color:#d81b60">当前公开的校招/社招需求</strong>，并按岗位类别拆分（技术研发 / 自动化设备 / 生产制造 / 销售市场 / 职能管理），据以研判其发展趋势（厂区扩充、设备自动化、研发强化等）。
-      <strong style="color:#c2185b">数据口径：</strong>严格取自各公司<strong>2026 年</strong>公开发布的招聘公告（2026 春招 / 2026 春风行动 / 2026 年重点企业招聘等，高校就业网、地方政府人才网、公司官方招聘渠道），为公开列明岗位，非实时总职位数；未使用 2025 年及更早的招聘数据；不同招聘平台所列岗位可能存在口径重叠，仅供趋势研判参考。
-    </div>
-    <div class="recruit-grid" id="recruit-grid"></div>
+<!-- ========== TAB 3.5: 人才招聘需求画像（独立菜单项） ========== -->
+<div class="tab-content" id="tab-recruitment">
+  <div class="summary">
+    本页统计各竞社<strong style="color:#d81b60">当前公开的校招/社招需求</strong>，并按岗位类别拆分（技术研发 / 自动化设备 / 生产制造 / 销售市场 / 职能管理），据以研判其发展趋势（厂区扩充、设备自动化、研发强化等）。
+    <strong style="color:#c2185b">数据口径：</strong>严格取自各公司<strong>2026 年</strong>公开发布的招聘公告（2026 春招 / 2026 春风行动 / 2026 年重点企业招聘等，高校就业网、地方政府人才网、公司官方招聘渠道），为公开列明岗位，非实时总职位数；未使用 2025 年及更早的招聘数据；不同招聘平台所列岗位可能存在口径重叠，仅供趋势研判参考。
   </div>
+  <div class="recruit-grid" id="recruit-grid"></div>
 </div>
 
 <!-- ========== TAB 4: 数据来源 ========== -->
