@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-23T04:09:07Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：2026年8月21日，数据来源于北方有色网。",
+  "lastUpdated": "2026-08-23T05:16:33Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月21日北方有色网数据更新稀土价格。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场整体呈区间震荡、品种分化运行格局。镨钕产品价格小幅下行，中重稀土走势分化，镝、铽表现偏强。",
+    "marketSummary": "稀土市场整体呈区间震荡、品种分化运行格局，镨钕产品价格小幅下行，中重稀土走势分化，镝、铽表现偏强。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -478,15 +478,15 @@
           "category": "轻稀土",
           "confidence": "高",
           "basis": "下游备货旺季，需求增加",
-          "logic": "下游磁材企业备货需求增加，推动价格上涨",
-          "prNdOxide": 78.5,
+          "logic": "金九银十旺季，下游需求增加，推动价格上涨",
+          "prNdOxide": 79.5,
           "ndOxide": 82.5,
-          "dysprosiumOxide": 147.5,
+          "dysprosiumOxide": 148,
           "terbiumOxide": 680,
-          "metalPrNd": 92.5,
-          "metalNd": 101.5,
-          "metalPr": 107.5,
-          "metalDy": 181.5,
+          "metalPrNd": 93,
+          "metalNd": 101,
+          "metalPr": 107,
+          "metalDy": 182,
           "metalTb": 830
         },
         {
@@ -494,15 +494,15 @@
           "category": "轻稀土",
           "confidence": "高",
           "basis": "旺季持续，需求稳定",
-          "logic": "旺季持续，需求稳定，价格维持高位",
-          "prNdOxide": 80.5,
-          "ndOxide": 84.5,
-          "dysprosiumOxide": 148.5,
+          "logic": "旺季持续，下游需求稳定，价格维持高位",
+          "prNdOxide": 81,
+          "ndOxide": 83.5,
+          "dysprosiumOxide": 149,
           "terbiumOxide": 690,
-          "metalPrNd": 94.5,
-          "metalNd": 103.5,
-          "metalPr": 110.5,
-          "metalDy": 183.5,
+          "metalPrNd": 95,
+          "metalNd": 103,
+          "metalPr": 109,
+          "metalDy": 183,
           "metalTb": 840
         },
         {
@@ -510,15 +510,15 @@
           "category": "轻稀土",
           "confidence": "高",
           "basis": "旺季结束，需求有所下降",
-          "logic": "旺季结束，需求有所下降，价格可能小幅回落",
-          "prNdOxide": 79.5,
-          "ndOxide": 83.5,
-          "dysprosiumOxide": 149.5,
+          "logic": "旺季结束，下游需求有所下降，价格可能小幅回落",
+          "prNdOxide": 80,
+          "ndOxide": 82,
+          "dysprosiumOxide": 150,
           "terbiumOxide": 695,
-          "metalPrNd": 93.5,
-          "metalNd": 102.5,
-          "metalPr": 109.5,
-          "metalDy": 184.5,
+          "metalPrNd": 97,
+          "metalNd": 105,
+          "metalPr": 111,
+          "metalDy": 184,
           "metalTb": 850
         }
       ]
@@ -529,20 +529,20 @@
         "detail": "与上游供应商签订长协合同，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "库存调节",
-        "detail": "根据市场供需情况，适时调整库存，避免库存积压或短缺。"
+        "title": "战略库存调节",
+        "detail": "根据市场供需情况，适时调整库存策略，避免库存积压或短缺。"
       },
       {
-        "title": "技术升级",
-        "detail": "推进无重稀土与晶界扩散技术，降低单耗，提高产品竞争力。"
+        "title": "提高高毛利产品占比",
+        "detail": "加大高毛利、高牌号产品的研发和生产，提升盈利能力。"
       },
       {
-        "title": "拓展市场",
-        "detail": "积极拓展海外市场，降低国内市场波动影响。"
+        "title": "技术降耗",
+        "detail": "推进无重稀土与晶界扩散技术，降低生产单耗，提高效率。"
       },
       {
-        "title": "成本传导",
-        "detail": "向下游客户传导成本压力，保持利润空间。"
+        "title": "拓展海外市场",
+        "detail": "拓展海外市场，降低对国内市场的依赖，分散风险。"
       }
     ]
   },
@@ -1276,6 +1276,18 @@
     {
       "company": "jinli",
       "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-08-21",
+      "title": "金力永磁：8月21日召开业绩说明会，AGT Partners、北京泽铭投资有限公司等多家机构参与",
+      "description": "公司召开业绩说明会，多家机构参与。",
+      "source": "证券之星",
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20260821183404056180590",
+      "id": "act-20260821-01"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
       "dimension": "supply",
       "dimensionName": "供应链",
       "date": "2026-08-20",
@@ -1296,6 +1308,18 @@
       "source": "人民财讯",
       "sourceUrl": "https://www.stcn.com/article/detail/4091153.html",
       "id": "act-20260820-01"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-08-18",
+      "title": "宁波韵升上半年净利增154%，人形机器人及低空经济布局初具成效",
+      "description": "公司上半年净利润同比增长154.18%，人形机器人及低空经济布局初具成效。",
+      "source": "中国上市公司网",
+      "sourceUrl": "https://m.10jqka.com.cn/20260818/c679039027.shtml",
+      "id": "act-20260818-04"
     },
     {
       "company": "sanhuan",
@@ -1634,6 +1658,18 @@
       "sourceUrl": "https://caifuhao.eastmoney.com/news/20260612151428667994730"
     },
     {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-06-12",
+      "title": "适配行业变局，放缓建设节奏：宁波韵升稀土永磁募投项目剩余万吨产能分批延期投产",
+      "description": "公司稀土永磁募投项目剩余万吨产能分批延期投产。",
+      "source": "深圳商报",
+      "sourceUrl": "https://xueqiu.com/6620276709/394529733?md5__1038=2790552d-WLeLfhpzph0TW%2FW=EtVREGwW1lqDEROeO537jvzwiAdPzu%2FwtEPEPTgWVPt5uQEfUWvEPeWrEhz7WgjuJhW6bW6tjueWLCqEurWhbWaWFUbqLWpcCj8JWe9WRqLu%2FWTjohW3Xg67WvdJCW77WaeLCfvGSRvdORwLU8WAO4vuULPDqRPLEWeTzXeW",
+      "id": "act-20260612-03"
+    },
+    {
       "company": "jinli",
       "companyName": "金力永磁",
       "dimension": "market",
@@ -1836,6 +1872,18 @@
       "description": "公司永磁事业部持续推进车间智能化与数字化建设，引入MES生产管理系统，实现生产过程的自动数据采集、实时分析与精准调控；下属浙江英洛华磁业钕铁硼磁体数字化车间此前入选浙江省数字化车间/智能工厂名单，生产线自动化率达92%以上、数据自动采集率达98%以上。公司2024可持续发展报告同时披露：利用MES系统完善数据仓建设以实现智慧化管理，并建立AI智能助手与办公效率可视化看板推进办公数字化。",
       "source": "东阳日报（2026-03-20）+ 英洛华2024可持续发展报告 + 横店集团官网",
       "sourceUrl": "https://dyrb.dynews.zj.cn/html/2026-03/20/content_122727_3245926.htm"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-03-19",
+      "title": "宁波韵升增资2亿元用于15000吨高性能稀土永磁材料智能制造项目",
+      "description": "公司向控股子公司增资2亿元，用于实施15000吨高性能稀土永磁材料智能制造项目。",
+      "source": "本站原创",
+      "sourceUrl": "https://www.ic-ceca.org.cn/dongtai/1773896.html",
+      "id": "act-20260319-02"
     },
     {
       "id": "act-005",
@@ -2658,6 +2706,13 @@
       "title": "2026年以来稀土供需偏紧，稀土板块交投升温！稀土ETF华泰柏瑞（516780）连续4个交易日累计“吸金”1.53亿元",
       "source": "新浪基金",
       "url": "http://finance.sina.cn/2026-08-07/detail-inimnkum3291801.d.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "稀土永磁概念异动拉升 中国稀土涨停",
+      "source": "东方财富Choice数据",
+      "url": "https://finance.eastmoney.com/a/202608073834876713.html"
     },
     {
       "date": "2026-08-06",
