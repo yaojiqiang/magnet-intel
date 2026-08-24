@@ -1990,21 +1990,23 @@ def main():
     #   内容未变化（如价格持平、模型仅复述）则保持原日期，不提交新版本，
     #   避免“日期已更新但内容没更新”导致页面日期与内容对不上。
     if existing and data_fingerprint(merged) == data_fingerprint(existing):
-        merged["lastUpdated"] = existing.get("lastUpdated")
         merged["updateNote"] = existing.get("updateNote")
         save_data(merged)
         changed = False
-        log("数据内容与上次一致，无实质更新：保留原 lastUpdated，不推进日期（git 不会产生新提交）")
+        log("数据内容与上次一致（无实质更新），仍强制推进 lastUpdated 为今天")
     else:
         # 写入带明确时区(UTC, Z)的 ISO8601，避免 GitHub Actions(UTC) 的裸时间被浏览器
         # 当成访问者本地时间解析，导致“更新于”显示偏差 8 小时。
-        merged["lastUpdated"] = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         save_data(merged)
         changed = True
         log("更新完成（内容有变化，已推进 lastUpdated）")
 
     # ★ 生成“今日更新摘要”并打印到日志（无论是否配置邮件都会输出，
     #   方便在 Actions 运行日志中直接查看“今天更新了哪些部分”）
+    # ★ 日期强制每日推进（无论内容有无变化）：即使价格持平/无新动态也每天刷新 lastUpdated，避免线上"更新于"冻结。
+    merged["lastUpdated"] = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    save_data(merged)
+
     summary = build_update_summary(existing, merged)
     log("=== 今日更新摘要 ===")
     for line in summary.split("\n"):
