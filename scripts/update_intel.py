@@ -380,8 +380,15 @@ def reconcile_cp_dates(new_cp, existing_cp):
         new_price = it.get("price")
         if isinstance(prev_price, (int, float)) and isinstance(new_price, (int, float)) \
                 and abs(new_price - prev_price) <= 1e-6:
-            # 价格未变 → 整体沿用上一交易日对象，零多余改动
-            new_cp[i] = dict(prev)
+            # 价格未变：沿用上一交易日的可靠价格/单位/来源，但“报价日期/更新时间”必须推进到当天
+            # （用户要求：即使价格无变化，当天查询了，更新时间就是当天）；涨跌置为持平。
+            _today = datetime.date.today().strftime("%Y-%m-%d")
+            it["price"] = prev.get("price", it.get("price"))
+            it["unit"] = prev.get("unit", it.get("unit", "万元/吨"))
+            it["source"] = prev.get("source", it.get("source"))
+            it["change"] = 0
+            it["changeDesc"] = "持平（与上一交易日一致）"
+            it["date"] = _today
     return new_cp
 
 
@@ -505,6 +512,12 @@ def safe_merge(existing, new):
             v = reconcile_cp_dates(v, existing_re.get("currentPrices"))
             # 来源守卫必须最后执行，避免 reconcile_cp_dates 在价格持平时整条回退把被污染的旧来源又复制回来
             v = reconcile_cp_sources(v, existing_re.get("currentPrices"))
+            # 最终强制：每条现价“报价日期/更新时间”必须推进到当天（用户要求：
+            # 即使价格无变化，只要当天查询过，更新时间就是当天），杜绝日期回退/沿用旧日期。
+            _today = datetime.date.today().strftime("%Y-%m-%d")
+            for _it in v:
+                if isinstance(_it, dict):
+                    _it["date"] = _today
             merged_re["currentPrices"] = v
     else:
         errors.append("currentPrices 未返回（保留原值）")
