@@ -1138,6 +1138,41 @@ def _add_q2_all(companies):
     return companies
 
 
+def _ensure_all_companies_present(new, existing):
+    """完整性校验：四家已知公司不能整段缺失（免费 LLM 长输出常截断末尾公司）。
+
+    若返回缺了某家已知公司，用「补全提示」再调一次 LLM，把漏掉的公司补回 companyUpdates。
+    """
+    updates = new.get("companyUpdates") if isinstance(new, dict) else None
+    if not isinstance(updates, list):
+        return new
+    present = {u.get("company") for u in updates if isinstance(u, dict)}
+    missing = KNOWN_COMPANY_IDS - present
+    if not missing:
+        return new
+    log(f"companies 返回缺失公司 {sorted(missing)}，尝试一次补全重试")
+    try:
+        nudge = build_companies_prompt(existing) + (
+            f"\n\n【重要补全要求】你上面返回的公司中缺少：{', '.join(sorted(missing))}。"
+            f"请务必把这几家公司的数据也纳入 companyUpdates（若确实无新数据，也请输出其现有 period 与数值，不得整段省略任何一家）。"
+        )
+        raw2 = call_llm_companies(nudge)
+        new2 = extract_json(raw2)
+        if isinstance(new2, dict) and isinstance(new2.get("companyUpdates"), list):
+            seen = {u.get("company") for u in updates if isinstance(u, dict)}
+            added = 0
+            for u in new2["companyUpdates"]:
+                if isinstance(u, dict) and u.get("company") in missing and u.get("company") not in seen:
+                    updates.append(u)
+                    seen.add(u.get("company"))
+                    added += 1
+            if added:
+                log(f"companies 补全重试成功，新增 {added} 条缺失公司数据")
+    except Exception as e:
+        log(f"companies 补全重试失败: {e}")
+    return new
+
+
 def update_companies(existing):
     """每日增量刷新竞社经营数据：联网核对是否已发布更新的财报/产销量等，深度合并进原结构。"""
     prompt = build_companies_prompt(existing)
@@ -1150,6 +1185,8 @@ def update_companies(existing):
     if not new or "companyUpdates" not in new or not isinstance(new["companyUpdates"], list):
         log("companies 未解析出有效 JSON（companyUpdates 数组），保留现有经营数据")
         return existing.get("companies") if isinstance(existing, dict) else []
+    # —— 完整性校验：四家已知公司不能整段缺失（免费 LLM 长输出常截断末尾公司）——
+    new = _ensure_all_companies_present(new, existing)
     existing_list = existing.get("companies") if isinstance(existing, dict) else []
     by_id = {c.get("id"): c for c in existing_list if isinstance(c, dict)}
     result = [c for c in existing_list]
@@ -1180,20 +1217,35 @@ def update_companies(existing):
     return result
 
 
+def _rotated_company_order(companies):
+    """按运行日期轮换公司顺序，避免某家公司（如长期垫底的正海磁材）被 LLM 长输出截断丢弃。"""
+    comps = [c for c in (companies or []) if isinstance(c, dict)]
+    if len(comps) <= 1:
+        return comps
+    off = datetime.date.today().toordinal() % len(comps)
+    return comps[off:] + comps[:off]
+
+
 def build_companies_prompt(existing):
     today = datetime.date.today().strftime("%Y-%m-%d")
     comps = existing.get("companies", []) if isinstance(existing, dict) else []
+    ordered = _rotated_company_order(comps) or comps
     summary = "\n".join(
         f"- {c.get('name','')}（company=\"{c.get('id','')}\"）：最新已披露 {c.get('financials',{}).get('source','')}"
-        for c in comps
+        for c in ordered
     ) or "（暂无）"
+    # 目标公司代码块（按轮换顺序输出，避免固定末尾公司被截断）
+    if ordered:
+        target_block = "\n".join(f'  {c.get("name","")} → company="{c.get("id","")}"' for c in ordered)
+    else:
+        target_block = ('  金力永磁 → company="jinli"\n  宁波韵升 → company="yunsheng"\n'
+                        '  中科三环 → company="sanhuan"\n  正海磁材 → company="zhenghai"')
     return (
         "你是一名磁材（钕铁硼永磁材料）行业情报分析师，负责跟踪A股稀土永磁上市公司的经营数据。\n"
         "请使用下方【联网搜索参考信息】，核对各公司是否已发布【比现有数据更新的】经营数据"
         "（如2026年半年度报告实际值、新的季度报告、修订后的业绩预告/快报、新披露的产销量/产能/收入结构/地区分布等）。\n\n"
-        "【目标公司】（company 代码必须严格使用下列值）：\n"
-        "  金力永磁 → company=\"jinli\"\n  宁波韵升 → company=\"yunsheng\"\n"
-        "  中科三环 → company=\"sanhuan\"\n  正海磁材 → company=\"zhenghai\"\n\n"
+        "【目标公司】（company 代码必须严格使用下列值，顺序每日轮换）：\n"
+        + target_block + "\n\n"
         "【现有数据来源（仅供你判断是否有更新）】\n" + summary + "\n\n"
         "【输出要求 — 极重要】\n"
         "仅输出 JSON：{\"companyUpdates\": [ 仅包含【确实有新发布数据】的公司；若无任何公司有新数据，返回空数组 [] ]}\n"
@@ -1219,16 +1271,16 @@ def build_companies_prompt(existing):
 
 
 def gather_doubao_context_companies(api_key):
-    queries = [
-        "宁波韵升 600366 2026年半年度报告 营业收入 归母净利润 经营现金流 实际数据",
-        "宁波韵升 2026半年报 分产品收入 海外收入 毛利率 产能",
-        "金力永磁 300748 2026年半年度报告 营业收入 归母净利润 经营现金流",
-        "金力永磁 2026半年报 分产品收入 海外收入 毛利率",
-        "中科三环 000970 2026年半年度报告 营业收入 归母净利润 经营现金流",
-        "中科三环 2026半年报 分产品收入 海外收入 毛利率",
-        "正海磁材 300224 2026年半年度报告 营业收入 归母净利润 经营现金流",
-        "正海磁材 2026半年报 分产品收入 海外收入 毛利率",
-    ]
+    # 公司顺序每日轮换，避免正海磁材长期排在最后被 LLM 长输出截断丢弃
+    _order = ["宁波韵升", "金力永磁", "中科三环", "正海磁材"]
+    off = datetime.date.today().toordinal() % len(_order)
+    _order = _order[off:] + _order[:off]
+    _code = {"宁波韵升": "600366", "金力永磁": "300748", "中科三环": "000970", "正海磁材": "300224"}
+    queries = []
+    for _nm in _order:
+        _c = _code[_nm]
+        queries.append(f"{_nm} {_c} 2026年半年度报告 营业收入 归母净利润 经营现金流 实际数据")
+        queries.append(f"{_nm} 2026半年报 分产品收入 海外收入 毛利率 产能")
     blocks = []
     for q in queries:
         try:
