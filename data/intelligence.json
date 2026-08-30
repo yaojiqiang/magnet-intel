@@ -994,8 +994,8 @@
         "rdRevenuePct": 5.71,
         "operatingCF": 1.22,
         "operatingCFYoY": -62.92,
-        "source": "2025年年度报告（巨潮资讯网/2026-03-31）",
-        "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225060090.PDF",
+        "source": "2026年半年度报告（巨潮资讯网/2026-08-28）",
+        "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=300224",
         "quarterly": [
           {
             "period": "2026Q1",
@@ -1015,25 +1015,30 @@
           },
           {
             "period": "2026H1",
-            "periodLabel": "2026年上半年（业绩预告）",
-            "type": "forecast",
-            "netProfitMin": 2.1,
-            "netProfitMax": 2.6,
-            "netProfitMid": 2.35,
-            "netProfitYoY": "92%—135%",
-            "note": "公司正式披露的2026年半年度业绩预告区间（以2025H1归母净利1.13亿元为基数）。正式半年报预约2026-08-28披露，届时以半年报实际数据替换本预告。",
-            "source": "2026年半年度业绩预告（巨潮资讯网）",
-            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=300224"
+            "periodLabel": "2026年半年度报告",
+            "type": "actual",
+            "netProfitYoY": 20.91,
+            "note": "正式半年报：营收34.54亿(+12.98%)，归母净利1.37亿(+20.91%)，扣非1.29亿(+29.73%)，经营现金流1.50亿(同比+149.76%)，EPS0.15元。",
+            "source": "2026年半年度报告（巨潮资讯网/2026-08-28）",
+            "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=300224",
+            "revenue": 34.54,
+            "revenueYoY": 12.98,
+            "netProfit": 1.37,
+            "deductedNetProfit": 1.29,
+            "deductedNetProfitYoY": 29.73,
+            "operatingCF": 1.5,
+            "operatingCFYoY": 149.76,
+            "eps": 0.15
           },
           {
             "period": "2026Q2",
-            "periodLabel": "2026年二季度（推算）",
-            "netProfitMin": 1.63,
-            "netProfitMax": 2.13,
-            "type": "forecast",
-            "source": "巨潮资讯网·二季度为上半年减一季度推算（非单独披露）",
+            "periodLabel": "2026年二季度（实际，半年报减一季度）",
+            "type": "actual",
+            "source": "2026年半年度报告（巨潮资讯网/2026-08-28）",
             "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/stock?stockCode=300224",
-            "note": "二季度数据由上半年（H1）减一季度（Q1）推算，仅供参考"
+            "note": "由正式半年报(34.54/1.37)减一季度实际(13.65/0.47)得出。",
+            "revenue": 20.89,
+            "netProfit": 0.9
           }
         ],
         "annual": {
