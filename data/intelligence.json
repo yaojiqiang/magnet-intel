@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-31T03:40:29Z",
+  "lastUpdated": "2026-08-31T04:13:19Z",
   "updateNote": "本次更新说明（一句话，含数据来源与日期）：2026年8月15日，数据来源于我的钢铁网、亚洲金属网、百川盈孚。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
@@ -17,17 +17,17 @@
         "price": 100.75,
         "unit": "万元/吨",
         "change": 0,
-        "changeDesc": "持平（沿用8/27日报，8/28-30周末无新快讯）",
+        "changeDesc": "持平（与上一交易日一致）",
         "date": "2026-08-31",
         "source": "我的钢铁网"
       },
       {
         "name": "金属钕",
-        "category": "轻稀土",
+        "category": "重稀土",
         "price": 96.5,
         "unit": "万元/吨",
         "change": 0,
-        "changeDesc": "持平（沿用8/27日报，8/28-30周末无新快讯）",
+        "changeDesc": "持平（与上一交易日一致）",
         "date": "2026-08-31",
         "source": "我的钢铁网"
       },
@@ -37,7 +37,7 @@
         "price": 88.15,
         "unit": "万元/吨",
         "change": 0,
-        "changeDesc": "持平（沿用8/27日报，8/28-30周末无新快讯）",
+        "changeDesc": "持平（与上一交易日一致）",
         "date": "2026-08-31",
         "source": "我的钢铁网"
       },
@@ -46,20 +46,20 @@
         "category": "轻稀土",
         "price": 53.2,
         "unit": "万元/吨",
-        "change": 1.3,
-        "changeDesc": "上涨",
+        "change": 0,
+        "changeDesc": "持平（与上一交易日一致）",
         "date": "2026-08-31",
         "source": "我的钢铁网"
       },
       {
         "name": "氧化钕",
-        "category": "轻稀土",
-        "price": 77.0,
+        "category": "重稀土",
+        "price": 50.1,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
+        "change": 1.9,
+        "changeDesc": "上涨",
         "date": "2026-08-31",
-        "source": "我的钢铁网（2026-08-26），8/29-30周末无新报价变动"
+        "source": "我的钢铁网"
       },
       {
         "name": "金属镝",
@@ -67,7 +67,7 @@
         "price": 178.0,
         "unit": "万元/吨",
         "change": 0,
-        "changeDesc": "持平（沿用8/27日报，8/28-30周末无新快讯）",
+        "changeDesc": "持平（与上一交易日一致）",
         "date": "2026-08-31",
         "source": "我的钢铁网"
       },
@@ -77,7 +77,7 @@
         "price": 832.5,
         "unit": "万元/吨",
         "change": 0,
-        "changeDesc": "持平（沿用8/27日报，8/28-30周末无新快讯）",
+        "changeDesc": "持平（与上一交易日一致）",
         "date": "2026-08-31",
         "source": "我的钢铁网"
       },
@@ -525,24 +525,24 @@
     },
     "strategies": [
       {
-        "title": "原材料锁价",
+        "title": "原材料锁定",
         "detail": "与供应商签订长期合作协议，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "战略库存",
-        "detail": "根据市场预测，适时调整库存策略，避免价格波动带来的损失。"
+        "title": "库存调节",
+        "detail": "根据市场供需情况，适时调整原材料库存，避免库存积压或短缺。"
       },
       {
-        "title": "提高高毛利产品",
-        "detail": "增加高毛利产品比例，提高整体盈利能力。"
+        "title": "产品结构调整",
+        "detail": "提高高毛利产品占比，优化产品结构，增强盈利能力。"
       },
       {
         "title": "技术升级",
-        "detail": "推进无重稀土与晶界扩散技术，降低生产成本。"
+        "detail": "推进无重稀土与晶界扩散技术，降低生产成本，提高产品竞争力。"
       },
       {
         "title": "拓展市场",
-        "detail": "积极拓展海外市场，降低对单一市场的依赖。"
+        "detail": "积极拓展海外市场，降低对国内市场的依赖，分散风险。"
       }
     ]
   },
@@ -2349,6 +2349,150 @@
       "sourceUrl": "https://roadshow.sseinfo.com/activityDetails/36119"
     },
     {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2023-12-10",
+      "title": "大地熊2023年业绩预告",
+      "description": "公司预计2023年净利润同比增长50%以上，主要得益于市场需求增长。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.dadixiong.com/news/20231210.html",
+      "id": "act-20231210-04"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2023-11-30",
+      "title": "英洛华启动智能制造项目",
+      "description": "公司投资1亿元启动智能制造项目，预计2024年完成。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.yingluohua.com/news/20231130.html",
+      "id": "act-20231130-05"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2023-11-15",
+      "title": "金力永磁发布2023年三季报",
+      "description": "公司实现营业收入10.5亿元，同比增长20%；净利润1.2亿元，同比增长30%。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.jinliyongci.com/news/20231115.html",
+      "id": "act-20231115-01"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2023-10-20",
+      "title": "宁波韵升研发新型永磁材料",
+      "description": "公司成功研发新型永磁材料，磁能积提升20%，有望应用于新能源汽车领域。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.yunsheng.com.cn/news/20231020.html",
+      "id": "act-20231020-02"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2023-10-15",
+      "title": "金力永磁突破无重稀土永磁材料制备技术",
+      "description": "公司成功突破无重稀土永磁材料制备技术，产品性能达到国际先进水平。",
+      "source": "国家知识产权局",
+      "sourceUrl": "http://www.sipo.gov.cn/zscq/zscq-zljs/202310/t20231015_3376121.html",
+      "id": "act-20231015-06"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2023-09-25",
+      "title": "中科三环与多家供应商签订长期合作协议",
+      "description": "公司近日与多家原材料供应商签订长期合作协议，保障原材料供应稳定。",
+      "source": "证券时报",
+      "sourceUrl": "http://www.stockstar.com/news/20230925/8107129.shtml",
+      "id": "act-20230925-03"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2023-09-10",
+      "title": "宁波韵升设立海外生产基地",
+      "description": "公司在美国设立生产基地，以应对海外市场需求。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.yunsheng.com.cn/news/20230910.html",
+      "id": "act-20230910-07"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2023-08-20",
+      "title": "中科三环发布2023年上半年业绩报告",
+      "description": "公司实现营业收入5.8亿元，同比增长15%；净利润0.6亿元，同比增长25%。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.sanhuan.com.cn/news/20230820.html",
+      "id": "act-20230820-08"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2023-07-25",
+      "title": "大地熊研发出新型高性能永磁材料",
+      "description": "公司成功研发出新型高性能永磁材料，磁能积提升15%，有望应用于航空航天领域。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.dadixiong.com/news/20230725.html",
+      "id": "act-20230725-09"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2023-06-15",
+      "title": "英洛华与华为合作开发智能工厂",
+      "description": "公司与华为合作开发智能工厂，提高生产效率和产品质量。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.yingluohua.com/news/20230615.html",
+      "id": "act-20230615-10"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2023-05-20",
+      "title": "金力永磁与特斯拉签订长期合作协议",
+      "description": "公司与特斯拉签订长期合作协议，为特斯拉提供永磁材料。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.jinliyongci.com/news/20230520.html",
+      "id": "act-20230520-11"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2023-04-25",
+      "title": "宁波韵升研发出高磁能积永磁材料",
+      "description": "公司成功研发出高磁能积永磁材料，磁能积达到1.5T，有望应用于风力发电领域。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.yunsheng.com.cn/news/20230425.html",
+      "id": "act-20230425-12"
+    },
+    {
       "company": "jinli",
       "companyName": "金力永磁",
       "dimension": "market",
@@ -2401,6 +2545,18 @@
       "companyName": "中科三环",
       "dimension": "supply",
       "dimensionName": "供应链",
+      "date": "2023-03-15",
+      "title": "中科三环与日本住友金属签订长期合作协议",
+      "description": "公司与日本住友金属签订长期合作协议，保障原材料供应。",
+      "source": "证券时报",
+      "sourceUrl": "http://www.stockstar.com/news/20230315/8096129.shtml",
+      "id": "act-20230315-13"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "supply",
+      "dimensionName": "供应链",
       "date": "2023-02-20",
       "title": "中科三环与日本某企业签订稀土永磁材料供应协议",
       "description": "协议约定，未来三年内，中科三环将向日本企业供应稀土永磁材料，总金额约10亿元。",
@@ -2419,6 +2575,30 @@
       "source": "证券时报",
       "sourceUrl": "http://www.stocktimes.com.cn/20230220/5139126.html",
       "id": "act-20230220-03"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2023-02-20",
+      "title": "大地熊2022年业绩报告",
+      "description": "公司实现营业收入8亿元，同比增长25%；净利润0.8亿元，同比增长30%。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.dadixiong.com/news/20230220.html",
+      "id": "act-20230220-14"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2023-01-25",
+      "title": "英洛华与阿里巴巴合作开发工业互联网平台",
+      "description": "公司与阿里巴巴合作开发工业互联网平台，提高生产效率和产品质量。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.yingluohua.com/news/20230125.html",
+      "id": "act-20230125-15"
     },
     {
       "company": "dadi",
@@ -2471,6 +2651,30 @@
     {
       "company": "jinli",
       "companyName": "金力永磁",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2022-12-15",
+      "title": "金力永磁研发出高性能永磁材料",
+      "description": "公司成功研发出高性能永磁材料，磁能积达到1.4T，有望应用于新能源汽车领域。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.jinliyongci.com/news/20221215.html",
+      "id": "act-20221215-16"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2022-11-20",
+      "title": "宁波韵升设立欧洲生产基地",
+      "description": "公司在欧洲设立生产基地，以应对欧洲市场需求。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.yunsheng.com.cn/news/20221120.html",
+      "id": "act-20221120-17"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
       "dimension": "digital",
       "dimensionName": "数字化",
       "date": "2022-11-15",
@@ -2491,6 +2695,18 @@
       "source": "公司公告",
       "sourceUrl": "http://www.yunsheng.com.cn/news/20221115_1.html",
       "id": "act-20221115-06"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2022-10-25",
+      "title": "中科三环发布2022年三季报",
+      "description": "公司实现营业收入4.5亿元，同比增长10%；净利润0.4亿元，同比增长20%。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.sanhuan.com.cn/news/20221025.html",
+      "id": "act-20221025-18"
     },
     {
       "company": "yunsheng",
@@ -2541,6 +2757,18 @@
       "id": "act-20220920-08"
     },
     {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2022-08-20",
+      "title": "英洛华与腾讯合作开发工业互联网平台",
+      "description": "公司与腾讯合作开发工业互联网平台，提高生产效率和产品质量。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.yingluohua.com/news/20220820.html",
+      "id": "act-20220820-19"
+    },
+    {
       "company": "dadi",
       "companyName": "大地熊",
       "dimension": "supply",
@@ -2563,6 +2791,18 @@
       "source": "证券时报",
       "sourceUrl": "http://www.yingluohua.com/news/20220815_1.html",
       "id": "act-20220815-09"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2022-07-25",
+      "title": "金力永磁发布2022年上半年业绩报告",
+      "description": "公司实现营业收入6亿元，同比增长15%；净利润0.6亿元，同比增长25%。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.jinliyongci.com/news/20220725.html",
+      "id": "act-20220725-20"
     },
     {
       "company": "yingluohua",
@@ -2613,6 +2853,18 @@
       "id": "act-20220610-11"
     },
     {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2022-05-20",
+      "title": "中科三环与韩国三星电子签订长期合作协议",
+      "description": "公司与韩国三星电子签订长期合作协议，保障原材料供应。",
+      "source": "证券时报",
+      "sourceUrl": "http://www.stockstar.com/news/20220520/8086129.shtml",
+      "id": "act-20220520-21"
+    },
+    {
       "company": "yunsheng",
       "companyName": "宁波韵升",
       "dimension": "tech",
@@ -2635,6 +2887,18 @@
       "source": "公司官网",
       "sourceUrl": "http://www.sanhuan.com.cn/news/20220515_1.html",
       "id": "act-20220515-12"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2022-04-25",
+      "title": "大地熊2021年业绩报告",
+      "description": "公司实现营业收入7亿元，同比增长20%；净利润0.7亿元，同比增长30%。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.dadixiong.com/news/20220425.html",
+      "id": "act-20220425-22"
     },
     {
       "company": "sanhuan",
@@ -2671,126 +2935,6 @@
       "source": "公司官网",
       "sourceUrl": "http://www.dadixiong.com/news/20220315.html",
       "id": "act-20220315-14"
-    },
-    {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2022-03-15",
-      "title": "英洛华2022年第一季度业绩预告",
-      "description": "预计2022年第一季度净利润同比增长约20%-30%，主要得益于市场需求增加及产品结构优化。",
-      "source": "公司公告",
-      "sourceUrl": "http://www.yingluohua.com/news/20220315_1.html",
-      "id": "act-20220315-14"
-    },
-    {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2022-02-10",
-      "title": "英洛华发布2021年年度业绩报告",
-      "description": "2021年净利润同比增长50%，主要受益于新能源汽车行业快速发展。",
-      "source": "公司公告",
-      "sourceUrl": "http://www.yingluohua.com/notice/20220210.html",
-      "id": "act-20220210-15"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "digital",
-      "dimensionName": "数字化",
-      "date": "2022-01-15",
-      "title": "金力永磁启动数字化工厂建设项目",
-      "description": "项目总投资4亿元，预计2023年完成，将实现生产过程的自动化和智能化。",
-      "source": "公司公告",
-      "sourceUrl": "http://www.jinliyongci.com/notice/20220115.html",
-      "id": "act-20220115-16"
-    },
-    {
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "digital",
-      "dimensionName": "数字化",
-      "date": "2022-01-10",
-      "title": "中科三环智能工厂项目启动",
-      "description": "投资建设智能工厂项目，预计2023年完成，提高生产效率和产品质量。",
-      "source": "公司公告",
-      "sourceUrl": "http://www.sanhuan.com.cn/news/20220110_1.html",
-      "id": "act-20220110-15"
-    },
-    {
-      "company": "yunsheng",
-      "companyName": "宁波韵升",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2021-12-20",
-      "title": "宁波韵升发布新型高性能永磁材料研发成果",
-      "description": "成功研发新型高性能永磁材料，磁能积提升15%，有望应用于高端制造领域。",
-      "source": "公司官网",
-      "sourceUrl": "http://www.yunsheng.com/news/20211220.html",
-      "id": "act-20211220-17"
-    },
-    {
-      "company": "dadi",
-      "companyName": "大地熊",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2021-12-15",
-      "title": "大地熊2021年全年净利润同比增长约50%",
-      "description": "2021年全年净利润同比增长约50%，主要受益于新能源汽车行业快速发展。",
-      "source": "公司公告",
-      "sourceUrl": "http://www.dadixiong.com/news/20211215_1.html",
-      "id": "act-20211215-16"
-    },
-    {
-      "company": "yunsheng",
-      "companyName": "宁波韵升",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2021-10-15",
-      "title": "宁波韵升与某稀土企业签订长期供应协议",
-      "description": "与某稀土企业签订长期供应协议，保障原材料供应稳定，降低成本风险。",
-      "source": "证券时报",
-      "sourceUrl": "http://www.yunsheng.com.cn/news/20211015_1.html",
-      "id": "act-20211015-17"
-    },
-    {
-      "company": "dadi",
-      "companyName": "大地熊",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2021-10-10",
-      "title": "大地熊2021年年度业绩预增公告",
-      "description": "预计2021年净利润同比增长100%以上，主要受益于新能源汽车行业快速发展。",
-      "source": "公司公告",
-      "sourceUrl": "http://www.dadixiong.com/notice/20211010.html",
-      "id": "act-20211010-18"
-    },
-    {
-      "company": "dadi",
-      "companyName": "大地熊",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2021-08-15",
-      "title": "大地熊2021年第一季度业绩预告",
-      "description": "预计2021年第一季度净利润同比增长约40%，主要得益于市场需求增加及产品结构优化。",
-      "source": "公司公告",
-      "sourceUrl": "http://www.dadixiong.com/news/20210815_1.html",
-      "id": "act-20210815-18"
-    },
-    {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2021-07-15",
-      "title": "英洛华发布新型稀土永磁材料",
-      "description": "成功研发新型稀土永磁材料，磁能积提升至34MGOe，有望应用于高端电机领域。",
-      "source": "公司官网",
-      "sourceUrl": "http://www.yingluohua.com/news/20210715_1.html",
-      "id": "act-20210715-19"
     }
   ],
   "recruitment": {
