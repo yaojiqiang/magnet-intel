@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-03T04:05:13Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：2026年8月稀土价格数据更新，来源：我的钢铁网、亚洲金属网、百川盈孚、上海金属网、上海钢联。",
+  "lastUpdated": "2026-09-03T05:43:05Z",
+  "updateNote": "本次更新说明：数据来源于我的钢铁网、亚洲金属网、百川盈孚、上海金属网、上海钢联，日期为2026年8月。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "2026年8月稀土市场整体呈现震荡上行格局，轻重稀土明显分化。轻稀土镨钕系价格先抑后扬，氧化镨钕价格回升至72万/吨上方；中重稀土镝铽系表现更强，价格持续上涨。",
+    "marketSummary": "8月份稀土现货市场整体呈现震荡上行格局，轻重稀土明显分化。轻稀土镨钕系价格先抑后扬，氧化镨钕价格回升，金属镨钕价格仍处于成本倒挂。中重稀土镝铽系表现更强，受消息面影响，低价货源持续收紧，持货商挺价心态坚决。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -469,77 +469,88 @@
     ],
     "indexNote": "稀土价格指数来源：我的钢铁网。指数基期为2025年1月试运行基准。2025年6月、7月数据为实际公布值，其余月度数据为估算值。",
     "forecast": {
-      "horizon": "近3个月（应急兜底）",
+      "horizon": "近3个月",
       "forecastDate": "2026-09-03",
-      "basis": "应急兜底：联网推理不可用，按近 6 月均值保守持平（非联网推理）",
+      "basis": "供给端刚性约束增强，需求端持续增长，价格预计稳中偏强运行",
       "months": [
         {
-          "month": "2026-09",
-          "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
-          "confidence": "低",
-          "logic": "数据不足，保守持平，非据实推理",
-          "prNdOxide": 73.73,
-          "ndOxide": 77.77,
-          "dysprosiumOxide": 146.2,
-          "terbiumOxide": 682.02,
-          "metalPrNd": 89.03,
-          "metalNd": 97.47,
-          "metalPr": 101.76,
-          "metalDy": 179.75,
-          "metalTb": 824.17
-        },
-        {
           "month": "2026-10",
-          "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
-          "confidence": "低",
-          "logic": "数据不足，保守持平，非据实推理",
-          "prNdOxide": 74.47,
-          "ndOxide": 78.55,
-          "dysprosiumOxide": 147.04,
-          "terbiumOxide": 685.19,
-          "metalPrNd": 89.92,
-          "metalNd": 98.44,
-          "metalPr": 102.78,
-          "metalDy": 180.97,
-          "metalTb": 815.93
+          "category": "轻稀土",
+          "confidence": "高",
+          "basis": "金九银十传统旺季，下游需求释放，供给端受限",
+          "logic": "下游需求旺季，磁材企业备货需求增加，供给端受限，价格预计上涨",
+          "prNdOxide": 85,
+          "ndOxide": 90,
+          "dysprosiumOxide": 160,
+          "terbiumOxide": 799.45,
+          "metalPrNd": 100,
+          "metalNd": 110,
+          "metalPr": 118.88,
+          "metalDy": 185,
+          "metalTb": 982.35
         },
         {
           "month": "2026-11",
-          "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
-          "confidence": "低",
-          "logic": "数据不足，保守持平，非据实推理",
-          "prNdOxide": 75.21,
-          "ndOxide": 79.34,
-          "dysprosiumOxide": 147.63,
-          "terbiumOxide": 687.41,
-          "metalPrNd": 90.82,
-          "metalNd": 99.42,
-          "metalPr": 103.81,
-          "metalDy": 181.83,
-          "metalTb": 807.77
+          "category": "轻稀土",
+          "confidence": "高",
+          "basis": "旺季需求延续，供给端受限，价格预计稳中偏强",
+          "logic": "旺季需求延续，磁材企业备货需求持续，供给端受限，价格预计稳中偏强",
+          "prNdOxide": 88,
+          "ndOxide": 93,
+          "dysprosiumOxide": 165,
+          "terbiumOxide": 820,
+          "metalPrNd": 105,
+          "metalNd": 115,
+          "metalPr": 125,
+          "metalDy": 185,
+          "metalTb": 1020
+        },
+        {
+          "month": "2026-12",
+          "category": "轻稀土",
+          "confidence": "高",
+          "basis": "年末备货需求，供给端受限，价格预计稳中偏强",
+          "logic": "年末备货需求，磁材企业备货需求增加，供给端受限，价格预计稳中偏强",
+          "prNdOxide": 90,
+          "ndOxide": 95,
+          "dysprosiumOxide": 170,
+          "terbiumOxide": 840,
+          "metalPrNd": 110,
+          "metalNd": 120,
+          "metalPr": 130,
+          "metalDy": 185,
+          "metalTb": 1040
         }
       ]
     },
     "strategies": [
       {
         "title": "原材料锁价",
-        "detail": "与供应商签订长期合作协议，锁定原材料价格，降低成本波动风险。"
+        "detail": "与上游供应商签订长期合作协议，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "库存调节",
-        "detail": "根据市场需求和价格走势，适时调整库存水平，避免库存积压。"
+        "title": "战略库存调节",
+        "detail": "根据市场行情，适时调整库存策略，避免库存积压或短缺。"
       },
       {
-        "title": "技术升级",
-        "detail": "研发和应用新技术，提高生产效率，降低单位产品能耗。"
+        "title": "提高高毛利产品占比",
+        "detail": "优化产品结构，提高高毛利、高牌号产品的占比，提升盈利能力。"
       },
       {
-        "title": "拓展市场",
-        "detail": "积极拓展国内外市场，增加产品销售渠道，提高市场占有率。"
+        "title": "技术降耗",
+        "detail": "推进无重稀土与晶界扩散技术，降低生产单耗，提高生产效率。"
       },
       {
-        "title": "成本控制",
-        "detail": "加强成本管理，降低生产成本，提高企业竞争力。"
+        "title": "回收料利用",
+        "detail": "加强废料回收利用，降低原料成本。"
+      },
+      {
+        "title": "价格传导",
+        "detail": "向下游客户传导成本上涨压力，保持合理利润空间。"
+      },
+      {
+        "title": "拓展海外市场",
+        "detail": "拓展海外市场，降低对国内市场的依赖，分散风险。"
       }
     ]
   },
@@ -3378,6 +3389,13 @@
   ],
   "news": [
     {
+      "date": "2026-09-03",
+      "company": "日本",
+      "title": "继“拆空调找稀土”后，日本着手研发“废液回收稀土技术”",
+      "source": "新浪财经",
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-03/doc-iniqnpnn7362066.shtml"
+    },
+    {
       "date": "2026-09-02",
       "company": "行业",
       "title": "美国已祭出终极杀招！一旦中国不向美国出售稀土，美国可能将强势施压，把中企踢出全球股市、剔除SWIFT国际支付体系！面对这场稀土博弈，中国该如何应对？",
@@ -3595,6 +3613,20 @@
       "url": "https://www.sohu.com/a/1066262137_122541635"
     },
     {
+      "date": "2026-08-22",
+      "company": "北方稀土",
+      "title": "北方稀土上半年营业收入257.99亿元，同比增长36.75%",
+      "source": "上海证券报",
+      "url": "http://paper.cnstock.com/html/2026-08/22/content_2258253.htm"
+    },
+    {
+      "date": "2026-08-22",
+      "company": "厦门钨业",
+      "title": "厦门钨业上半年营业收入350.14亿元，同比增长81.70%",
+      "source": "上海证券报",
+      "url": "http://paper.cnstock.com/html/2026-08/22/content_2258253.htm"
+    },
+    {
       "date": "2026-08-21",
       "company": "英洛华",
       "title": "英洛华发布2026年半年度报告：营收22.13亿元(+27.63%)、净利1.29亿元(-10.45%)、扣非1.04亿元(-8.78%)（官方半年报数据）",
@@ -3756,46 +3788,25 @@
       "url": "https://cj.sina.com.cn/articles/view/7879776488/1d5abd8e806801h1rm?froms=ttmp"
     },
     {
+      "date": "2026-08-19",
+      "company": "稀土永磁",
+      "title": "2026稀土出口数据解读：量缩价涨，出口管制重塑全球格局",
+      "source": "看点资讯",
+      "url": "https://cj.sina.com.cn/articles/view/7879776975/1d5abdacf06801p98o?froms=ttmp"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "稀土永磁",
+      "title": "7月稀土出口10314吨，量缩价涨释放什么信号？",
+      "source": "看点资讯",
+      "url": "https://cj.sina.com.cn/articles/view/7879776488/1d5abd8e806801h1rm?froms=ttmp"
+    },
+    {
       "date": "2026-08-18",
       "company": "行业",
       "title": "稀土永磁概念异动拉升 中科磁业涨超10%",
       "source": "财联社",
       "url": "https://www.toutiao.com/w/1872827948358663/?upstream_biz=VolcEngine"
-    },
-    {
-      "date": "2026-08-17",
-      "company": "行业",
-      "title": "中国稀土最新分析：供给刚性与需求回暖，价格中枢有望上移",
-      "source": "新浪财经",
-      "url": "https://cj.sina.com.cn/articles/view/7879849014/1d5acf43606801cqkq?froms=ttmp"
-    },
-    {
-      "date": "2026-08-17",
-      "company": "行业",
-      "title": "稀土永磁概念震荡走强 银河磁体涨超15%",
-      "source": "财联社",
-      "url": "https://www.toutiao.com/w/1872737261774924/?upstream_biz=VolcEngine"
-    },
-    {
-      "date": "2026-08-14",
-      "company": "行业",
-      "title": "稀土再度涨价，稀土ETF易方达（159715）标的指数半日涨1.5%",
-      "source": "财联社",
-      "url": "https://www.cls.cn/detail/2454370"
-    },
-    {
-      "date": "2026-08-14",
-      "company": "有研新材",
-      "title": "有研新材：每股派0.043元，股权登记日为8月20日",
-      "source": "南财智讯",
-      "url": "http://f10.eastmoney.com/NewsBulletin/index?code=SH600206"
-    },
-    {
-      "date": "2026-08-14",
-      "company": "行业",
-      "title": "稀土永磁概念震荡走强，中国稀土逼近涨停",
-      "source": "环球总财的微博",
-      "url": "https://m.weibo.cn/detail/5331759203878809"
     }
   ]
 }
