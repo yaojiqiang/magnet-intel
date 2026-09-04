@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-04T03:42:40Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：2026年8月稀土价格行情更新，数据来源于我的钢铁网、亚洲金属网、百川盈孚、上海金属网、上海钢联。",
+  "lastUpdated": "2026-09-04T04:05:41Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：2026年8月稀土价格数据更新，来源：我的钢铁网、亚洲金属网、百川盈孚、上海金属网、上海钢联。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场整体呈现震荡上行格局，轻稀土镨钕系价格有所下降，但月末有所反弹；中重稀土镝铽系表现更强，价格持续上涨。",
+    "marketSummary": "稀土市场在8月份呈现震荡上行格局，轻重稀土明显分化。轻稀土镨钕系价格先抑后扬，氧化镨钕价格回升，但市场交投僵持。中重稀土镝铽系表现更强，受消息面影响，价格持续上涨。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -469,80 +469,92 @@
     ],
     "indexNote": "稀土价格指数来源：我的钢铁网。指数基期为2025年1月试运行基准。2025年6月、7月数据为实际公布值，其余月度数据为估算值。",
     "forecast": {
-      "horizon": "近3个月",
+      "horizon": "近3个月\n",
       "forecastDate": "2026-09-04",
-      "basis": "供给端刚性约束，需求端持续增长，政策支持力度加大，预计稀土价格将稳中偏强运行。",
+      "basis": "供给端刚性约束与需求端增长预期，价格稳中偏强运行",
       "months": [
         {
           "month": "2026-10",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "金九银十传统旺季，下游需求增加，预计价格将有所上涨。",
-          "logic": "下游需求增加，库存低位，预计价格上涨。",
+          "basis": "金九银十旺季预期，下游备货需求增加",
+          "logic": "下游需求旺季，库存低位，价格有望上涨",
           "prNdOxide": 85,
           "ndOxide": 85,
           "dysprosiumOxide": 160,
           "terbiumOxide": 799.45,
           "metalPrNd": 95,
           "metalNd": 95,
-          "metalPr": 105,
-          "metalDy": 175,
-          "metalTb": 900
+          "metalPr": 100,
+          "metalDy": 165,
+          "metalTb": 880
         },
         {
           "month": "2026-11",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "旺季需求延续，但增速可能放缓，预计价格将保持稳定。",
-          "logic": "旺季需求延续，但增速可能放缓，预计价格将保持稳定。",
-          "prNdOxide": 85,
-          "ndOxide": 85,
-          "dysprosiumOxide": 160,
-          "terbiumOxide": 800,
-          "metalPrNd": 95,
-          "metalNd": 95,
-          "metalPr": 105,
-          "metalDy": 175,
-          "metalTb": 900
+          "basis": "旺季需求延续，供应端刚性约束不变",
+          "logic": "旺季需求延续，供应端刚性约束不变，价格有望维持高位",
+          "prNdOxide": 88,
+          "ndOxide": 88,
+          "dysprosiumOxide": 165,
+          "terbiumOxide": 830,
+          "metalPrNd": 98,
+          "metalNd": 98,
+          "metalPr": 103,
+          "metalDy": 170,
+          "metalTb": 870
         },
         {
           "month": "2026-12",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "年末备货需求，但增速可能放缓，预计价格将保持稳定。",
-          "logic": "年末备货需求，但增速可能放缓，预计价格将保持稳定。",
-          "prNdOxide": 85,
-          "ndOxide": 85,
-          "dysprosiumOxide": 160,
-          "terbiumOxide": 800,
-          "metalPrNd": 95,
-          "metalNd": 95,
-          "metalPr": 105,
+          "basis": "年末备货需求，供应端刚性约束持续",
+          "logic": "年末备货需求增加，供应端刚性约束持续，价格有望保持高位",
+          "prNdOxide": 90,
+          "ndOxide": 90,
+          "dysprosiumOxide": 170,
+          "terbiumOxide": 860,
+          "metalPrNd": 101,
+          "metalNd": 101,
+          "metalPr": 106,
           "metalDy": 175,
-          "metalTb": 900
+          "metalTb": 860
         }
       ]
     },
     "strategies": [
       {
         "title": "原材料锁价",
-        "detail": "与供应商签订长期合作协议，锁定原材料价格，降低成本波动风险。"
+        "detail": "与供应商签订长协合同，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "库存调节",
-        "detail": "根据市场需求和价格走势，适时调整库存水平，避免库存积压。"
+        "title": "战略库存调节",
+        "detail": "根据市场供需情况，适时调整库存策略，避免库存积压。"
       },
       {
-        "title": "技术升级",
-        "detail": "研发新技术，提高生产效率，降低单位产品能耗。"
+        "title": "提高高毛利产品占比",
+        "detail": "加大高毛利、高牌号产品的研发和生产，提升盈利能力。"
       },
       {
-        "title": "拓展市场",
-        "detail": "积极拓展海外市场，降低对国内市场的依赖。"
+        "title": "技术降耗",
+        "detail": "推进无重稀土与晶界扩散技术，降低生产单耗，提高效率。"
+      },
+      {
+        "title": "回收料利用",
+        "detail": "加强回收料利用，降低生产成本，实现资源循环利用。"
+      },
+      {
+        "title": "价格传导",
+        "detail": "向下游客户传导成本，保持合理利润空间。"
+      },
+      {
+        "title": "拓展海外业务",
+        "detail": "拓展海外市场，降低对国内市场的依赖，分散风险。"
       },
       {
         "title": "多元化发展",
-        "detail": "开发新产品，拓展应用领域，降低单一产品风险。"
+        "detail": "拓展非稀土业务，降低对单一市场的依赖，实现多元化发展。"
       }
     ]
   },
@@ -1428,6 +1440,18 @@
       "id": "act-20260822-02"
     },
     {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-08-22",
+      "title": "金力永磁：深度绑定风电、新能源汽车与机器人+业绩高增+新业爆发",
+      "description": "公司机器人业务爆发：上半年机器人及伺服电机收入同比增90%，具身机器人电机转子小批量交付。",
+      "source": "头条新闻",
+      "sourceUrl": "http://m.toutiao.com/group/7658687484527739436/?upstream_biz=VolcEngine",
+      "id": "act-20260822-03"
+    },
+    {
       "id": "act-20260821-smart-01",
       "company": "jinli",
       "companyName": "金力永磁",
@@ -1750,6 +1774,30 @@
       "source": "每日经济新闻",
       "sourceUrl": "https://finance.eastmoney.com/a/202607013790630738.html",
       "id": "act-20260821-01"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-08-21",
+      "title": "金力永磁上半年技术创新及智能制造进展",
+      "description": "公司已自主掌握核心技术及专利体系，包括晶界渗透、配方体系、晶粒细化、一次成型、生产工艺自动化等技术。",
+      "source": "金力永磁：2026年8月21日投资者关系活动记录表",
+      "sourceUrl": "http://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?CompanyCode=80450842&gather=1&id=12515538",
+      "id": "act-20260821-01"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-08-21",
+      "title": "金力永磁拟参股稀土交易平台，强化供应保障",
+      "description": "公司拟通过内蒙古产权交易中心公开挂牌转让方式受让北方稀土持有的包头稀交所9.24%的股权。",
+      "source": "金力永磁：2026年8月21日投资者关系活动记录表",
+      "sourceUrl": "http://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?CompanyCode=80450842&gather=1&id=12515538",
+      "id": "act-20260821-02"
     },
     {
       "company": "jinli",
@@ -2902,42 +2950,6 @@
       "source": "公司官网",
       "sourceUrl": "http://www.sanhuan.com/news/20220920.html",
       "id": "act-20220920-08"
-    },
-    {
-      "company": "dadi",
-      "companyName": "大地熊",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2022-09-20",
-      "title": "大地熊研发成功无重稀土永磁材料",
-      "description": "成功研发无重稀土永磁材料，降低产品成本，满足环保要求。",
-      "source": "公司官网",
-      "sourceUrl": "http://www.dadixiong.com/news/20220920_1.html",
-      "id": "act-20220920-08"
-    },
-    {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "digital",
-      "dimensionName": "数字化",
-      "date": "2022-08-20",
-      "title": "英洛华与腾讯合作开发工业互联网平台",
-      "description": "公司与腾讯合作开发工业互联网平台，提高生产效率和产品质量。",
-      "source": "公司公告",
-      "sourceUrl": "http://www.yingluohua.com/news/20220820.html",
-      "id": "act-20220820-19"
-    },
-    {
-      "company": "dadi",
-      "companyName": "大地熊",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2022-08-15",
-      "title": "大地熊与某汽车制造商签订长期供应协议",
-      "description": "协议约定，大地熊将为该汽车制造商提供稀土永磁材料，合作期限为五年。",
-      "source": "证券时报",
-      "sourceUrl": "http://www.stocktimes.com.cn/20220815/857833.html",
-      "id": "act-20220815-09"
     }
   ],
   "recruitment": {
