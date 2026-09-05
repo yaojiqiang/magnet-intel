@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-05T03:42:03Z",
+  "lastUpdated": "2026-09-05T04:06:13Z",
   "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月稀土市场周报及各平台报价，更新稀土及磁材市场价格信息。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场整体呈现震荡上行格局，轻稀土价格企稳回升，重稀土价格持续上涨。",
+    "marketSummary": "稀土市场整体呈现涨跌互现的格局，轻稀土价格震荡下降，但月末有所反弹；重稀土价格先降后涨，月底价格高于月初价格。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -86,8 +86,8 @@
         "category": "重稀土",
         "price": 145.0,
         "unit": "万元/吨",
-        "change": 0.0,
-        "changeDesc": "持平",
+        "change": 0,
+        "changeDesc": "持平（与上一交易日一致）",
         "date": "2026-09-05",
         "source": "我的钢铁网"
       },
@@ -470,79 +470,79 @@
     "indexNote": "稀土价格指数来源：我的钢铁网。指数基期为2025年1月试运行基准。2025年6月、7月数据为实际公布值，其余月度数据为估算值。",
     "forecast": {
       "horizon": "近3个月",
-      "forecast\n\n{\"Date": "2026-09-05",
-      "basis": "供给端刚性约束增强，需求端新兴领域增长，价格整体震荡上行",
+      "forecastDate": "2026-09-05",
+      "basis": "供给端刚性约束增强，需求端持续增长，政策支持力度加大，预计稀土价格将维持稳中偏强运行。",
       "months": [
         {
           "month": "2026-10",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "缅甸矿进口受限，国内政策支持稀土开采，需求端新能源汽车、风电等增长",
-          "logic": "缅甸矿进口受限导致供应紧张，国内政策支持稀土开采，新能源汽车、风电等需求增长推动价格上涨",
-          "prNdOxide": 85,
-          "ndOxide": 85,
-          "dysprosiumOxide": 160,
-          "terbiumOxide": 799.45,
-          "metalPrNd": 95,
-          "metalNd": 95,
-          "metalPr": 105,
-          "metalDy": 175,
-          "metalTb": 900
+          "basis": "下游需求旺季，库存低位，预计价格上涨。",
+          "logic": "下游需求旺季，库存低位，预计价格上涨。",
+          "prNdOxide": 82.0,
+          "ndOxide": 86.0,
+          "dysprosiumOxide": 150.0,
+          "terbiumOxide": 700.0,
+          "metalPrNd": 96.0,
+          "metalNd": 104.0,
+          "metalPr": 110.0,
+          "metalDy": 185.0,
+          "metalTb": 880.0
         },
         {
           "month": "2026-11",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "缅甸矿进口受限，国内政策支持稀土开采，需求端新能源汽车、风电等增长",
-          "logic": "缅甸矿进口受限导致供应紧张，国内政策支持稀土开采，新能源汽车、风电等需求增长推动价格上涨",
-          "prNdOxide": 88,
-          "ndOxide": 88,
-          "dysprosiumOxide": 165,
-          "terbiumOxide": 820,
-          "metalPrNd": 98,
-          "metalNd": 98,
-          "metalPr": 108,
-          "metalDy": 180,
-          "metalTb": 920
+          "basis": "下游需求持续增长，政策支持力度加大，预计价格上涨。",
+          "logic": "下游需求持续增长，政策支持力度加大，预计价格上涨。",
+          "prNdOxide": 84.0,
+          "ndOxide": 88.0,
+          "dysprosiumOxide": 155.0,
+          "terbiumOxide": 720.0,
+          "metalPrNd": 98.0,
+          "metalNd": 106.0,
+          "metalPr": 112.0,
+          "metalDy": 185,
+          "metalTb": 900.0
         },
         {
           "month": "2026-12",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "缅甸矿进口受限，国内政策支持稀土开采，需求端新能源汽车、风电等增长",
-          "logic": "缅甸矿进口受限导致供应紧张，国内政策支持稀土开采，新能源汽车、风电等需求增长推动价格上涨",
-          "prNdOxide": 90,
-          "ndOxide": 90,
-          "dysprosiumOxide": 170,
-          "terbiumOxide": 840,
-          "metalPrNd": 100,
-          "metalNd": 100,
-          "metalPr": 110,
+          "basis": "下游需求旺季，库存低位，预计价格上涨。",
+          "logic": "下游需求旺季，库存低位，预计价格上涨。",
+          "prNdOxide": 86.0,
+          "ndOxide": 90.0,
+          "dysprosiumOxide": 160.0,
+          "terbiumOxide": 740.0,
+          "metalPrNd": 100.0,
+          "metalNd": 108.0,
+          "metalPr": 114.0,
           "metalDy": 185,
-          "metalTb": 950
+          "metalTb": 920.0
         }
       ]
     },
     "strategies": [
       {
         "title": "原材料锁价",
-        "detail": "与供应商签订长协合同，锁定原材料价格，降低成本风险。"
+        "detail": "与供应商签订长协合同，锁定原材料价格，降低成本波动风险。"
       },
       {
         "title": "库存调节",
-        "detail": "根据市场需求和价格走势，适时调整库存，避免库存积压。"
-      },
-      {
-        "title": "产品结构调整",
-        "detail": "提高高毛利产品占比，优化产品结构，提升盈利能力。"
+        "detail": "根据市场需求和价格走势，适时调整库存，避免库存积压或短缺。"
       },
       {
         "title": "技术升级",
-        "detail": "推进无重稀土与晶界扩散技术，降低单耗，提高生产效率。"
+        "detail": "推进无重稀土与晶界扩散技术，降低单耗，提高产品竞争力。"
       },
       {
         "title": "拓展市场",
-        "detail": "积极拓展海外市场，降低国内市场风险。"
+        "detail": "积极拓展海外市场，降低国内市场波动影响。"
+      },
+      {
+        "title": "成本传导",
+        "detail": "向下游客户传导成本上涨压力，保持利润空间。"
       }
     ]
   },
@@ -2244,6 +2244,30 @@
       "id": "act-20260701-03"
     },
     {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-07-01",
+      "title": "金力永磁预计上半年净利增超三成：具身机器人电机转子产品已有小批量交付",
+      "description": "公司预计今年上半年归属于上市公司股东的净利润为4.00亿元-4.60亿元，同比增长31.17%-50.84%。",
+      "source": "澎湃新闻",
+      "sourceUrl": "https://www.toutiao.com/w/1869518706131012/?upstream_biz=VolcEngine",
+      "id": "act-20260701-01"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-07-01",
+      "title": "金力永磁，问鼎全球第一！",
+      "description": "公司牢牢把握产业链上下游，保证资源供应。上游原材料供应，金力永磁与北方稀土、中国稀土在内的主要供应商，建立了长期战略合作关系。",
+      "source": "新浪财经",
+      "sourceUrl": "http://m.toutiao.com/group/7656771067016528418/?upstream_biz=VolcEngine",
+      "id": "act-20260701-03"
+    },
+    {
       "id": "act-007",
       "company": "yunsheng",
       "companyName": "宁波韵升",
@@ -2410,6 +2434,18 @@
       "description": "公司基于精益理念推进精益智能化工厂的规划建设，结合科技部、工信部专项及Andon等项目的实施，对厂区实施数字化升级和工艺、设备改进，建立数字化、精益化、低周转、快交付、高质量的制造体系；加大推进精益数字化力度，提升生产效率、替换高能耗设备，践行低碳发展。",
       "source": "宁波韵升2025年年度报告（上海证券报/2026-04-11）",
       "sourceUrl": "https://paper.cnstock.com/html/2026-04/11/content_2198699.htm"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-04-10",
+      "title": "金力永磁：2026年4月10日投资者关系活动记录表",
+      "description": "公司牢牢把握产业链上下游，保证资源供应。上游原材料供应，公司与北方稀土、中国稀土在内的主要供应商，建立了长期战略合作关系。",
+      "source": "江西金力永磁科技股份有限公司",
+      "sourceUrl": "https://data.eastmoney.com/notices/detail/300748/AN202604101821123413.html",
+      "id": "act-20260410-02"
     },
     {
       "id": "act-012",
@@ -2902,42 +2938,6 @@
       "source": "公司公告",
       "sourceUrl": "http://www.yunsheng.com.cn/news/20221115_1.html",
       "id": "act-20221115-06"
-    },
-    {
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2022-10-25",
-      "title": "中科三环发布2022年三季报",
-      "description": "公司实现营业收入4.5亿元，同比增长10%；净利润0.4亿元，同比增长20%。",
-      "source": "公司公告",
-      "sourceUrl": "http://www.sanhuan.com.cn/news/20221025.html",
-      "id": "act-20221025-18"
-    },
-    {
-      "company": "yunsheng",
-      "companyName": "宁波韵升",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2022-10-10",
-      "title": "宁波韵升与特斯拉签订供应协议",
-      "description": "协议约定，宁波韵升将为特斯拉提供稀土永磁材料，合作期限为三年。",
-      "source": "证券时报",
-      "sourceUrl": "http://www.stocktimes.com.cn/20221010/858733.html",
-      "id": "act-20221010-07"
-    },
-    {
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2022-10-10",
-      "title": "中科三环与某汽车企业签订战略合作协议",
-      "description": "与某汽车企业签订战略合作协议，共同开发新能源汽车用稀土永磁材料。",
-      "source": "证券时报",
-      "sourceUrl": "http://www.stocktimes.com.cn/20221010/5133456.html",
-      "id": "act-20221010-07"
     }
   ],
   "recruitment": {
