@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-06T03:44:06Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月31日生意社数据更新，包含氧化镨钕、金属镨钕、氧化镝、氧化铽等稀土产品价格。",
+  "lastUpdated": "2026-09-06T04:05:30Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月31日生意社数据更新稀土价格。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土市场在8月呈现震荡走势，轻稀土价格有所下降，重稀土价格则有所上涨。",
+    "marketSummary": "稀土市场整体呈现震荡上行格局，轻稀土价格有所下降，重稀土价格保持稳定。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -470,15 +470,15 @@
     "indexNote": "稀土价格指数来源：我的钢铁网。指数基期为2025年1月试运行基准。2025年6月、7月数据为实际公布值，其余月度数据为估算值。",
     "forecast": {
       "horizon": "近3个月",
-      "forecastDate": "2026-09-06",
-      "basis": "供给端刚性约束与需求端增长，价格中枢有望上移",
+      "forecast\n\n{\"Date": "2026-09-06",
+      "basis": "供给端刚性约束与需求端增长，稀土价格稳中偏强运行",
       "months": [
         {
           "month": "2026-10",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "下游需求旺季，库存低位，预计价格上涨",
-          "logic": "新能源汽车、风电等下游需求旺盛，库存低位，预计价格上涨",
+          "basis": "下游需求旺季，库存低位，价格有望上涨",
+          "logic": "金九银十传统旺季，下游企业备货需求增加，推动价格上涨",
           "prNdOxide": 85,
           "ndOxide": 85,
           "dysprosiumOxide": 150,
@@ -487,62 +487,62 @@
           "metalNd": 95,
           "metalPr": 100,
           "metalDy": 160,
-          "metalTb": 800
+          "metalTb": 900
         },
         {
           "month": "2026-11",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "下游需求旺季延续，库存继续低位，预计价格上涨",
-          "logic": "下游需求旺季延续，库存继续低位，预计价格上涨",
-          "prNdOxide": 90,
-          "ndOxide": 90,
-          "dysprosiumOxide": 160,
-          "terbiumOxide": 750,
-          "metalPrNd": 100,
-          "metalNd": 100,
-          "metalPr": 105,
-          "metalDy": 170,
-          "metalTb": 850
+          "basis": "下游需求持续，库存低位，价格有望维持高位",
+          "logic": "下游需求持续旺盛，库存低位，价格有望维持高位",
+          "prNdOxide": 88,
+          "ndOxide": 88,
+          "dysprosiumOxide": 155,
+          "terbiumOxide": 730,
+          "metalPrNd": 98,
+          "metalNd": 98,
+          "metalPr": 103,
+          "metalDy": 165,
+          "metalTb": 920
         },
         {
           "month": "2026-12",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "下游需求旺季尾声，库存或有所回升，预计价格稳中有降",
-          "logic": "下游需求旺季尾声，库存或有所回升，预计价格稳中有降",
-          "prNdOxide": 88,
-          "ndOxide": 88,
-          "dysprosiumOxide": 155,
+          "basis": "下游需求平稳，库存低位，价格有望小幅上涨",
+          "logic": "下游需求平稳，库存低位，价格有望小幅上涨",
+          "prNdOxide": 90,
+          "ndOxide": 90,
+          "dysprosiumOxide": 160,
           "terbiumOxide": 760,
-          "metalPrNd": 102,
-          "metalNd": 102,
-          "metalPr": 107,
-          "metalDy": 165,
-          "metalTb": 830
+          "metalPrNd": 101,
+          "metalNd": 101,
+          "metalPr": 106,
+          "metalDy": 170,
+          "metalTb": 950
         }
       ]
     },
     "strategies": [
       {
         "title": "原材料锁价",
-        "detail": "与供应商签订长期合作协议，锁定原材料价格，降低成本波动风险。"
+        "detail": "与供应商签订长协合同，锁定原材料价格，降低成本风险。"
       },
       {
         "title": "库存调节",
-        "detail": "根据市场需求和价格走势，适时调整库存水平，避免库存积压或短缺。"
+        "detail": "根据市场需求和价格走势，适时调整库存，避免库存积压。"
       },
       {
         "title": "技术升级",
-        "detail": "研发和应用新技术，提高生产效率和产品质量，降低单位产品稀土消耗。"
+        "detail": "推进无重稀土与晶界扩散技术，降低生产成本，提高产品竞争力。"
       },
       {
         "title": "拓展市场",
-        "detail": "积极拓展海外市场，降低对国内市场的依赖，分散市场风险。"
+        "detail": "积极拓展海外市场，降低对国内市场的依赖。"
       },
       {
         "title": "成本传导",
-        "detail": "将原材料价格上涨传导至下游客户，保持企业利润水平。"
+        "detail": "将原材料价格上涨传导至下游客户，保证企业利润。"
       }
     ]
   },
@@ -643,7 +643,7 @@
         "production": 7190,
         "productionUnit": "吨（毛坯）",
         "productionYoY": 17.31,
-        "sales": 29.14,
+        "sales": 33.37,
         "salesUnit": "吨（成品）",
         "salesYoY": 21.25,
         "capacity": 4,
@@ -678,12 +678,18 @@
           "revenue": 2.61,
           "salesYoY": 96.4,
           "note": "同比增长96.40%"
+        },
+        {
+          "segment": "其他",
+          "revenue": 2.86,
+          "salesYoY": null,
+          "note": null
         }
       ],
       "geo": {
-        "domestic": 10.23,
+        "domestic": 18.91,
         "domesticPct": 83.54,
-        "overseas": 23.14,
+        "overseas": 10.23,
         "overseasPct": 16.46,
         "usExport": 5.01,
         "usExportYoY": 39.8
@@ -1486,6 +1492,18 @@
       "source": "股海一叶虚舟",
       "sourceUrl": "http://m.toutiao.com/group/7658687484527739436/?upstream_biz=VolcEngine",
       "id": "act-20260822-09"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-08-22",
+      "title": "金力永磁2026年中报：营收利润现金流同步改善，具身机器人电机转子进入定点量产期",
+      "description": "公司2024年成为全球稀土永磁材料行业产销量排名第一的企业，2026年中报称上半年\"磁材产品产销量保持稳定\"。",
+      "source": "股海一叶虚舟",
+      "sourceUrl": "http://m.toutiao.com/group/7658687484527739436/?upstream_biz=VolcEngine",
+      "id": "act-20260822-03"
     },
     {
       "id": "act-20260821-smart-01",
@@ -2376,6 +2394,30 @@
       "id": "act-20260630-04"
     },
     {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-06-30",
+      "title": "金力永磁技术创新及智能制造进展",
+      "description": "公司已自主掌握核心技术及专利体系，包括晶界渗透、配方体系、晶粒细化、一次成型、生产工艺自动化等技术。",
+      "source": "金力永磁：2026年8月21日投资者关系活动记录表",
+      "sourceUrl": "http://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?CompanyCode=80450842&gather=1&id=12515538",
+      "id": "act-20260630-01"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-06-30",
+      "title": "金力永磁拟参股稀土交易平台",
+      "description": "公司拟通过内蒙古产权交易中心公开挂牌转让方式受让北方稀土持有的包头稀交所9.24%的股权。",
+      "source": "金力永磁：2026年半年度报告摘要",
+      "sourceUrl": "http://www.cnfin.com/announ/detail/index.html?announ=lc&code=300748&dannoun=lcdetail&id=840567812201",
+      "id": "act-20260630-02"
+    },
+    {
       "id": "act-007",
       "company": "yunsheng",
       "companyName": "宁波韵升",
@@ -2902,42 +2944,6 @@
       "source": "证券时报",
       "sourceUrl": "http://www.stockstar.com/news/20230315/8096129.shtml",
       "id": "act-20230315-13"
-    },
-    {
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2023-02-20",
-      "title": "中科三环与日本某企业签订稀土永磁材料供应协议",
-      "description": "协议约定，未来三年内，中科三环将向日本企业供应稀土永磁材料，总金额约10亿元。",
-      "source": "证券时报",
-      "sourceUrl": "http://www.stocktimes.com.cn/20230220/864833.html",
-      "id": "act-20230220-03"
-    },
-    {
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2023-02-20",
-      "title": "中科三环与某稀土企业签订长期供应协议",
-      "description": "与某稀土企业签订长期供应协议，保障原材料供应稳定，降低成本风险。",
-      "source": "证券时报",
-      "sourceUrl": "http://www.stocktimes.com.cn/20230220/5139126.html",
-      "id": "act-20230220-03"
-    },
-    {
-      "company": "dadi",
-      "companyName": "大地熊",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2023-02-20",
-      "title": "大地熊2022年业绩报告",
-      "description": "公司实现营业收入8亿元，同比增长25%；净利润0.8亿元，同比增长30%。",
-      "source": "公司公告",
-      "sourceUrl": "http://www.dadixiong.com/news/20230220.html",
-      "id": "act-20230220-14"
     }
   ],
   "recruitment": {
@@ -3381,6 +3387,20 @@
   ],
   "news": [
     {
+      "date": "2026-09-06",
+      "company": "行业",
+      "title": "中国稀土企业集体断供，美国审查工具反噬自身，大戏才刚开场",
+      "source": "什刹海水师提督",
+      "url": "m.sohu.com/a/1072239899_122655926/"
+    },
+    {
+      "date": "2026-09-06",
+      "company": "行业",
+      "title": "中国稀土企业拒绝对美国发货！",
+      "source": "逍遥论经",
+      "url": "c.m.163.com/news/a/L64PBO0I05565VV2.html"
+    },
+    {
       "date": "2026-09-05",
       "company": "行业",
       "title": "对美制裁生效，“中企拒绝发货”",
@@ -3407,6 +3427,20 @@
       "title": "反制禁令准时落地！美方收到噩耗，中方动真格，稀土断供",
       "source": "逛街的胖头鱼",
       "url": "m.sohu.com/a/1072224165_122747195/"
+    },
+    {
+      "date": "2026-09-05",
+      "company": "行业",
+      "title": "搬起石头砸自己的脚！9月4日，路透社援引多名行业知情人士称：中方制裁生效后，中国稀土供应商因担心稀土被转售给被禁用户而拒绝对美发货",
+      "source": "国际小表妹",
+      "url": "https://www.sohu.com/a/1072410822_122615833"
+    },
+    {
+      "date": "2026-09-05",
+      "company": "行业",
+      "title": "制裁正式生效！国内稀土企业拒绝对美发货，产业链迎来大变局",
+      "source": "中国科创经纬",
+      "url": "https://www.toutiao.com/w/1875483686587459/?upstream_biz=VolcEngine"
     },
     {
       "date": "2026-09-04",
@@ -3771,34 +3805,6 @@
       "title": "中国特事特办，给美国送去稀土“及时雨”，对日管制继续下狠手",
       "source": "素衣读史",
       "url": "https://c.m.163.com/news/a/L4VSQNRG05568PJ3.html"
-    },
-    {
-      "date": "2026-08-19",
-      "company": "行业",
-      "title": "日本稀土进口量降至中国管制前 2 成",
-      "source": "新浪新闻",
-      "url": "https://www.sina.cn/news/detail/5333587947950478.html"
-    },
-    {
-      "date": "2026-08-19",
-      "company": "行业",
-      "title": "2026稀土出口数据解读：7月出口量降29.54%均价涨103%，供需博弈下价格能否稳住？",
-      "source": "新浪财富汇",
-      "url": "https://k.sina.com.cn/article_7879922977_1d5ae152106801ig8e.html"
-    },
-    {
-      "date": "2026-08-19",
-      "company": "行业",
-      "title": "美日深海千亿稀土夺权遭三重门坎,中国悄然定标准话语权谁是真正操盘手?",
-      "source": "铅笔如有神助",
-      "url": "https://k.sina.com.cn/article_7295511708_1b2d8ac9c02001bphm.html"
-    },
-    {
-      "date": "2026-08-19",
-      "company": "行业",
-      "title": "稀土供需缺口持续扩大！稀土ETF易方达（159715）涨近3%，战略资源品属性凸显",
-      "source": "东方财富证券",
-      "url": "https://wap.eastmoney.com/a/202608073834936442.html"
     }
   ]
 }
