@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-07T03:46:05Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据我的钢铁网、亚洲金属网、百川盈孚、上海金属网、上海钢联最新数据，更新稀土及磁材市场信息，日期为2026年9月4日。",
+  "lastUpdated": "2026-09-07T04:14:54Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据2026年8月31日生意社数据更新，数据来源：生意社。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土及磁材市场短期波动有限，原料价格下行空间不大，市场对9月订单修复及价格上行存在一定预期，但终端需求对涨价的承接能力仍有待验证。",
+    "marketSummary": "稀土市场整体呈现震荡上行格局，轻稀土镨钕系价格有所下降，但月末有所反弹；中重稀土镝铽系表现更强。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -471,55 +471,55 @@
     "forecast": {
       "horizon": "近3个月",
       "forecastDate": "2026-09-07",
-      "basis": "供给端刚性约束与需求端增长，预计稀土价格将维持稳中偏强运行。",
+      "basis": "下游需求增长，政策支持，库存水平适中，预计稀土价格将保持稳定增长。",
       "months": [
         {
           "month": "2026-10",
-          "category": "轻稀土/重稀土",
-          "confidence": "高",
-          "basis": "下游需求旺季，叠加供给端刚性约束，预计价格将维持高位。",
-          "logic": "下游需求旺季，叠加供给端刚性约束，预计价格将维持高位。",
-          "prNdOxide": 85,
-          "ndOxide": 85,
-          "dysprosiumOxide": 160,
-          "terbiumOxide": 799.45,
-          "metalPrNd": 95,
-          "metalNd": 95,
-          "metalPr": 110,
-          "metalDy": 185,
-          "metalTb": 982.35
+          "category": "轻稀土",
+          "confidence": "中",
+          "basis": "新能源汽车和风电需求增加，供应端稳定，预计价格将小幅上涨。",
+          "logic": "下游需求增长，供应端稳定，价格有望上涨。",
+          "prNdOxide": 76.5,
+          "ndOxide": 82.0,
+          "dysprosiumOxide": 147.0,
+          "terbiumOxide": 680.0,
+          "metalPrNd": 92.0,
+          "metalNd": 99.0,
+          "metalPr": 107.0,
+          "metalDy": 181.0,
+          "metalTb": 770.0
         },
         {
           "month": "2026-11",
-          "category": "轻稀土/重稀土",
+          "category": "重稀土",
           "confidence": "高",
-          "basis": "下游需求持续旺盛，供给端刚性约束未变，预计价格将继续维持高位。",
-          "logic": "下游需求持续旺盛，供给端刚性约束未变，预计价格将继续维持高位。",
-          "prNdOxide": 90,
-          "ndOxide": 90,
-          "dysprosiumOxide": 170,
-          "terbiumOxide": 850,
-          "metalPrNd": 100,
-          "metalNd": 100,
-          "metalPr": 115,
-          "metalDy": 185,
-          "metalTb": 1050
+          "basis": "人形机器人和消费电子需求旺盛，政策支持力度不减，预计价格将大幅上涨。",
+          "logic": "下游需求强劲，政策支持，价格有望大幅上涨。",
+          "prNdOxide": 78.0,
+          "ndOxide": 83.5,
+          "dysprosiumOxide": 150.0,
+          "terbiumOxide": 700.0,
+          "metalPrNd": 94.0,
+          "metalNd": 101.0,
+          "metalPr": 109.0,
+          "metalDy": 185.0,
+          "metalTb": 810.0
         },
         {
           "month": "2026-12",
           "category": "轻稀土/重稀土",
-          "confidence": "高",
-          "basis": "下游需求逐渐减弱，但供给端刚性约束未变，预计价格将维持高位。",
-          "logic": "下游需求逐渐减弱，但供给端刚性约束未变，预计价格将维持高位。",
-          "prNdOxide": 88,
-          "ndOxide": 88,
-          "dysprosiumOxide": 175,
-          "terbiumOxide": 875,
-          "metalPrNd": 105,
-          "metalNd": 105,
-          "metalPr": 120,
-          "metalDy": 185,
-          "metalTb": 1100
+          "confidence": "中",
+          "basis": "年末备货需求增加，供应端稳定，预计价格将保持稳定。",
+          "logic": "年末备货需求增加，供应端稳定，价格有望保持稳定。",
+          "prNdOxide": 75.0,
+          "ndOxide": 80.5,
+          "dysprosiumOxide": 148.0,
+          "terbiumOxide": 690.0,
+          "metalPrNd": 91.0,
+          "metalNd": 98.0,
+          "metalPr": 106.0,
+          "metalDy": 182.0,
+          "metalTb": 780.0
         }
       ]
     },
@@ -530,7 +530,7 @@
       },
       {
         "title": "库存调节",
-        "detail": "根据市场需求和价格走势，适时调整库存水平，避免库存积压或短缺。"
+        "detail": "根据市场需求和价格走势，适时调整库存，避免库存积压或短缺。"
       },
       {
         "title": "产品结构调整",
@@ -3485,6 +3485,13 @@
       "url": "http://m.toutiao.com/group/7682465021477044765/?upstream_biz=VolcEngine"
     },
     {
+      "date": "2026-09-04",
+      "company": "行业",
+      "title": "供给端刚性约束与全球高端制造需求增长共振，稀土行业上行趋势不改",
+      "source": "界面新闻",
+      "url": "https://www.jiemian.com/article/15055569.html"
+    },
+    {
       "date": "2026-09-03",
       "company": "日本",
       "title": "继“拆空调找稀土”后，日本着手研发“废液回收稀土技术”",
@@ -3798,13 +3805,6 @@
       "title": "日媒称日本稀土进口仍依赖中国 替代供应难稳定",
       "source": "环球网",
       "url": "https://news.china.com/socialgd/10000169/20260820/49686615.html"
-    },
-    {
-      "date": "2026-08-20",
-      "company": "行业",
-      "title": "日媒称日本稀土进口仍依赖中国 替代供应难稳定",
-      "source": "环球网",
-      "url": "https://3g.china.com/act/news/10000169/20260820/49686615.html"
     }
   ]
 }
