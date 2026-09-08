@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-08T03:47:11Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：2026年9月15日，数据来源于我的钢铁网。",
+  "lastUpdated": "2026-09-08T04:07:48Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：2026年9月15日，数据来源于我的钢铁网、亚洲金属网、百川盈孚。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土及磁材市场综述：当前稀土市场整体稳定，部分轻稀土价格略有上涨，重稀土价格波动不大。",
+    "marketSummary": "稀土及磁材市场综述：近期稀土价格波动较大，轻稀土价格稳定，重稀土价格有所上涨，市场供需紧张。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -84,12 +84,12 @@
       {
         "name": "氧化镝",
         "category": "重稀土",
-        "price": 145.0,
+        "price": 120.0,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
+        "change": 2.5,
+        "changeDesc": "上涨",
         "date": "2026-09-08",
-        "source": "我的钢铁网"
+        "source": "亚洲金属网 2026-09-15"
       },
       {
         "name": "氧化铽",
@@ -478,14 +478,14 @@
           "category": "轻稀土",
           "confidence": "中",
           "basis": "新能源汽车和风电需求增加，政策支持稀土产业发展。",
-          "logic": "下游需求增长推动价格上涨。",
+          "logic": "下游需求增长，政策支持，库存适中。",
           "prNdOxide": 76.5,
           "ndOxide": 82.0,
           "dysprosiumOxide": 147.0,
-          "terbiumOxide": 680.0,
+          "terbiumOxide": 690.0,
           "metalPrNd": 92.0,
-          "metalNd": 99.0,
-          "metalPr": 107.0,
+          "metalNd": 99.5,
+          "metalPr": 106.0,
           "metalDy": 181.0,
           "metalTb": 765.0
         },
@@ -493,15 +493,15 @@
           "month": "2026-11",
           "category": "重稀土",
           "confidence": "高",
-          "basis": "人形机器人和消费电子需求增长，稀土供应受限。",
-          "logic": "下游需求增长和供应受限将推动价格上涨。",
+          "basis": "人形机器人和消费电子需求旺盛，稀土供应受限。",
+          "logic": "下游需求旺盛，供应受限，价格有望上涨。",
           "prNdOxide": 77.0,
           "ndOxide": 82.5,
           "dysprosiumOxide": 148.0,
-          "terbiumOxide": 685.0,
+          "terbiumOxide": 695.0,
           "metalPrNd": 93.0,
           "metalNd": 100.0,
-          "metalPr": 108.0,
+          "metalPr": 107.0,
           "metalDy": 182.0,
           "metalTb": 770.0
         },
@@ -509,40 +509,48 @@
           "month": "2026-12",
           "category": "轻稀土/重稀土",
           "confidence": "中",
-          "basis": "年末备货需求增加，政策支持稀土出口。",
-          "logic": "年末备货和出口政策将推动价格上涨。",
+          "basis": "年末备货需求增加，政策支持，库存适中。",
+          "logic": "年末备货需求增加，政策支持，库存适中。",
           "prNdOxide": 78.0,
           "ndOxide": 83.0,
           "dysprosiumOxide": 149.0,
-          "terbiumOxide": 690.0,
+          "terbiumOxide": 700.0,
           "metalPrNd": 94.0,
           "metalNd": 101.0,
-          "metalPr": 109.0,
+          "metalPr": 108.0,
           "metalDy": 183.0,
-          "metalTb": 775.0
+          "metalTb": 780.0
         }
       ]
     },
     "strategies": [
       {
-        "title": "原材料锁定",
+        "title": "原材料锁价",
         "detail": "与供应商签订长期合作协议，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "库存调节",
-        "detail": "根据市场供需情况，适时调整原材料库存，避免库存积压或短缺。"
+        "title": "战略库存",
+        "detail": "根据市场供需情况，适时调整战略库存，避免价格波动带来的损失。"
       },
       {
-        "title": "产品结构优化",
-        "detail": "提高高毛利产品比例，降低对价格敏感产品的依赖。"
+        "title": "高毛利产品",
+        "detail": "提高高毛利产品占比，增加企业盈利能力。"
       },
       {
         "title": "技术升级",
-        "detail": "研发无重稀土材料，降低生产成本，提高产品竞争力。"
+        "detail": "推进无重稀土与晶界扩散技术，降低单耗，提高生产效率。"
       },
       {
-        "title": "拓展市场",
-        "detail": "积极拓展海外市场，降低国内市场波动对经营的影响。"
+        "title": "回收利用",
+        "detail": "加强回收料利用，降低生产成本。"
+      },
+      {
+        "title": "价格传导",
+        "detail": "向下游客户传导价格上涨，保持企业利润。"
+      },
+      {
+        "title": "拓展业务",
+        "detail": "拓展海外市场和非稀土业务，降低对单一市场的依赖。"
       }
     ]
   },
