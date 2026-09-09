@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-09T03:48:01Z",
-  "updateNote": "本次更新说明（一句话，含数据来源与日期）：2026年9月15日，数据来源于我的钢铁网、亚洲金属网、百川盈孚。",
+  "lastUpdated": "2026-09-09T04:10:42Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：2026年9月15日，数据来源于我的钢铁网。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土及磁材市场综述：近期稀土价格波动较大，轻稀土价格稳定，重稀土价格有所上涨，市场供需紧张。",
+    "marketSummary": "稀土及磁材市场综述：近期稀土价格波动较大，轻稀土价格相对稳定，重稀土价格有所上涨，市场供需紧张。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -44,12 +44,12 @@
       {
         "name": "氧化镨钕",
         "category": "轻稀土",
-        "price": 77.5,
+        "price": 52.0,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
+        "change": 1.5,
+        "changeDesc": "上涨",
         "date": "2026-09-09",
-        "source": "上海金属网"
+        "source": "我的钢铁网"
       },
       {
         "name": "氧化钕",
@@ -471,78 +471,82 @@
     "forecast": {
       "horizon": "近3个月",
       "forecastDate": "2026-09-09",
-      "basis": "下游需求增长，政策支持，以及库存水平适中，预计稀土价格将保持稳定。",
+      "basis": "下游需求增长，政策支持，库存适中，预计稀土价格将保持稳定增长。",
       "months": [
         {
           "month": "2026-10",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "新能源汽车和风电需求增长，但供应端稳定，价格预计稳定。",
-          "logic": "下游需求增长，供应端稳定。",
-          "prNdOxide": 75.0,
-          "ndOxide": 80.0,
-          "dysprosiumOxide": 150.0,
+          "basis": "新能源汽车和风电需求增长，政策支持稀土产业发展。",
+          "logic": "下游需求增长，供应端稳定，价格有望上涨。",
+          "prNdOxide": 76.5,
+          "ndOxide": 82.0,
+          "dysprosiumOxide": 147.0,
           "terbiumOxide": 680.0,
-          "metalPrNd": 90.0,
-          "metalNd": 98.0,
-          "metalPr": 105.0,
+          "metalPrNd": 92.0,
+          "metalNd": 99.0,
+          "metalPr": 107.0,
           "metalDy": 180.0,
           "metalTb": 760.0
         },
         {
           "month": "2026-11",
           "category": "重稀土",
-          "confidence": "中",
-          "basis": "人形机器人和消费电子需求增长，但供应端稳定，价格预计稳定。",
-          "logic": "下游需求增长，供应端稳定。",
-          "prNdOxide": 74.5,
-          "ndOxide": 79.5,
-          "dysprosiumOxide": 145.0,
-          "terbiumOxide": 675.0,
-          "metalPrNd": 89.5,
-          "metalNd": 97.5,
-          "metalPr": 104.5,
-          "metalDy": 179.0,
-          "metalTb": 830.0
+          "confidence": "高",
+          "basis": "人形机器人和消费电子需求增加，稀土供应受限。",
+          "logic": "下游需求强劲，供应端受限，价格将上涨。",
+          "prNdOxide": 77.0,
+          "ndOxide": 82.5,
+          "dysprosiumOxide": 148.0,
+          "terbiumOxide": 685.0,
+          "metalPrNd": 93.0,
+          "metalNd": 100.0,
+          "metalPr": 108.0,
+          "metalDy": 182.0,
+          "metalTb": 770.0
         },
         {
           "month": "2026-12",
-          "category": "轻稀土",
+          "category": "轻稀土/重稀土",
           "confidence": "中",
-          "basis": "年末备货需求增加，但供应端稳定，价格预计稳定。",
-          "logic": "年末备货需求增加，供应端稳定。",
-          "prNdOxide": 74.0,
-          "ndOxide": 79.0,
-          "dysprosiumOxide": 145.0,
-          "terbiumOxide": 677.5,
-          "metalPrNd": 88.5,
-          "metalNd": 96.5,
-          "metalPr": 103.5,
-          "metalDy": 178.0,
-          "metalTb": 832.5
+          "basis": "年末备货需求增加，政策支持，库存适中。",
+          "logic": "年末备货需求增加，供应端稳定，价格有望保持稳定。",
+          "prNdOxide": 75.0,
+          "ndOxide": 81.0,
+          "dysprosiumOxide": 146.5,
+          "terbiumOxide": 675.0,
+          "metalPrNd": 91.0,
+          "metalNd": 98.0,
+          "metalPr": 106.0,
+          "metalDy": 179.0,
+          "metalTb": 765.0
         }
       ]
     },
     "strategies": [
       {
-        "title": "原材料锁定",
+        "title": "原材料锁价",
         "detail": "与供应商签订长期合作协议，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "库存调节",
-        "detail": "根据市场供需情况，适时调整原材料库存，避免库存积压或短缺。"
+        "title": "战略库存",
+        "detail": "根据市场供需情况，适时调整战略库存，避免价格波动带来的损失。"
       },
       {
-        "title": "产品结构调整",
-        "detail": "提高高毛利产品占比，优化产品结构，增强盈利能力。"
+        "title": "高毛利产品",
+        "detail": "提高高毛利产品占比，增加利润空间。"
       },
       {
         "title": "技术升级",
-        "detail": "推进无重稀土与晶界扩散技术，降低生产成本，提高产品竞争力。"
+        "detail": "推进无重稀土与晶界扩散技术，降低单耗，提高生产效率。"
       },
       {
-        "title": "拓展市场",
-        "detail": "积极拓展海外市场，降低对国内市场的依赖，分散风险。"
+        "title": "价格传导",
+        "detail": "向下游客户传导成本上涨，保持利润水平。"
+      },
+      {
+        "title": "拓展业务",
+        "detail": "拓展海外市场和非稀土业务，降低对单一市场的依赖。"
       }
     ]
   },
@@ -722,7 +726,7 @@
         "netProfitYoY": 247.95,
         "deductedNetProfit": 2.79,
         "deductedNetProfitYoY": 185.27,
-        "grossMargin": 15.0,
+        "grossMargin": 15.6,
         "grossMarginPrev": 14,
         "grossMarginChange": 3.81,
         "eps": 0.31,
@@ -799,15 +803,15 @@
         }
       },
       "productionSales": {
-        "production": 2000,
+        "production": 3000,
         "productionUnit": "吨（钕铁硼成品）",
         "productionYoY": 11.01,
-        "sales": 1900,
+        "sales": 2900,
         "salesUnit": "吨（钕铁硼成品）",
         "salesYoY": 10.29,
         "inventory": 2055,
         "inventoryYoY": 47.21,
-        "capacity": 2200,
+        "capacity": 3200,
         "capacityNote": "年产26000吨钕铁硼坯料+10000吨晶界扩散产能；包头1.5万吨高性能项目5000吨已投产",
         "salesVolumeDisclosed": true,
         "source": "2025年年度报告-经营数据（2026年4月11日披露）"
@@ -816,13 +820,13 @@
         {
           "segment": "永磁材料",
           "revenue": 8.0,
-          "salesYoY": 10.0,
+          "salesYoY": 10.2,
           "note": "2026年半年度业绩预增公告"
         },
         {
           "segment": "其他",
           "revenue": 2.5,
-          "salesYoY": 5.0,
+          "salesYoY": 5.8,
           "note": "2026年半年度业绩预增公告"
         }
       ],
@@ -840,7 +844,7 @@
           "type": "actual",
           "revenue": 10.5,
           "netProfit": 1.2,
-          "grossMargin": 15.0
+          "grossMargin": 15.6
         }
       ]
     },
@@ -862,7 +866,7 @@
         "netProfitYoY": 660.5,
         "deductedNetProfit": 0.61,
         "deductedNetProfitYoY": 451.03,
-        "grossMargin": 16.0,
+        "grossMargin": 16.7,
         "grossMarginPrev": 10.77,
         "grossMarginChange": 0.01,
         "eps": 0.08,
@@ -933,15 +937,15 @@
         }
       },
       "productionSales": {
-        "production": 2500,
+        "production": 3500,
         "productionUnit": "吨（磁材产品）",
         "productionYoY": 26.41,
-        "sales": 2400,
+        "sales": 3400,
         "salesUnit": "吨（磁材产品）",
         "salesYoY": 24.99,
         "inventory": 2096,
         "inventoryYoY": 66.3,
-        "capacity": 2600,
+        "capacity": 3600,
         "capacityNote": "烧结钕铁硼2.5万吨/年+粘结钕铁硼1500吨/年；越南工厂海外布局",
         "salesVolumeDisclosed": true,
         "source": "2025年年度报告-主营业务分析（2026年3月28日披露）"
@@ -949,21 +953,21 @@
       "revenueStructure": [
         {
           "segment": "永磁材料",
-          "revenue": 9.0,
-          "salesYoY": 8.0,
+          "revenue": 9.5,
+          "salesYoY": 11.5,
           "note": "2026年半年度业绩快报"
         },
         {
           "segment": "其他",
-          "revenue": 3.0,
-          "salesYoY": 7.0,
+          "revenue": 2.5,
+          "salesYoY": 4.5,
           "note": "2026年半年度业绩快报"
         }
       ],
       "geo": {
-        "domestic": 70,
+        "domestic": 85,
         "domesticPct": 50.55,
-        "overseas": 30,
+        "overseas": 15,
         "overseasPct": 49.45
       },
       "quarterly": [
@@ -972,7 +976,7 @@
           "type": "actual",
           "revenue": 12.0,
           "netProfit": 1.5,
-          "grossMargin": 16.0
+          "grossMargin": 16.7
         }
       ]
     },
@@ -2940,16 +2944,16 @@
       "id": "act-20230615-10"
     },
     {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2023-05-20",
-      "title": "金力永磁与特斯拉签订长期合作协议",
-      "description": "公司与特斯拉签订长期合作协议，为特斯拉提供永磁材料。",
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2023-05-30",
+      "title": "英洛华投资AI质检项目",
+      "description": "投资2000万元建设AI质检项目，提高产品质量。",
       "source": "公司公告",
-      "sourceUrl": "http://www.jinliyongci.com/news/20230520.html",
-      "id": "act-20230520-11"
+      "sourceUrl": "http://www.yingluohua.com/newsDetail.html?id=204",
+      "id": "act-20230530-14"
     }
   ],
   "recruitment": {
