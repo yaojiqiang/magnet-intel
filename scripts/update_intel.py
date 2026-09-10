@@ -92,18 +92,20 @@ def extract_json(text):
     fence = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
     if fence:
         text = fence.group(1)
+    lb = text.find("[")
     start = text.find("{")
-    if start == -1:
-        # 模型可能直接输出裸数组 [...]（无外层对象）：从首个 "[" 起解析并包成 {"items": ...}
-        lb = text.find("[")
-        if lb == -1:
-            return None
+    if lb != -1 and (start == -1 or lb < start):
+        # 顶层是裸数组 [...]（模型直接输出数组）：从首个 "[" 起解析并包成 {"items": ...}。
+        # 必须先比较 "[" 与 "{" 的先后：数组元素的 "{" 会让 find("{") 命中内部对象，
+        # 从而错误地只返回数组第一个元素（2026-09-10 单测发现）。
         try:
             _arr, _e = _dec.raw_decode(text[lb:])
         except Exception as e:
             log(f"顶层为数组但解析失败: {e}")
             return None
         return {"items": _arr} if isinstance(_arr, list) else None
+    if start == -1:
+        return None
     candidate = text[start:]
     # strict=False：允许字符串里出现原始控制字符（模型常把换行直接写进 JSON 字符串，
     # 默认解析会报 "Invalid control character"）。这是 news 解析失败的第二层原因。
