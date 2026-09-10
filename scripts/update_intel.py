@@ -708,7 +708,11 @@ def safe_merge(existing, new):
 #       匹配不上就留空（前端不渲染链接）—— 宁可不显示链接，也不显示错的链接。
 # ---------------------------------------------------------------------------
 _SEARCH_REFS = []
-URL_MATCH_MIN_SCORE = 0.62
+# 阈值 0.70：实测 0.62 会让模板化标题（如「XX：2026年X月X日投资者关系活动记录表」）相似度虚高，
+# 把金力永磁的条目错配到北方稀土的公告上；配合下面的「同名公司必须出现」规则一起收紧。
+URL_MATCH_MIN_SCORE = 0.70
+# 归一化标题的最短长度：过短的泛标题（如「业绩说明会」）容易随机命中
+URL_MATCH_MIN_TITLE_LEN = 8
 
 # 跨公司错配拦截用：参考结果标题提到别家公司、而条目属于另一家 => 拒绝匹配
 COMPANY_NAMES = ["金力永磁", "宁波韵升", "中科三环", "大地熊", "英洛华", "正海磁材", "天和磁材"]
@@ -785,14 +789,31 @@ def _company_conflict(item_name, ref_title):
     return not any(c in item_companies for c in mentioned)
 
 
+def _item_company_names(title, company_name=""):
+    """条目归属的公司名（来自标题或 companyName/company 字段）。"""
+    blob = (title or "") + "|" + (company_name or "")
+    return [c for c in COMPANY_NAMES if c in blob]
+
+
 def _match_ref_url(title, company_name=""):
-    """在本次运行的检索结果里找出该标题真正对应的原文链接；返回 (url, score)。"""
+    """在本次运行的检索结果里找出该标题真正对应的原文链接；返回 (url, score)。
+
+    三重收敛，宁缺勿错：
+      1) 归一化标题过短（< URL_MATCH_MIN_TITLE_LEN）不匹配，避免泛标题随机命中；
+      2) 参考标题提到的是别家公司 -> 拒绝（跨公司错配）；
+      3) 条目明确属于某家公司时，要求参考标题也出现同一家公司名 —— 用于挡住
+         「XX：2026年X月X日投资者关系活动记录表」这类模板化标题的虚高相似度
+         （实测 0.62 阈值下会把金力永磁的条目错配到北方稀土的公告链接）。
+    """
     nt = _norm_title(title)
-    if not nt or not _SEARCH_REFS:
+    if len(nt) < URL_MATCH_MIN_TITLE_LEN or not _SEARCH_REFS:
         return "", 0.0
+    names = _item_company_names(title, company_name)
     best_url, best_score = "", 0.0
     for r in _SEARCH_REFS:
         if _company_conflict(company_name, r["title"]):
+            continue
+        if names and not any(n in r["title"] for n in names):
             continue
         sc = _title_sim(nt, r["nt"])
         if sc > best_score:
