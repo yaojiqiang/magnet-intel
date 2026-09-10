@@ -2013,18 +2013,34 @@ def _baidu_search_once(query, api_key, count=15):
             keep.append(ch)
         q = "".join(keep)
     top_k = max(1, min(int(count or 15), 50))
-    resp = requests.post(
-        endpoint,
-        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-        json={
-            "messages": [{"role": "user", "content": q}],
-            "search_source": "baidu_search_v2",
-            "resource_type_filter": [{"type": "web", "top_k": top_k}],
-            "search_recency_filter": "month",   # 只取最近 30 天，配合动态/新闻的时效要求
-            "sort": {"priority": "auto"},       # 强时效性 query 自动排序
-        },
-        timeout=60,
-    )
+    # 限流容错（2026-09-10）：免费额度按天发放（约每天 50 次），单日超额或瞬时 QPS 超限会返回 429。
+    # 此前 raise_for_status() 直接抛错 → 该类查询全部 0 命中、对应板块当次拿不到新数据。
+    # 改为退避重试一次，仍失败则抛出明确错误（上层会记日志并保留现有数据）。
+    import time as _time
+    body = {
+        "messages": [{"role": "user", "content": q}],
+        "search_source": "baidu_search_v2",
+        "resource_type_filter": [{"type": "web", "top_k": top_k}],
+        "search_recency_filter": "month",   # 只取最近 30 天，配合动态/新闻的时效要求
+        "sort": {"priority": "auto"},       # 强时效性 query 自动排序
+    }
+    resp = None
+    for _attempt in range(3):
+        resp = requests.post(
+            endpoint,
+            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+            json=body,
+            timeout=60,
+        )
+        if resp.status_code == 429:
+            _wait = 3 * (_attempt + 1)
+            log(f"百度搜索限流 429（第 {_attempt + 1} 次），{_wait}s 后重试；"
+                f"若持续出现说明当日检索额度已用尽")
+            _time.sleep(_wait)
+            continue
+        break
+    if resp is not None and resp.status_code == 429:
+        raise RuntimeError("百度检索限流 429：当日额度可能已用尽，本次未取到数据（不影响其它板块）")
     resp.raise_for_status()
     data = resp.json()
     refs = data.get("references") or data.get("References") or []
