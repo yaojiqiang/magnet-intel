@@ -6,6 +6,13 @@
 <title>磁材行业竞社情报监测站</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+// chart.js 的 CDN 在国内经常不可达：主源失败时同步兜底换一个源。
+// 不兜底的话，顶层 Chart.defaults 会直接抛错、整个内联脚本挂掉（2026-09-10 发现的隐患）。
+if (typeof Chart === 'undefined') {
+  document.write('<script src="https://unpkg.com/chart.js@4.4.1/dist/chart.umd.min.js"><\/script>');
+}
+</script>
 <style>
 :root{
   --bg:#f0f2f5; --card:#fff; --border:#e0e3eb; --text:#1f2937; --text2:#6b7280;
@@ -406,9 +413,20 @@ async function initHistory(){
 }
 
 // ========== Chart defaults ==========
-Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif';
-Chart.defaults.color = '#6b7280';
-Chart.defaults.font.size = 12;
+// 守卫：chart.js 未加载时不能在这里抛错，否则整个内联脚本会挂掉、页面全空
+if (typeof Chart !== 'undefined') {
+  Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif';
+  Chart.defaults.color = '#6b7280';
+  Chart.defaults.font.size = 12;
+} else {
+  console.warn('chart.js 未加载（CDN 不可达？），图表将不渲染，其余内容不受影响');
+}
+
+// 图表创建的容错包装：chart.js 缺失或渲染失败时返回 null，不影响调用方继续执行
+function mkChart(canvas, cfg){
+  if (typeof Chart === 'undefined') return null;
+  try { return new Chart(canvas, cfg); } catch (e) { console.error('图表渲染失败', e); return null; }
+}
 
 const COMPANY_COLORS = { jinli:'#1565c0', yunsheng:'#e65100', sanhuan:'#2e7d32', zhenghai:'#6a1b9a', dadi:'#00838f', yingluohua:'#ad1457' };
 const COMPANY_NAMES = { jinli:'金力永磁', yunsheng:'宁波韵升', sanhuan:'中科三环', zhenghai:'正海磁材', dadi:'大地熊', yingluohua:'英洛华' };
@@ -478,7 +496,7 @@ function initPrices(){
   // Price history chart
   const fMonths = re.forecast ? re.forecast.months : [];
   const labels = [...re.priceHistory.map(d=>d.month), ...fMonths.map(m=>m.month)];
-  const ph = CHARTS['price-history'] = new Chart(document.getElementById('chart-price-history'),{
+  const ph = CHARTS['price-history'] = mkChart(document.getElementById('chart-price-history'),{
     type:'line',
     data:{
       labels,
@@ -512,7 +530,7 @@ function initPrices(){
   });
 
   // Metal price history chart
-  CHARTS['metal-history'] = new Chart(document.getElementById('chart-metal-history'),{
+  CHARTS['metal-history'] = mkChart(document.getElementById('chart-metal-history'),{
     type:'line',
     data:{
       labels,
