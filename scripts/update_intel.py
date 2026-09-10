@@ -723,6 +723,16 @@ COMPANY_NAMES = ["金力永磁", "宁波韵升", "中科三环", "大地熊", "�
 _PLACEHOLDER_URLS = {"", "无", "none", "null", "n/a", "na", "-", "--", "#", "空", "暂无", "公开信息"}
 
 
+class QuotaExhausted(RuntimeError):
+    """检索源免费额度已用尽（与瞬时限流区分：重试无用，应回退备源）。"""
+
+
+# 本次运行内已确认额度耗尽的检索源（避免每条查询都白试一轮）
+_DISABLED_SOURCES = set()
+# 本次运行实际使用的检索源（日志标签要显示真实来源，否则回退后会误导）
+_LAST_SEARCH_SOURCE = None
+
+
 def _url_ok(u):
     """是否为可点击的原文链接：必须 http(s)，且不能是裸域名首页（首页不构成「原文」）。"""
     u = (u or "").strip()
@@ -2034,14 +2044,21 @@ def _baidu_search_once(query, api_key, count=15):
             timeout=60,
         )
         if resp.status_code == 429:
-            _wait = 3 * (_attempt + 1)
-            log(f"百度搜索限流 429（第 {_attempt + 1} 次），{_wait}s 后重试；"
-                f"若持续出现说明当日检索额度已用尽")
+            _txt = (resp.text or "")[:400]
+            # 额度耗尽：实测响应体为 BILLING_INSUFFICIENT_BALANCE（未开后付费时直接拒绝）。
+            # 重试无用 —— 直接抛出，由 _search_once 切到备源。
+            if "BILLING_INSUFFICIENT_BALANCE" in _txt or "insufficient balance" in _txt.lower():
+                raise QuotaExhausted("百度检索免费额度已用尽（BILLING_INSUFFICIENT_BALANCE）")
+            _wait = 3 * (_attempt + 1)       # 瞬时限流：退避重试
+            log(f"百度搜索限流 429（第 {_attempt + 1} 次非额度问题），{_wait}s 后重试")
             _time.sleep(_wait)
             continue
         break
     if resp is not None and resp.status_code == 429:
-        raise RuntimeError("百度检索限流 429：当日额度可能已用尽，本次未取到数据（不影响其它板块）")
+        _txt = (resp.text or "")[:400]
+        if "BILLING_INSUFFICIENT_BALANCE" in _txt or "insufficient balance" in _txt.lower():
+            raise QuotaExhausted("百度检索免费额度已用尽（BILLING_INSUFFICIENT_BALANCE）")
+        raise RuntimeError("百度检索限流 429：本次未取到数据（不影响其它板块）")
     resp.raise_for_status()
     data = resp.json()
     refs = data.get("references") or data.get("References") or []
@@ -2087,18 +2104,53 @@ def _search_api_key():
     return os.environ.get("DOUBAO_SEARCH_API_KEY")
 
 
+_SOURCE_LABELS = {"baidu": "百度搜索", "doubao": "豆包搜索"}
+
+
+def _source_key(prov):
+    return os.environ.get("BAIDU_SEARCH_API_KEY" if prov == "baidu" else "DOUBAO_SEARCH_API_KEY")
+
+
 def _search_label():
-    return "百度搜索" if _search_provider() == "baidu" else "豆包搜索"
+    """日志标签：显示本次运行「实际在用」的检索源（回退后显示备源名）。"""
+    return _SOURCE_LABELS.get(_LAST_SEARCH_SOURCE or _search_provider(), "检索")
 
 
 def _search_once(query, count=15):
-    """统一联网检索入口：按 _search_provider() 分发到百度/豆包；未配置 Key 时返回空串。"""
-    key = _search_api_key()
-    if not key:
-        return ""
-    if _search_provider() == "baidu":
-        return _baidu_search_once(query, key, count=count)
-    return _doubao_search_once(query, key, count=count)
+    """统一联网检索入口：主源失败（额度用尽/限流/网络）时自动回退到备源。
+
+    两个源的免费额度相互独立（百度 1500 次/月、豆包 500 次/月），
+    而我们每天只跑 14 次 ≈ 420 次/月 —— 任一源单独都能撑住整月，
+    因此单源额度耗尽不再导致停更（2026-09-10 加固）。
+    """
+    global _LAST_SEARCH_SOURCE
+    primary = _search_provider()
+    order = [primary] + [p for p in ("baidu", "doubao") if p != primary]
+    last_err = None
+    for prov in order:
+        if prov in _DISABLED_SOURCES:
+            continue
+        key = _source_key(prov)
+        if not key:
+            continue
+        try:
+            if prov == "baidu":
+                out = _baidu_search_once(query, key, count=count)
+            else:
+                out = _doubao_search_once(query, key, count=count)
+            _LAST_SEARCH_SOURCE = prov
+            return out
+        except QuotaExhausted as e:
+            _DISABLED_SOURCES.add(prov)
+            log(f"{_SOURCE_LABELS[prov]}免费额度已用尽，本次运行改为完全使用备源：{e}")
+            last_err = e
+        except Exception as e:
+            last_err = e
+            log(f"{_SOURCE_LABELS[prov]}检索失败（非额度问题），尝试备源："
+                f"{type(e).__name__}: {str(e)[:120]}")
+    if last_err:
+        raise last_err
+    return ""
 
 
 def gather_doubao_context(api_key):
