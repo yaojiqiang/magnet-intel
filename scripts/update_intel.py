@@ -813,19 +813,19 @@ def build_news_prompt(existing):
 def gather_doubao_context_news(api_key):
     """新闻联网搜索：按『每家公司 + 行业多维』拆细查询，覆盖面远大于原先 3 个泛查询。"""
     _ym = f"{datetime.date.today().year}年{datetime.date.today().month}月"
-    # 精简至 2 条；额度预算见 DOUBAO_QUERIES_PER_RUN
+    # 精简至 2 条；额度预算见 DOUBAO_QUERIES_PER_RUN；查询词控制在 72 字符内
     queries = [
-        f"稀土永磁 行业 新闻 政策 价格 {_ym} 财联社 证券时报 上海证券报",
-        f"钕铁硼 稀土永磁 企业 {_ym} 最新新闻 公告 业绩 合作 订单",
+        f"稀土永磁 行业 新闻 政策 {_ym}",
+        f"钕铁硼 企业 公告 业绩 {_ym}",
     ]
     blocks = []
     for q in queries:
         try:
-            r = _doubao_search_once(q, api_key, count=15)
+            r = _search_once(q, count=15)
             if r:
                 blocks.append(f"查询「{q}」：\n{r}")
         except Exception as e:
-            log(f"豆包搜索(news)失败（{q}）：{e}")
+            log(f"{_search_label()}(news)失败（{q}）：{e}")
     # 上下文长度保护：按整块累积，最多约 32000 字，避免单次输入过长
     kept, total = [], 0
     for b in blocks:
@@ -834,7 +834,7 @@ def gather_doubao_context_news(api_key):
         kept.append(b)
         total += len(b)
     ctx = "\n\n".join(kept)
-    log(f"豆包搜索(news)：{len(blocks)}/{len(queries)} 个查询返回结果，上下文 {len(ctx)} 字")
+    log(f"{_search_label()}(news)：{len(blocks)}/{len(queries)} 个查询返回结果，上下文 {len(ctx)} 字")
     return ctx
 
 
@@ -845,8 +845,8 @@ def call_llm_news(prompt):
         if ctx:
             full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出真实可核实的增量新闻）：\n" + ctx
             return call_zhipu(full)
-        # 豆包搜索无结果（Key 失效/接口异常）→ 改用智谱 web_search 自行联网检索，确保新闻段不靠幻觉
-        log("news 豆包搜索无结果，改用智谱 web_search 自行联网检索最新新闻")
+        # 联网检索无结果（Key 失效/接口异常）→ 改用智谱 web_search 自行联网检索，确保新闻段不靠幻觉
+        log("news 联网检索无结果，改用智谱 web_search 自行联网检索最新新闻")
         return call_zhipu_websearch(prompt)
     if provider == "perplexity":
         return call_perplexity(prompt)
@@ -1316,23 +1316,23 @@ def gather_doubao_context_companies(api_key):
     off = datetime.date.today().toordinal() % len(_order)
     _order = _order[off:] + _order[:off]
     _code = {"宁波韵升": "600366", "金力永磁": "300748", "中科三环": "000970", "正海磁材": "300224"}
-    # 精简至 2 条：按轮换后的顺序两两分组，一条查询覆盖两家公司
+    # 精简至 2 条：按轮换后的顺序两两分组，一条查询覆盖两家公司；查询词控制在 72 字符内
     queries = []
     _half = max(1, len(_order) // 2)
     for _grp in (_order[:_half], _order[_half:]):
         if not _grp:
             continue
         queries.append(" ".join(f"{_n} {_code[_n]}" for _n in _grp) +
-                       " 2026年半年度报告 营业收入 归母净利润 经营现金流 分产品收入 毛利率 实际数据")
+                       " 2026年半年度报告 营收 净利")
     blocks = []
     for q in queries:
         try:
-            r = _doubao_search_once(q, api_key)
+            r = _search_once(q)
             if r:
                 blocks.append(f"查询「{q}」：\n{r}")
         except Exception as e:
-            log(f"豆包搜索(companies)失败（{q}）：{e}")
-    log(f"豆包搜索(companies)：{len(blocks)}/{len(queries)} 个查询返回结果")
+            log(f"{_search_label()}(companies)失败（{q}）：{e}")
+    log(f"{_search_label()}(companies)：{len(blocks)}/{len(queries)} 个查询返回结果")
     return "\n\n".join(blocks)
 
 
@@ -1343,9 +1343,9 @@ def call_llm_companies(prompt):
         if ctx:
             full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出确有新发布的经营数据增量）：\n" + ctx
             return call_zhipu(full)
-        # 豆包搜索无结果（Key 失效或接口异常）→ 改用智谱自带 web_search 自行联网检索，
+        # 联网检索无结果（Key 失效或接口异常）→ 改用智谱自带 web_search 自行联网检索，
         # 确保竞社经营数据在豆包不可用时仍能更新，而不是整段空白。
-        log("companies 豆包搜索无结果，改用智谱 web_search 自行联网检索最新经营数据")
+        log("companies 联网检索无结果，改用智谱 web_search 自行联网检索最新经营数据")
         return call_zhipu_websearch(prompt)
     if provider == "perplexity":
         return call_perplexity(prompt)
@@ -1471,20 +1471,20 @@ def build_forecast_prompt(existing):
 def gather_doubao_context_forecast(api_key):
     """针对“未来 3 个月稀土价格预测”的定向联网检索：覆盖供需、政策贸易、重稀土供给、下游需求、海外供给、季节性等。"""
     _ym = f"{datetime.date.today().year}年{datetime.date.today().month}月"
-    # 精简至 2 条；额度预算见 DOUBAO_QUERIES_PER_RUN
+    # 精简至 2 条；额度预算见 DOUBAO_QUERIES_PER_RUN；查询词控制在 72 字符内
     queries = [
-        f"稀土价格走势 {_ym} 后市 预测 氧化镨钕 镨钕金属 重稀土 机构观点",
-        f"稀土 供需 出口管制 开采配额 排产 收储 {_ym} 新能源汽车 风电 人形机器人 对价格影响",
+        f"稀土价格 走势 预测 {_ym}",
+        f"稀土 供需 出口管制 政策 {_ym}",
     ]
     blocks = []
     for q in queries:
         try:
-            r = _doubao_search_once(q, api_key, count=15)
+            r = _search_once(q, count=15)
             if r:
                 blocks.append(f"查询「{q}」：\n{r}")
         except Exception as e:
-            log(f"豆包搜索(forecast)失败（{q}）：{e}")
-    log(f"豆包搜索(forecast)：{len(blocks)}/{len(queries)} 个查询返回结果")
+            log(f"{_search_label()}(forecast)失败（{q}）：{e}")
+    log(f"{_search_label()}(forecast)：{len(blocks)}/{len(queries)} 个查询返回结果")
     return "\n\n".join(blocks)
 
 
@@ -1497,8 +1497,8 @@ def call_llm_forecast(prompt):
             full = (prompt + "\n\n以下是联网检索到的稀土市场参考信息"
                     "（请据此严格推理未来 3 个月各品类价格，不要简单线性外推历史）：\n" + ctx)
             return call_zhipu(full)
-        # 豆包搜索无结果 → 改用智谱 web_search 自行联网检索稀土市场信息后推理
-        log("forecast 豆包搜索无结果，改用智谱 web_search 自行联网检索稀土市场信息")
+        # 联网检索无结果 → 改用智谱 web_search 自行联网检索稀土市场信息后推理
+        log("forecast 联网检索无结果，改用智谱 web_search 自行联网检索稀土市场信息")
         return call_zhipu_websearch(prompt)
     if provider == "perplexity":
         return call_perplexity(prompt)
@@ -1693,24 +1693,110 @@ def _doubao_search_once(query, api_key, count=15):
     return "\n".join(lines)
 
 
+def _baidu_search_once(query, api_key, count=15):
+    """调用百度千帆「AI 搜索（百度搜索 v2）」，返回拼接的检索结果文本。
+    计费：每月免费 1500 次（按天发放约每天 50 次），超出后 ¥0.036/次；
+    中文网页（巨潮公告/证券媒体/行业协会）收录质量优于豆包，可作主力检索源。
+    注意：查询词上限 72 字符（一个汉字按 2 字符计），超长会被截断。
+    """
+    import requests
+    endpoint = os.environ.get("BAIDU_SEARCH_ENDPOINT") or "https://qianfan.baidubce.com/v2/ai_search/web_search"
+    q = (query or "").strip()
+    if _baidu_len(q) > 72:                      # 与官方口径一致：汉字按 2 字符计
+        acc, keep = 0, []
+        for ch in q:
+            acc += 2 if ord(ch) > 0x2E80 else 1
+            if acc > 72:
+                break
+            keep.append(ch)
+        q = "".join(keep)
+    top_k = max(1, min(int(count or 15), 50))
+    resp = requests.post(
+        endpoint,
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+        json={
+            "messages": [{"role": "user", "content": q}],
+            "search_source": "baidu_search_v2",
+            "resource_type_filter": [{"type": "web", "top_k": top_k}],
+            "search_recency_filter": "month",   # 只取最近 30 天，配合动态/新闻的时效要求
+            "sort": {"priority": "auto"},       # 强时效性 query 自动排序
+        },
+        timeout=60,
+    )
+    resp.raise_for_status()
+    data = resp.json()
+    refs = data.get("references") or data.get("References") or []
+    lines = []
+    for it in refs:
+        if not isinstance(it, dict):
+            continue
+        title = (it.get("title") or it.get("web_anchor") or "").strip()
+        body = (it.get("content") or it.get("snippet") or "").strip()
+        url = (it.get("url") or "").strip()
+        site = (it.get("website") or "").strip()
+        date = (it.get("date") or "").strip()
+        if not body:                            # 只保留有正文摘要的条目：空壳标题对合成无价值
+            continue
+        meta = "，".join(x for x in (
+            f"来源：{site or url}", (f"日期：{date}" if date else "")) if x)
+        lines.append(f"- 【{title}】{body}（{meta}）")
+    return "\n".join(lines)
+
+
+def _baidu_len(s):
+    """按百度口径计算查询词长度：汉字（含全角）按 2 字符计。"""
+    return sum(2 if ord(c) > 0x2E80 else 1 for c in (s or ""))
+
+
+def _search_provider():
+    """当前联网检索源：显式 SEARCH_PROVIDER 优先；否则按已配置的 Key 自动选择（百度优先，额度更大）。"""
+    p = (os.environ.get("SEARCH_PROVIDER") or "").strip().lower()
+    if p in ("baidu", "doubao"):
+        return p
+    if os.environ.get("BAIDU_SEARCH_API_KEY"):
+        return "baidu"
+    return "doubao"
+
+
+def _search_api_key():
+    """按当前检索源返回对应 Key（兼容原有 DOUBAO_SEARCH_API_KEY 配置）。"""
+    if _search_provider() == "baidu":
+        return os.environ.get("BAIDU_SEARCH_API_KEY")
+    return os.environ.get("DOUBAO_SEARCH_API_KEY")
+
+
+def _search_label():
+    return "百度搜索" if _search_provider() == "baidu" else "豆包搜索"
+
+
+def _search_once(query, count=15):
+    """统一联网检索入口：按 _search_provider() 分发到百度/豆包；未配置 Key 时返回空串。"""
+    key = _search_api_key()
+    if not key:
+        return ""
+    if _search_provider() == "baidu":
+        return _baidu_search_once(query, key, count=count)
+    return _doubao_search_once(query, key, count=count)
+
+
 def gather_doubao_context(api_key):
     """对若干查询调用豆包搜索，汇总为参考上下文。"""
     _ym = f"{datetime.date.today().year}年{datetime.date.today().month}月"
-    # 精简至 3 条；额度预算见 DOUBAO_QUERIES_PER_RUN
+    # 精简至 3 条；额度预算见 DOUBAO_QUERIES_PER_RUN；查询词控制在 72 字符内（百度限制）
     queries = [
-        f"氧化镨钕 氧化钕 氧化镝 氧化铽 价格 {_ym} 我的钢铁网 报价",
+        f"氧化镨钕 氧化钕 氧化镝 氧化铽 报价 {_ym}",
         f"金属镨 金属钕 金属镨钕 金属镝 金属铽 价格 {_ym}",
-        f"钕铁硼 稀土永磁 行业 价格 政策 出口 最新动态 {_ym}",
+        f"钕铁硼 稀土永磁 行业 动态 {_ym}",
     ]
     blocks = []
     for q in queries:
         try:
-            r = _doubao_search_once(q, api_key)
+            r = _search_once(q)
             if r:
                 blocks.append(f"查询「{q}」：\n{r}")
         except Exception as e:
-            log(f"豆包搜索失败（{q}）：{e}")
-    log(f"豆包搜索：{len(blocks)}/{len(queries)} 个查询返回结果")
+            log(f"{_search_label()}失败（{q}）：{e}")
+    log(f"{_search_label()}：{len(blocks)}/{len(queries)} 个查询返回结果")
     return "\n\n".join(blocks)
 
 
@@ -1723,20 +1809,20 @@ def gather_doubao_context_activities(api_key):
     _off = _t.toordinal() % len(_names)
     _names = _names[_off:] + _names[:_off]
     queries = [
-        f"{_names[0]} {_names[1]} {_ym} 公告 业绩 扩产 订单 合作 产能",
-        f"{_names[2]} {_names[3]} {_names[4]} {_ym} 公告 业绩 专利 技术 突破",
-        f"稀土永磁 钕铁硼 企业 {_ym} 重大项目 投产 中标 合作 订单",
-        f"稀土永磁 企业 {_ym} 机构调研 数字化 智能工厂 国家知识产权局 专利",
-        f"稀土 {_ym} 出口 供应链 政策 收储 行业动态 企业",
+        f"{_names[0]} {_names[1]} 公告 业绩 {_ym}",
+        f"{_names[2]} {_names[3]} {_names[4]} 公告 技术 {_ym}",
+        f"稀土永磁 企业 产能 项目 投产 {_ym}",
+        f"稀土永磁 机构调研 智能工厂 {_ym}",
+        f"稀土 出口 供应链 政策 收储 {_ym}",
     ]
     blocks = []
     for q in queries:
         try:
-            r = _doubao_search_once(q, api_key, count=15)
+            r = _search_once(q, count=15)
             if r:
                 blocks.append(f"查询「{q}」：\n{r}")
         except Exception as e:
-            log(f"豆包搜索(activities)失败（{q}）：{e}")
+            log(f"{_search_label()}(activities)失败（{q}）：{e}")
     kept, total = [], 0
     for b in blocks:
         if total + len(b) > 32000:
@@ -1744,7 +1830,7 @@ def gather_doubao_context_activities(api_key):
         kept.append(b)
         total += len(b)
     ctx = "\n\n".join(kept)
-    log(f"豆包搜索(activities)：{len(blocks)}/{len(queries)} 个查询返回结果，上下文 {len(ctx)} 字")
+    log(f"{_search_label()}(activities)：{len(blocks)}/{len(queries)} 个查询返回结果，上下文 {len(ctx)} 字")
     return ctx
 
 
@@ -1824,9 +1910,9 @@ def call_cn_free(prompt):
     if ctx:
         full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对并更新数据，数字以参考信息原文为准，不要编造）：\n" + ctx
         return call_zhipu(full)
-    # 豆包搜索无结果（Key 失效/接口异常）→ 改用智谱 web_search 自行联网检索后合成，
+    # 联网检索无结果（Key 失效/接口异常）→ 改用智谱 web_search 自行联网检索后合成，
     # 确保市场概况/价格/对策等主合成字段拿到真实数据，而不是回退为占位示例文本。
-    log("主合成（rareEarth/市场概况）豆包搜索无结果，改用智谱 web_search 自行联网检索")
+    log("主合成（rareEarth/市场概况）联网检索无结果，改用智谱 web_search 自行联网检索")
     return call_zhipu_websearch(prompt)
 
 
@@ -1849,8 +1935,8 @@ def call_llm_activities(prompt):
         if ctx:
             full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出真实可核实的增量动态）：\n" + ctx
             return call_zhipu(full)
-        # 豆包搜索无结果 → 改用智谱 web_search 自行联网检索，确保动态段不靠幻觉
-        log("activities 豆包搜索无结果，改用智谱 web_search 自行联网检索最新动态")
+        # 联网检索无结果 → 改用智谱 web_search 自行联网检索，确保动态段不靠幻觉
+        log("activities 联网检索无结果，改用智谱 web_search 自行联网检索最新动态")
         return call_zhipu_websearch(prompt)
     if provider == "perplexity":
         return call_perplexity(prompt)
@@ -1865,7 +1951,8 @@ REQUIRED_KEYS = {
     "openai": ["OPENAI_API_KEY"],
     "perplexity": ["PERPLEXITY_API_KEY"],
     "gemini": ["GEMINI_API_KEY"],
-    "cn-free": ["DOUBAO_SEARCH_API_KEY", "ZHIPU_API_KEY"],
+    # cn-free：智谱必填；联网检索源二选一（百度千帆 AI 搜索免费 1500 次/月 > 豆包 500 次/月）
+    "cn-free": ["ZHIPU_API_KEY"],
 }
 
 
@@ -1874,6 +1961,9 @@ def validate_provider():
     provider = (os.environ.get("LLM_PROVIDER") or "openai").lower()
     need = REQUIRED_KEYS.get(provider, ["OPENAI_API_KEY"])
     missing = [k for k in need if not os.environ.get(k)]
+    if provider == "cn-free" and not (os.environ.get("BAIDU_SEARCH_API_KEY")
+                                      or os.environ.get("DOUBAO_SEARCH_API_KEY")):
+        missing.append("BAIDU_SEARCH_API_KEY（或 DOUBAO_SEARCH_API_KEY）")
     if missing:
         raise RuntimeError(
             f"缺少必需密钥（provider={provider}）：{', '.join(missing)}。"
@@ -2164,5 +2254,24 @@ def main():
     send_email_report(summary, merged.get("lastUpdated"), os.environ.get("NOTIFY_EMAIL"))
 
 
+def _cli_check_search(queries=None):
+    """自检：直接调用当前联网检索源并打印原文，用于验证 Key 与接口是否可用。
+    用法：python scripts/update_intel.py --check-search "氧化镨钕 价格"
+    """
+    qs = queries or ["氧化镨钕 价格 我的钢铁网", "稀土永磁 行业 动态"]
+    log(f"检索源自检：provider={_search_provider()}，Key={'已配置' if _search_api_key() else '未配置'}，"
+        f"共 {len(qs)} 条查询")
+    for q in qs:
+        try:
+            r = _search_once(q, count=10)
+            log(f"查询「{q}」→ 返回 {len(r)} 字符")
+            print(r or "（无结果）")
+        except Exception as e:
+            log(f"查询「{q}」调用失败：{e}")
+
+
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1 and sys.argv[1] == "--check-search":
+        _cli_check_search(sys.argv[2:])
+    else:
+        main()
