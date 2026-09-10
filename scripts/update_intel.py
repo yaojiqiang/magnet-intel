@@ -92,6 +92,9 @@ def extract_json(text):
     fence = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
     if fence:
         text = fence.group(1)
+    # strict=False：允许字符串里出现原始控制字符（模型常把换行直接写进 JSON 字符串，
+    # 默认解析会报 "Invalid control character"）。必须定义在下面的裸数组分支之前。
+    _dec = json.JSONDecoder(strict=False)
     lb = text.find("[")
     start = text.find("{")
     if lb != -1 and (start == -1 or lb < start):
@@ -107,9 +110,6 @@ def extract_json(text):
     if start == -1:
         return None
     candidate = text[start:]
-    # strict=False：允许字符串里出现原始控制字符（模型常把换行直接写进 JSON 字符串，
-    # 默认解析会报 "Invalid control character"）。这是 news 解析失败的第二层原因。
-    _dec = json.JSONDecoder(strict=False)
     try:
         obj, _end = _dec.raw_decode(candidate)
         return obj
