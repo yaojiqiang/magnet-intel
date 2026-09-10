@@ -94,7 +94,16 @@ def extract_json(text):
         text = fence.group(1)
     start = text.find("{")
     if start == -1:
-        return None
+        # 模型可能直接输出裸数组 [...]（无外层对象）：从首个 "[" 起解析并包成 {"items": ...}
+        lb = text.find("[")
+        if lb == -1:
+            return None
+        try:
+            _arr, _e = _dec.raw_decode(text[lb:])
+        except Exception as e:
+            log(f"顶层为数组但解析失败: {e}")
+            return None
+        return {"items": _arr} if isinstance(_arr, list) else None
     candidate = text[start:]
     # strict=False：允许字符串里出现原始控制字符（模型常把换行直接写进 JSON 字符串，
     # 默认解析会报 "Invalid control character"）。这是 news 解析失败的第二层原因。
@@ -376,6 +385,20 @@ def _canon_current_prices(new_cp, existing_cp):
     if missing:
         log(f"currentPrices 既无新值也无历史数据，跳过：{missing}")
     return out
+
+
+def _coerce_key(obj, key):
+    """弱模型常把顶层键写错（items/data/articles/result…）。若 obj 缺少 key，
+    但对象里恰有非空数组值，就把它挂到 key 上，使后续校验逻辑无需改动。"""
+    if not isinstance(obj, dict) or isinstance(obj.get(key), list):
+        return obj
+    for k, v in obj.items():
+        if isinstance(v, list) and v:
+            log(f"顶层键「{key}」缺失，改用实际键「{k}」（{len(v)} 项）")
+            out = dict(obj)
+            out[key] = v
+            return out
+    return obj
 
 
 def _date_ok(date_str):
@@ -762,6 +785,7 @@ def update_activities(existing):
         log(f"activities LLM 调用失败，保留现有动态: {e}")
         return existing.get("activities") if isinstance(existing, dict) else []
     new = extract_json(raw)
+    new = _coerce_key(new, "activities")
     if not new or "activities" not in new or not isinstance(new["activities"], list):
         log("activities 未解析出有效 JSON（activities 数组），保留现有动态")
         return existing.get("activities") if isinstance(existing, dict) else []
@@ -842,6 +866,7 @@ def update_news(existing):
         log(f"news LLM 调用失败，保留现有新闻: {e}")
         return existing.get("news") if isinstance(existing, dict) else []
     new = extract_json(raw)
+    new = _coerce_key(new, "news")
     if not new or "news" not in new or not isinstance(new["news"], list):
         log("news 未解析出有效 JSON（news 数组），保留现有新闻")
         return existing.get("news") if isinstance(existing, dict) else []
