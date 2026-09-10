@@ -276,7 +276,10 @@ ACTIVITY_REQUIRED = {"company", "companyName", "dimension", "dimensionName", "da
 VALID_DIMENSIONS = {"market", "tech", "supply", "digital"}
 ACTIVITY_MAX = 150  # 动态列表上限：保留最新的 150 条（竞社动态本就应是较长的信息流）
 # 新闻动态（news）每日增量更新相关
-NEWS_REQUIRED = {"date", "company", "title", "source"}
+# 只强制 date/title：company/source 在 validate_news_item 里已有默认兜底（"行业"/"公开信息"），
+# 旧写法要求四者齐全却在返回时才兜底，自相矛盾 —— 弱模型少给一个字段就会被静默丢弃，
+# 表现为「news 无有效新项」而日志无任何拒绝原因（2026-09-10 实测）。
+NEWS_REQUIRED = {"date", "title"}
 NEWS_MAX = 60  # 新闻列表上限：保留最新的 60 条（新闻流应尽可能覆盖多源信息）
 
 # ── 时效守卫（新增动态/新闻的日期必须落在合理时间窗内）────────────────────
