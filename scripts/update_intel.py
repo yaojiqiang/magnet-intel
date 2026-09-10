@@ -244,10 +244,16 @@ REF_PRICES = {
     "氧化钕": 77.0, "金属镝": 167.5, "金属铽": 820.5, "氧化镝": 138.5, "氧化铽": 662.0,
 }
 # 各品类绝对合理区间（万元/吨），用于拦截明显的量级/单位错误
-BANDS = {
-    "金属镨": (80, 130), "金属钕": (70, 130), "金属镨钕": (70, 120), "氧化镨钕": (50, 110),
-    "氧化钕": (50, 120), "金属镝": (140, 185), "金属铽": (500, 1200), "氧化镝": (100, 220), "氧化铽": (450, 1000),
-}
+# 各品类合理区间（万元/吨）＝ REF_PRICES ±18%，由可靠基准价派生（单一事实来源）。
+# 收紧原因（2026-09-10）：原区间下限过松（氧化镨钕 50、氧化镝 100），
+# 使免费模型在“无联网检索”状态下给出的错误值被当作合法值写入线上
+# （氧化镨钕 77.5→53.5、氧化镝 145→110、氧化钕→50.1）。
+# 收紧后这些值落在区间外 → 自动回退 REF_PRICES 基准，反而能自我修复。
+PRICE_BAND_MARGIN = 0.18
+BANDS = {_k: (round(_v * (1 - PRICE_BAND_MARGIN), 1), round(_v * (1 + PRICE_BAND_MARGIN), 1))
+         for _k, _v in REF_PRICES.items()}
+# 供 prompt 引用（由 BANDS 派生，避免提示词里的区间与守卫实际阈值不一致）
+BAND_HINT = "、".join(f"{_k} {_lo}-{_hi}" for _k, (_lo, _hi) in BANDS.items())
 
 
 # 现货价格来源白名单（可信平台）。模型若返回白名单外的来源（如编造的“中国稀土行业协会”），
@@ -261,6 +267,20 @@ ACTIVITY_MAX = 150  # 动态列表上限：保留最新的 150 条（竞社动�
 # 新闻动态（news）每日增量更新相关
 NEWS_REQUIRED = {"date", "company", "title", "source"}
 NEWS_MAX = 60  # 新闻列表上限：保留最新的 60 条（新闻流应尽可能覆盖多源信息）
+
+# ── 时效守卫（新增动态/新闻的日期必须落在合理时间窗内）────────────────────
+# 背景（2026-09-10 事故）：豆包搜索免费额度耗尽后，免费模型在“无联网检索”状态下
+# 会编造 2022/2023 年的“旧闻”，或把日期写到未来；由于列表按日期倒序截断，
+# 未来日期还会永久占住列表顶部。此处统一拦截此类脏数据。
+FRESH_MAX_AGE_DAYS = 30              # 日常模式：新增条目最早可回溯天数
+FRESH_FUTURE_SLACK_DAYS = 1          # 允许的“未来”容差（吸收 UTC/北京时区差）
+FRESH_BACKFILL_FLOOR = "2020-01-01"  # 回填模式（BACKFILL=1）下的最早允许日期
+
+# ── 豆包搜索免费额度预算（免费版约 500 次/月）──────────────────────────
+# 单次运行查询数：主合成 3 + 竞社动态 5 + 新闻 2 + 经营数据 2 + 价格预测 2 = 14 次
+# 每日只运行 1 次（由 main() 的“每日只跑一次守卫”保证）→ 约 14×30 = 420 次/月，留有余量。
+# ⚠ 改动查询清单时请同步更新这里的预算，以免超出 500 次/月导致整月失去联网检索能力。
+DOUBAO_QUERIES_PER_RUN = 14
 
 # 竞社经营数据（companies）每日增量“报告刷新”相关
 KNOWN_COMPANY_IDS = {"jinli", "yunsheng", "sanhuan", "zhenghai"}
@@ -311,11 +331,34 @@ def _source_in_whitelist(src):
     return False
 
 
+def _date_ok(date_str):
+    """时效守卫：返回 (是否通过, 原因)。
+    规则：格式必须合法；禁止未来日期（容忍 FRESH_FUTURE_SLACK_DAYS 天时区差）；
+    日常模式禁止过老日期（超过 FRESH_MAX_AGE_DAYS 天，疑似旧闻/编造），回填模式放宽到底线。
+    """
+    s = str(date_str or "").strip()
+    if not re.match(r"^\d{4}-\d{1,2}-\d{1,2}$", s):
+        return False, f"日期格式非法 {s!r}"
+    try:
+        d = datetime.date(*[int(x) for x in s.split("-")])
+    except Exception:
+        return False, f"日期无法解析 {s!r}"
+    today = datetime.date.today()
+    if (d - today).days > FRESH_FUTURE_SLACK_DAYS:
+        return False, f"日期在未来 {s}（今天 {today.isoformat()}）"
+    if str(os.environ.get("BACKFILL", "")).lower() in ("1", "true", "yes", "backfill"):
+        if d < datetime.date.fromisoformat(FRESH_BACKFILL_FLOOR):
+            return False, f"日期过早 {s}（回填下限 {FRESH_BACKFILL_FLOOR}）"
+    elif (today - d).days > FRESH_MAX_AGE_DAYS:
+        return False, f"日期过老 {s}（超过 {FRESH_MAX_AGE_DAYS} 天，疑似旧闻/编造）"
+    return True, ""
+
+
 def reconcile_cp(new_cp, existing_cp):
     """
     两层合理性守卫（保护稀土现价不被免费模型的量级/单位错误写崩）：
       1) 绝对合理区间（BANDS）：区间内才可能被采纳；
-      2) 与“可信昨日价”比对，日度偏离 >±50% 视为跳变过大，信昨日价；
+      2) 与“可信昨日价”比对，日度偏离 >±15% 视为跳变过大，信昨日价；
       3) 若昨日价本身已被污染（不在区间），回退到已知可靠基准 REF_PRICES。
     返回（已被校正的）列表。
     """
@@ -331,7 +374,7 @@ def reconcile_cp(new_cp, existing_cp):
         if isinstance(newp, (int, float)) and lo <= newp <= hi:
             # 新值在合理区间
             if isinstance(prevp, (int, float)) and lo <= prevp <= hi and prevp != 0:
-                trusted = newp if abs(newp - prevp) / prevp <= 0.5 else prevp
+                trusted = newp if abs(newp - prevp) / prevp <= 0.15 else prevp
             else:
                 trusted = newp  # 昨日价不可信，直接信新值（其已在合理区间）
         else:
@@ -592,8 +635,9 @@ def merge_activities(existing, new_items):
             log(f"activities 新项 {i} 命中禁收录企业（正海磁材），跳过")
             continue
         date = str(it.get("date", "")).strip()
-        if not re.match(r"^\d{4}-\d{1,2}-\d{1,2}$", date):
-            log(f"activities 新项 {i} 日期非法 {date!r}，跳过")
+        _ok, _why = _date_ok(date)
+        if not _ok:
+            log(f"activities 新项 {i} 日期不可用（{_why}），跳过")
             continue
         dim = it.get("dimension")
         if dim not in VALID_DIMENSIONS:
@@ -672,7 +716,9 @@ def validate_news_item(it):
     if miss:
         return None
     date = str(it.get("date", "")).strip()
-    if not re.match(r"^\d{4}-\d{1,2}-\d{1,2}$", date):
+    _ok, _why = _date_ok(date)
+    if not _ok:
+        log(f"news 新项日期不可用（{_why}），跳过")
         return None
     title = str(it.get("title", "")).strip()
     if not title:
@@ -766,17 +812,11 @@ def build_news_prompt(existing):
 
 def gather_doubao_context_news(api_key):
     """新闻联网搜索：按『每家公司 + 行业多维』拆细查询，覆盖面远大于原先 3 个泛查询。"""
+    _ym = f"{datetime.date.today().year}年{datetime.date.today().month}月"
+    # 精简至 2 条；额度预算见 DOUBAO_QUERIES_PER_RUN
     queries = [
-        "稀土永磁 行业 新闻 政策 价格 2026年8月 财联社 证券时报",
-        "稀土 出口管制 供需 最新动态 2026年",
-        "钕铁硼 稀土永磁 专利 技术 突破 2026",
-        "金力永磁 2026 最新新闻 公告 业绩 扩产",
-        "宁波韵升 2026 最新新闻 公告 业绩 扩产",
-        "中科三环 2026 最新新闻 公告 业绩 重组",
-        "大地熊 2026 最新新闻 公告 专利",
-        "英洛华 2026 最新新闻 公告 业绩",
-        "稀土永磁 企业 合作 订单 2026年",
-        "正海磁材 稀土永磁 行业 新闻 2026年",
+        f"稀土永磁 行业 新闻 政策 价格 {_ym} 财联社 证券时报 上海证券报",
+        f"钕铁硼 稀土永磁 企业 {_ym} 最新新闻 公告 业绩 合作 订单",
     ]
     blocks = []
     for q in queries:
@@ -1276,11 +1316,14 @@ def gather_doubao_context_companies(api_key):
     off = datetime.date.today().toordinal() % len(_order)
     _order = _order[off:] + _order[:off]
     _code = {"宁波韵升": "600366", "金力永磁": "300748", "中科三环": "000970", "正海磁材": "300224"}
+    # 精简至 2 条：按轮换后的顺序两两分组，一条查询覆盖两家公司
     queries = []
-    for _nm in _order:
-        _c = _code[_nm]
-        queries.append(f"{_nm} {_c} 2026年半年度报告 营业收入 归母净利润 经营现金流 实际数据")
-        queries.append(f"{_nm} 2026半年报 分产品收入 海外收入 毛利率 产能")
+    _half = max(1, len(_order) // 2)
+    for _grp in (_order[:_half], _order[_half:]):
+        if not _grp:
+            continue
+        queries.append(" ".join(f"{_n} {_code[_n]}" for _n in _grp) +
+                       " 2026年半年度报告 营业收入 归母净利润 经营现金流 分产品收入 毛利率 实际数据")
     blocks = []
     for q in queries:
         try:
@@ -1420,25 +1463,18 @@ def build_forecast_prompt(existing):
         "  prNdOxide(氧化镨钕), ndOxide(氧化钕), dysprosiumOxide(氧化镝), terbiumOxide(氧化铽),\n"
         "  metalPrNd(金属镨钕), metalNd(金属钕), metalPr(金属镨), metalDy(金属镝), metalTb(金属铽)\n"
         "约束：预测价相对上一月（或最新实际价）的单月变化通常不超过 ±15%；数值须落在合理区间"
-        "（氧化镨钕/氧化钕 50-110、金属系 70-130、氧化镝 100-220、氧化铽 450-1000、"
-        "金属镝 140-185、金属铽 500-1200 万元/吨）。\n"
+        "（" + BAND_HINT + " 万元/吨）。\n"
         "仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
     )
 
 
 def gather_doubao_context_forecast(api_key):
     """针对“未来 3 个月稀土价格预测”的定向联网检索：覆盖供需、政策贸易、重稀土供给、下游需求、海外供给、季节性等。"""
+    _ym = f"{datetime.date.today().year}年{datetime.date.today().month}月"
+    # 精简至 2 条；额度预算见 DOUBAO_QUERIES_PER_RUN
     queries = [
-        "稀土价格走势 2026年下半年 预测 氧化镨钕 镨钕金属 机构观点 分析",
-        "稀土 供需 2026下半年 北方稀土 中国稀土集团 开采配额 冶炼分离指标 排产",
-        "稀土 出口管制 2026 最新 影响 镝 铽 价格",
-        "缅甸 稀土矿 进口 2026 停产 恢复 重稀土 供应 影响",
-        "氧化镝 氧化铽 重稀土 价格 2026 后市 展望 预测",
-        "钕铁硼 永磁 需求 2026 新能源汽车 风电 人形机器人 对稀土价格拉动",
-        "Lynas MP Materials 稀土供应 2026 产能 价格影响",
-        "稀土 收储 放储 2026 政策 对价格影响",
-        "美元指数 汇率 2026 稀土价格 影响 分析",
-        "稀土 价格 2026年9月 10月 11月 走势 预测 金九银十 年末备货",
+        f"稀土价格走势 {_ym} 后市 预测 氧化镨钕 镨钕金属 重稀土 机构观点",
+        f"稀土 供需 出口管制 开采配额 排产 收储 {_ym} 新能源汽车 风电 人形机器人 对价格影响",
     ]
     blocks = []
     for q in queries:
@@ -1659,11 +1695,12 @@ def _doubao_search_once(query, api_key, count=15):
 
 def gather_doubao_context(api_key):
     """对若干查询调用豆包搜索，汇总为参考上下文。"""
+    _ym = f"{datetime.date.today().year}年{datetime.date.today().month}月"
+    # 精简至 3 条；额度预算见 DOUBAO_QUERIES_PER_RUN
     queries = [
-        "稀土价格今日 氧化镨钕 金属镨钕 金属铽 我的钢铁网 2026年8月 报价",
-        "金属镨 金属钕 氧化镝 氧化铽 氧化钕 金属镝 最新价格 2026年8月",
-        "金力永磁 宁波韵升 中科三环 大地熊 英洛华 2026 最新动态 业绩 扩产 合作",
-        "钕铁硼 稀土永磁 行业 最新新闻 政策 2026年8月",
+        f"氧化镨钕 氧化钕 氧化镝 氧化铽 价格 {_ym} 我的钢铁网 报价",
+        f"金属镨 金属钕 金属镨钕 金属镝 金属铽 价格 {_ym}",
+        f"钕铁硼 稀土永磁 行业 价格 政策 出口 最新动态 {_ym}",
     ]
     blocks = []
     for q in queries:
@@ -1679,17 +1716,18 @@ def gather_doubao_context(api_key):
 
 def gather_doubao_context_activities(api_key):
     """竞社动态联网搜索：按『每家公司 + 维度/行业』拆细查询，覆盖面远大于原先 5 个泛查询。"""
+    _t = datetime.date.today()
+    _ym = f"{_t.year}年{_t.month}月"
+    # 精简至 5 条（动态是最有价值的板块）；公司顺序每日轮换，避免固定公司长期垫底漏报
+    _names = ["金力永磁", "宁波韵升", "中科三环", "大地熊", "英洛华"]
+    _off = _t.toordinal() % len(_names)
+    _names = _names[_off:] + _names[:_off]
     queries = [
-        "金力永磁 2026 公告 扩产 业绩 稀土永磁 合作 订单",
-        "宁波韵升 2026 公告 扩产 业绩 稀土永磁 合作",
-        "中科三环 2026 公告 重组 收购 扩产 业绩",
-        "大地熊 2026 公告 专利 业绩 稀土永磁",
-        "英洛华 2026 公告 业绩 重组 稀土永磁",
-        "稀土永磁 钕铁硼 行业 企业 产能 订单 合作 2026年",
-        "稀土永磁 企业 专利 技术 突破 国家知识产权局 2026",
-        "稀土永磁 企业 机构调研 数字化 2026年",
-        "钕铁硼 稀土 出口 企业 供应链 2026年",
-        "金力永磁 2026 半年报 业绩 机构调研",
+        f"{_names[0]} {_names[1]} {_ym} 公告 业绩 扩产 订单 合作 产能",
+        f"{_names[2]} {_names[3]} {_names[4]} {_ym} 公告 业绩 专利 技术 突破",
+        f"稀土永磁 钕铁硼 企业 {_ym} 重大项目 投产 中标 合作 订单",
+        f"稀土永磁 企业 {_ym} 机构调研 数字化 智能工厂 国家知识产权局 专利",
+        f"稀土 {_ym} 出口 供应链 政策 收储 行业动态 企业",
     ]
     blocks = []
     for q in queries:
@@ -1948,6 +1986,22 @@ def _history_has_today(last_updated=None):
         return False
 
 
+def _history_is_failure(day):
+    """判断某天的更新记录是否为“LLM 调用失败/保留现有数据”这类无效记录（是则允许当天重试）。"""
+    try:
+        base = os.path.dirname(DATA_PATH) or "."
+        hist_path = os.path.join(base, "update-history.json")
+        with open(hist_path, encoding="utf-8") as f:
+            history = json.load(f)
+        for h in (history if isinstance(history, list) else []):
+            if h.get("date") == day:
+                s = h.get("summary") or ""
+                return ("调用失败" in s) or ("保留现有数据" in s)
+        return False
+    except Exception:
+        return False
+
+
 def send_email_report(summary, last_updated, to_addr):
     """把更新摘要通过 SMTP 发送邮件。未配置 SMTP 凭据时安全跳过（不影响数据更新）。"""
     host = os.environ.get("SMTP_HOST")
@@ -1990,6 +2044,16 @@ def send_email_report(summary, last_updated, to_addr):
 
 
 def main():
+    # ── 每日只跑一次守卫 ──────────────────────────────────────────────
+    # 触发源有两个：GitHub schedule（03:30 UTC）+ cron-job.org 调用的 workflow_dispatch（约 04:00 UTC）。
+    # 双触发会把豆包搜索的每月免费额度用掉两倍（约 5 天耗尽 → 之后整月无联网检索、数据停更）。
+    # 因此真正调用 LLM 之前先判断：今天若已成功更新过，直接跳过（0 次检索、0 消耗）。
+    _today_utc = datetime.datetime.now(datetime.timezone.utc).date().isoformat()
+    _backfill = str(os.environ.get("BACKFILL", "")).lower() in ("1", "true", "yes", "backfill")
+    if not _backfill and _history_has_today(_today_utc) and not _history_is_failure(_today_utc):
+        log(f"今日（{_today_utc}）已有成功更新记录，跳过本次运行（避免重复消耗豆包免费检索额度）")
+        sys.exit(0)
+
     existing = load_existing()
     prompt = build_prompt(existing)
     try:
