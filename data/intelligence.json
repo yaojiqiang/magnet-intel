@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-10T13:32:39Z",
-  "updateNote": "本次更新说明（生意社，日期：2026-09-10 16:04:00）",
+  "lastUpdated": "2026-09-10T13:47:22Z",
+  "updateNote": "本次更新说明（生意社，日期：2026-09-08 09:01:49），数据截至2026年9月7日",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -96,8 +96,8 @@
         "category": "重稀土",
         "price": 672.5,
         "unit": "万元/吨",
-        "change": -5.0,
-        "changeDesc": "下跌（较上一交易日 5.0 万元/吨，已按同花顺/上海钢联 9/8 现货 6725 元/千克校正）",
+        "change": 0,
+        "changeDesc": "持平（与上一交易日一致）",
         "date": "2026-09-10",
         "source": "上海金属网"
       }
@@ -477,84 +477,80 @@
           "month": "2026-10",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "下游需求稳定，供给端受限，价格预计保持稳定。",
-          "logic": "新能源汽车和风电等主要下游需求保持稳定，同时中国稀土出口管制政策继续实施，限制了市场供给。",
-          "prNdOxide": 72.5,
+          "basis": "下游需求稳定，供给端管控趋严。",
+          "logic": "新能源汽车和风电等主要下游需求保持稳定，但中国稀土出口管制政策趋严，供给端受限。",
+          "prNdOxide": 72.75,
           "ndOxide": 79.5,
-          "dysprosiumOxide": 145.5,
-          "terbiumOxide": 675,
-          "metalPrNd": 90.5,
-          "metalNd": 97.5,
-          "metalPr": 102.5,
-          "metalDy": 180.5,
-          "metalTb": 855
+          "dysprosiumOxide": 145,
+          "terbiumOxide": 677.5,
+          "metalPrNd": 90,
+          "metalNd": 96.5,
+          "metalPr": 102,
+          "metalDy": 178,
+          "metalTb": 832.5
         },
         {
           "month": "2026-11",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "下游需求略有放缓，供给端压力加大。",
-          "logic": "虽然下游需求略有放缓，但中国稀土出口管制政策可能进一步收紧，市场供给端压力加大。",
-          "prNdOxide": 71.5,
-          "ndOxide": 78.5,
-          "dysprosiumOxide": 144.5,
-          "terbiumOxide": 665,
-          "metalPrNd": 89.5,
-          "metalNd": 96.5,
-          "metalPr": 101.5,
-          "metalDy": 179.5,
-          "metalTb": 835
+          "basis": "需求略有放缓，出口政策持续。",
+          "logic": "下游需求略有放缓，但中国稀土出口政策持续收紧，价格预计保持稳定。",
+          "prNdOxide": 73.5,
+          "ndOxide": 78,
+          "dysprosiumOxide": 145.5,
+          "terbiumOxide": 678,
+          "metalPrNd": 90.5,
+          "metalNd": 97,
+          "metalPr": 102.5,
+          "metalDy": 178.5,
+          "metalTb": 833
         },
         {
           "month": "2026-12",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "下游需求继续放缓，供给端压力持续。",
-          "logic": "下游需求继续放缓，同时中国稀土出口管制政策可能持续收紧，市场供给端压力持续。",
-          "prNdOxide": 70.5,
-          "ndOxide": 77.5,
-          "dysprosiumOxide": 143.5,
-          "terbiumOxide": 655,
-          "metalPrNd": 88.5,
-          "metalNd": 95.5,
-          "metalPr": 100.5,
-          "metalDy": 178.5,
-          "metalTb": 825
+          "basis": "需求平稳，政策影响持续。",
+          "logic": "下游需求平稳，中国稀土出口政策影响持续，价格预计小幅波动。",
+          "prNdOxide": 74.5,
+          "ndOxide": 78.5,
+          "dysprosiumOxide": 146,
+          "terbiumOxide": 678.5,
+          "metalPrNd": 91,
+          "metalNd": 98,
+          "metalPr": 103,
+          "metalDy": 179,
+          "metalTb": 834
         }
       ]
     },
     "strategies": [
       {
         "title": "原材料锁价长协",
-        "detail": "与稀土供应商签订长期锁价协议，稳定原料成本，降低价格波动风险。"
-      },
-      {
-        "title": "套期保值",
-        "detail": "利用期货市场进行套期保值操作，锁定未来稀土原料采购价格，规避价格下跌风险。"
+        "detail": "与稀土供应商签订锁价长协，稳定原料成本，对冲价格波动风险。"
       },
       {
         "title": "战略库存调节",
-        "detail": "根据市场趋势，适时增加或减少库存，以应对价格波动，优化成本结构。"
+        "detail": "根据市场趋势，择时调节库存水平，避免在价格高峰期采购，降低成本。"
       },
       {
-        "title": "提高高毛利产品占比",
-        "detail": "加大对高附加值、高毛利稀土产品的研发和生产力度，提升整体盈利能力。"
+        "title": "提升产品结构",
+        "detail": "提高高毛利/高牌号产品占比，增强盈利能力，减少对低利润产品的依赖。"
       },
       {
-        "title": "推进无重稀土技术",
-        "detail": "研发和推广无重稀土永磁材料技术，降低对重稀土的依赖，增强市场竞争力。"
+        "title": "技术降本增效",
+        "detail": "推进无重稀土与晶界扩散技术降低单耗，减少对重稀土的依赖，提升成本竞争力。"
       },
       {
         "title": "回收料利用",
-        "detail": "提高废旧稀土材料的回收利用率，降低原材料依赖，实现可持续发展。"
+        "detail": "增加回收料利用比例，降低原材料采购成本，实现绿色可持续发展。"
       },
       {
         "title": "价格传导",
-        "detail": "根据市场情况，适时向下游客户传导成本压力，保持自身利润空间。"
+        "detail": "根据市场情况，适时向下游客户进行价格传导，维持自身利润空间。"
       },
       {
-        "title": "拓展海外业务",
-        "detail": "积极拓展海外市场和业务，分散风险，寻找新的增长点。"
+        "title": "拓展非稀土业务",
+        "detail": "拓展海外/非稀土业务对冲，分散经营风险，增强企业抗风险能力。"
       }
     ]
   },
@@ -1175,6 +1171,18 @@
       "source": "百家号",
       "sourceUrl": "https://baijiahao.baidu.com/",
       "id": "act-20260909-08"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-09-09",
+      "title": "中科三环2026年上半年业绩表现",
+      "description": "中科三环上半年实现营业收入36.14亿元，同比增长21.16%；净利润1.19亿元，同比增长23.53%。",
+      "source": "新浪财经",
+      "sourceUrl": "https://finance.sina.com.cn/",
+      "id": "act-20260909-01"
     },
     {
       "company": "jinli",
