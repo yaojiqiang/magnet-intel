@@ -428,7 +428,11 @@ def reconcile_cp(new_cp, existing_cp):
                 trusted = newp  # 都没救，保留新值（总比崩好）
 
         if trusted is not None and trusted != newp:
-            log(f"currentPrices[{name}] 价格 {newp} 不可信（区间 {lo}~{hi}），已校正为 {trusted}")
+            if isinstance(newp, (int, float)) and lo <= newp <= hi:
+                _why = f"单日跳变过大（{prevp}→{newp}，超过 ±15%）"
+            else:
+                _why = f"越界（区间 {lo}~{hi}）"
+            log(f"currentPrices[{name}] 价格 {newp} 不可信（{_why}），已校正为 {trusted}")
             if trusted == prevp and isinstance(prev, dict):
                 it["price"] = prev.get("price")
                 it["unit"] = prev.get("unit", "万元/吨")
@@ -842,7 +846,7 @@ def build_news_prompt(existing):
         "大地熊、英洛华、正海磁材等）的新闻。\n\n"
         "【时间范围】" + window + "\n\n"
         "【输出要求】\n"
-        "仅输出 JSON：{\"news\": [ 最多40条，按日期倒序（最新在前） ]}\n"
+        "仅输出 JSON：{\"news\": [ 最多10条，按日期倒序（最新在前） ]}\n"
         "每条对象必须包含字段：\n"
         "  date(新闻日期，格式 YYYY-MM-DD), company(涉及企业名或\"行业\"), title(新闻标题), "
         "source(真实来源，如 证券时报/财联社/我的钢铁网/公司公告/新浪财经 等，严禁写\"网络\"等模糊来源), "
@@ -1635,14 +1639,14 @@ def build_activities_prompt(existing):
         "【维度归类澄清】工艺/技术类内容（晶界扩散、无重稀土、磁能积提升、研发工艺突破、新产品工艺等）必须归 tech（工艺技术）；只有明确属于智能工厂、AI 质检、自动化产线、工业互联网/数字化管控等智能制造/数字化内容才归 digital（数字化），二者不可混用。\n"
         "【时间范围】" + window + "\n\n"
         "【输出要求】\n"
-        "仅输出 JSON：{\"activities\": [ 最多60条，按日期倒序（最新在前） ]}\n"
+        "仅输出 JSON：{\"activities\": [ 最多12条，按日期倒序（最新在前） ]}\n"
         "每条对象必须包含字段：\n"
         "  company(上述代码), companyName(企业中文名), dimension(上述4个值之一), dimensionName(对应中文),\n"
-        "  date(事件发生日期，格式 YYYY-MM-DD), title(动态标题), description(2-4句客观描述，含关键数字/金额/比例),\n"
+        "  date(事件发生日期，格式 YYYY-MM-DD), title(动态标题), description(1-2句客观描述，含关键数字/金额/比例),\n"
         "  source(真实来源，如 公司公告/证券时报/上证报/公司官网/国家知识产权局 等，严禁写“网络”等模糊来源),\n"
         "  sourceUrl(可选，原文链接)\n"
         "规则：只收录真实发生、可核实的动态；不得编造日期、金额或来源；同一事件不要拆成多条。\n"
-        "【内容充实度与来源】尽量补充新动态条目（建议累计 20 条以上），description 须充实具体（含关键数字、背景、意义），不得仅一句话带过；可重点参考各公司及行业协会微信公众号发布的动态，source 标注公众号名称、sourceUrl 填文章链接，但须真实可核验，不得编造。\n"
+        "【内容充实度与来源】尽量补充新动态条目（建议 6-12 条，不要为凑数而编造或重复），description 须含关键数字，言简意赅；可重点参考各公司及行业协会微信公众号发布的动态，source 标注公众号名称、sourceUrl 填文章链接，但须真实可核验，不得编造。\n"
         "仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
     )
 
