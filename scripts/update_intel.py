@@ -1098,9 +1098,10 @@ def build_news_prompt(existing):
         "大地熊、英洛华、正海磁材等）的新闻。\n\n"
         "【时间范围】" + window + "\n\n"
         "【输出要求】\n"
-        "仅输出 JSON：{\"news\": [ 最多10条，按日期倒序（最新在前） ]}\n"
+        "仅输出 JSON：{\"news\": [ 最多6条，按日期倒序（最新在前） ]}\n"
         "每条对象必须包含字段：\n"
-        "  date(新闻日期，格式 YYYY-MM-DD), company(涉及企业名或\"行业\"), title(新闻标题), "
+        "  date(新闻日期，格式 YYYY-MM-DD), company(涉及企业名或\"行业\"), "
+        "title(新闻标题，严格不超过 30 个字，必须是标题而不是段落摘要——过长的 title 会导致本次输出被截断), "
         "source(真实来源，如 证券时报/财联社/我的钢铁网/公司公告/新浪财经 等，严禁写\"网络\"等模糊来源), "
         "url(固定填空字符串 \"\"，原文链接由系统按标题自动绑定，禁止填写任何网址)\n"
         "规则：只收录真实发生、可核实的新闻；不得编造日期、标题或来源；同一事件不要拆成多条。\n"
@@ -2036,9 +2037,10 @@ def _baidu_search_once(query, api_key, count=15):
         url = (it.get("url") or "").strip()
         site = (it.get("website") or "").strip()
         date = (it.get("date") or "").strip()
+        # 先登记链接：即使该条没有正文摘要（不喂给模型），它的真实 URL 仍可用于后续绑定
+        _register_search_ref(title, url, site, date)
         if not body:                            # 只保留有正文摘要的条目：空壳标题对合成无价值
             continue
-        _register_search_ref(title, url, site, date)   # 登记真实链接，供合并前确定性绑定
         meta = "，".join(x for x in (
             f"来源：{site or url}", (f"日期：{date}" if date else ""),
             (f"链接：{url}" if _url_ok(url) else "")) if x)
