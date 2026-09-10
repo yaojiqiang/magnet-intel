@@ -871,6 +871,11 @@ def update_news(existing):
     new = _coerce_key(new, "news")
     if not new or "news" not in new or not isinstance(new["news"], list):
         log("news 未解析出有效 JSON（news 数组），保留现有新闻")
+        # 诊断（2026-09-10）：打印模型原始返回与解析结果结构，用于定位是解析失败、键偏移还是值非数组
+        _t = str(raw)[:400]
+        log(f"news 原始返回前 400 字: {_t!r}")
+        log("news 解析结果: %s%s" % (type(new).__name__,
+              ("，顶层键=" + str(list(new.keys()))) if isinstance(new, dict) else ""))
         return existing.get("news") if isinstance(existing, dict) else []
     return merge_news(existing.get("news") if isinstance(existing, dict) else [], new["news"])
 
