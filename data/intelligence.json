@@ -13,93 +13,84 @@
     "currentPrices": [
       {
         "name": "金属镨",
-        "category": "轻稀土",
-        "price": 101.5,
+        "price": 101.0,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
+        "change": -0.5,
+        "changeDesc": "下跌（较上一交易日 0.50 万元/吨）",
         "date": "2026-09-10",
-        "source": "上海金属网"
+        "source": "我的钢铁网"
       },
       {
         "name": "金属钕",
-        "category": "轻稀土",
-        "price": 95.0,
+        "price": 95.5,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
+        "change": 0.5,
+        "changeDesc": "上涨（较上一交易日 0.50 万元/吨）",
         "date": "2026-09-10",
-        "source": "上海金属网"
+        "source": "我的钢铁网"
       },
       {
         "name": "金属镨钕",
-        "category": "轻稀土",
-        "price": 87.5,
+        "price": 90.0,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
+        "change": 2.5,
+        "changeDesc": "上涨（较上一交易日 2.50 万元/吨）",
         "date": "2026-09-10",
-        "source": "上海金属网"
+        "source": "我的钢铁网"
       },
       {
         "name": "氧化镨钕",
-        "category": "轻稀土",
-        "price": 71.7,
+        "price": 72.75,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
+        "change": 1.05,
+        "changeDesc": "上涨（较上一交易日 1.05 万元/吨）",
         "date": "2026-09-10",
         "source": "我的钢铁网"
       },
       {
         "name": "氧化钕",
-        "category": "轻稀土",
-        "price": 77.0,
+        "price": 77.25,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-10",
-        "source": "我的钢铁网"
-      },
-      {
-        "name": "氧化钬",
-        "category": "重稀土",
-        "price": 670000,
-        "unit": "万元/吨",
-        "change": 7500,
-        "changeDesc": "上涨",
+        "change": 0.25,
+        "changeDesc": "上涨（较上一交易日 0.25 万元/吨）",
         "date": "2026-09-10",
         "source": "我的钢铁网"
       },
       {
         "name": "金属镝",
-        "category": "重稀土",
-        "price": 165.2,
+        "price": 196.5,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
+        "change": 31.3,
+        "changeDesc": "上涨（较上一交易日 31.30 万元/吨）",
         "date": "2026-09-10",
         "source": "百川盈孚"
       },
       {
-        "name": "氧化镝",
-        "category": "重稀土",
-        "price": 138.5,
+        "name": "金属铽",
+        "price": 832.5,
         "unit": "万元/吨",
         "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
+        "changeDesc": "持平（较上一交易日暂无对比）",
         "date": "2026-09-10",
-        "source": "我的钢铁网"
+        "source": "亚洲金属网"
+      },
+      {
+        "name": "氧化镝",
+        "price": 146.5,
+        "unit": "万元/吨",
+        "change": 8.0,
+        "changeDesc": "上涨（较上一交易日 8.00 万元/吨）",
+        "date": "2026-09-10",
+        "source": "亚洲金属网"
       },
       {
         "name": "氧化铽",
-        "category": "重稀土",
         "price": 677.5,
         "unit": "万元/吨",
-        "change": 0,
+        "change": 0.0,
         "changeDesc": "持平（与上一交易日一致）",
         "date": "2026-09-10",
-        "source": "上海金属网（2026-08-27），8/29-30周末无新报价变动"
+        "source": "上海金属网"
       }
     ],
     "priceHistory": [
