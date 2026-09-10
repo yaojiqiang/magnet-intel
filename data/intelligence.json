@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-10T14:08:03Z",
-  "updateNote": "本次更新说明（生意社，日期：2026-09-08 09:01:49），数据截至2026年9月7日",
+  "lastUpdated": "2026-09-10T14:28:55Z",
+  "updateNote": "本次更新说明：根据生意社数据更新至2026年9月9日，部分品类当日无最新快讯，沿用最近报价。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -469,85 +469,88 @@
     ],
     "indexNote": "稀土价格指数来源：我的钢铁网。指数基期为2025年1月试运行基准。2025年6月、7月数据为实际公布值，其余月度数据为估算值。",
     "forecast": {
-      "horizon": "近3个月（应急兜底）",
+      "horizon": "近3个月",
       "forecastDate": "2026-09-10",
-      "basis": "应急兜底：联网推理不可用，按近 6 月均值保守持平（非联网推理）",
+      "basis": "综合供需/政策/需求与价格走势的推理结论（1-2句）",
       "months": [
         {
-          "month": "2026-09",
-          "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
-          "confidence": "低",
-          "logic": "数据不足，保守持平，非据实推理",
-          "prNdOxide": 73.73,
-          "ndOxide": 77.77,
-          "dysprosiumOxide": 146.2,
-          "terbiumOxide": 682.02,
-          "metalPrNd": 89.03,
-          "metalNd": 97.47,
-          "metalPr": 101.76,
-          "metalDy": 179.75,
-          "metalTb": 824.17
-        },
-        {
           "month": "2026-10",
-          "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
-          "confidence": "低",
-          "logic": "数据不足，保守持平，非据实推理",
-          "prNdOxide": 74.47,
-          "ndOxide": 78.55,
-          "dysprosiumOxide": 147.04,
-          "terbiumOxide": 685.19,
-          "metalPrNd": 89.92,
-          "metalNd": 98.44,
-          "metalPr": 102.78,
-          "metalDy": 180.97,
-          "metalTb": 815.93
+          "category": "轻稀土",
+          "confidence": "高",
+          "basis": "轻稀土市场整体呈现震荡运行态势，下游需求保持稳定，供给端国内开采配额与指标维持稳定，但出口受限将影响市场供应。",
+          "logic": "轻稀土需求来自新能源汽车、消费电子等领域，这些领域景气度稳定，但中国稀土出口受限将减少市场供应，对价格形成支撑。",
+          "prNdOxide": 72.5,
+          "ndOxide": 79.5,
+          "dysprosiumOxide": 145.0,
+          "terbiumOxide": 670.0,
+          "metalPrNd": 90.0,
+          "metalNd": 97.0,
+          "metalPr": 102.0,
+          "metalDy": 178.0,
+          "metalTb": 800.0
         },
         {
           "month": "2026-11",
-          "basis": "应急兜底：联网推理不可用，按近 6 月均值附近保守持平（非联网推理，仅供参考）",
-          "confidence": "低",
-          "logic": "数据不足，保守持平，非据实推理",
-          "prNdOxide": 75.21,
-          "ndOxide": 79.34,
-          "dysprosiumOxide": 147.63,
-          "terbiumOxide": 687.41,
-          "metalPrNd": 90.82,
-          "metalNd": 99.42,
-          "metalPr": 103.81,
-          "metalDy": 181.83,
-          "metalTb": 807.77
+          "category": "轻稀土",
+          "confidence": "中",
+          "basis": "轻稀土市场在10月份震荡基础上，预计11月份将保持稳定，下游需求无明显变化，供给端维持稳定。",
+          "logic": "轻稀土需求来自新能源汽车、消费电子等领域，这些领域景气度稳定，供给端国内开采配额与指标维持稳定，出口受限将影响市场供应，对价格形成支撑。",
+          "prNdOxide": 73.0,
+          "ndOxide": 80.0,
+          "dysprosiumOxide": 145.5,
+          "terbiumOxide": 675.0,
+          "metalPrNd": 91.0,
+          "metalNd": 98.0,
+          "metalPr": 103.0,
+          "metalDy": 179.0,
+          "metalTb": 810.0
+        },
+        {
+          "month": "2026-12",
+          "category": "轻稀土",
+          "confidence": "中",
+          "basis": "轻稀土市场在11月份稳定基础上，预计12月份将略有上涨，下游需求略有增加，供给端维持稳定。",
+          "logic": "轻稀土需求来自新能源汽车、消费电子等领域，这些领域景气度略有增加，供给端国内开采配额与指标维持稳定，出口受限将影响市场供应，对价格形成支撑。",
+          "prNdOxide": 74.0,
+          "ndOxide": 81.0,
+          "dysprosiumOxide": 146.0,
+          "terbiumOxide": 680.0,
+          "metalPrNd": 92.0,
+          "metalNd": 99.0,
+          "metalPr": 104.0,
+          "metalDy": 180.0,
+          "metalTb": 820.0
         }
       ]
     },
     "strategies": [
       {
-        "title": "原材料锁价长协",
-        "detail": "与稀土供应商签订锁价长协，锁定原料成本，规避价格波动风险。"
+        "title": "锁价长协",
+        "detail": "与稀土供应商签订长期锁价协议，稳定原料成本，规避价格波动风险。"
       },
       {
-        "title": "战略库存调节",
-        "detail": "根据市场趋势，择时调节原材料库存，降低高位采购成本，缓解成本传导压力。"
+        "title": "库存调节",
+        "detail": "根据市场趋势，择时调节战略库存，在价格低谷时增加采购，高峰时减少采购，平衡供需。"
       },
       {
-        "title": "提高高毛利产品占比",
-        "detail": "增加高牌号、高性能磁材产品占比，提升产品附加值，增强盈利能力。"
+        "title": "产品结构优化",
+        "detail": "提高高毛利/高牌号产品占比，降低对低附加值产品的依赖，提升整体盈利能力。"
       },
       {
-        "title": "推进无重稀土技术",
-        "detail": "研发推广无重稀土永磁材料技术，降低对重稀土的依赖，增强市场竞争力。"
+        "title": "技术降本",
+        "detail": "推进无重稀土与晶界扩散技术，降低稀土原料单耗，减少对重稀土的依赖，缓解成本压力。"
       },
       {
-        "title": "回收料利用",
-        "detail": "提高废旧磁材回收利用率，降低原材料采购成本，实现绿色可持续发展。"
+        "title": "回收利用",
+        "detail": "提高回收料利用比例，降低原材料采购成本，实现绿色可持续发展。"
       },
       {
         "title": "价格传导",
-        "detail": "根据原材料成本变化，适时向下游客户传导成本压力，保持合理利润空间。"
+        "detail": "根据原料成本变化，适时向下游客户进行价格传导，维持自身利润空间。"
       },
       {
-        "title": "拓展海外业务",
-        "detail": "拓展海外市场，分散市场风险，寻找新的增长点。"
+        "title": "海外业务",
+        "detail": "拓展海外/非稀土业务，对冲国内市场风险，实现多元化发展。"
       }
     ]
   },
@@ -804,8 +807,8 @@
       "revenueStructure": [
         {
           "segment": "车规级磁体",
-          "revenue": 19.2,
-          "salesYoY": 12.4,
+          "revenue": null,
+          "salesYoY": null,
           "note": "2026年半年度报告"
         }
       ],
@@ -839,11 +842,11 @@
       "officialSite": "https://www.san-huan.com.cn",
       "irSite": "https://www.szse.cn",
       "financials": {
-        "revenue": 12.88,
+        "revenue": 3.61377207687,
         "revenueYoY": -1.63,
         "mainRevenue": 63.77,
         "mainRevenuePct": 96.03,
-        "netProfit": 1.88,
+        "netProfit": 0.4921267933,
         "netProfitYoY": 660.5,
         "deductedNetProfit": 0.61,
         "deductedNetProfitYoY": 451.03,
@@ -1194,6 +1197,30 @@
       "id": "act-20260909-04"
     },
     {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-09-09",
+      "title": "大地熊:关于参加科创板2026年半年度新材料行业集体业绩说明会的公告",
+      "description": "大地熊计划于2026年9月18日参加科创板2026年半年度新材料行业集体业绩说明会。",
+      "source": "百家号",
+      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875854279099224332&wfr=spider&for=pc",
+      "id": "act-20260909-08"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-09-09",
+      "title": "中科三环:2026年半年度报告",
+      "description": "中科三环2026年上半年实现营业收入36.14亿元，同比增长21.16%。",
+      "source": "无",
+      "sourceUrl": "",
+      "id": "act-20260909-10"
+    },
+    {
       "company": "jinli",
       "companyName": "金力永磁",
       "dimension": "market",
@@ -1278,6 +1305,42 @@
       "id": "act-20260908-01"
     },
     {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-09-08",
+      "title": "金力永磁:拟审议半年度利润分配及H股可转债募资用途变更",
+      "description": "金力永磁拟于2026年9月24日召开临时股东大会，审议半年度利润分配预案及H股可转债募资用途变更，拟向股东每10股派发现金股息2.5元，变更原用于购回H股的1500万美元未动用募资用途。",
+      "source": "新浪港股-好仓工作室",
+      "sourceUrl": "",
+      "id": "act-20260908-01"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-09-08",
+      "title": "金力永磁:9月8日接受机构调研",
+      "description": "金力永磁于2026年9月8日接受多家机构调研，报告期内实现营业收入46.49亿元，同比增长32.57%，净利润4.62亿元，同比增长51.58%。",
+      "source": "网易",
+      "sourceUrl": "https://www.163.com/dy/article/L6BSDTKF051984TV.html",
+      "id": "act-20260908-02"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-09-08",
+      "title": "金力永磁:预计2027年底磁材产能将达6万吨/年 上半年净利同比增51.58%",
+      "description": "金力永磁包头三期项目主要工程主体基本完工，预计2027年底磁材产能将达6万吨/年。",
+      "source": "上海有色网",
+      "sourceUrl": "https://news.smm.cn/news/104106247",
+      "id": "act-20260908-09"
+    },
+    {
       "company": "yunsheng",
       "companyName": "宁波韵升",
       "dimension": "market",
@@ -1326,6 +1389,30 @@
       "id": "act-20260904-03"
     },
     {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-09-04",
+      "title": "英洛华:9月3日获融资买入484.81万元",
+      "description": "英洛华2026年上半年实现营业收入22.13亿元，同比增长27.63%，归母净利润1.29亿元，同比减少10.45%。",
+      "source": "百家号",
+      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875362193031281921&wfr=spider&for=pc",
+      "id": "act-20260904-03"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-09-04",
+      "title": "宁波韵升:公司将于9月14日召开2026年半年度业绩说明会",
+      "description": "宁波韵升计划于2026年9月14日举行半年度业绩说明会，披露2026年半年度报告。",
+      "source": "同花顺财经网",
+      "sourceUrl": "http://news.10jqka.com.cn/20260904/c679615995.shtml",
+      "id": "act-20260904-07"
+    },
+    {
       "company": "dadi",
       "companyName": "大地熊",
       "dimension": "tech",
@@ -1348,6 +1435,54 @@
       "source": "新浪财经",
       "sourceUrl": "",
       "id": "act-20260902-01"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-09-02",
+      "title": "英洛华:9月2日获融资买入658.09万元",
+      "description": "英洛华2026年上半年实现营业收入22.13亿元，同比增长27.63%，归母净利润1.29亿元，同比减少10.45%。",
+      "source": "百家号",
+      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875271584471139878&wfr=spider&for=pc",
+      "id": "act-20260902-04"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-09-02",
+      "title": "大地熊、宁国永磁申请钕铁硼厚磁体相关专利,改性夹层提升钕铁硼厚磁体力学与磁性能",
+      "description": "大地熊申请一项名为“一种钕铁硼厚磁体及其制备方法”的专利，通过改性高熵合金夹层提升磁体层间结合强度和矫顽力。",
+      "source": "新浪网",
+      "sourceUrl": "http://finance.sina.com.cn/stock/aigc/zl/2026-09-02/doc-iniqkvce1351332.shtml",
+      "id": "act-20260902-11"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-09-01",
+      "title": "英洛华:9月1日获融资买入715.24万元",
+      "description": "英洛华2026年上半年实现营业收入22.13亿元，同比增长27.63%，归母净利润1.29亿元，同比减少10.45%。",
+      "source": "百家号",
+      "sourceUrl": "https://www.163.com/dy/article/L5QFID7N05568W0A.html",
+      "id": "act-20260901-05"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-09-01",
+      "title": "英洛华:9月1日主力资金净卖出903.62万元",
+      "description": "英洛华2026年上半年实现营业收入22.13亿元，同比增长27.63%，归母净利润1.29亿元，同比减少10.45%。",
+      "source": "证券之星",
+      "sourceUrl": "https://stock.stockstar.com/RB2026090100024191.shtml",
+      "id": "act-20260901-06"
     },
     {
       "id": "act-20260830-jinli-supply-01",
@@ -2811,126 +2946,6 @@
       "title": "与盘毂动力战略合作，轴向磁通电机专用磁钢全球首次量产",
       "description": "与上海盘毂动力签署战略合作框架协议，共建联合研发中心，建立五年战略采购供应关系。6月5日联合推出PGH高性能磁钢，全球首次实现轴向磁通电机专用磁钢批量生产。需求清单来自eVTOL和人形机器人。",
       "source": "公司公告",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-20260401-digital-01",
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "digital",
-      "dimensionName": "数字化",
-      "date": "2026-04-01",
-      "title": "中科三环发布信息化三年规划，总部ERP项目进入蓝图设计",
-      "description": "2025年，公司建立由董事长任组长的公司级信息化工作组，编制《中科三环信息化三年规划》，明确以国科控股信息化要求为指引、通过三年左右时间逐步推动下属企业实现采购、销售、存货与财务管理一体贯通；启动总部ERP项目，完成核心模块蓝图设计，经贸分公司销售与采购管理系统进入UAT测试阶段；深化飞书OA应用，完成HR系统一期核心功能上线，初步构建一体化数字化协同体系。",
-      "source": "中科三环2025年度环境、社会及管治报告（巨潮资讯网/2026-04-01）",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-011",
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-03-28",
-      "title": "稀土原材料集中协同采购100%覆盖",
-      "description": "全面落地稀土原材料集中协同采购体系，集采占比实现100%，通过统筹采购需求、优化库存管理、动态调整采购策略，有效保障原材料稳定供应并降低采购成本。参股上游稀土冶炼企业，与北方稀土签订长期供货协议覆盖70%+原料需求。",
-      "source": "2025年年度报告",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-001",
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "smart",
-      "dimensionName": "智能制造",
-      "date": "2026-03-26",
-      "title": "组建超300人自动化与智能化团队",
-      "description": "2025年全年研发投入5.06亿元（+57.6%），组建超300人的自动化与智能化团队，投用653台工业机器人及11条自动化产线。已建成具身机器人电机转子自动化生产线。",
-      "source": "投资者关系活动记录表(2026-002)",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-002",
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-03-26",
-      "title": "包头三期2万吨绿色智造项目开工",
-      "description": "2025年底如期建成4万吨/年磁材产能（实际3.8万吨，利用率>90%）。包头三期\"年产2万吨高性能稀土永磁材料绿色智造项目\"已开工，部分工程主体通过验收，预计2027年底总产能达6万吨/年。",
-      "source": "2025年报+投资者关系活动",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-003",
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-03-26",
-      "title": "两大稀土集团长协采购占比72%",
-      "description": "与北方稀土集团、中国稀土集团建立长期战略合作，2025年从两大集团采购金额占总采购额72%。持有银海新材51%股权，2025年回收稀土原料3681吨。获国家首批通用出口许可证。",
-      "source": "投资者关系活动记录表",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-004",
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-03-26",
-      "title": "具身机器人转子小批量交付，墨西哥基地供货特斯拉",
-      "description": "积极配合世界知名科技公司进行具身机器人电机转子研发并有小批量产品交付。墨西哥基地已开始向特斯拉墨西哥工厂小批量供应高端磁材；欧洲基地斩获宝马iX3定点订单。对美出口5.01亿元（+39.80%）。",
-      "source": "投资者关系活动记录表+行业研报",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-20260320-digital-01",
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "digital",
-      "dimensionName": "数字化",
-      "date": "2026-03-20",
-      "title": "英洛华永磁事业部引入MES，生产数据自动采集率超98%",
-      "description": "公司永磁事业部持续推进车间智能化与数字化建设，引入MES生产管理系统，实现生产过程的自动数据采集、实时分析与精准调控；下属浙江英洛华磁业钕铁硼磁体数字化车间此前入选浙江省数字化车间/智能工厂名单，生产线自动化率达92%以上、数据自动采集率达98%以上。公司2024可持续发展报告同时披露：利用MES系统完善数据仓建设以实现智慧化管理，并建立AI智能助手与办公效率可视化看板推进办公数字化。",
-      "source": "东阳日报（2026-03-20）+ 英洛华2024可持续发展报告 + 横店集团官网",
-      "sourceUrl": ""
-    },
-    {
-      "company": "yunsheng",
-      "companyName": "宁波韵升",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-03-19",
-      "title": "宁波韵升增资2亿元用于15000吨高性能稀土永磁材料智能制造项目",
-      "description": "公司向控股子公司增资2亿元，用于实施15000吨高性能稀土永磁材料智能制造项目。",
-      "source": "本站原创",
-      "sourceUrl": "",
-      "id": "act-20260319-02"
-    },
-    {
-      "id": "act-005",
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2025-12-31",
-      "title": "晶界扩散产品占比超60%",
-      "description": "采用行业领先的晶界扩散技术，重稀土用量较传统工艺降低40%以上，晶界扩散产品占比已提升至60%以上，大幅降低原材料成本波动影响。",
-      "source": "2025年报+行业研报",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-20251105-digital-01",
-      "company": "dadi",
-      "companyName": "大地熊",
-      "dimension": "digital",
-      "dimensionName": "数字化",
-      "date": "2025-11-05",
-      "title": "大地熊获评安徽省数字化车间、合肥市智能工厂",
-      "description": "在2025年第三季度业绩说明会上，公司披露已获得安徽省绿色工厂、安徽省数字化车间、合肥市智能工厂认定，标志着公司在生产过程的数字化、智能化改造方面取得阶段性成果。",
-      "source": "大地熊2025年第三季度业绩说明会（上证路演中心/2025-11-05）",
       "sourceUrl": ""
     }
   ],
