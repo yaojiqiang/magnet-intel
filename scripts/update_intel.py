@@ -713,6 +713,9 @@ _SEARCH_REFS = []
 URL_MATCH_MIN_SCORE = 0.70
 # 归一化标题的最短长度：过短的泛标题（如「业绩说明会」）容易随机命中
 URL_MATCH_MIN_TITLE_LEN = 8
+# 条目日期与参考日期（含 URL 内嵌日期）的允许偏差：用于挡住「周期性模板标题」
+# （如「XX：海外监管公告内容摘要」每期同名）匹配到另一期、甚至去年同一模板的文章。
+URL_DATE_SLACK_DAYS = 45
 
 # 跨公司错配拦截用：参考结果标题提到别家公司、而条目属于另一家 => 拒绝匹配
 COMPANY_NAMES = ["金力永磁", "宁波韵升", "中科三环", "大地熊", "英洛华", "正海磁材", "天和磁材"]
@@ -795,15 +798,58 @@ def _item_company_names(title, company_name=""):
     return [c for c in COMPANY_NAMES if c in blob]
 
 
-def _match_ref_url(title, company_name=""):
+def _date_in_url(u):
+    """从 URL 里提取内嵌日期（很多媒体/公告链接把日期写进路径或编号）。取不到返回空串。"""
+    u = u or ""
+    pats = (
+        r"[=/](20\d{2})/(\d{2})(\d{2})",            # ?date=2026/0908
+        r"/(20\d{2})[-/]?(\d{2})[-/]?(\d{2})",      # /2026-09-08/  /20260908/
+        r"(20\d{2})[-/](\d{2})[-/](\d{2})",          # 2026-08-21（含 PDF 路径）
+        r"(?:AN|RB)(20\d{2})(\d{2})(\d{2})",         # 巨潮/证券之星公告编号
+        r"/(20\d{2})(\d{2})(\d{2})\d{6}",           # 东方财富 202609083868188459
+    )
+    for p in pats:
+        m = re.search(p, u)
+        if not m:
+            continue
+        try:
+            return datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3))).isoformat()
+        except Exception:
+            continue
+    return ""
+
+
+def _date_compatible(item_date, *cands):
+    """条目日期与候选日期需在 ±URL_DATE_SLACK_DAYS 内；取不到日期则视为通过。"""
+    if not item_date:
+        return True
+    try:
+        d0 = datetime.date.fromisoformat(str(item_date)[:10])
+    except Exception:
+        return True
+    for ds in cands:
+        if not ds:
+            continue
+        try:
+            d1 = datetime.date.fromisoformat(str(ds)[:10])
+        except Exception:
+            continue
+        if abs((d1 - d0).days) > URL_DATE_SLACK_DAYS:
+            return False
+    return True
+
+
+def _match_ref_url(title, company_name="", item_date=""):
     """在本次运行的检索结果里找出该标题真正对应的原文链接；返回 (url, score)。
 
-    三重收敛，宁缺勿错：
+    四重收敛，宁缺勿错：
       1) 归一化标题过短（< URL_MATCH_MIN_TITLE_LEN）不匹配，避免泛标题随机命中；
       2) 参考标题提到的是别家公司 -> 拒绝（跨公司错配）；
       3) 条目明确属于某家公司时，要求参考标题也出现同一家公司名 —— 用于挡住
          「XX：2026年X月X日投资者关系活动记录表」这类模板化标题的虚高相似度
-         （实测 0.62 阈值下会把金力永磁的条目错配到北方稀土的公告链接）。
+         （实测 0.62 阈值下会把金力永磁的条目错配到北方稀土的公告链接）；
+      4) 日期一致性：参考日期/URL 内嵌日期与条目日期相差超过 ±URL_DATE_SLACK_DAYS
+         则拒绝 —— 挡住「海外监管公告内容摘要」这类每期同名的模板标题匹配到去年的文章。
     """
     nt = _norm_title(title)
     if len(nt) < URL_MATCH_MIN_TITLE_LEN or not _SEARCH_REFS:
@@ -814,6 +860,8 @@ def _match_ref_url(title, company_name=""):
         if _company_conflict(company_name, r["title"]):
             continue
         if names and not any(n in r["title"] for n in names):
+            continue
+        if not _date_compatible(item_date, r.get("date"), _date_in_url(r["url"])):
             continue
         sc = _title_sim(nt, r["nt"])
         if sc > best_score:
@@ -832,7 +880,8 @@ def _attach_source_urls(items, url_key="sourceUrl", name_key="companyName"):
         if not isinstance(it, dict):
             continue
         old = str(it.get(url_key) or "").strip()
-        url, _sc = _match_ref_url(it.get("title") or "", it.get(name_key) or "")
+        url, _sc = _match_ref_url(it.get("title") or "", it.get(name_key) or "",
+                                  it.get("date") or "")
         if url:
             it[url_key] = url
             matched += 1
