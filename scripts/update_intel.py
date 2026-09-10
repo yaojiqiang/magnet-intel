@@ -698,6 +698,132 @@ def safe_merge(existing, new):
     return merged, errors, critical_fail
 
 
+# ---------------------------------------------------------------------------
+# 原文链接确定性绑定（2026-09-10）
+# 背景：此前 sourceUrl 由 LLM 生成，实测完全不可信 —— 149 条动态中 88 条（59%）共用了 26 个链接，
+#       同一链接被安到 4 家不同公司的不同事件上；另有大量网站首页链接与「无」等非法值，
+#       导致「查看原文」跳转内容与动态对不上、甚至打不开。
+# 方案：链接不由模型决定。检索阶段把真实结果的 (标题, 链接) 登记到 _SEARCH_REFS；
+#       合并前按标题相似度把每条动态/新闻绑定到它真正对应的那篇原文；
+#       匹配不上就留空（前端不渲染链接）—— 宁可不显示链接，也不显示错的链接。
+# ---------------------------------------------------------------------------
+_SEARCH_REFS = []
+URL_MATCH_MIN_SCORE = 0.62
+
+# 跨公司错配拦截用：参考结果标题提到别家公司、而条目属于另一家 => 拒绝匹配
+COMPANY_NAMES = ["金力永磁", "宁波韵升", "中科三环", "大地熊", "英洛华", "正海磁材", "天和磁材"]
+
+_PLACEHOLDER_URLS = {"", "无", "none", "null", "n/a", "na", "-", "--", "#", "空", "暂无", "公开信息"}
+
+
+def _url_ok(u):
+    """是否为可点击的原文链接：必须 http(s)，且不能是裸域名首页（首页不构成「原文」）。"""
+    u = (u or "").strip()
+    if u.lower() in _PLACEHOLDER_URLS:
+        return False
+    if not re.match(r"^https?://[^\s/]+", u, re.I):
+        return False
+    rest = re.sub(r"^https?://[^\s/]+", "", u, flags=re.I)
+    return rest.strip("/?#") != ""
+
+
+def _clean_url(u):
+    """清洗模型给出的链接：非法值（「无」/相对路径/裸域名/纯文字）一律返回空串。"""
+    return (u or "").strip() if _url_ok(u) else ""
+
+
+def _norm_title(s):
+    """标题归一化：仅保留中文与字母数字，用于相似度比较。"""
+    return re.sub(r"[^0-9a-z\u4e00-\u9fff]+", "", (s or "").lower())
+
+
+def _bigrams(s):
+    return {s[i:i + 2] for i in range(len(s) - 1)} if len(s) > 1 else ({s} if s else set())
+
+
+def _title_sim(a, b):
+    """标题相似度：完全一致 1.0；包含关系 0.85~0.98；否则二元组 Dice 系数。"""
+    if not a or not b:
+        return 0.0
+    if a == b:
+        return 1.0
+    if len(a) >= 8 and len(b) >= 8 and (a in b or b in a):
+        r = min(len(a), len(b)) / max(len(a), len(b))
+        return round(0.85 + 0.13 * r, 4)
+    A, B = _bigrams(a), _bigrams(b)
+    if not A or not B:
+        return 0.0
+    return 2 * len(A & B) / (len(A) + len(B))
+
+
+def _register_search_ref(title, url, website="", date=""):
+    """登记一条真实检索结果（仅接受可点击的文章页链接）。"""
+    if not _url_ok(url):
+        return
+    nt = _norm_title(title)
+    if not nt:
+        return
+    u = url.strip()
+    for r in _SEARCH_REFS:
+        if r["nt"] == nt and r["url"] == u:
+            return
+    _SEARCH_REFS.append({"nt": nt, "title": (title or "").strip(), "url": u,
+                         "website": website or "", "date": date or ""})
+
+
+def _company_conflict(item_name, ref_title):
+    """条目属于某家公司，而参考标题提到的是「别家」公司 => 跨公司错配，拒绝。
+    条目本身不是特定公司（如 news 的 company="行业"）时不做拦截。"""
+    if not item_name:
+        return False
+    item_companies = [c for c in COMPANY_NAMES if c in item_name or item_name in c]
+    if not item_companies:
+        return False
+    mentioned = [c for c in COMPANY_NAMES if c in (ref_title or "")]
+    if not mentioned:
+        return False
+    return not any(c in item_companies for c in mentioned)
+
+
+def _match_ref_url(title, company_name=""):
+    """在本次运行的检索结果里找出该标题真正对应的原文链接；返回 (url, score)。"""
+    nt = _norm_title(title)
+    if not nt or not _SEARCH_REFS:
+        return "", 0.0
+    best_url, best_score = "", 0.0
+    for r in _SEARCH_REFS:
+        if _company_conflict(company_name, r["title"]):
+            continue
+        sc = _title_sim(nt, r["nt"])
+        if sc > best_score:
+            best_score, best_url = sc, r["url"]
+    if best_score >= URL_MATCH_MIN_SCORE:
+        return best_url, best_score
+    return "", 0.0
+
+
+def _attach_source_urls(items, url_key="sourceUrl", name_key="companyName"):
+    """把每条动态/新闻绑定到检索到的真实原文；匹配不上则清空链接（不显示胜于显示错的）。"""
+    if not isinstance(items, list):
+        return items
+    matched, cleared = 0, 0
+    for it in items:
+        if not isinstance(it, dict):
+            continue
+        old = str(it.get(url_key) or "").strip()
+        url, _sc = _match_ref_url(it.get("title") or "", it.get(name_key) or "")
+        if url:
+            it[url_key] = url
+            matched += 1
+        else:
+            it[url_key] = ""
+            if old:
+                cleared += 1
+    log("原文链接绑定（%s）：%d/%d 条匹配到真实原文；%d 条原链接与检索结果对不上已清空"
+        % (url_key, matched, len(items), cleared))
+    return items
+
+
 def merge_activities(existing, new_items):
     """
     竞社动态「增量合并」守卫（核心防写坏逻辑）：
@@ -744,7 +870,7 @@ def merge_activities(existing, new_items):
             "title": str(it.get("title")).strip(),
             "description": str(it.get("description")).strip(),
             "source": str(it.get("source")).strip() or "公开信息",
-            "sourceUrl": str(it.get("sourceUrl") or "").strip(),
+            "sourceUrl": _clean_url(it.get("sourceUrl")),
         })
 
     if not valid:
@@ -791,6 +917,8 @@ def update_activities(existing):
     if not new or "activities" not in new or not isinstance(new["activities"], list):
         log("activities 未解析出有效 JSON（activities 数组），保留现有动态")
         return existing.get("activities") if isinstance(existing, dict) else []
+    # 原文链接确定性绑定：按标题匹配本次检索到的真实原文，模型给的链接一律丢弃
+    _attach_source_urls(new["activities"], "sourceUrl", "companyName")
     return merge_activities(
         existing.get("activities") if isinstance(existing, dict) else [],
         new["activities"],
@@ -821,7 +949,7 @@ def validate_news_item(it):
         "company": str(it.get("company", "")).strip() or "行业",
         "title": title,
         "source": str(it.get("source", "")).strip() or "公开信息",
-        "url": str(it.get("url") or "").strip(),
+        "url": _clean_url(it.get("url")),
     }
 
 
@@ -877,6 +1005,7 @@ def update_news(existing):
         log("news 解析结果: %s%s" % (type(new).__name__,
               ("，顶层键=" + str(list(new.keys()))) if isinstance(new, dict) else ""))
         return existing.get("news") if isinstance(existing, dict) else []
+    _attach_source_urls(new["news"], "url", "company")
     return merge_news(existing.get("news") if isinstance(existing, dict) else [], new["news"])
 
 
@@ -903,7 +1032,7 @@ def build_news_prompt(existing):
         "每条对象必须包含字段：\n"
         "  date(新闻日期，格式 YYYY-MM-DD), company(涉及企业名或\"行业\"), title(新闻标题), "
         "source(真实来源，如 证券时报/财联社/我的钢铁网/公司公告/新浪财经 等，严禁写\"网络\"等模糊来源), "
-        "url(可选，原文链接；无则留空字符串)\n"
+        "url(固定填空字符串 \"\"，原文链接由系统按标题自动绑定，禁止填写任何网址)\n"
         "规则：只收录真实发生、可核实的新闻；不得编造日期、标题或来源；同一事件不要拆成多条。\n"
         "仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
     )
@@ -1697,9 +1826,9 @@ def build_activities_prompt(existing):
         "  company(上述代码), companyName(企业中文名), dimension(上述4个值之一), dimensionName(对应中文),\n"
         "  date(事件发生日期，格式 YYYY-MM-DD), title(动态标题), description(1-2句客观描述，含关键数字/金额/比例),\n"
         "  source(真实来源，如 公司公告/证券时报/上证报/公司官网/国家知识产权局 等，严禁写“网络”等模糊来源),\n"
-        "  sourceUrl(可选，原文链接)\n"
+        "  sourceUrl(固定填空字符串 \"\"，原文链接由系统按标题自动绑定，禁止填写任何网址)\n"
         "规则：只收录真实发生、可核实的动态；不得编造日期、金额或来源；同一事件不要拆成多条。\n"
-        "【内容充实度与来源】尽量补充新动态条目（建议 6-12 条，不要为凑数而编造或重复），description 须含关键数字，言简意赅；可重点参考各公司及行业协会微信公众号发布的动态，source 标注公众号名称、sourceUrl 填文章链接，但须真实可核验，不得编造。\n"
+        "【内容充实度与来源】尽量补充新动态条目（建议 6-12 条，不要为凑数而编造或重复），description 须含关键数字，言简意赅；可重点参考各公司及行业协会微信公众号发布的动态，source 标注公众号名称；sourceUrl 一律留空字符串（链接由系统自动绑定真实原文，你填了也会被覆盖）。\n"
         "仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
     )
 
@@ -1788,6 +1917,7 @@ def _doubao_search_once(query, api_key, count=15):
         summary = it.get("Summary", "") or ""
         url = it.get("Url", "") or ""
         if title or summary:
+            _register_search_ref(title, url)               # 登记真实链接，供合并前确定性绑定
             lines.append(f"- 【{title}】{summary}（来源：{url}）")
     return "\n".join(lines)
 
@@ -1836,8 +1966,10 @@ def _baidu_search_once(query, api_key, count=15):
         date = (it.get("date") or "").strip()
         if not body:                            # 只保留有正文摘要的条目：空壳标题对合成无价值
             continue
+        _register_search_ref(title, url, site, date)   # 登记真实链接，供合并前确定性绑定
         meta = "，".join(x for x in (
-            f"来源：{site or url}", (f"日期：{date}" if date else "")) if x)
+            f"来源：{site or url}", (f"日期：{date}" if date else ""),
+            (f"链接：{url}" if _url_ok(url) else "")) if x)
         lines.append(f"- 【{title}】{body}（{meta}）")
     return "\n".join(lines)
 
