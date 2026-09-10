@@ -80,7 +80,12 @@ def _repair_json(text):
 
 
 def extract_json(text):
-    """从 LLM 返回文本中提取 JSON 对象，必要时尝试修复。"""
+    """从 LLM 返回文本中提取 JSON 对象，必要时尝试修复。
+
+    要点：模型常在输出 JSON 之后追加解释文字、或再输出一段内容。旧实现用 rfind("}")
+    取「最后一个」右大括号，会把尾部杂质一起切进来 → 报 "Extra data"（news 长期因此解析失败）。
+    现改用 JSONDecoder.raw_decode()：从第一个 "{" 起只解析首个完整对象，其后内容自动忽略。
+    """
     if not text:
         return None
     text = text.strip()
@@ -88,18 +93,22 @@ def extract_json(text):
     if fence:
         text = fence.group(1)
     start = text.find("{")
-    end = text.rfind("}")
-    if start != -1 and end != -1 and end > start:
-        text = text[start:end + 1]
+    if start == -1:
+        return None
+    candidate = text[start:]
+    _dec = json.JSONDecoder()
     try:
-        return json.loads(text)
+        obj, _end = _dec.raw_decode(candidate)
+        return obj
     except Exception as e:
         log(f"JSON 解析失败（首次）: {e}，尝试修复")
-        try:
-            return json.loads(_repair_json(text))
-        except Exception as e2:
-            log(f"JSON 修复后仍解析失败: {e2}")
-            return None
+    repaired = _repair_json(candidate)
+    try:
+        obj, _end = _dec.raw_decode(repaired)
+        return obj
+    except Exception as e2:
+        log(f"JSON 修复后仍解析失败: {e2}")
+        return None
 
 
 # ---------------------------------------------------------------------------
@@ -391,7 +400,10 @@ def reconcile_cp(new_cp, existing_cp):
     """
     两层合理性守卫（保护稀土现价不被免费模型的量级/单位错误写崩）：
       1) 绝对合理区间（BANDS）：区间内才可能被采纳；
-      2) 与“可信昨日价”比对，日度偏离 >±15% 视为跳变过大，信昨日价；
+      2) 与“可信昨日价”比对，日度偏离 >±20% 视为跳变过大，信昨日价
+         （2026-09-10 由 ±15% 放宽：金属镝真实价自 9/1 起为 196.5 万元/吨，而线上旧值被写坏成 165.2，
+           +18.9% 的“水平修正”被 ±15% 永久拒绝 → 错值永远改不回来；±20% 既能放行该修正，
+           又能挡住无检索时期观测到的 -24%/-31% 垃圾跳变）；
       3) 若昨日价本身已被污染（不在区间），回退到已知可靠基准 REF_PRICES。
     返回（已被校正的）列表。
     """
@@ -415,7 +427,11 @@ def reconcile_cp(new_cp, existing_cp):
         if isinstance(newp, (int, float)) and lo <= newp <= hi:
             # 新值在合理区间
             if isinstance(prevp, (int, float)) and lo <= prevp <= hi and prevp != 0:
-                trusted = newp if abs(newp - prevp) / prevp <= 0.15 else prevp
+                _jump = abs(newp - prevp) / prevp
+                if _jump > 0.15 and _jump <= 0.20:
+                    log(f"⚠ currentPrices[{name}] 单日变动 {prevp}→{newp}"
+                        f"（{_jump*100:.1f}%）超过 15%，但在 ±20% 内，按新值采纳（疑似水平修正）")
+                trusted = newp if _jump <= 0.20 else prevp
             else:
                 trusted = newp  # 昨日价不可信，直接信新值（其已在合理区间）
         else:
