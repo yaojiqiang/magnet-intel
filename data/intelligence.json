@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-10T13:47:22Z",
-  "updateNote": "本次更新说明（生意社，日期：2026-09-08 09:01:49），数据截至2026年9月7日",
+  "lastUpdated": "2026-09-10T13:52:00Z",
+  "updateNote": "本次更新说明（生意社，日期：2026-09-10 16:04:00）",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -478,79 +478,83 @@
           "category": "轻稀土",
           "confidence": "高",
           "basis": "下游需求稳定，供给端管控趋严。",
-          "logic": "新能源汽车和风电等主要下游需求保持稳定，但中国稀土出口管制政策趋严，供给端受限。",
-          "prNdOxide": 72.75,
-          "ndOxide": 79.5,
-          "dysprosiumOxide": 145,
-          "terbiumOxide": 677.5,
+          "logic": "新能源汽车和风电等主要下游需求保持稳定，同时中国稀土出口管控趋严，预计将支撑价格。",
+          "prNdOxide": 74,
+          "ndOxide": 79,
+          "dysprosiumOxide": 144,
+          "terbiumOxide": 680,
           "metalPrNd": 90,
-          "metalNd": 96.5,
+          "metalNd": 99,
           "metalPr": 102,
-          "metalDy": 178,
-          "metalTb": 832.5
+          "metalDy": 180,
+          "metalTb": 760
         },
         {
           "month": "2026-11",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "需求略有放缓，出口政策持续。",
-          "logic": "下游需求略有放缓，但中国稀土出口政策持续收紧，价格预计保持稳定。",
-          "prNdOxide": 73.5,
+          "basis": "下游需求平稳，供给端维持紧缩。",
+          "logic": "下游需求平稳，但供给端维持紧缩，预计价格将保持相对稳定。",
+          "prNdOxide": 73,
           "ndOxide": 78,
-          "dysprosiumOxide": 145.5,
-          "terbiumOxide": 678,
-          "metalPrNd": 90.5,
+          "dysprosiumOxide": 145,
+          "terbiumOxide": 675,
+          "metalPrNd": 88,
           "metalNd": 97,
-          "metalPr": 102.5,
-          "metalDy": 178.5,
-          "metalTb": 833
+          "metalPr": 101,
+          "metalDy": 178,
+          "metalTb": 830
         },
         {
           "month": "2026-12",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "需求平稳，政策影响持续。",
-          "logic": "下游需求平稳，中国稀土出口政策影响持续，价格预计小幅波动。",
-          "prNdOxide": 74.5,
-          "ndOxide": 78.5,
-          "dysprosiumOxide": 146,
-          "terbiumOxide": 678.5,
-          "metalPrNd": 91,
-          "metalNd": 98,
-          "metalPr": 103,
-          "metalDy": 179,
-          "metalTb": 834
+          "basis": "下游需求略有回升，供给端政策影响持续。",
+          "logic": "下游需求略有回升，但供给端政策影响持续，预计价格将小幅上涨。",
+          "prNdOxide": 72,
+          "ndOxide": 77,
+          "dysprosiumOxide": 145,
+          "terbiumOxide": 670,
+          "metalPrNd": 87,
+          "metalNd": 96,
+          "metalPr": 100,
+          "metalDy": 177,
+          "metalTb": 820
         }
       ]
     },
     "strategies": [
       {
         "title": "原材料锁价长协",
-        "detail": "与稀土供应商签订锁价长协，稳定原料成本，对冲价格波动风险。"
+        "detail": "与稀土供应商签订锁价长协，锁定原料成本，规避价格波动风险。"
+      },
+      {
+        "title": "套期保值",
+        "detail": "利用期货市场进行套期保值操作，对冲未来原料价格风险。"
       },
       {
         "title": "战略库存调节",
-        "detail": "根据市场趋势，择时调节库存水平，避免在价格高峰期采购，降低成本。"
+        "detail": "根据市场趋势，择时调节原材料库存，降低采购成本。"
       },
       {
-        "title": "提升产品结构",
-        "detail": "提高高毛利/高牌号产品占比，增强盈利能力，减少对低利润产品的依赖。"
+        "title": "提高高毛利产品占比",
+        "detail": "增加高毛利、高牌号产品的生产比例，提升整体盈利能力。"
       },
       {
-        "title": "技术降本增效",
-        "detail": "推进无重稀土与晶界扩散技术降低单耗，减少对重稀土的依赖，提升成本竞争力。"
+        "title": "推进无重稀土技术",
+        "detail": "研发推广无重稀土永磁材料技术，降低对重稀土的依赖。"
       },
       {
         "title": "回收料利用",
-        "detail": "增加回收料利用比例，降低原材料采购成本，实现绿色可持续发展。"
+        "detail": "提高废旧磁材回收利用率，降低原材料采购成本。"
       },
       {
         "title": "价格传导",
-        "detail": "根据市场情况，适时向下游客户进行价格传导，维持自身利润空间。"
+        "detail": "根据原料成本变化，适时向下游客户传导成本压力。"
       },
       {
-        "title": "拓展非稀土业务",
-        "detail": "拓展海外/非稀土业务对冲，分散经营风险，增强企业抗风险能力。"
+        "title": "拓展海外业务",
+        "detail": "拓展海外市场，分散市场风险，寻找新的增长点。"
       }
     ]
   },
@@ -1219,6 +1223,30 @@
       "source": "百家号",
       "sourceUrl": "https://baijiahao.baidu.com/",
       "id": "act-20260908-07"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-09-08",
+      "title": "金力永磁包头三期项目主体基本完工，预计2027年底产能达6万吨/年",
+      "description": "金力永磁包头三期“年产2万吨高性能稀土永磁材料绿色智造项目”主要工程主体基本完工，生产设备将按计划分批次安装，预计2027年底公司磁材产能将达到6万吨/年。",
+      "source": "财闻",
+      "sourceUrl": "https://www.caiwen.com/",
+      "id": "act-20260908-01"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-09-07",
+      "title": "宁波韵升2026年上半年业绩表现",
+      "description": "宁波韵升2026年上半年实现营业收入19.2亿元，同比增长12.4%；归母净利润2.16亿元，同比微增3.8%。",
+      "source": "搜狐网",
+      "sourceUrl": "https://www.sohu.com/",
+      "id": "act-20260907-02"
     },
     {
       "company": "yingluohua",
