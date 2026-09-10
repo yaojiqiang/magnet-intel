@@ -731,6 +731,8 @@ class QuotaExhausted(RuntimeError):
 _DISABLED_SOURCES = set()
 # 本次运行实际使用的检索源（日志标签要显示真实来源，否则回退后会误导）
 _LAST_SEARCH_SOURCE = None
+# 连续空结果计数：用于识别「额度用尽但接口不报错」的静默归零（豆包即如此）
+_EMPTY_STREAK = 0
 
 
 def _url_ok(u):
@@ -2139,6 +2141,17 @@ def _search_once(query, count=15):
             else:
                 out = _doubao_search_once(query, key, count=count)
             _LAST_SEARCH_SOURCE = prov
+            # 豆包等源在额度耗尽时不报错、只返回空结果 —— 连续多条全空时给出明确提示，
+            # 否则日志里只有「0/N 个查询返回结果」，容易被误读为"模型没抓到内容"。
+            global _EMPTY_STREAK
+            if not out:
+                _EMPTY_STREAK += 1
+                if _EMPTY_STREAK == 6:
+                    log("连续 6 条查询均无结果 —— 疑似检索额度已用尽（不会报错，只静默返回空）："
+                        "豆包免费 500 次/月、每月 1 日重置；百度 1500 次/月、按天发放。"
+                        "此时脚本会保留现有数据（不会写坏），但当天不会新增内容。")
+            else:
+                _EMPTY_STREAK = 0
             return out
         except QuotaExhausted as e:
             _DISABLED_SOURCES.add(prov)
