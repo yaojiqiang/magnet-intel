@@ -96,7 +96,9 @@ def extract_json(text):
     if start == -1:
         return None
     candidate = text[start:]
-    _dec = json.JSONDecoder()
+    # strict=False：允许字符串里出现原始控制字符（模型常把换行直接写进 JSON 字符串，
+    # 默认解析会报 "Invalid control character"）。这是 news 解析失败的第二层原因。
+    _dec = json.JSONDecoder(strict=False)
     try:
         obj, _end = _dec.raw_decode(candidate)
         return obj
