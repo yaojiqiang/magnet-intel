@@ -331,6 +331,39 @@ def _source_in_whitelist(src):
     return False
 
 
+CP_NAMES = ["金属镨", "金属钕", "金属镨钕", "氧化镨钕", "氧化钕",
+            "金属镝", "金属铽", "氧化镝", "氧化铽"]
+
+
+def _canon_current_prices(new_cp, existing_cp):
+    """把 currentPrices 规范化为「固定 9 品类、顺序固定」：
+      - 模型返回的非标品类（如「氧化钬」）一律丢弃，避免污染价格卡片；
+      - 模型漏报的品类，用上一交易日的数据补齐，避免整类从卡片上消失。
+    返回规范化后的列表。
+    """
+    new_map = {it.get("name"): it for it in (new_cp or [])
+               if isinstance(it, dict) and it.get("name")}
+    old_map = {it.get("name"): it for it in (existing_cp or [])
+               if isinstance(it, dict) and it.get("name")}
+    extra = [n for n in new_map if n not in CP_NAMES]
+    if extra:
+        log(f"currentPrices 丢弃非标品类（不在标准 9 品类内）：{extra}")
+    out, filled, missing = [], [], []
+    for name in CP_NAMES:
+        if name in new_map:
+            out.append(new_map[name])
+        elif name in old_map:
+            out.append(dict(old_map[name]))
+            filled.append(name)
+        else:
+            missing.append(name)
+    if filled:
+        log(f"currentPrices 模型漏报，已用上一交易日数据补齐：{filled}")
+    if missing:
+        log(f"currentPrices 既无新值也无历史数据，跳过：{missing}")
+    return out
+
+
 def _date_ok(date_str):
     """时效守卫：返回 (是否通过, 原因)。
     规则：格式必须合法；禁止未来日期（容忍 FRESH_FUTURE_SLACK_DAYS 天时区差）；
@@ -366,7 +399,15 @@ def reconcile_cp(new_cp, existing_cp):
     for i, it in enumerate(new_cp):
         name = it.get("name")
         newp = it.get("price")
-        lo, hi = BANDS.get(name, (0, 1e9))
+        # ★ 单位归一（2026-09-10）：联网检索结果普遍以「元/吨」给出（如氧化镨钕 727500），
+        # 模型常原样搬运，导致真实价被区间守卫判为「不可信」而钳回旧值，真实数据反而进不来。
+        # 合理区间上限最大 1200 万元/吨，故任何 > 5000 的数值必为「元/吨」→ 除以 10000 换算。
+        if isinstance(newp, (int, float)) and newp > 5000:
+            _conv = round(newp / 10000.0, 2)
+            log(f"currentPrices[{name}] 价格 {newp} 疑似「元/吨」，已换算为 {_conv} 万元/吨")
+            it["price"] = newp = _conv
+        # 未知名称不再给宽松默认区间（防止非标品类把荒谬数值写进线上）
+        lo, hi = BANDS.get(name, (1, 2000))
         ref = REF_PRICES.get(name)
         prev = old.get(name)
         prevp = prev.get("price") if isinstance(prev, dict) else None
@@ -551,6 +592,7 @@ def safe_merge(existing, new):
             errors.append(f"currentPrices 校验失败：{err}")
             errors.append("currentPrices 校验失败：保留现有值，不阻断更新")
         else:
+            v = _canon_current_prices(v, existing_re.get("currentPrices"))
             v = reconcile_cp(v, existing_re.get("currentPrices"))
             v = reconcile_cp_dates(v, existing_re.get("currentPrices"))
             # 来源守卫必须最后执行，避免 reconcile_cp_dates 在价格持平时整条回退把被污染的旧来源又复制回来
