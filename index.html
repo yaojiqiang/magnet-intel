@@ -535,7 +535,15 @@ function initFinancials(){
   // ---- 季报 / 半年报 / 年报 三张横向对比表 ----
   const fmtYoY = v => (v==null||v==='') ? '—' : (typeof v==='number' ? (v>=0?'+':'')+v+'%' : v);
   const cell = (v, cls='') => `<td class="num ${cls}">${v}</td>`;
-  const link=(txt,url)=> url ? `<a href="${url}" target="_blank" style="color:var(--primary)">${txt}↗</a>` : txt;
+  // 只渲染真实可点击的原文链接：空值/「无」/裸域名首页/缺 scheme 的相对路径一律视为「无链接」。
+  // 2026-09-10 加入：此前数据里混入过网站首页链接与「无」，点开与内容对不上、甚至打不开。
+  const safeUrl = u => {
+    u = (u == null ? '' : String(u)).trim();
+    if (!/^https?:\/\//i.test(u)) return '';
+    const rest = u.replace(/^https?:\/\/[^\/]+/i, '').replace(/^[\/?#]+/, '');
+    return rest ? u : '';
+  };
+  const link=(txt,url)=> { const _u=safeUrl(url); return _u ? `<a href="${_u}" target="_blank" style="color:var(--primary)">${txt}↗</a>` : txt; };
   const tableHead = () => {
     let h = '<thead><tr><th style="text-align:left">指标</th>';
     companies.forEach(c=> h += `<th style="text-align:center;vertical-align:middle">${c.name}<br><span style="font-weight:400;font-size:11px;color:var(--text2)">${c.code}</span></th>`);
@@ -576,7 +584,7 @@ function initFinancials(){
     s += '<tr><td>数据来源</td>';
     companies.forEach(c=>{ const q=getQ(c,p);
       const txt = q&&q.source ? q.source : '—';
-      const u = q&&q.sourceUrl;
+      const u = safeUrl(q&&q.sourceUrl);
       s += `<td style="font-size:11px;color:var(--text2)">${link(txt,u)}</td>`; });
     s += '</tr>';
     return s;
@@ -642,7 +650,7 @@ function initFinancials(){
     companies.forEach(c=>{ const x=ann(c); yhtml += ycell(x.eps!=null?x.eps:'—'); });
     yhtml += '</tr>';
     yhtml += '<tr><td>数据来源</td>';
-    companies.forEach(c=>{ const x=ann(c); const txt=x.source||'—'; const u=x.sourceUrl; yhtml += `<td style="font-size:11px;color:var(--text2)">${link(txt,u)}</td>`; });
+    companies.forEach(c=>{ const x=ann(c); const txt=x.source||'—'; const u=safeUrl(x.sourceUrl); yhtml += `<td style="font-size:11px;color:var(--text2)">${link(txt,u)}</td>`; });
     yhtml += '</tr>';
     yhtml += '</tbody>';
     ftY.innerHTML = yhtml;
@@ -721,7 +729,7 @@ function renderActivities(){
         <span class="act-dim" style="background:${a.dimension==='digital'?'#f3e5f5':a.dimension==='supply'?'#e3f2fd':a.dimension==='market'?'#fff3e0':a.dimension==='tech'?'#e0f2f1':a.dimension==='lean'?'#fce4ec':'#e0f7fa'};color:${a.dimension==='digital'?'#7b1fa2':a.dimension==='supply'?'#1565c0':a.dimension==='market'?'#e65100':a.dimension==='tech'?'#00695c':a.dimension==='lean'?'#c2185b':'#00838f'}">${a.dimensionName}</span>
       </div>
       <div class="act-desc">${a.description}</div>
-      <div class="act-source">来源：${a.source}${a.sourceUrl?' · <a href="'+a.sourceUrl+'" target="_blank">查看原文</a>':''}</div>
+      <div class="act-source">来源：${a.source}${safeUrl(a.sourceUrl)?' · <a href="'+safeUrl(a.sourceUrl)+'" target="_blank">查看原文</a>':''}</div>
     </div>`;
   }).join('');
 
@@ -787,7 +795,7 @@ function initRecruitment(){
       '<div class="rc-bar">'+bar+'</div>'+
       '<div class="rc-legend">'+legend+'</div>'+
       '<div class="rc-trend">'+(c.trend||'')+'</div>'+
-      '<div class="rc-src">来源：'+(c.source||'')+(c.sourceUrl?' · <a href="'+c.sourceUrl+'" target="_blank">查看简章</a>':'')+'</div>'+
+      '<div class="rc-src">来源：'+(c.source||'')+(safeUrl(c.sourceUrl)?' · <a href="'+safeUrl(c.sourceUrl)+'" target="_blank">查看简章</a>':'')+'</div>'+
     '</div>';
   }).join('');
 }
@@ -800,7 +808,7 @@ function initSources(){
       <h3>${s.category}</h3>
       ${s.items.map(item=>`
         <div class="source-item">
-          <div class="s-name">${item.url?'<a href="'+item.url+'" target="_blank">'+item.name+'</a>':item.name}</div>
+          <div class="s-name">${safeUrl(item.url)?'<a href="'+safeUrl(item.url)+'" target="_blank">'+item.name+'</a>':item.name}</div>
           <div class="s-desc">${item.desc}</div>
         </div>
       `).join('')}
@@ -837,7 +845,7 @@ function renderNews(){
     return `<div class="news-item">
       <span class="news-date">${n.date}</span>
       <span class="news-company" style="background:${color}">${n.company}</span>
-      ${n.url?'<a href="'+n.url+'" target="_blank">'+n.title+'</a>':'<span class="news-title">'+n.title+'</span>'}
+      ${safeUrl(n.url)?'<a href="'+safeUrl(n.url)+'" target="_blank" title="'+n.source+'">'+n.title+'</a>':'<span class="news-title">'+n.title+'</span>'}
       <span style="font-size:11px;color:var(--text2);margin-left:4px">[${n.source}]</span>
     </div>`;
   }).join('');
