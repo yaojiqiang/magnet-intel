@@ -329,15 +329,21 @@ async function loadData(){
       return;
     }
     console.warn('Fetch not OK, falling back to embedded data');
-  }catch(e){ console.warn('Fetch failed, falling back to embedded data:', e.message); }
+  }catch(e){ window.__loadError = e.message; console.warn('Fetch failed, falling back to embedded data:', e.message); }
 
   // Fallback to embedded data
   const el = document.getElementById('embedded-data');
   if(el && el.textContent.trim() && el.textContent.trim() !== 'FALLBACK_PLACEHOLDER'){
-    try{ DATA = JSON.parse(el.textContent); init(); return; }catch(e2){ console.error('Embedded data parse failed:', e2.message); }
+    try{ DATA = JSON.parse(el.textContent); init(); return; }catch(e2){ window.__loadError = '内嵌数据回退失败: ' + e2.message; console.error('Embedded data parse failed:', e2.message); }
   }
-  // If no data at all, show error
-  document.querySelector('.main').innerHTML = '<div class="card" style="text-align:center;padding:40px"><p>数据加载失败，请稍后刷新。</p></div>';
+  // 两条路径都失败：把真实异常显示出来，便于自助定位（此前只有兜底文案，真因被 catch 隐藏）
+  const _diag = [];
+  if(window.__loadError) _diag.push('数据加载：' + window.__loadError);
+  if(window.__initErrors && window.__initErrors.length) _diag.push('板块异常：' + window.__initErrors.join('；'));
+  document.querySelector('.main').innerHTML =
+    '<div class="card" style="text-align:center;padding:40px"><p>数据加载失败，请稍后刷新。</p>'
+    + (_diag.length ? '<p style="font-size:12px;color:var(--text2);margin-top:10px">诊断：' + _diag.join(' ／ ') + '</p>' : '')
+    + '</div>';
 }
 
 function init(){
@@ -357,13 +363,21 @@ function init(){
     });
   });
 
-  initPrices();
-  initFinancials();
-  initActivities();
-  initRecruitment();
-  initSources();
-  initNews();
-  initHistory();
+  // 板块隔离（2026-09-10 事故加固）：任一板块抛异常只记日志，不再中断其它板块，
+  // 更不再让整页被替换成「数据加载失败」。
+  // 起因：safeUrl 作用域错误让 renderActivities 抛 ReferenceError -> 冒泡到 loadData -> 整站白屏。
+  const _steps = [initPrices, initFinancials, initActivities, initRecruitment,
+                  initSources, initNews, initHistory];
+  for(const _fn of _steps){
+    try{ _fn(); }
+    catch(e){
+      (window.__initErrors = window.__initErrors || []).push(_fn.name + ': ' + e.message);
+      console.error('板块初始化失败 ' + _fn.name, e);
+    }
+  }
+  if(window.__initErrors && window.__initErrors.length){
+    console.warn('部分板块初始化失败：', window.__initErrors);
+  }
 }
 
 // ========== TAB 6: 每日更新记录 ==========
