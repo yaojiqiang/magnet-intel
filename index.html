@@ -306,6 +306,16 @@ tr:hover td{background:#fafbfc}
 let DATA = null;
 const CHARTS = {};
 
+// 链接安全渲染：非 http(s)、裸域名首页、「无」、缺 scheme 的相对路径一律视为「无链接」。
+// 必须在脚本顶层定义 —— 曾经误放在 initFinancials() 内部，而其它 init* 函数也要用它，
+// 于是抛 ReferenceError: safeUrl is not defined，被 loadData 的 try/catch 吞掉后整站显示"数据加载失败"。
+const safeUrl = u => {
+  u = (u == null ? '' : String(u)).trim();
+  if (!/^https?:\/\//i.test(u)) return '';
+  const rest = u.replace(/^https?:\/\/[^\/]+/i, '').replace(/^[\/?#]+/, '');
+  return rest ? u : '';
+};
+
 async function loadData(){
   // Try fetch external JSON (fresh data from daily automation)
   try{
@@ -535,14 +545,6 @@ function initFinancials(){
   // ---- 季报 / 半年报 / 年报 三张横向对比表 ----
   const fmtYoY = v => (v==null||v==='') ? '—' : (typeof v==='number' ? (v>=0?'+':'')+v+'%' : v);
   const cell = (v, cls='') => `<td class="num ${cls}">${v}</td>`;
-  // 只渲染真实可点击的原文链接：空值/「无」/裸域名首页/缺 scheme 的相对路径一律视为「无链接」。
-  // 2026-09-10 加入：此前数据里混入过网站首页链接与「无」，点开与内容对不上、甚至打不开。
-  const safeUrl = u => {
-    u = (u == null ? '' : String(u)).trim();
-    if (!/^https?:\/\//i.test(u)) return '';
-    const rest = u.replace(/^https?:\/\/[^\/]+/i, '').replace(/^[\/?#]+/, '');
-    return rest ? u : '';
-  };
   const link=(txt,url)=> { const _u=safeUrl(url); return _u ? `<a href="${_u}" target="_blank" style="color:var(--primary)">${txt}↗</a>` : txt; };
   const tableHead = () => {
     let h = '<thead><tr><th style="text-align:left">指标</th>';
