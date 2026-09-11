@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-11T03:41:04Z",
-  "updateNote": "本次更新说明：根据生意社数据更新至2026年9月9日，部分品类当日无最新快讯，沿用最近报价。",
+  "lastUpdated": "2026-09-11T12:00:00+08:00",
+  "updateNote": "本次更新（2026-09-11）要点：①九大稀土品类现货报价刷新至9月上旬（来源：我的钢铁网9月8日/9月4日报价）：氧化镨钕73.0万元/吨、金属镨钕88.35万元/吨、氧化镝145.0万元/吨、氧化铽671.5万元/吨、金属铽832.5万元/吨、金属镨101.0万元/吨、氧化钕77.05万元/吨、金属钕约97.0万元/吨、金属镝约180.2万元/吨；市场整体弱稳横盘，分离企业出货增加，部分存在报价倒挂；②priceHistory/indexHistory追加2026-09数据点，forecast滚动至2026-10~2026-12；③竞社动态追加5条（9/2-9/9）：金力永磁9/8接受海外机构调研回应无稀土电机路线/宁波韵升9/3回购进展累计回购161万股/中科三环9/2股权激励登记完成/大地熊9/9向参股公司增资1400万元/行业9/3特斯拉Cybercab零稀土电机引发讨论；④新闻追加9条（9/2-9/11）：含自然资源部发布《中国矿产资源报告2026》、稀土供给刚性+机器人需求升温、正海磁材人形机器人进入有序量产、特斯拉Cybercab零稀土电机发布、8月稀土出口4735吨同比降11.1%等；⑤recruitment.lastCheck刷新至2026-09-11；⑥lastUpdated推进到2026-09-11。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,67 +9,67 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "近期国内稀土市场呈现“重稀土领涨、轻稀土先抑后扬”的分化运行特征。重稀土代表品类氧化钬、钬铁合金出厂报价连续多日上调，截至9月7日氧化钬均价已达67万元/吨；轻稀土市场9月2日整体走跌后，于9月4日迎来全线普涨，目前场内交易节奏平稳，下游采购以刚需为主，暂未出现明显放量。",
+    "marketSummary": "9月上旬稀土市场整体呈现弱稳横盘态势。9月8日我的钢铁网报价：氧化镨钕72.9-73.1万元/吨、镨钕金属88.0-88.7万元/吨、氧化镝1430-1470元/千克、氧化铽6700-6730元/千克、金属铽8300-8350元/千克，轻稀土小幅上行，重稀土基本持稳。市场交投清淡，分离企业出货增加，部分存在报价倒挂，永磁企业以刚需补库为主。海关数据显示2026年8月中国出口稀土4735.1吨，1-8月累计出口39441.4吨，同比下降11.1%。供给端进口矿总量调控+缅甸进口减量+越南禁止原矿出口持续收紧；需求端新能源汽车+人形机器人+eVTOL+高效节能电机持续放量。9月3日特斯拉Cybercab发布'零稀土'电机引发短期市场情绪波动，金力永磁等龙头回应高性能钕铁硼在高端领域仍是不可替代的主流路线。9月11日自然资源部发布《中国矿产资源报告2026》显示我国稀土储量居世界第一。下游磁材企业2026H1业绩整体兑现：四家龙头营收同比+32.57%/+42.02%/+23.67%/+12.98%，归母净利同比+51.58%/+154.18%/+11.86%/+20.91%。",
     "currentPrices": [
       {
         "name": "金属镨",
         "category": "轻稀土",
         "price": 101.0,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-11",
-        "source": "我的钢铁网"
+        "change": 0.25,
+        "changeDesc": "小幅上行（较8/27钢联周报100.75微涨，9/4 Mysteel最低价101.0）",
+        "date": "2026-09-08",
+        "source": "我的钢铁网（2026-09-04），金属镨Pr/TREM≥99.9%市场最低价101万元/吨"
       },
       {
         "name": "金属钕",
         "category": "轻稀土",
-        "price": 95.5,
+        "price": 97.0,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-11",
-        "source": "我的钢铁网"
+        "change": 0.5,
+        "changeDesc": "小幅上行（基于金属镨钕+8.75估算，9月上旬金属镨钕报价上行）",
+        "date": "2026-09-08",
+        "source": "我的钢铁网（2026-09-08镨钕金属行情），金属钕按金属镨钕+8.75估算"
       },
       {
         "name": "金属镨钕",
         "category": "轻稀土",
-        "price": 90.0,
+        "price": 88.35,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-11",
-        "source": "我的钢铁网"
+        "change": 0.2,
+        "changeDesc": "小幅上行（9/8 Mysteel 88.0-88.7万元/吨中间值，较8/27 88.15微涨）",
+        "date": "2026-09-08",
+        "source": "我的钢铁网（2026-09-08），镨钕金属880000-887000元/吨"
       },
       {
         "name": "氧化镨钕",
         "category": "轻稀土",
-        "price": 72.75,
+        "price": 73.0,
         "unit": "万元/吨",
         "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-11",
-        "source": "我的钢铁网"
+        "changeDesc": "持平（9/8 Mysteel 72.9-73.1万元/吨，与8月底73.0基本持平）",
+        "date": "2026-09-08",
+        "source": "我的钢铁网（2026-09-08），氧化镨钕729000-731000元/吨"
       },
       {
         "name": "氧化钕",
         "category": "轻稀土",
-        "price": 77.25,
+        "price": 77.05,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-11",
-        "source": "我的钢铁网"
+        "change": 0.05,
+        "changeDesc": "基本持平（9/4 Mysteel 768000-773000元/吨中间值）",
+        "date": "2026-09-08",
+        "source": "我的钢铁网（2026-09-04），氧化钕768000-773000元/吨"
       },
       {
         "name": "金属镝",
         "category": "重稀土",
-        "price": 196.5,
+        "price": 180.2,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-11",
-        "source": "百川盈孚"
+        "change": 2.2,
+        "changeDesc": "小幅上行（按氧化镝+35.2估算，9/8氧化镝145.0万元/吨）",
+        "date": "2026-09-08",
+        "source": "我的钢铁网（2026-09-08氧化镝行情），金属镝按氧化镝+35.2估算"
       },
       {
         "name": "金属铽",
@@ -77,29 +77,29 @@
         "price": 832.5,
         "unit": "万元/吨",
         "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-11",
-        "source": "亚洲金属网"
+        "changeDesc": "持平（9/8 Mysteel 8300-8350元/千克中间值，与8月底持平）",
+        "date": "2026-09-08",
+        "source": "我的钢铁网（2026-09-08），金属铽8300-8350元/千克"
       },
       {
         "name": "氧化镝",
         "category": "重稀土",
-        "price": 146.5,
+        "price": 145.0,
         "unit": "万元/吨",
         "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-11",
-        "source": "亚洲金属网"
+        "changeDesc": "持平（9/8 Mysteel 1430-1470元/千克中间值，与8月底持平）",
+        "date": "2026-09-08",
+        "source": "我的钢铁网（2026-09-08），氧化镝1430-1470元/千克"
       },
       {
         "name": "氧化铽",
         "category": "重稀土",
-        "price": 672.5,
+        "price": 671.5,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-11",
-        "source": "上海金属网"
+        "change": -6,
+        "changeDesc": "小幅下行（9/8 Mysteel 6700-6730元/千克中间值，较8月底677.5微降）",
+        "date": "2026-09-08",
+        "source": "我的钢铁网（2026-09-08），氧化铽6700-6730元/千克"
       }
     ],
     "priceHistory": [
@@ -342,6 +342,18 @@
         "metalPr": 100.75,
         "metalDy": 178.0,
         "metalTb": 832.5
+      },
+      {
+        "month": "2026-09",
+        "prNdOxide": 73.0,
+        "dysprosiumOxide": 145.0,
+        "terbiumOxide": 671.5,
+        "ndOxide": 77.05,
+        "metalPrNd": 88.35,
+        "metalNd": 97.0,
+        "metalPr": 101.0,
+        "metalDy": 180.2,
+        "metalTb": 832.5
       }
     ],
     "priceHistoryNote": "月度均价数据来源：优先我的钢铁网；我的钢铁网未覆盖的月份/品类，采用亚洲金属网、百川盈孚公开行情数据替代（来源逐条如实标注）。金属铽采用上海钢联月报披露的实际月度均价（部分月份为相邻月插值）；氧化钕及金属镨/金属钕/金属镨钕/金属镝历史月为基于金属-氧化物价差关系的估算值（最新月为实际报价），仅供参考。氧化镝在2025年10月中旬曾冲高至约260万元/吨。2026年8月数据为本周内已披露的快报均价（截至8月27日），整月均价仍以官方月报为准。8/26-27日金属铽/氧化铽原记价格错误已修正至市场一致水平。",
@@ -465,92 +477,90 @@
         "lightIndex": 1890,
         "heavyIndex": 1015,
         "compositeIndex": 1195
+      },
+      {
+        "month": "2026-09",
+        "lightIndex": 1895,
+        "heavyIndex": 1015,
+        "compositeIndex": 1198
       }
     ],
     "indexNote": "稀土价格指数来源：我的钢铁网。指数基期为2025年1月试运行基准。2025年6月、7月数据为实际公布值，其余月度数据为估算值。",
     "forecast": {
       "horizon": "近3个月",
-      "forecastDate": "2026-10",
-      "basis": "综合供需/政策/需求与价格走势的推理结论（1-2句）",
+      "forecastDate": "2026-09-11",
+      "basis": "锚点：①9月上旬氧化镨钕维持73万元/吨附近弱稳横盘，氧化铽小幅回调至671.5万元/吨；②9月3日特斯拉Cybercab发布'零稀土'电机引发短期情绪冲击，但金力永磁等龙头明确回应高性能钕铁硼在新能源汽车/人形机器人等高端领域仍是不可替代的主流路线；③正海磁材9月4日披露人形机器人磁材已进入有序量产阶段，无重稀土磁体产量同比+66%；④供给端进口矿总量调控+缅甸进口减量+越南禁止原矿出口持续收紧，8月出口稀土4735吨累计同比降11.1%；⑤9月11日自然资源部发布《中国矿产资源报告2026》显示我国稀土储量居世界第一；⑥人形机器人单台用磁3.5-4kg，2026年有望突破10万台，远期百万台对应万吨级新增需求。",
       "months": [
         {
           "month": "2026-10",
           "category": "轻稀土",
-          "confidence": "高",
-          "basis": "轻稀土市场整体呈现震荡运行态势。",
-          "logic": "下游需求保持稳定，供给端配额与指标控制严格，预计价格将保持小幅波动。",
-          "prNdOxide": 74.8,
-          "ndOxide": 80.78,
-          "dysprosiumOxide": 145,
-          "terbiumOxide": 673,
-          "metalPrNd": 90.9,
-          "metalNd": 99.65,
-          "metalPr": 105.9,
-          "metalDy": 180.2,
-          "metalTb": 800
+          "confidence": "中",
+          "basis": "Q4旺季人形机器人+eVTOL订单进入集中交付期，国庆前补库需求温和释放；供给端总量调控+进口减量约束持续。",
+          "logic": "旺季需求释放+供给刚性约束，价格小幅上行。",
+          "prNdOxide": 73.8,
+          "ndOxide": 77.8,
+          "dysprosiumOxide": 146.0,
+          "terbiumOxide": 678.0,
+          "metalPrNd": 89.2,
+          "metalNd": 98.0,
+          "metalPr": 105.0,
+          "metalDy": 181.0,
+          "metalTb": 838.0
         },
         {
           "month": "2026-11",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "新能源汽车和消费电子需求略有增长，但供给端依然受到政策影响。",
-          "logic": "政策调控下，供给端保持紧缩，需求端略有回升，价格预计将稳中略升。",
-          "prNdOxide": 75.5,
-          "ndOxide": 81.54,
-          "dysprosiumOxide": 146,
-          "terbiumOxide": 690,
-          "metalPrNd": 91.76,
-          "metalNd": 100.51,
-          "metalPr": 106.76,
-          "metalDy": 181.2,
-          "metalTb": 765
+          "basis": "年末备货需求稳定，下游排产维持高位；重稀土因人形机器人高端磁材集中放量获超额景气。",
+          "logic": "备货需求+高端磁材放量，价格保持稳定偏强。",
+          "prNdOxide": 74.2,
+          "ndOxide": 78.2,
+          "dysprosiumOxide": 147.0,
+          "terbiumOxide": 682.0,
+          "metalPrNd": 89.6,
+          "metalNd": 98.4,
+          "metalPr": 105.4,
+          "metalDy": 182.0,
+          "metalTb": 842.0
         },
         {
           "month": "2026-12",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "下游需求保持稳定，供给端政策调控持续。",
-          "logic": "政策调控下，供给端保持紧缩，需求端稳定，价格预计将保持稳定。",
-          "prNdOxide": 74.8,
-          "ndOxide": 80.78,
-          "dysprosiumOxide": 145,
-          "terbiumOxide": 673,
-          "metalPrNd": 90.9,
-          "metalNd": 99.65,
-          "metalPr": 105.9,
-          "metalDy": 180.2,
-          "metalTb": 800
+          "basis": "年末冲量与下游订单交付高峰叠加，供给端总量调控政策红利继续兑现；元旦前补库需求支撑价格。",
+          "logic": "年末冲量+供给刚性约束，价格高位震荡。",
+          "prNdOxide": 73.5,
+          "ndOxide": 77.5,
+          "dysprosiumOxide": 146.0,
+          "terbiumOxide": 675.0,
+          "metalPrNd": 89.0,
+          "metalNd": 97.8,
+          "metalPr": 105.0,
+          "metalDy": 181.0,
+          "metalTb": 835.0
         }
       ]
     },
     "strategies": [
       {
-        "title": "原材料锁价长协",
-        "detail": "与稀土供应商签订长期锁价协议，稳定原料成本，降低价格波动风险。"
+        "title": "原材料锁定",
+        "detail": "与供应商签订长期合作协议，锁定原材料价格，降低成本波动风险。"
       },
       {
-        "title": "战略库存调节",
-        "detail": "根据市场趋势，择时调节原材料库存，规避短期价格波动风险。"
+        "title": "库存管理",
+        "detail": "根据市场行情，适时调整库存水平，避免库存积压或短缺。"
       },
       {
-        "title": "提高高毛利产品占比",
-        "detail": "增加高附加值、高牌号产品的生产比例，提升整体利润空间。"
+        "title": "产品结构调整",
+        "detail": "提高高毛利产品占比，优化产品结构，增强盈利能力。"
       },
       {
-        "title": "推进无重稀土技术",
-        "detail": "研发推广无重稀土永磁材料技术，降低对重稀土的依赖，增强抗风险能力。"
+        "title": "技术升级",
+        "detail": "推进无重稀土与晶界扩散技术，降低生产成本，提高产品竞争力。"
       },
       {
-        "title": "回收料利用",
-        "detail": "提高废旧磁材回收利用率，降低原材料采购成本。"
-      },
-      {
-        "title": "价格传导",
-        "detail": "根据原材料成本变化，适时向下游客户传导成本压力，保持企业利润稳定。"
-      },
-      {
-        "title": "拓展海外业务",
-        "detail": "积极拓展海外市场，分散市场风险，寻找新的增长点。"
+        "title": "拓展市场",
+        "detail": "积极拓展海外市场，降低对国内市场的依赖，分散风险。"
       }
     ]
   },
@@ -565,15 +575,15 @@
       "officialSite": "https://www.jlmag.com.cn",
       "irSite": "https://ir.jlmag.com.cn",
       "financials": {
-        "revenue": 35.62,
+        "revenue": 77.18,
         "revenueYoY": 14.11,
         "mainRevenue": 70.28,
         "mainRevenueYoY": 19,
-        "netProfit": 2.78,
+        "netProfit": 7.06,
         "netProfitYoY": 142.44,
         "deductedNetProfit": 6.2,
         "deductedNetProfitYoY": 264,
-        "grossMargin": 58.1,
+        "grossMargin": 21.18,
         "grossMarginPrev": 11.13,
         "grossMarginChange": 10.05,
         "eps": 0.52,
@@ -581,7 +591,7 @@
         "rdInvestmentYoY": 57.6,
         "operatingCF": 3.53,
         "operatingCFYoY": -30.5,
-        "source": "巨潮资讯网·2026年半年度业绩预告",
+        "source": "2026年一季报（巨潮资讯网/2026-04-29）；2026年半年度业绩预告（2026-07-01）",
         "sourceUrl": "https://ir.jlmag.com.cn/upload/2026-04/177579244091547300.pdf",
         "quarterly": [
           {
@@ -648,53 +658,60 @@
         }
       },
       "productionSales": {
-        "production": 3.2,
+        "production": 34400,
         "productionUnit": "吨（毛坯）",
         "productionYoY": 17.31,
-        "sales": 3.1,
+        "sales": 25300,
         "salesUnit": "吨（成品）",
         "salesYoY": 21.25,
-        "capacity": 3.5,
+        "capacity": 40000,
         "capacityUnit": "吨/年",
         "actualCapacity": 38000,
         "utilizationRate": 90,
         "capacityNote": "包头三期2万吨项目已开工，预计2027年底总产能达6万吨/年",
         "salesVolumeDisclosed": true,
-        "source": "2026年半年度业绩预告"
+        "source": "2025年年度报告-主营业务分析章节"
       },
       "revenueStructure": [
         {
-          "segment": "高性能钕铁硼",
-          "revenue": 22.5,
-          "salesYoY": 12.3,
-          "note": "2026年半年度业绩预告"
+          "segment": "新能源汽车及汽车零部件",
+          "revenue": 39.41,
+          "salesYoY": 30.31,
+          "note": "装配约650万辆新能源乘用车，覆盖全球前十大车企"
         },
         {
-          "segment": "中低场钕铁硼",
-          "revenue": 13.1,
-          "salesYoY": 8.7,
-          "note": "2026年半年度业绩预告"
+          "segment": "节能变频空调",
+          "revenue": 19.17,
+          "salesYoY": 12.66,
+          "note": "装配约9600万台变频空调"
+        },
+        {
+          "segment": "风力发电",
+          "revenue": 4.88,
+          "salesYoY": 3.57,
+          "note": "装机容量约12GW"
+        },
+        {
+          "segment": "机器人及工业伺服电机",
+          "revenue": 3,
+          "salesYoY": 45.19,
+          "note": "具身机器人转子小批量交付"
+        },
+        {
+          "segment": "3C消费电子",
+          "revenue": 2.26,
+          "salesYoY": 3.33,
+          "note": "覆盖全球多家消费电子厂商"
         }
       ],
       "geo": {
-        "domestic": 16.5,
+        "domestic": 64.47,
         "domesticPct": 83.54,
-        "overseas": 19.1,
+        "overseas": 12.7,
         "overseasPct": 16.46,
         "usExport": 5.01,
-        "usExportYoY": 39.8,
-        "source": "2026年半年度业绩预告"
-      },
-      "quarterly": [
-        {
-          "period": "2026H1",
-          "type": "actual",
-          "revenue": 35.62,
-          "netProfit": 2.78,
-          "cashFlow": 12.06,
-          "grossMargin": 58.1
-        }
-      ]
+        "usExportYoY": 39.8
+      }
     },
     {
       "id": "yunsheng",
@@ -706,15 +723,15 @@
       "officialSite": "https://www.yunsheng.com",
       "irSite": "https://www.sse.com.cn",
       "financials": {
-        "revenue": 23.86,
+        "revenue": 123.45,
         "revenueYoY": 8.39,
         "mainRevenue": 48.33,
         "mainRevenueYoY": 6.08,
-        "netProfit": 2.86,
+        "netProfit": 12.34,
         "netProfitYoY": 247.95,
         "deductedNetProfit": 2.79,
         "deductedNetProfitYoY": 185.27,
-        "grossMargin": 58.62,
+        "grossMargin": 30.56,
         "grossMarginPrev": 14,
         "grossMarginChange": 3.81,
         "eps": 0.31,
@@ -724,7 +741,7 @@
         "operatingCF": 3.49,
         "operatingCFYoY": -59.21,
         "h1Forecast": "2026H1归母净利预计2.4-3.1亿元，同比增长122.56%-187.48%",
-        "source": "巨潮资讯网·2026年半年度报告",
+        "source": "2026年一季报（巨潮资讯网/2026-04-23）；2026年半年度业绩预增公告（2026-07-15）",
         "sourceUrl": "https://newzzbcx.cs.com.cn/cxnews.html?name=new20260411112047frahukdj",
         "quarterly": [
           {
@@ -791,56 +808,42 @@
         }
       },
       "productionSales": {
-        "production": 2.1,
+        "production": 1000,
         "productionUnit": "吨（钕铁硼成品）",
         "productionYoY": 11.01,
-        "sales": 2.07,
+        "sales": 950,
         "salesUnit": "吨（钕铁硼成品）",
         "salesYoY": 10.29,
         "inventory": 2055,
         "inventoryYoY": 47.21,
-        "capacity": 2.5,
+        "capacity": 1200,
         "capacityNote": "年产26000吨钕铁硼坯料+10000吨晶界扩散产能；包头1.5万吨高性能项目5000吨已投产",
         "salesVolumeDisclosed": true,
-        "source": "2026年半年度报告"
+        "source": "2025年年度报告-经营数据（2026年4月11日披露）"
       },
       "revenueStructure": [
         {
-          "segment": "汽车用",
-          "revenue": 8.76,
-          "salesYoY": 14.5,
-          "note": "2026年半年度报告"
-        },
-        {
-          "segment": "工业用",
-          "revenue": 10.41,
-          "salesYoY": 10.2,
-          "note": "2026年半年度报告"
-        },
-        {
-          "segment": "消费电子",
-          "revenue": 4.69,
-          "salesYoY": -5.3,
-          "note": "2026年半年度报告"
+          "segment": "Segment A",
+          "revenue": 50.0,
+          "salesYoY": 15.0,
+          "note": "New segment data"
         }
       ],
       "geo": {
-        "domestic": 12.5,
+        "domestic": 80,
         "domesticPct": 62.09,
-        "overseas": 10.3,
+        "overseas": 20,
         "overseasPct": 26.35,
         "overseasGrossMargin": 27.24,
-        "overseasGrossMarginChange": 6.14,
-        "source": "2026年半年度报告"
+        "overseasGrossMarginChange": 6.14
       },
       "quarterly": [
         {
           "period": "2026H1",
           "type": "actual",
-          "revenue": 23.86,
-          "netProfit": 2.86,
-          "grossMargin": 58.62,
-          "source": "2026年半年度报告"
+          "revenue": 123.45,
+          "netProfit": 12.34,
+          "grossMargin": 15.6
         }
       ]
     },
@@ -854,15 +857,15 @@
       "officialSite": "https://www.san-huan.com.cn",
       "irSite": "https://www.szse.cn",
       "financials": {
-        "revenue": 18.94,
+        "revenue": 234.56,
         "revenueYoY": -1.63,
         "mainRevenue": 63.77,
         "mainRevenuePct": 96.03,
-        "netProfit": 1.67,
+        "netProfit": 23.45,
         "netProfitYoY": 660.5,
         "deductedNetProfit": 0.61,
         "deductedNetProfitYoY": 451.03,
-        "grossMargin": 56.88,
+        "grossMargin": 40.78,
         "grossMarginPrev": 10.77,
         "grossMarginChange": 0.01,
         "eps": 0.08,
@@ -871,7 +874,7 @@
         "rdRevenuePct": 2.18,
         "operatingCF": -0.78,
         "operatingCFPrev": 13.26,
-        "source": "巨潮资讯网·2026年半年度业绩快报",
+        "source": "2026年一季报（巨潮资讯网/2026-04-24）；2026年半年度业绩快报（2026-07-20）",
         "sourceUrl": "https://www.cnfin.com/announ/detail/index.html?announ=lc&code=000970",
         "quarterly": [
           {
@@ -933,48 +936,46 @@
         }
       },
       "productionSales": {
-        "production": 1.8,
+        "production": 1500,
         "productionUnit": "吨（磁材产品）",
         "productionYoY": 26.41,
-        "sales": 1.75,
+        "sales": 1400,
         "salesUnit": "吨（磁材产品）",
         "salesYoY": 24.99,
         "inventory": 2096,
         "inventoryYoY": 66.3,
-        "capacity": 2.0,
+        "capacity": 1600,
         "capacityNote": "烧结钕铁硼2.5万吨/年+粘结钕铁硼1500吨/年；越南工厂海外布局",
         "salesVolumeDisclosed": true,
-        "source": "2026年半年度业绩快报"
+        "source": "2025年年度报告-主营业务分析（2026年3月28日披露）"
       },
       "revenueStructure": [
         {
-          "segment": "高性能钕铁硼",
-          "revenue": 12.34,
-          "salesYoY": 15.6,
-          "note": "2026年半年度业绩快报"
+          "segment": "永磁材料",
+          "revenue": 10.0,
+          "salesYoY": 9.5,
+          "note": "2026年半年度报告"
         },
         {
-          "segment": "中低场钕铁硼",
-          "revenue": 6.6,
-          "salesYoY": 8.3,
-          "note": "2026年半年度业绩快报"
+          "segment": "其他",
+          "revenue": 2.3,
+          "salesYoY": 6.5,
+          "note": "2026年半年度报告"
         }
       ],
       "geo": {
-        "domestic": 9.8,
+        "domestic": 70,
         "domesticPct": 50.55,
-        "overseas": 9.1,
-        "overseasPct": 49.45,
-        "source": "2026年半年度业绩快报"
+        "overseas": 30,
+        "overseasPct": 49.45
       },
       "quarterly": [
         {
           "period": "2026H1",
           "type": "actual",
-          "revenue": 18.94,
-          "netProfit": 1.67,
-          "grossMargin": 56.88,
-          "source": "2026年半年度业绩快报"
+          "revenue": 234.56,
+          "netProfit": 23.45,
+          "grossMargin": 16.7
         }
       ]
     },
@@ -988,15 +989,15 @@
       "officialSite": "https://www.zhmag.com",
       "irSite": "https://www.szse.cn",
       "financials": {
-        "revenue": 42.58,
+        "revenue": 70.31,
         "revenueYoY": 26.93,
         "mainRevenue": 70.27,
         "mainRevenuePct": 99.94,
-        "netProfit": 3.12,
+        "netProfit": 3.07,
         "netProfitYoY": 232.85,
         "deductedNetProfit": 2.77,
         "deductedNetProfitYoY": 360.93,
-        "grossMargin": 58.3,
+        "grossMargin": 13.05,
         "grossMarginPrev": 13.55,
         "grossMarginChange": -0.5,
         "eps": 0.36,
@@ -1005,7 +1006,7 @@
         "rdRevenuePct": 5.71,
         "operatingCF": 1.22,
         "operatingCFYoY": -62.92,
-        "source": "巨潮资讯网·2025年年度报告",
+        "source": "2025年年度报告（巨潮资讯网/2026-03-31）",
         "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225060090.PDF",
         "quarterly": [
           {
@@ -1072,43 +1073,36 @@
       "productionSales": {
         "salesVolumeDisclosed": false,
         "salesVolumeNote": "正海磁材未在年报中公开披露具体发货吨数，仅披露产品销量同比增长21%。新能源车搭载电机超800万台套（+40%），消费电子出货量同比+35%。",
-        "capacity": 4.0,
+        "capacity": 0,
         "capacityNote": "国内5处生产基地；海外在德国、日本、韩国、美国、马来西亚设子公司",
-        "source": "2025年年度报告",
-        "production": 3.5,
-        "sales": 3.4
+        "source": "2025年年度报告（2026年3月31日披露）"
       },
       "revenueStructure": [
         {
-          "segment": "汽车用",
-          "revenue": 9.5,
-          "salesYoY": 20.0,
-          "note": "2025年年度报告"
+          "segment": "节能与新能源汽车",
+          "revenue": 0,
+          "salesYoY": 40,
+          "note": "搭载电机超800万台套"
         },
         {
-          "segment": "工业用",
-          "revenue": 6.38,
-          "salesYoY": -3.0,
-          "note": "2025年年度报告"
+          "segment": "智能消费电子",
+          "revenue": 0,
+          "salesYoY": 35,
+          "note": "出货量同比+35%"
+        },
+        {
+          "segment": "海外出口",
+          "revenue": 18.72,
+          "salesYoY": 0,
+          "note": "出口发货量同比明显增长，无重稀土磁体接受度提高"
         }
       ],
       "geo": {
-        "domestic": 18.2,
+        "domestic": 51.59,
         "domesticPct": 73.37,
-        "overseas": 24.3,
-        "overseasPct": 26.63,
-        "source": "2025年年度报告"
-      },
-      "quarterly": [
-        {
-          "period": "2026H1",
-          "type": "forecast",
-          "revenue": 10.14,
-          "netProfit": 0.88,
-          "grossMargin": 59.5,
-          "source": "2025年年度报告"
-        }
-      ]
+        "overseas": 18.72,
+        "overseasPct": 26.63
+      }
     }
   ],
   "comparison": {
@@ -1161,508 +1155,64 @@
   },
   "activities": [
     {
-      "company": "dadi",
-      "companyName": "大地熊",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2026-09-09",
-      "title": "大地熊参加科创板2026年半年度新材料行业集体业绩说明会",
-      "description": "大地熊计划于2026年9月18日参加科创板2026年半年度新材料行业集体业绩说明会。",
-      "source": "百家号",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875854279099224332&wfr=spider&for=pc",
-      "id": "act-20260909-08"
-    },
-    {
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-09-09",
-      "title": "中科三环2026年上半年业绩表现",
-      "description": "中科三环上半年实现营业收入36.14亿元，同比增长21.16%；净利润1.19亿元，同比增长23.53%。",
-      "source": "新浪财经",
-      "sourceUrl": "",
-      "id": "act-20260909-01"
-    },
-    {
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-09-09",
-      "title": "中科三环2026年半年度报告披露",
-      "description": "中科三环2026年半年度报告披露，具体数据未在提供的参考信息中体现。",
-      "source": "无",
-      "sourceUrl": "http://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000970&id=12514831",
-      "id": "act-20260909-04"
-    },
-    {
-      "company": "dadi",
-      "companyName": "大地熊",
+      "id": "act-20260908-jinli-market-01",
+      "company": "jinli",
+      "companyName": "金力永磁",
       "dimension": "market",
       "dimensionName": "市场",
-      "date": "2026-09-09",
-      "title": "大地熊:关于参加科创板2026年半年度新材料行业集体业绩说明会的公告",
-      "description": "大地熊计划于2026年9月18日参加科创板2026年半年度新材料行业集体业绩说明会。",
-      "source": "百家号",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875854279099224332&wfr=spider&for=pc",
-      "id": "act-20260909-08"
+      "date": "2026-09-08",
+      "title": "金力永磁接受Dymon Asia Capital等4家海外机构调研，回应无稀土电机技术路线",
+      "description": "9月8日金力永磁披露投资者关系活动记录表（编号2026-010），接待Dymon Asia Capital、Millennium Partners、Jain Global、Morgan Stanley等4家海外机构现场调研。公司重申2026H1营收46.49亿元(+32.57%)、归母净利4.62亿元(+51.58%)、毛利率21.73%(+5.34pct)、经营现金流12.06亿元。针对特斯拉Cybercab'零稀土'电机，公司明确回应：高性能钕铁硼在新能源汽车驱动电机、人形机器人等高端领域经过四十余年产业验证，是不可替代的主流核心材料路线，公司订单未发生变化。包头三期'年产2万吨高性能稀土永磁材料绿色智造项目'主体基本完工，预计2027年底总产能达6万吨/年。",
+      "source": "金力永磁投资者关系活动记录表2026-010（巨潮资讯网/2026-09-08）",
+      "sourceUrl": "https://static.cninfo.com.cn/finalpage/2026-09-08/1225554319.PDF"
     },
     {
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-09-09",
-      "title": "中科三环:2026年半年度报告",
-      "description": "中科三环2026年上半年实现营业收入36.14亿元，同比增长21.16%。",
-      "source": "无",
-      "sourceUrl": "http://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000970&id=12514831",
-      "id": "act-20260909-10"
-    },
-    {
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-09-09",
-      "title": "中科三环:2026年半年度报告摘要",
-      "description": "中科三环2026年上半年实现营业收入36.14亿元，同比增长21.16%；净利润1.19亿元，同比增长12.90%。",
-      "source": "东方财富网",
-      "sourceUrl": "https://data.eastmoney.com/notices/detail/000970/AN202608210006743719,JUU0JUI4JUFEJUU3JUE3JTkxJUU0JUI4JTg5JUU3JThFJUFG.html",
-      "id": "act-20260909-04"
-    },
-    {
+      "id": "act-20260903-yunsheng-market-01",
       "company": "yunsheng",
       "companyName": "宁波韵升",
       "dimension": "market",
       "dimensionName": "市场",
-      "date": "2026-09-09",
-      "title": "9月9日,宁波韵升涨0.45%,成交额2.06亿元,后市是否有机会?",
-      "description": "9月9日，宁波韵升涨0.45%，成交额2.06亿元，换手率1.66%，总市值123.97亿元。",
-      "source": "百家号",
-      "sourceUrl": "https://www.sohu.com/a/1073819190_122014422",
-      "id": "act-20260909-01"
+      "date": "2026-09-03",
+      "title": "宁波韵升披露股份回购进展：截至8月31日累计回购161.05万股、支付1895.62万元",
+      "description": "9月3日宁波韵升发布《关于以集中竞价交易方式回购股份的进展公告》：截至2026年8月31日，公司已累计回购股份1,610,500股，占总股本0.15%，成交最高价12.63元/股、最低价10.63元/股，累计支付总金额18,956,196.00元（不含交易费用）。其中8月单月回购1,346,500股、支付1,613.53万元，执行速度迅速。本次回购用途为员工持股计划，回购期限自2026年7月28日至11月27日，金额下限5,000万元、上限1亿元。",
+      "source": "宁波韵升回购进展公告（巨潮资讯网/上交所/2026-09-03）",
+      "sourceUrl": "https://static.cninfo.com.cn/finalpage/2026-09-03/1225543976.PDF"
     },
     {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-08",
-      "title": "金力永磁拟审议半年度利润分配及H股可转债募资用途变更",
-      "description": "金力永磁拟向股东每10股派发现金股息2.5元，不送红股、不以资本公积转增股本，股息总额约3.45亿元；变更H股可转债所得款项用途，划转600万美元至“偿还债务”和900万美元至“一般营运资金-原材料采购”。",
-      "source": "新浪港股-好仓工作室",
-      "sourceUrl": "",
-      "id": "act-20260908-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-08",
-      "title": "金力永磁接受机构调研，上半年业绩稳健增长",
-      "description": "金力永磁上半年实现营业收入46.49亿元，同比增长32.57%，创历史同期新高；净利润4.62亿元，同比增长51.58%；扣非净利润3.99亿元，同比增长70.31%。公司综合毛利率达21.73%，较上年同期提升5.34个百分点。",
-      "source": "网易",
-      "sourceUrl": "",
-      "id": "act-20260908-02"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-09-08",
-      "title": "金力永磁包头三期项目主要工程主体基本完工",
-      "description": "金力永磁包头三期“年产2万吨高性能稀土永磁材料绿色智造项目”主要工程主体基本完工，生产设备将按计划分批次安装，预计2027年底公司磁材产能将达到6万吨/年。",
-      "source": "百家号",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875764120495858878&wfr=spider&for=pc",
-      "id": "act-20260908-07"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-09-08",
-      "title": "金力永磁包头三期项目主体基本完工，预计2027年底产能达6万吨/年",
-      "description": "金力永磁包头三期“年产2万吨高性能稀土永磁材料绿色智造项目”主要工程主体基本完工，生产设备将按计划分批次安装，预计2027年底公司磁材产能将达到6万吨/年。",
-      "source": "财闻",
-      "sourceUrl": "",
-      "id": "act-20260908-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-08",
-      "title": "金力永磁接受机构调研",
-      "description": "金力永磁接受Dymon Asia Capital、Millennium Partners等多家机构调研，公司上半年实现营业收入46.49亿元，同比增长32.57%，净利润4.62亿元，同比增长51.58%。",
-      "source": "网易",
-      "sourceUrl": "",
-      "id": "act-20260908-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-09-08",
-      "title": "金力永磁包头三期项目主体基本完工",
-      "description": "金力永磁包头三期“年产2万吨高性能稀土永磁材料绿色智造项目”主要工程主体基本完工，预计2027年底公司磁材产能将达6万吨/年。",
-      "source": "财闻",
-      "sourceUrl": "",
-      "id": "act-20260908-02"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-09-08",
-      "title": "金力永磁预计2027年底磁材产能将达6万吨/年",
-      "description": "金力永磁包头三期“年产2万吨高性能稀土永磁材料绿色智造项目”主要工程主体基本完工，生产设备将按计划分批次安装，预计2027年底公司磁材产能将达到6万吨/年。",
-      "source": "财闻",
-      "sourceUrl": "https://www.sohu.com/a/1073519908_362225",
-      "id": "act-20260908-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-09-08",
-      "title": "金力永磁:拟审议半年度利润分配及H股可转债募资用途变更",
-      "description": "金力永磁拟于2026年9月24日召开临时股东大会，审议半年度利润分配预案及H股可转债募资用途变更，拟向股东每10股派发现金股息2.5元，变更原用于购回H股的1500万美元未动用募资用途。",
-      "source": "新浪港股-好仓工作室",
-      "sourceUrl": "",
-      "id": "act-20260908-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-08",
-      "title": "金力永磁:9月8日接受机构调研",
-      "description": "金力永磁于2026年9月8日接受多家机构调研，报告期内实现营业收入46.49亿元，同比增长32.57%，净利润4.62亿元，同比增长51.58%。",
-      "source": "网易",
-      "sourceUrl": "https://www.163.com/dy/article/L6BSDTKF051984TV.html",
-      "id": "act-20260908-02"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-09-08",
-      "title": "金力永磁:预计2027年底磁材产能将达6万吨/年 上半年净利同比增51.58%",
-      "description": "金力永磁包头三期项目主要工程主体基本完工，预计2027年底磁材产能将达6万吨/年。",
-      "source": "上海有色网",
-      "sourceUrl": "https://news.smm.cn/news/104106247",
-      "id": "act-20260908-09"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-09-08",
-      "title": "金力永磁:包头三期项目主要工程主体基本完工,预计2027年底公司磁材产能将达6万吨/年",
-      "description": "金力永磁表示，公司于2025年中启动包头三期“年产2万吨高性能稀土永磁材料绿色智造项目”，目前主体基本完工，设备将分批安装，产能逐步释放，预计2027年底公司磁材产能将达到6万吨/年。",
-      "source": "财闻",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875764120495858878&wfr=spider&for=pc",
-      "id": "act-20260908-03"
-    },
-    {
-      "company": "yunsheng",
-      "companyName": "宁波韵升",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-08",
-      "title": "宁波韵升跌0.35%,成交额2.03亿元,后市是否有机会?",
-      "description": "9月8日，宁波韵升跌0.35%，成交额2.03亿元，换手率1.64%，总市值123.42亿元。",
-      "source": "新浪证券-红岸工作室",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875810277751652569&wfr=spider&for=pc",
-      "id": "act-20260908-02"
-    },
-    {
-      "company": "yunsheng",
-      "companyName": "宁波韵升",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-07",
-      "title": "宁波韵升2026年上半年业绩表现",
-      "description": "宁波韵升2026年上半年实现营业收入19.2亿元，同比增长12.4%；归母净利润2.16亿元，同比微增3.8%。",
-      "source": "搜狐网",
-      "sourceUrl": "",
-      "id": "act-20260907-02"
-    },
-    {
-      "company": "yunsheng",
-      "companyName": "宁波韵升",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-07",
-      "title": "宁波韵升涨0.18%,成交额1.75亿元,今日主力净流入-419.42万",
-      "description": "9月7日，宁波韵升涨0.18%，成交额1.75亿元，换手率1.41%，总市值123.86亿元。",
-      "source": "新浪证券-红岸工作室",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875655658972274593&wfr=spider&for=pc",
-      "id": "act-20260907-03"
-    },
-    {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-04",
-      "title": "英洛华2026年上半年业绩表现",
-      "description": "英洛华上半年实现营业收入22.13亿元，同比增长27.63%；归母净利润1.29亿元，同比减少10.45%。",
-      "source": "百家号",
-      "sourceUrl": "",
-      "id": "act-20260904-03"
-    },
-    {
-      "company": "yunsheng",
-      "companyName": "宁波韵升",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-04",
-      "title": "宁波韵升召开2026年半年度业绩说明会",
-      "description": "宁波韵升计划于2026年9月14日举行2026年半年度业绩说明会，就投资者关心的问题进行交流。",
-      "source": "证券日报网",
-      "sourceUrl": "https://data.eastmoney.com/notices/detail/600366/AN202609041829015395.html",
-      "id": "act-20260904-04"
-    },
-    {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-04",
-      "title": "英洛华2026年1-6月业绩",
-      "description": "英洛华实现营业收入22.13亿元，同比增长27.63%；归母净利润1.29亿元，同比减少10.45%。",
-      "source": "百家号",
-      "sourceUrl": "",
-      "id": "act-20260904-03"
-    },
-    {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-04",
-      "title": "英洛华:9月3日获融资买入484.81万元",
-      "description": "英洛华2026年上半年实现营业收入22.13亿元，同比增长27.63%，归母净利润1.29亿元，同比减少10.45%。",
-      "source": "百家号",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875362193031281921&wfr=spider&for=pc",
-      "id": "act-20260904-03"
-    },
-    {
-      "company": "yunsheng",
-      "companyName": "宁波韵升",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-04",
-      "title": "宁波韵升:公司将于9月14日召开2026年半年度业绩说明会",
-      "description": "宁波韵升计划于2026年9月14日举行半年度业绩说明会，披露2026年半年度报告。",
-      "source": "同花顺财经网",
-      "sourceUrl": "http://news.10jqka.com.cn/20260904/c679615995.shtml",
-      "id": "act-20260904-07"
-    },
-    {
-      "company": "dadi",
-      "companyName": "大地熊",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2026-09-02",
-      "title": "大地熊申请钕铁硼厚磁体相关专利",
-      "description": "大地熊申请一项名为“一种钕铁硼厚磁体及其制备方法”的专利，通过增设改性高熵合金夹层，显著提升磁体层间结合强度，提高磁体矫顽力。",
-      "source": "新浪网",
-      "sourceUrl": "",
-      "id": "act-20260902-06"
-    },
-    {
+      "id": "act-20260902-sanhuan-supply-01",
       "company": "sanhuan",
       "companyName": "中科三环",
       "dimension": "supply",
       "dimensionName": "供应链",
       "date": "2026-09-02",
-      "title": "中科三环2026年上半年业绩",
-      "description": "中科三环上半年实现营业收入36.14亿元，同比增长21.16%；净利润1.19亿元，同比增长18.37%。",
-      "source": "新浪财经",
-      "sourceUrl": "",
-      "id": "act-20260902-01"
+      "title": "中科三环2026年股票期权激励计划首次授予登记完成，266人获授1103万份",
+      "description": "9月2日中科三环公告2026年股票期权激励计划首次授予登记完成：股票期权简称'三环JLC1'、代码037986；首次授予日2026年8月20日，登记完成日2026年9月1日；首次授予数量11,030,000份，授予人数266人，行权价格15.99元/股。业绩考核目标：以2025年净利润为基数，2026年增长不低于7%、2027年不低于23%、2028年不低于31%。摊销总费用2,412.15万元，2026年度摊销283.25万元。",
+      "source": "中科三环关于2026年股票期权激励计划首次授予登记完成的公告（巨潮资讯网/2026-09-02）",
+      "sourceUrl": "https://static.cninfo.com.cn/finalpage/2026-09-02/1225541516.PDF"
     },
     {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-02",
-      "title": "英洛华:9月2日获融资买入658.09万元",
-      "description": "英洛华2026年上半年实现营业收入22.13亿元，同比增长27.63%，归母净利润1.29亿元，同比减少10.45%。",
-      "source": "百家号",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875271584471139878&wfr=spider&for=pc",
-      "id": "act-20260902-04"
-    },
-    {
+      "id": "act-20260909-dadi-supply-01",
       "company": "dadi",
       "companyName": "大地熊",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-09-09",
+      "title": "大地熊拟与钢研总院、安泰科技向参股公司合肥钢研同比例增资1400万元",
+      "description": "9月9日大地熊公告：公司拟与钢研总院、安泰科技以货币出资方式向参股公司合肥钢研同比例增资，本次增资总金额3,500万元（对应新增注册资本3,500万元），其中大地熊增资1,400万元。增资完成后合肥钢研注册资本由500万元增至4,000万元，公司持股比例仍为40%。本次交易构成关联交易，已获董事会审议通过，无需提交股东会审议。",
+      "source": "大地熊关于向参股公司增资暨关联交易的公告（巨潮资讯网/2026-09-09）",
+      "sourceUrl": "https://static.cninfo.com.cn/finalpage/2026-09-09/1225560000.PDF"
+    },
+    {
+      "id": "act-20260903-industry-tech-01",
+      "company": "industry",
+      "companyName": "稀土行业",
       "dimension": "tech",
       "dimensionName": "工艺技术",
-      "date": "2026-09-02",
-      "title": "大地熊、宁国永磁申请钕铁硼厚磁体相关专利,改性夹层提升钕铁硼厚磁体力学与磁性能",
-      "description": "大地熊申请一项名为“一种钕铁硼厚磁体及其制备方法”的专利，通过改性高熵合金夹层提升磁体层间结合强度和矫顽力。",
-      "source": "新浪网",
-      "sourceUrl": "http://finance.sina.com.cn/stock/aigc/zl/2026-09-02/doc-iniqkvce1351332.shtml",
-      "id": "act-20260902-11"
-    },
-    {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-01",
-      "title": "英洛华:9月1日获融资买入715.24万元",
-      "description": "英洛华2026年上半年实现营业收入22.13亿元，同比增长27.63%，归母净利润1.29亿元，同比减少10.45%。",
-      "source": "百家号",
-      "sourceUrl": "https://www.163.com/dy/article/L5QFID7N05568W0A.html",
-      "id": "act-20260901-05"
-    },
-    {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-01",
-      "title": "英洛华:9月1日主力资金净卖出903.62万元",
-      "description": "英洛华2026年上半年实现营业收入22.13亿元，同比增长27.63%，归母净利润1.29亿元，同比减少10.45%。",
-      "source": "证券之星",
-      "sourceUrl": "https://stock.stockstar.com/RB2026090100024191.shtml",
-      "id": "act-20260901-06"
-    },
-    {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-01",
-      "title": "英洛华:9月1日获融资买入715.24万元,融资余额2.60亿元占流通市值比例2.67%,低于近一年30%分位水平",
-      "description": "英洛华2026年上半年实现营业收入22.13亿元，同比增长27.63%；归母净利润1.29亿元，同比减少10.45%。",
-      "source": "百家号",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875191188126798005&wfr=spider&for=pc",
-      "id": "act-20260901-01"
-    },
-    {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-09-01",
-      "title": "英洛华(000795)9月1日主力资金净卖出903.62万元",
-      "description": "英洛华2026年中报显示，上半年度公司主营收入22.13亿元，同比上升27.63%；归母净利润1.29亿元，同比下降10.45%。",
-      "source": "证券之星",
-      "sourceUrl": "https://stock.stockstar.com/RB2026090100024191.shtml",
-      "id": "act-20260901-02"
-    },
-    {
-      "id": "act-20260830-jinli-supply-01",
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-08-30",
-      "title": "包头三期2万吨绿色智造项目设备分批进场，预计2027年底磁材总产能达6万吨/年",
-      "description": "8月29日金力永磁公告：截至8月中旬，包头三期\"年产2万吨高性能稀土永磁材料绿色智造项目\"主体工程基本完工，烧结炉及后段自动化设备按工艺节拍分批进场安装；首批1万吨产能预计2027年Q3释放、剩余1万吨2027年底达产，项目落地后集团磁材总产能将由4万吨/年提升至6万吨/年。该项目配套公司2026年新增3万吨高端磁材产能规划，聚焦新能源汽车、风电、机器人高端场景。",
-      "source": "金力永磁2026年半年度报告·产能进度章节 + 包头基地现场公示",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-20260830-sanhuan-supply-02",
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-08-30",
-      "title": "中科三环召开2026年第三次临时股东大会，审议通过股票期权激励计划调整方案",
-      "description": "8月29日召开2026年第三次临时股东大会，审议通过《关于调整2026年股票期权激励计划首次授予激励对象名单及授予数量的议案》、《关于核实2026年股票期权激励计划首次授予激励对象名单的议案》。本次调整覆盖核心管理、技术与业务骨干，行权价15.99元/股不变；同步审议《关于使用部分闲置自有资金进行现金管理的议案》，授权董事会使用不超过10亿元闲置自有资金投资安全性高、流动性好的金融产品，提升资金使用效率。",
-      "source": "中科三环2026年第三次临时股东大会决议公告（巨潮资讯网/2026-08-29）",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-20260830-dadi-market-01",
-      "company": "dadi",
-      "companyName": "大地熊",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-30",
-      "title": "大地熊半年报披露后机构关注高端磁材产能爬坡进度与机器人定点进展",
-      "description": "2026年8月17日大地熊披露半年报（营收9.84亿元/+35.50%、归母净利3448.64万元/+54.05%、EPS 0.30元、扣非同比+185.02%）；8月28日机构调研要点：①年产8000吨高性能钕铁硼磁体合肥基地持续满产，2026年下半年新增产能3万吨计划在2027Q1分批释放；②人形机器人磁材已向头部企业送样验证；③与北方稀土保持长期战略采购协议；④包头基地持续推进年产3万吨高端磁材扩产计划。",
-      "source": "大地熊2026年半年度报告（巨潮资讯网/2026-08-17）+ 投资者关系活动记录表（2026-08-28）",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-20260830-tianhe-supply-01",
-      "company": "tianhe",
-      "companyName": "天和磁材",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-08-30",
-      "title": "天和磁材发布半年报补充公告：人形机器人磁材订单已进入批量交付阶段",
-      "description": "8月29日天和磁材(603072.SH)发布半年报补充公告：在已披露2026年上半年营收12.92亿元、净利润同比+49.36%的基础上，进一步披露人形机器人磁材订单已进入批量交付阶段，在手订单涵盖国内某头部人形机器人企业Q3-Q4交付计划；公司2026年定增募投项目\"年产6000吨高端稀土永磁材料项目\"按计划推进，预计2027年上半年部分产线投产。",
-      "source": "天和磁材半年报补充公告（上交所/2026-08-29）",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-20260830-yunsheng-lean-01",
-      "company": "yunsheng",
-      "companyName": "宁波韵升",
-      "dimension": "lean",
-      "dimensionName": "精益",
-      "date": "2026-08-30",
-      "title": "包头基地\"年产15000吨高性能稀土永磁材料智能制造项目\"首条产线Q3产能爬坡顺利",
-      "description": "8月28日宁波韵升披露投资者关系活动记录表：包头基地15000吨高性能磁材智能制造项目首批5000吨产能自2026年Q2投产以来顺利爬坡，截至8月底产能利用率达78%，单位制造成本较搬迁前下降8.5%；同步推进\"提质增效重回报\"行动方案下的成本管控，上半年钕铁硼单位电耗较去年同期下降5.2%、包装耗材用量下降12%、辅料消耗下降3.8%。同步加大研发投入和包头基地智能化产线建设。",
-      "source": "宁波韵升投资者关系活动记录表 2026-012（上交所/2026-08-28）",
-      "sourceUrl": ""
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-27",
-      "title": "金力永磁(06680.HK)：2026年中期报告内容摘要",
-      "description": "报告期内实现营业收入人民币46.49亿元，同比增长32.57%；归母净利润达4.62亿元，同比增长51.58%。",
-      "source": "金力永磁(06680.HK)：2026年中期报告内容摘要",
-      "sourceUrl": "",
-      "id": "act-20260827-05"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-27",
-      "title": "金力永磁2026半年报炸了！净利狂增50%，机器人磁材杀疯了",
-      "description": "上半年归母净利润预计达4亿～4.6亿元，同比暴增31.17%～50.84%；更亮眼的是，扣非净利润预计3.68亿～4.28亿元，同比飙涨57.26%～82.9%。",
-      "source": "金力永磁2026半年报炸了！净利狂增50%，机器人磁材杀疯了",
-      "sourceUrl": "",
-      "id": "act-20260827-06"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2026-08-27",
-      "title": "金力永磁：2026年半年度报告摘要",
-      "description": "公司持续推进产能建设，预计2027年底高性能稀土永磁材料年产能达6万吨。",
-      "source": "金力永磁：2026年半年度报告摘要",
-      "sourceUrl": "http://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=300748&id=12510772",
-      "id": "act-20260827-02"
+      "date": "2026-09-03",
+      "title": "特斯拉Cybercab发布'零稀土'电机，金力永磁等龙头回应高性能钕铁硼仍是不可替代主流路线",
+      "description": "9月3日特斯拉在德州奥斯汀发布无人驾驶量产车Cybercab，马斯克证实该车驱动电机已实现'零稀土金属使用'，主要通过Halbach磁阵列+发卡式定子+超高转速等系统工程手段弥补磁场强度不足，目前仅搭载于城市低速匀速运营场景。金力永磁9月8日在投资者关系活动中明确回应：高性能稀土永磁材料在新能源汽车驱动电机、人形机器人等高端领域是不可替代的主流核心材料路线，公司订单未发生变化。9月9日SMM数据显示氧化镨钕价格短时承压后迅速企稳，产业链盈利表现未受冲击。",
+      "source": "特斯拉发布会/金力永磁投资者关系活动记录表2026-010/Mysteel",
+      "sourceUrl": "https://www.toutiao.com/a7682547669171978752"
     },
     {
       "id": "act-20260826-policy-01",
@@ -1674,19 +1224,7 @@
       "title": "三部门联合发布《稀土开采和冶炼分离总量调控管理暂行办法》对全环节实施刚性总量调控",
       "description": "8月26日工信部、发改委、自然资源部联合发布《稀土开采和冶炼分离总量调控管理暂行办法》，对稀土开采与冶炼分离加强全环节刚性总量调控，并首次将进口矿纳入总量调控管理。受新规催化，8月25日稀土永磁板块拉升金力永磁涨超10%、北方稀土/包钢股份携手封板；8月26日板块持续调整北方稀土跌超7%，反映供给侧政策与下游需求的博弈加剧。",
       "source": "财联社 / 工信部、发改委、自然资源部公告",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-20260826-tianhe-tech-01",
-      "company": "tianhe",
-      "companyName": "天和磁材",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2026-08-26",
-      "title": "天和磁材获得\"低重稀土保障高剩磁与矫顽力\"稀土永磁体专利授权",
-      "description": "国家知识产权局信息显示，包头天和磁材科技股份有限公司申请的\"稀土永磁体及其生产方法和应用\"专利于2026年8月21日授权(授权公告号CN115810460B)。本发明通过特定组分设计(R 30~32wt%、B 0.93~0.96wt%、M 0.07~0.16wt%、Ga 0.12~0.22wt%、Cu 0.05~0.18wt%、Co 0.2~1.42wt%、Al 0~0.55wt%、Fe余量)进一步降低Dy用量，同时具有较高剩磁和矫顽力。8月26日天和磁材同步披露2026年半年报：上半年营收12.92亿元、净利润同比增长49.36%，人形机器人等新兴稀土应用赛道布局提速；在国内12家同行业可比公司中营收排名第5。",
-      "source": "国家知识产权局公告（新浪财经/2026-08-26）",
-      "sourceUrl": ""
+      "sourceUrl": "https://api3.cls.cn/share/article/2124419"
     },
     {
       "id": "act-20260825-jinli-market-01",
@@ -1698,19 +1236,7 @@
       "title": "稀土永磁板块拉升金力永磁盘中涨超10%，国盛证券维持买入",
       "description": "8月25日稀土永磁概念股震荡拉升，金力永磁涨超10%、H股(06680)涨3.42%报17.83港元；国盛证券新研报指公司上半年实现营收46.49亿元(+32.57%)、毛利率21.73%、归母净利4.62亿元(+51.58%)，预计26-28年归母净利9.7/12.3/14.0亿元，对应PE 39/31/27x，维持\"买入\"评级。机构料公司26H2继续受益于机器人、高效节能电机及半导体设备等下游需求加速放量，磁材量稳价升、毛利提升，包头三期2万吨高性能磁材项目主体基本完工，银海新材年回收稀土能力5000吨。",
       "source": "财联社 / 国盛证券研报 / 新浪财经",
-      "sourceUrl": ""
-    },
-    {
-      "id": "act-20260825-yingluohua-market-01",
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-25",
-      "title": "英洛华半年报正式披露，增收不增利，钕铁硼磁材毛利率提升0.87pct至15.74%",
-      "description": "8月25日晚正式披露2026年半年报：营收22.13亿元(+27.63%)、归母净利润1.29亿元(-10.45%)、扣非净利润1.04亿元(-8.78%)、基本EPS 0.1175元；钕铁硼磁材营收10.98亿元(+24.47%)，毛利率提升0.87个百分点至15.74%；电机系列营收4.82亿元(+10.86%)、毛利率28.91%(+2.15pct)；电动轮椅及代步车(健康器材)营收2.99亿元(+34.00%)，但毛利率下降7.94pct至25.16%；拟每10股派0.47元；经营现金流由正转负-1.10亿元，主要因汇兑损失增加+4518万元存货跌价准备计提影响。",
-      "source": "英洛华2026年半年度报告（巨潮资讯网/2026-08-25）/ 中国证券报·中证网",
-      "sourceUrl": ""
+      "sourceUrl": "https://www.163.com/dy/article/L568KDA505568W0A.html"
     },
     {
       "id": "act-20260824-sanhuan-supply-01",
@@ -1722,7 +1248,31 @@
       "title": "完成2026年股票期权激励计划首次授予，调整激励对象名单及授予数量",
       "description": "8月22日董事会审议通过《关于调整2026年股票期权激励计划首次授予激励对象名单及授予数量的议案》及《关于向2026年股票期权激励计划激励对象首次授予股票期权的议案》，8月24日完成向激励对象首次授予股票期权。本次调整已通过董事会薪酬与考核委员会审议，国金证券出具独立财务顾问报告；激励计划初始行权价15.99元/股，覆盖核心管理、技术与业务骨干，绑定长期发展。",
       "source": "中科三环第九届董事会第十四次会议决议公告（巨潮资讯网/2026-08-22）+ 关于向2026年股票期权激励计划激励对象首次授予股票期权的公告（巨潮资讯网/2026-08-24）",
-      "sourceUrl": ""
+      "sourceUrl": "https://www.cnfin.com/announ/detail/index.html?dannoun=lcdetail&id=840643016561"
+    },
+    {
+      "id": "act-20260825-yingluohua-market-01",
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-08-25",
+      "title": "英洛华半年报正式披露，增收不增利，钕铁硼磁材毛利率提升0.87pct至15.74%",
+      "description": "8月25日晚正式披露2026年半年报：营收22.13亿元(+27.63%)、归母净利润1.29亿元(-10.45%)、扣非净利润1.04亿元(-8.78%)、基本EPS 0.1175元；钕铁硼磁材营收10.98亿元(+24.47%)，毛利率提升0.87个百分点至15.74%；电机系列营收4.82亿元(+10.86%)、毛利率28.91%(+2.15pct)；电动轮椅及代步车(健康器材)营收2.99亿元(+34.00%)，但毛利率下降7.94pct至25.16%；拟每10股派0.47元；经营现金流由正转负-1.10亿元，主要因汇兑损失增加+4518万元存货跌价准备计提影响。",
+      "source": "英洛华2026年半年度报告（巨潮资讯网/2026-08-25）/ 中国证券报·中证网",
+      "sourceUrl": "https://wap.eastmoney.com/a/202608263854291573.html"
+    },
+    {
+      "id": "act-20260826-tianhe-tech-01",
+      "company": "tianhe",
+      "companyName": "天和磁材",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-08-26",
+      "title": "天和磁材获得\"低重稀土保障高剩磁与矫顽力\"稀土永磁体专利授权",
+      "description": "国家知识产权局信息显示，包头天和磁材科技股份有限公司申请的\"稀土永磁体及其生产方法和应用\"专利于2026年8月21日授权(授权公告号CN115810460B)。本发明通过特定组分设计(R 30~32wt%、B 0.93~0.96wt%、M 0.07~0.16wt%、Ga 0.12~0.22wt%、Cu 0.05~0.18wt%、Co 0.2~1.42wt%、Al 0~0.55wt%、Fe余量)进一步降低Dy用量，同时具有较高剩磁和矫顽力。8月26日天和磁材同步披露2026年半年报：上半年营收12.92亿元、净利润同比增长49.36%，人形机器人等新兴稀土应用赛道布局提速；在国内12家同行业可比公司中营收排名第5。",
+      "source": "国家知识产权局公告（新浪财经/2026-08-26）",
+      "sourceUrl": "https://finance.sina.com.cn/stock/aigc/zl/2026-08-26/doc-inipqxhc6342374.shtml"
     },
     {
       "company": "jinli",
@@ -1733,7 +1283,7 @@
       "title": "金力永磁业绩高增获机器人定点",
       "description": "金力永磁业绩高增，获机器人定点。",
       "source": "中财网",
-      "sourceUrl": "",
+      "sourceUrl": "http://fund.cfi.cn/p20260823000048.html",
       "id": "act-20260823-06"
     },
     {
@@ -1746,7 +1296,7 @@
       "title": "H股上市申请聆讯推进，募投加码机器人/eVTOL磁体",
       "description": "8月22日港交所披露文件显示宁波韵升H股上市申请获进一步推进，本次募资主要投向人形机器人高性能钕铁硼磁体研发、低空飞行器磁体研发以及包头高性能磁材基地二阶段建设。公司年内已向宇树、智元等头部机器人企业供应核心关节磁材，并向eVTOL客户送样验证。",
       "source": "港交所/财联社",
-      "sourceUrl": ""
+      "sourceUrl": "https://www.cls.cn/detail/xk/84eb65dcac318418ff293f334ccf5ff6"
     },
     {
       "id": "act-20260822-tech-01",
@@ -1758,7 +1308,7 @@
       "title": "技术中心聚焦人形机器人/高效节能电机，重稀土耗用持续下降",
       "description": "2026年半年报披露：上半年研发投入6539万元(+11.80%)；报告期内成立公司级技术创新中心，聚焦人形机器人、高效节能电机等重点领域开展前沿研究与产品创新；公司通过优化配方工艺减少重稀土耗用，磁材产品毛利率较上年同期提升3.24个百分点至12.63%；同步推进信息化、自动化、智能化改造，海外业务汇兑风险通过外汇远期结售业务对冲。",
       "source": "2026年半年度报告（巨潮资讯网/2026-08-22）",
-      "sourceUrl": ""
+      "sourceUrl": "https://static.cninfo.com.cn/finalpage/2026-08-22/1225488280.PDF"
     },
     {
       "company": "jinli",
@@ -1769,7 +1319,7 @@
       "title": "华泰证券-金力永磁-300748-Q2业绩环增且具身业务加快落地-260821",
       "description": "公司H1新能源汽车及汽车零部件领域销售收入22.28亿元，同比增长33.04%；机器人及工业伺服电机业务增长强劲，销售收入2.61亿元，同比增长96.40%。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "http://m.microbell.com/wap_detail.aspx?id=c88902b63625eb9aaa4ccd5f52814404",
       "id": "act-20260822-06"
     },
     {
@@ -1781,7 +1331,7 @@
       "title": "华泰证券-金力永磁-300748-Q2业绩环增且具身业务加快落地",
       "description": "金力永磁Q2业绩环比增长，具身机器人业务加快落地。",
       "source": "华泰证券",
-      "sourceUrl": "",
+      "sourceUrl": "http://m.microbell.com/wap_detail.aspx?id=c88902b63625eb9aaa4ccd5f52814404",
       "id": "act-20260822-04"
     },
     {
@@ -1793,7 +1343,7 @@
       "title": "业绩高增毛利提升，机器人定点打开成长空间",
       "description": "金力永磁2026年上半年业绩高增，毛利提升，机器人业务加速放量。",
       "source": "国盛证券",
-      "sourceUrl": "",
+      "sourceUrl": "http://m.microbell.com/wap_detail.aspx?id=6eff5abe969b7bc57f22536e81c40b89",
       "id": "act-20260822-16"
     },
     {
@@ -1805,7 +1355,7 @@
       "title": "Q2收入利润均为环增，26H1新能源汽车、机器人等领域增长强劲",
       "description": "金力永磁Q2收入利润均为环增，新能源汽车、机器人等领域增长强劲。",
       "source": "华泰证券",
-      "sourceUrl": "",
+      "sourceUrl": "http://m.microbell.com/wap_detail.aspx?id=c88902b63625eb9aaa4ccd5f52814404",
       "id": "act-20260822-17"
     },
     {
@@ -1817,116 +1367,8 @@
       "title": "产能扩张稳步推进，原料保障体系持续完善",
       "description": "金力永磁产能扩张稳步推进，原料保障体系持续完善。",
       "source": "华泰证券",
-      "sourceUrl": "",
+      "sourceUrl": "http://m.microbell.com/wap_detail.aspx?id=c88902b63625eb9aaa4ccd5f52814404",
       "id": "act-20260822-18"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-22",
-      "title": "国盛证券-金力永磁-300748-业绩高增毛利提升，机器人定点打开成长空间-260822",
-      "description": "上半年公司实现营收46.49亿元，同比+32.57%，毛利率21.73%；归母净利4.62亿元，同比+51.58%，净利率9.96%。",
-      "source": "国盛证券-金力永磁-300748-业绩高增毛利提升，机器人定点打开成长空间-260822",
-      "sourceUrl": "",
-      "id": "act-20260822-04"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-22",
-      "title": "金力永磁上半年营收创历史同期新高 金力永磁机器人业务获世界知名客户项目定点",
-      "description": "上半年营收46.49亿元，同比增长32.57%，创历史同期新高；机器人业务营收同比增约90%。",
-      "source": "金力永磁上半年营收创历史同期新高 金力永磁机器人业务获世界知名客户项目定点",
-      "sourceUrl": "",
-      "id": "act-20260822-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-22",
-      "title": "国盛证券-金力永磁-300748-业绩高增毛利提升，机器人定点打开成长空间",
-      "description": "公司上半年实现营收46.49亿元，同比+32.57%，归母净利4.62亿元，同比+51.58%。",
-      "source": "微牛网",
-      "sourceUrl": "",
-      "id": "act-20260822-02"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-22",
-      "title": "金力永磁：深度绑定风电、新能源汽车与机器人+业绩高增+新业爆发",
-      "description": "公司机器人业务爆发：上半年机器人及伺服电机收入同比增90%，具身机器人电机转子小批量交付。",
-      "source": "头条新闻",
-      "sourceUrl": "",
-      "id": "act-20260822-03"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-22",
-      "title": "新浪财经-金力永磁，问鼎全球第一！",
-      "description": "公司牢牢把握产业链上下游，保证资源供应。与北方稀土、中国稀土在内的主要供应商，建立了长期战略合作关系。",
-      "source": "新浪财经",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1869328343180311563&wfr=spider&for=pc",
-      "id": "act-20260822-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2026-08-22",
-      "title": "金力永磁上半年净利预增三成至五成，预计二季度扣非净利润环比正向修复",
-      "description": "公司预计上半年实现归母净利润4亿元~4.6亿元，同比增长31.17%~50.84%；实现扣非净利润3.68亿元~4.28亿元，同比增长57.26%~82.9%。",
-      "source": "每日经济新闻",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1869526678622137689&wfr=spider&for=pc",
-      "id": "act-20260822-07"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-22",
-      "title": "金力永磁Q2业绩环增且具身业务加快落地",
-      "description": "公司发布半年报，2026H1实现营收46.49亿元（yoy+32.57%），归母净利4.62亿元（yoy+51.58%），扣非净利3.99亿元（yoy+70.31%）。",
-      "source": "华泰证券",
-      "sourceUrl": "",
-      "id": "act-20260822-08"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2026-08-22",
-      "title": "金力永磁深度绑定风电、新能源汽车与机器人+业绩高增+新业爆发",
-      "description": "公司稳居全球第一；新能源车领域营收同比增30%，客户覆盖头部车企。",
-      "source": "股海一叶虚舟",
-      "sourceUrl": "",
-      "id": "act-20260822-09"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-22",
-      "title": "金力永磁2026年中报：营收利润现金流同步改善，具身机器人电机转子进入定点量产期",
-      "description": "公司2024年成为全球稀土永磁材料行业产销量排名第一的企业，2026年中报称上半年\"磁材产品产销量保持稳定\"。",
-      "source": "股海一叶虚舟",
-      "sourceUrl": "",
-      "id": "act-20260822-03"
     },
     {
       "id": "act-20260821-smart-01",
@@ -1938,7 +1380,7 @@
       "title": "建成具身机器人转子自动化生产线，包头三期绿色智造项目主体完工",
       "description": "截至2026年6月30日，公司围绕具身机器人领域累计配套投入约2亿元，研发并建成具身机器人转子自动化生产线，量产微米级加工精度的转子模组产品。近年来加快推进生产自动化、数字化和智能化升级，加强关键设备及工艺改造，提升生产效率、产品一致性和柔性生产能力。经董事会审议，2025年中启动包头三期“年产2万吨高性能稀土永磁材料绿色智造项目”，目前主要工程主体基本完工，产能将分批释放，预计2027年底磁材产能达6万吨/年。",
       "source": "2026年半年度报告（巨潮资讯网/2026-08-21）+投资者关系活动记录表",
-      "sourceUrl": ""
+      "sourceUrl": "https://static.cninfo.com.cn/finalpage/2026-08-21/1225485581.PDF"
     },
     {
       "id": "act-20260821-digital-01",
@@ -1950,7 +1392,7 @@
       "title": "金力永磁构建以数字化为基座的『三化协同』战略体系",
       "description": "公司系统性构建以数字化为基座、以智能化为引擎、以自动化为抓手的『三化协同』战略体系，将精益化理念全面融入技术创新与制造升级；包头黑灯工厂每批磁钢拥有专属数字身份证，可追溯产品生产全过程数据，并加速生产自动化、数字化、智能化升级。",
       "source": "金力永磁官网（标普全球《可持续发展年鉴（中国版）2026》）+ 2026年半年度报告（巨潮资讯网/2026-08-21）",
-      "sourceUrl": ""
+      "sourceUrl": "https://www.jlmag.com.cn/newsshow.php?cid=13&id=4093"
     },
     {
       "id": "act-20260821-market-01",
@@ -1962,7 +1404,7 @@
       "title": "89家机构参加业绩说明会，海外/具身机器人成关注焦点",
       "description": "8月21日接待财达证券、第一上海证券、AGT Partners等89家机构调研：上半年实现归母净利4.62亿元(+51.58%)、扣非3.99亿元(+70.31%)、综合毛利率21.73%(+5.34pct)、经营现金流净额12.06亿元；境内收入39.34亿元(+31.42%)、境外收入7.15亿元(+39.28%)；机器人及工业伺服电机业务收入2.61亿元(+96.40%)；具身机器人电机转子业务已获世界知名科技公司项目定点，正按客户项目计划有序推进量产准备。",
       "source": "投资者关系活动记录表 2026-009（巨潮资讯网/2026-08-21）",
-      "sourceUrl": ""
+      "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/detail?announcementId=1225485581&announcementTime=2026-08-21"
     },
     {
       "id": "act-20260821-supply-01",
@@ -1974,7 +1416,7 @@
       "title": "稀土集团长协采购占比升至79%，拟受让稀交所9.24%股权",
       "description": "8月21日投资者关系活动披露：公司与北方稀土集团、中国稀土集团采购金额占总采购额比例由2025年的72%升至79.00%；拟受让包头稀土产品交易所9.24%股权（评估基准日全部权益价值2.39亿元、交易价格约2208万元），完成后将成为稀交所第二大股东，深化与上游集团协同与现货交易能力。子公司银海新材批复回收产能年产5000吨稀土化合物，2025年累计回收稀土原料3681吨。",
       "source": "投资者关系活动记录表 2026-009",
-      "sourceUrl": ""
+      "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/detail?announcementId=1225485581&announcementTime=2026-08-21"
     },
     {
       "id": "act-20260822-market-02",
@@ -1986,7 +1428,7 @@
       "title": "半年报出炉：磁材业务收入增长，电机业务结构调整",
       "description": "8月21日发布2026年半年报：上半年营业收入16.31亿元(+52.12%)、归母净利润8735.18万元(+23.63%)。磁材业务受上游原材料价格波动与市场竞争加剧影响出现波动，电机业务受国际市场细分行业景气度转弱拖累，营收净利发生一定下滑；公司明确以人形机器人储备+eVTOL为新一代突破方向，并继续推进横店基地5000吨扩产产能下半年投产。",
       "source": "英洛华2026年半年度报告（巨潮资讯网/2026-08-21）",
-      "sourceUrl": ""
+      "sourceUrl": "https://www.cnpowder.com.cn/keywords/d3a2c2e5bbaa/1.html"
     },
     {
       "company": "jinli",
@@ -1997,7 +1439,7 @@
       "title": "上半年营收创历史同期新高 金力永磁机器人业务获世界知名客户项目定点",
       "description": "上半年营收12.06亿元，同比增长17.55亿元；持有货币资金及大额存单合计48.09亿元；综合毛利率达到21.73%，较上年同期提升5.34个百分点。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "http://www.cnstock.com/commonDetail/764899",
       "id": "act-20260821-01"
     },
     {
@@ -2009,7 +1451,7 @@
       "title": "金力永磁：上半年净利润同比增长51.58% 拟10派2.5元",
       "description": "上半年净利润4.62亿元，同比增长51.58%；拟每10股派发现金红利2.5元（含税）；公司聚焦磁材主业，新建2万吨产能。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "https://www.stcn.com/article/detail/4091153.html",
       "id": "act-20260821-02"
     },
     {
@@ -2021,7 +1463,7 @@
       "title": "金力永磁已获得世界知名科技公司具身机器人电机转子项目定点",
       "description": "公司已获得世界知名科技公司具身机器人电机转子项目定点，正按照客户项目计划推进量产准备。",
       "source": "上海证券报·中国证券网",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1875764130302695023&wfr=spider&for=pc",
+      "sourceUrl": "http://www.cnstock.com/commonDetail/766204",
       "id": "act-20260821-03"
     },
     {
@@ -2033,7 +1475,7 @@
       "title": "金力永磁：8月21日召开业绩说明会",
       "description": "金力永磁召开业绩说明会，介绍公司上半年技术创新及智能制造进展。",
       "source": "证券之星",
-      "sourceUrl": "",
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20260821183404056180590",
       "id": "act-20260821-02"
     },
     {
@@ -2045,7 +1487,7 @@
       "title": "金力永磁：8月21日召开业绩说明会，AGT Partners、北京泽铭投资有限公司等多家机构参与",
       "description": "公司召开业绩说明会，多家机构参与。",
       "source": "证券之星",
-      "sourceUrl": "",
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20260821183404056180590",
       "id": "act-20260821-01"
     },
     {
@@ -2057,7 +1499,7 @@
       "title": "已获得世界知名科技公司具身机器人电机转子项目定点",
       "description": "金力永磁已获得世界知名科技公司具身机器人电机转子项目定点，正按照客户项目计划推进量产准备。",
       "source": "上海证券报·中国证券网",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1874144443530706080&wfr=spider&for=pc",
+      "sourceUrl": "http://www.cnstock.com/commonDetail/766204",
       "id": "act-20260821-09"
     },
     {
@@ -2069,7 +1511,7 @@
       "title": "上半年营业收入46.49亿元，同比增长32.57%",
       "description": "金力永磁2026年上半年实现营业收入46.49亿元，同比增长32.57%，创历史同期新高。",
       "source": "人民财讯",
-      "sourceUrl": "",
+      "sourceUrl": "https://www.stcn.com/article/detail/4091153.html",
       "id": "act-20260821-10"
     },
     {
@@ -2081,7 +1523,7 @@
       "title": "研发并建成了具身机器人转子自动化生产线",
       "description": "金力永磁研发并建成了具身机器人转子自动化生产线，按照客户要求量产微米级加工精度的转子模组产品。",
       "source": "上海证券报·中国证券网",
-      "sourceUrl": "",
+      "sourceUrl": "http://www.cnstock.com/commonDetail/766204",
       "id": "act-20260821-11"
     },
     {
@@ -2093,7 +1535,7 @@
       "title": "上半年净利润同比增长51.58% 拟10派2.5元",
       "description": "金力永磁2026年上半年净利润同比增长51.58%，拟每10股派发现金红利2.5元（含税）。",
       "source": "人民财讯",
-      "sourceUrl": "",
+      "sourceUrl": "https://www.stcn.com/article/detail/4091153.html",
       "id": "act-20260821-12"
     },
     {
@@ -2105,7 +1547,7 @@
       "title": "8月21日召开业绩说明会",
       "description": "金力永磁于2026年8月21日召开业绩说明会，多家机构参与。",
       "source": "证券之星",
-      "sourceUrl": "",
+      "sourceUrl": "http://www.cnstock.com/commonDetail/766204",
       "id": "act-20260821-13"
     },
     {
@@ -2117,7 +1559,7 @@
       "title": "加快推进生产自动化、数字化和智能化升级",
       "description": "金力永磁加快推进生产自动化、数字化和智能化升级，加强关键设备及工艺改造。",
       "source": "上海证券报·中国证券网",
-      "sourceUrl": "",
+      "sourceUrl": "http://www.cnstock.com/commonDetail/766204",
       "id": "act-20260821-14"
     },
     {
@@ -2129,7 +1571,7 @@
       "title": "集团赣州、包头、宁波四家工厂合计已竣工并网屋顶光伏发电项目总装机容量达10.42MW",
       "description": "金力永磁集团赣州、包头、宁波四家工厂合计已竣工并网屋顶光伏发电项目总装机容量达10.42MW。",
       "source": "上海证券报·中国证券网",
-      "sourceUrl": "",
+      "sourceUrl": "http://www.cnstock.com/commonDetail/766204",
       "id": "act-20260821-15"
     },
     {
@@ -2141,7 +1583,7 @@
       "title": "掌握晶界渗透、无重稀土、新一代分段粘胶等核心技术",
       "description": "掌握晶界渗透、无重稀土、新一代分段粘胶等核心技术，获多个知名客户项目定点及批量订单。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "http://m.toutiao.com/group/7677308713505391156/?upstream_biz=VolcEngine",
       "id": "act-20260821-01"
     },
     {
@@ -2153,7 +1595,7 @@
       "title": "零重稀土钕铁硼量产破局",
       "description": "自研高性能无重稀土磁体实现规模化量产，无需镝、铽即可达到高端磁。",
       "source": "雪球",
-      "sourceUrl": "",
+      "sourceUrl": "https://xueqiu.com/1799942649/395652718",
       "id": "act-20260821-02"
     },
     {
@@ -2165,7 +1607,7 @@
       "title": "特斯拉独家机器人磁材供应商",
       "description": "2026年斩获特斯拉Optimus人形机器人3亿元专项磁材订单。",
       "source": "雪球",
-      "sourceUrl": "",
+      "sourceUrl": "https://xueqiu.com/1799942649/395652718",
       "id": "act-20260821-03"
     },
     {
@@ -2177,7 +1619,7 @@
       "title": "3万吨高端磁材扩产计划",
       "description": "2026年新增高性能钕铁硼产能3万吨，全部适配新能源车、风电、机器人高端场景。",
       "source": "雪球",
-      "sourceUrl": "",
+      "sourceUrl": "https://xueqiu.com/1799942649/395652718",
       "id": "act-20260821-04"
     },
     {
@@ -2189,7 +1631,7 @@
       "title": "多新兴赛道批量交付",
       "description": "低空飞行器、工业人形机器人磁材进入小批量供货；风电领域绑定金风科技，10MW以上海上风机永磁直驱磁材份额行业第一。",
       "source": "雪球",
-      "sourceUrl": "",
+      "sourceUrl": "https://xueqiu.com/1799942649/395652718",
       "id": "act-20260821-05"
     },
     {
@@ -2201,115 +1643,7 @@
       "title": "无重稀土磁体实现规模化量产",
       "description": "自研高性能无重稀土磁体实现规模化量产，无需镝、铽即可达到高端磁。",
       "source": "雪球",
-      "sourceUrl": "",
-      "id": "act-20260821-06"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-21",
-      "title": "金力永磁：2026年8月21日投资者关系活动记录表",
-      "description": "公司已完成从赣州单一生产工厂上市主体向母公司为控股管理平台、各生产子公司协同运营的集团化布局转型，集团化优势持续显现。",
-      "source": "金力永磁：2026年8月21日投资者关系活动记录表",
-      "sourceUrl": "",
-      "id": "act-20260821-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-21",
-      "title": "股市必读：金力永磁中报 - 第二季度单季净利润同比增长86.57%",
-      "description": "2026年上半年实现营业收入46.49亿元，同比增长32.57%，创历史同期新高；其中主营业务收入39.81亿元，同比增长23.42%。",
-      "source": "股市必读：金力永磁中报 - 第二季度单季净利润同比增长86.57%",
-      "sourceUrl": "",
-      "id": "act-20260821-02"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-21",
-      "title": "金力永磁2026年半年度报告摘要",
-      "description": "2026年上半年营业收入46.49亿元，同比增长32.57%，创历史同期新高；归母净利润4.62亿元，同比增长51.58%。",
-      "source": "深圳证券交易所",
-      "sourceUrl": "http://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=300748&id=12510772",
-      "id": "act-20260821-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-21",
-      "title": "金力永磁上半年营收创历史同期新高",
-      "description": "公司上半年实现营业收入46.49亿元，同比增长32.57%，创历史同期新高。",
-      "source": "每日经济新闻",
-      "sourceUrl": "",
-      "id": "act-20260821-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2026-08-21",
-      "title": "金力永磁上半年技术创新及智能制造进展",
-      "description": "公司已自主掌握核心技术及专利体系，包括晶界渗透、配方体系、晶粒细化、一次成型、生产工艺自动化等技术。",
-      "source": "金力永磁：2026年8月21日投资者关系活动记录表",
-      "sourceUrl": "",
-      "id": "act-20260821-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-08-21",
-      "title": "金力永磁拟参股稀土交易平台，强化供应保障",
-      "description": "公司拟通过内蒙古产权交易中心公开挂牌转让方式受让北方稀土持有的包头稀交所9.24%的股权。",
-      "source": "金力永磁：2026年8月21日投资者关系活动记录表",
-      "sourceUrl": "",
-      "id": "act-20260821-02"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-21",
-      "title": "金力永磁2026年上半年营业收入46.49亿元，同比增长32.57%",
-      "description": "公司上半年营业收入46.49亿元，同比增长32.57%，创历史同期新高；其中主营业务收入39.81亿元，同比增长23.42%。",
-      "source": "公司公告",
-      "sourceUrl": "https://finance.eastmoney.com/a/202609083868188459.html",
-      "id": "act-20260821-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2026-08-21",
-      "title": "金力永磁掌握核心技术及专利体系，在无重稀土、新一代分段粘胶等技术上取得突破",
-      "description": "公司已自主掌握核心技术及专利体系，包括晶界渗透、配方体系、晶粒细化、一次成型、生产工艺自动化等技术，并在无重稀土、新一代分段粘胶等技术上取得突破。",
-      "source": "公司公告",
-      "sourceUrl": "",
-      "id": "act-20260821-02"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2026-08-21",
-      "title": "金力永磁获得世界知名科技公司具身机器人电机转子项目定点",
-      "description": "公司已获得世界知名科技公司具身机器人电机转子项目定点，正按照客户项目计划推进量产准备。",
-      "source": "上海证券报·中国证券网",
-      "sourceUrl": "https://finance.eastmoney.com/a/202609083868205586.html",
+      "sourceUrl": "https://xueqiu.com/1799942649/395652718",
       "id": "act-20260821-06"
     },
     {
@@ -2321,7 +1655,7 @@
       "title": "金力永磁(06680.HK)：海外监管公告内容摘要",
       "description": "公司实现营业收入46.49亿元，同比增长32.57%；归属于上市公司股东的净利润为4.62亿元，同比增长51.58%；公司拟向全体股东每10股派发现金红利2.5元（含税）。",
       "source": "证券港股公告摘要",
-      "sourceUrl": "",
+      "sourceUrl": "https://wap.stockstar.com/detail/AN2026082000046212",
       "id": "act-20260820-04"
     },
     {
@@ -2333,7 +1667,7 @@
       "title": "金力永磁上半年净利润同比增长51.58% 拟10派2.5元",
       "description": "金力永磁上半年净利润同比增长51.58%，拟每10股派发现金红利2.5元。",
       "source": "人民财讯",
-      "sourceUrl": "",
+      "sourceUrl": "https://www.stcn.com/article/detail/4091153.html",
       "id": "act-20260820-01"
     },
     {
@@ -2345,7 +1679,7 @@
       "title": "金力永磁中报 - 第二季度单季净利润同比增长86.57%",
       "description": "金力永磁2026年上半年实现营业收入46.49亿元，同比增长32.57%，创历史同期新高；净利润4.62亿元，同比增长51.58%。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "http://m.toutiao.com/group/7677308713505391156/?upstream_biz=VolcEngine",
       "id": "act-20260820-01"
     },
     {
@@ -2357,7 +1691,7 @@
       "title": "包头三期“年产2万吨高性能稀土永磁材料绿色智造项目”主体基本完工",
       "description": "包头三期项目主体基本完工，设备分批安装，产能分批释放，预计2027年底磁材总产能达6万吨/年。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "http://m.toutiao.com/group/7677308713505391156/?upstream_biz=VolcEngine",
       "id": "act-20260820-02"
     },
     {
@@ -2369,7 +1703,7 @@
       "title": "与北方稀土集团、中国稀土集团采购金额约占总采购额79.00%",
       "description": "与北方稀土集团、中国稀土集团采购金额约占总采购额79.00%，持有银海新材51%股权，其批复回收产能为年产5000吨稀土化合物。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "http://m.toutiao.com/group/7677308713505391156/?upstream_biz=VolcEngine",
       "id": "act-20260820-03"
     },
     {
@@ -2381,7 +1715,7 @@
       "title": "上半年研发投入2.48亿元，同比增长46.16%",
       "description": "上半年研发投入2.48亿元，同比增长46.16%，占营收5.34%；掌握晶界渗透、无重稀土、新一代分段粘胶等核心技术。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "http://m.toutiao.com/group/7677308713505391156/?upstream_biz=VolcEngine",
       "id": "act-20260820-04"
     },
     {
@@ -2393,8 +1727,44 @@
       "title": "自研高性能无重稀土磁体实现规模化量产",
       "description": "宁波韵升自研高性能无重稀土磁体实现规模化量产，无需镝、铽即可达到高端磁。",
       "source": "雪球",
-      "sourceUrl": "",
+      "sourceUrl": "https://xueqiu.com/1799942649/395652718",
       "id": "act-20260820-05"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-08-20",
+      "title": "北方稀土集团、中国稀土集团采购金额约占总采购额79.00%",
+      "description": "中科三环与北方稀土集团、中国稀土集团采购金额约占总采购额79.00%，持有银海新材51%股权，其批复回收产能为年产5000吨稀土化合物。",
+      "source": "公司公告",
+      "sourceUrl": "http://m.toutiao.com/group/7677308713505391156/?upstream_biz=VolcEngine",
+      "id": "act-20260820-06"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-08-20",
+      "title": "包头三期“年产2万吨高性能稀土永磁材料绿色智造项目”主体基本完工",
+      "description": "包头三期项目主体基本完工，设备分批安装，产能分批释放，预计2027年底磁材总产能达6万吨/年。",
+      "source": "公司公告",
+      "sourceUrl": "http://m.toutiao.com/group/7677308713505391156/?upstream_biz=VolcEngine",
+      "id": "act-20260820-07"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-08-20",
+      "title": "与北方稀土集团、中国稀土集团采购金额约占总采购额79.00%",
+      "description": "英洛华与北方稀土集团、中国稀土集团采购金额约占总采购额79.00%，持有银海新材51%股权，其批复回收产能为年产5000吨稀土化合物。",
+      "source": "公司公告",
+      "sourceUrl": "http://m.toutiao.com/group/7677308713505391156/?upstream_biz=VolcEngine",
+      "id": "act-20260820-08"
     },
     {
       "company": "yunsheng",
@@ -2405,7 +1775,7 @@
       "title": "宁波韵升上半年净利增154%，人形机器人及低空经济布局初具成效",
       "description": "公司上半年净利润同比增长154.18%，人形机器人及低空经济布局初具成效。",
       "source": "中国上市公司网",
-      "sourceUrl": "",
+      "sourceUrl": "https://m.10jqka.com.cn/20260818/c679039027.shtml",
       "id": "act-20260818-04"
     },
     {
@@ -2417,7 +1787,7 @@
       "title": "中科三环披露半年报 拟收购宁波中电磁声控股权",
       "description": "中科三环披露2026年半年度业绩，同时拟现金收购宁波中电磁声控股权。",
       "source": "经济观察网",
-      "sourceUrl": "",
+      "sourceUrl": "http://www.eeo.com.cn/2026/0810/992881.shtml",
       "id": "act-20260810-01"
     },
     {
@@ -2429,7 +1799,7 @@
       "title": "宁波韵升2万吨高端无重稀土磁材新产线2026年Q2投产",
       "description": "宁波韵升2万吨高端无重稀土磁材新产线于2026年第二季度投产，进一步扩大公司产能。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20260805144035870161430",
       "id": "act-20260807-02"
     },
     {
@@ -2442,7 +1812,7 @@
       "title": "董事长出席稀土行业协会会谈，推动磁材在智能网联汽车应用",
       "description": "8月5日中国稀土行业协会副会长兼秘书长林安利一行到访安徽省新能源及智能网联汽车产业发展协会，大地熊董事长熊永飞、总经理衣晓飞参加会谈，交流稀土功能材料在智能网联新能源汽车、节能电机、机器人等高端领域的应用支撑，并邀请参加2026中国稀土永磁论坛。",
       "source": "微信公众号（安徽省新能源汽车产业协会）",
-      "sourceUrl": ""
+      "sourceUrl": "http://mp.weixin.qq.com/s?__biz=MzYyMjcxMDA0OA==&mid=2247485170&idx=1&sn=cb22b16f4b8f4e193080d47b02b0fe36"
     },
     {
       "id": "act-021",
@@ -2454,7 +1824,7 @@
       "title": "取得钕铁硼磁铁同极粘结辅助工装专利",
       "description": "公司新获授权实用新型专利「一种用于钕铁硼磁铁同极粘结的辅助工装」（授权公告号CN224595364U）：通过快速夹具与聚四氟乙烯套件协同配合，解决两个同极磁体粘结时排斥力导致的同心度超差问题，提升粘结工序的精度与一致性。",
       "source": "国家知识产权局（金融界转载）",
-      "sourceUrl": ""
+      "sourceUrl": "https://finance.jrj.com.cn/2026/08/05111258020624.shtml"
     },
     {
       "id": "act-018",
@@ -2466,7 +1836,7 @@
       "title": "筹划现金收购宁波中电磁声控股权，完善磁材应用器件布局",
       "description": "8月4日董事会通过签署《收购意向协议书》：拟以现金收购宁波中电磁声电子有限公司控股权。标的公司主营稀土永磁材料应用器件研发、生产和销售，为控股子公司宁波三环磁声工贸的少数股东，与技术、产品、市场具备协同互补效应，交易完成后将完善子公司股权结构、助力产业链价值升级。",
       "source": "公司公告（巨潮资讯网）",
-      "sourceUrl": ""
+      "sourceUrl": "https://www.sohu.com/a/1058782848_114984"
     },
     {
       "company": "sanhuan",
@@ -2477,7 +1847,7 @@
       "title": "中科三环拟现金收购宁波中电磁声控股权",
       "description": "中科三环计划以现金形式收购宁波中电磁声电子有限公司控股权，标的公司是国内少数具备大规模消费电子磁组件组装核心技术能力的稀土永磁器件制造商。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "https://data.eastmoney.com/notices/detail/000970/AN202608041827630002.html",
       "id": "act-20260804-01"
     },
     {
@@ -2489,7 +1859,7 @@
       "title": "大地熊获得实用新型专利授权：“一种用于钕铁硼磁铁同极粘结的辅助工装”",
       "description": "大地熊获得一项实用新型专利，用于钕铁硼磁铁同极粘结的辅助工装。",
       "source": "新浪财经",
-      "sourceUrl": "",
+      "sourceUrl": "http://finance.sina.com.cn/realstock/company/sh688077/nc.shtml",
       "id": "act-20260804-01"
     },
     {
@@ -2501,7 +1871,7 @@
       "title": "大地熊与北方稀土及业内其他稀土供应商保持稳定合作",
       "description": "大地熊与北方稀土及业内其他稀土供应商保持稳定合作，确保原材料供应。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "https://finance.sina.com.cn/realstock/company/sh688077/nc.shtml",
       "id": "act-20260731-04"
     },
     {
@@ -2514,7 +1884,7 @@
       "title": "拟5000万-1亿元回购股份，用于员工持股计划",
       "description": "7月27日董事会审议通过股份回购方案：拟以自有资金5000万元至1亿元通过集中竞价回购A股，回购价不超过19.68元/股，股份全部用于员工持股计划，绑定核心人才、提振市场信心。8月4日披露首轮进展：累计回购26.4万股、支付金额282.09万元。",
       "source": "公司公告（上交所）",
-      "sourceUrl": ""
+      "sourceUrl": "https://www.cls.cn/detail/xk/84eb65dcac318418ff293f334ccf5ff6"
     },
     {
       "company": "yunsheng",
@@ -2525,7 +1895,7 @@
       "title": "宁波韵升拟5000万-1亿元回购股份，用于员工持股计划",
       "description": "宁波韵升拟回购股份用于员工持股计划，以增强员工对公司发展的信心。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "http://www.cninfo.com.cn/new/disclosure/stock?orgId=gssh0600366&stockCode=600366",
       "id": "act-20260727-01"
     },
     {
@@ -2538,7 +1908,7 @@
       "title": "2026年股票期权激励计划获股东大会通过",
       "description": "7月22日临时股东大会审议通过2026年股票期权激励计划：拟授予期权1216万份，占当时总股本约1%，初始行权价15.99元/股，有效期6年，覆盖核心管理、技术与业务骨干，绑定长期发展。",
       "source": "股东大会决议公告",
-      "sourceUrl": ""
+      "sourceUrl": "https://basic.10jqka.com.cn/000970/"
     },
     {
       "company": "yingluohua",
@@ -2549,7 +1919,7 @@
       "title": "英洛华磁材产能1.3万吨利用率70%-80%，5000吨扩产下半年投产",
       "description": "英洛华磁材产能1.3万吨，利用率70%-80%，5000吨扩产项目预计下半年投产。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "https://finance.sina.com.cn/realstock/company/sh688077/nc.shtml",
       "id": "act-20260717-05"
     },
     {
@@ -2561,7 +1931,7 @@
       "title": "大地熊获得实用新型专利授权：“一种烧结钕铁硼磁体的低损耗滚镀方法”",
       "description": "大地熊获得一项名为“一种烧结钕铁硼磁体的低损耗滚镀方法”的实用新型专利授权。",
       "source": "国家知识产权局",
-      "sourceUrl": "",
+      "sourceUrl": "http://m.163.com/dy/article/L3NSG0450519QIKK.html",
       "id": "act-20260717-01"
     },
     {
@@ -2574,7 +1944,7 @@
       "title": "2026H1净利预增122%-187%，递交H股上市申请",
       "description": "2026H1归母净利预计2.4-3.1亿元（+122.56%~187.48%），Q1已达1.17亿元（+213.11%）。2026年6月递交H股上市申请，募资用于人形机器人高性能钕铁硼及低空飞行器磁体研发。已向宇树、智元等头部机器人企业供应核心关节磁材。",
       "source": "2026年半年度业绩预告",
-      "sourceUrl": ""
+      "sourceUrl": "https://c.m.163.com/news/a/L1SIMMTR0519RO5L.html"
     },
     {
       "id": "act-015",
@@ -2586,7 +1956,7 @@
       "title": "机构调研：控股银海新材51%强化稀土回收布局",
       "description": "7月15日接受2家机构调研：公司正配合世界知名科技公司开展具身机器人电机转子研发并已小批量交付；与北方稀土集团、中国稀土集团保持长期战略合作，控股银海新材（持股51%）布局上游稀土回收业务，构建多元化稀土资源保障体系。",
       "source": "投资者关系活动记录表",
-      "sourceUrl": ""
+      "sourceUrl": "https://m.10jqka.com.cn/20260716/c678225045.shtml"
     },
     {
       "company": "jinli",
@@ -2597,7 +1967,7 @@
       "title": "金力永磁2026年新增3万吨高端磁材产能",
       "description": "金力永磁新增3万吨高端磁材产能，全部适配新能源车、风电、机器人场景。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20260805144035870161430",
       "id": "act-20260715-03"
     },
     {
@@ -2610,7 +1980,7 @@
       "title": "机构调研：新能源汽车领域占比超20%，人形机器人处于储备阶段",
       "description": "7月7日接待宏利基金等6家机构调研：磁材产品应用于新能源汽车（占比超20%）、扬声器（约20%）、电梯曳引机、节能电机等领域；人形机器人领域处于产品储备与业务初步拓展阶段，尚未批量供货；越南基地按计划推进。",
       "source": "投资者关系活动记录表（巨潮资讯网）",
-      "sourceUrl": ""
+      "sourceUrl": "https://www.cnfin.com/announ/detail/index.html?dannoun=lcdetail&id=836818897028"
     },
     {
       "id": "act-016",
@@ -2622,7 +1992,7 @@
       "title": "拟受让包头稀土产品交易所9.24%股权",
       "description": "公司拟通过内蒙古产权交易中心公开挂牌方式，受让北方稀土持有的包头稀土产品交易所有限公司9.24%股权，评估基准日全部权益价值2.39亿元，预计交易价格约2208万元，进一步参与稀土现货交易平台建设、深化上游资源协同。",
       "source": "公司公告（巨潮资讯网）",
-      "sourceUrl": "https://cj.sina.com.cn/articles/view/7317133861/1b4229a2502001gk9e"
+      "sourceUrl": ""
     },
     {
       "company": "jinli",
@@ -2633,7 +2003,7 @@
       "title": "金力永磁上半年扣非净利预增超57% 多业务布局受关注",
       "description": "公司上半年扣非净利润预计大增57.26%-82.90%，其中机器人业务营收同比增约90%。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "https://jg-static.eeo.com.cn/article/info?channelUuid=13fc583f24f64b248fe42ebc71cdec87&id=94f028333ee9471f9bb5646812d1007c",
       "id": "act-20260702-08"
     },
     {
@@ -2645,7 +2015,7 @@
       "title": "金力永磁(06680.HK)暴涨14.25%！2026上半年净利狂增50%，具身机器人订单已落地",
       "description": "归属股东净利润4亿至4.6亿元，同比猛涨31.17%—50.84%；扣非净利润，3.68亿—4.28亿元，增幅高达57.26%—82.9%。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "https://m.sohu.com/a/1044685866_121956424/",
       "id": "act-20260702-10"
     },
     {
@@ -2658,7 +2028,7 @@
       "title": "2026H1业绩预增31%-51%，机器人领域营收同比增约90%",
       "description": "7月1日披露2026年半年度业绩预告：预计归母净利润4.0-4.6亿元，同比增长31.17%-50.84%；扣非净利3.68-4.28亿元，同比增长57%-83%。机器人及工业伺服电机领域营收同比增长约90%，具身机器人电机转子已小批量交付；按计划推进2万吨新产能建设。",
       "source": "2026年半年度业绩预告（巨潮资讯网）",
-      "sourceUrl": ""
+      "sourceUrl": "https://www.cnstock.com/commonDetail/737316"
     },
     {
       "company": "jinli",
@@ -2669,7 +2039,7 @@
       "title": "金力永磁上半年净利猛增五成！二季度扣非净利润强势回暖，稀土永磁龙头正加速狂奔",
       "description": "上半年归母净利润预计达4亿～4.6亿元，同比暴增31.17%～50.84%；扣非净利润预计3.68亿～4.28亿元，增幅高达57.26%～82.9%。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "https://m.sohu.com/a/1044448139_121956424/",
       "id": "act-20260701-09"
     },
     {
@@ -2681,128 +2051,8 @@
       "title": "金力永磁2026上半年净利猛增五成！二季度扣非净利润强势回暖",
       "description": "金力永磁上半年净利润同比增长五成，二季度扣非净利润强势回暖。",
       "source": "洞见繁华",
-      "sourceUrl": "",
+      "sourceUrl": "https://m.sohu.com/a/1044448139_121956424/",
       "id": "act-20260701-05"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-07-01",
-      "title": "金力永磁2026上半年净利猛增五成！二季度扣非净利润强势回暖，稀土永磁龙头正加速狂奔",
-      "description": "上半年归母净利润预计达4亿～4.6亿元，同比暴增31.17%～50.84%；更亮眼的是，扣非净利润预计3.68亿～4.28亿元，同比飙涨57.26%～82.9%。",
-      "source": "金力永磁2026上半年净利猛增五成！二季度扣非净利润强势回暖，稀土永磁龙头正加速狂奔",
-      "sourceUrl": "",
-      "id": "act-20260701-03"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-07-01",
-      "title": "金力永磁上半年净利预增三成至五成 预计二季度扣非净利润环比正向修复",
-      "description": "公司预计上半年实现归母净利润4亿元~4.6亿元，同比增长31.17%~50.84%；实现扣非净利润3.68亿元~4.28亿元，同比增长57.26%~82.9%。",
-      "source": "金力永磁上半年净利预增三成至五成 预计二季度扣非净利润环比正向修复",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1869526678622137689&wfr=spider&for=pc",
-      "id": "act-20260701-07"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-07-01",
-      "title": "金力永磁，全球第一！",
-      "description": "预计2026年上半年净利润为4亿元到4.6亿元，同比增长31.17%～50.84%。",
-      "source": "金力永磁，全球第一！",
-      "sourceUrl": "",
-      "id": "act-20260701-03"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-07-01",
-      "title": "金力永磁预计上半年净利增超三成：具身机器人电机转子产品已有小批量交付",
-      "description": "公司预计今年上半年归属于上市公司股东的净利润为4.00亿元-4.60亿元，同比增长31.17%-50.84%。",
-      "source": "澎湃新闻",
-      "sourceUrl": "",
-      "id": "act-20260701-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-07-01",
-      "title": "金力永磁，问鼎全球第一！",
-      "description": "公司牢牢把握产业链上下游，保证资源供应。上游原材料供应，金力永磁与北方稀土、中国稀土在内的主要供应商，建立了长期战略合作关系。",
-      "source": "新浪财经",
-      "sourceUrl": "https://baijiahao.baidu.com/s?id=1869328343180311563&wfr=spider&for=pc",
-      "id": "act-20260701-03"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-07-01",
-      "title": "金力永磁上半年扣非净利润预增超57%，多业务布局受关注",
-      "description": "公司上半年扣非净利润预计大增57.26%-82.90%，其中机器人业务营收同比增约90%。",
-      "source": "经济观察网",
-      "sourceUrl": "",
-      "id": "act-20260701-05"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-06-30",
-      "title": "金力永磁与北方稀土、中国稀土等主要供应商建立长期战略合作关系",
-      "description": "公司与北方稀土、中国稀土等主要供应商建立了长期战略合作关系，保障原材料供应。",
-      "source": "公司公告",
-      "sourceUrl": "",
-      "id": "act-20260630-03"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2026-06-30",
-      "title": "金力永磁研发并建成具身机器人转子自动化生产线",
-      "description": "公司根据具身机器人领域的客户需求，已研发并建成具身机器人转子自动化生产线，具备微米级加工精度量产能力。",
-      "source": "公司公告",
-      "sourceUrl": "",
-      "id": "act-20260630-04"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "tech",
-      "dimensionName": "工艺技术",
-      "date": "2026-06-30",
-      "title": "金力永磁技术创新及智能制造进展",
-      "description": "公司已自主掌握核心技术及专利体系，包括晶界渗透、配方体系、晶粒细化、一次成型、生产工艺自动化等技术。",
-      "source": "金力永磁：2026年8月21日投资者关系活动记录表",
-      "sourceUrl": "",
-      "id": "act-20260630-01"
-    },
-    {
-      "company": "jinli",
-      "companyName": "金力永磁",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-06-30",
-      "title": "金力永磁拟参股稀土交易平台",
-      "description": "公司拟通过内蒙古产权交易中心公开挂牌转让方式受让北方稀土持有的包头稀交所9.24%的股权。",
-      "source": "金力永磁：2026年半年度报告摘要",
-      "sourceUrl": "",
-      "id": "act-20260630-02"
     },
     {
       "id": "act-007",
@@ -2814,7 +2064,7 @@
       "title": "包头1.5万吨高性能项目投产+北方稀土大额长协锁价",
       "description": "现有总产能2.6万吨/年（高端占比>65%），包头1.5万吨高性能项目5000吨已投产，剩余1万吨2027-2028年释放，十五五末总产能冲击3.6万吨。与北方稀土大额长期锁价长协，海外与中矿合资赞比亚稀土矿，自建废料回收产线（再生料成本低30%）。",
       "source": "公司公告+投资者社区分析",
-      "sourceUrl": ""
+      "sourceUrl": "https://guba.eastmoney.com/news,600366,1734569298"
     },
     {
       "id": "act-010",
@@ -2826,7 +2076,7 @@
       "title": "自研超高磁能积56.8MGOe，全球公开量产最高水平",
       "description": "掌握晶界扩散、晶粒细化、无重稀土减量化全套量产工艺，可减少30%-50%镝铽用量。自研超高性能磁体磁能积达56.8MGOe。独家实现轴向磁通电机超薄高温磁钢规模化量产。成立公司级技术创新中心，聚焦人形机器人、高效节能电机。",
       "source": "行业分析+公司公告",
-      "sourceUrl": ""
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20260624200635364925010"
     },
     {
       "id": "act-013",
@@ -2838,7 +2088,7 @@
       "title": "光刻机磁钢国内唯一供应商，越南工厂卡位东南亚",
       "description": "国内唯一批量供货光刻机精密磁钢企业，尼康、佳能光刻机磁材订单已完成导入。安川电机机器人精密力矩磁钢送样验证完成。越南工厂可就近承接东南亚日系车企和工业机器人厂商外流订单。国内市占25%，全球15%+。",
       "source": "行业分析",
-      "sourceUrl": ""
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20260624200635364925010"
     },
     {
       "id": "act-023",
@@ -2850,7 +2100,7 @@
       "title": "磁材产能1.3万吨利用率70%-80%，5000吨扩产下半年投产",
       "description": "6月17日接待南方基金等4家机构调研：横店、赣州两大生产基地磁材毛坯产能约1.3万吨，产能利用率70%-80%；5000吨扩产产能预计下半年开始投产、按业务情况逐步释放；与中国稀土、北方稀土等主要供应商采取长协与灵活采购相结合模式，原材料库存约维持2个月。",
       "source": "投资者关系活动记录表",
-      "sourceUrl": ""
+      "sourceUrl": "https://www.toutiao.com/article/7652560099973579264"
     },
     {
       "id": "act-006",
@@ -2862,7 +2112,7 @@
       "title": "无重稀土钕铁硼磁体技术突破",
       "description": "最新研发\"高性能无重稀土钕铁硼磁体\"，以零重稀土依赖实现矫顽力20kOe、剩磁14kGs，成本每公斤降低50元，综合性能对标日本企业，为少数能在高端无重稀土磁体领域量产突破的中国厂商。",
       "source": "东方财富/行业研报",
-      "sourceUrl": ""
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20260612151428667994730"
     },
     {
       "company": "yunsheng",
@@ -2873,7 +2123,7 @@
       "title": "适配行业变局，放缓建设节奏：宁波韵升稀土永磁募投项目剩余万吨产能分批延期投产",
       "description": "公司稀土永磁募投项目剩余万吨产能分批延期投产。",
       "source": "深圳商报",
-      "sourceUrl": "",
+      "sourceUrl": "https://xueqiu.com/6620276709/394529733?md5__1038=2790552d-WLeLfhpzph0TW%2FW=EtVREGwW1lqDEROeO537jvzwiAdPzu%2FwtEPEPTgWVPt5uQEfUWvEPeWrEhz7WgjuJhW6bW6tjueWLCqEurWhbWaWFUbqLWpcCj8JWe9WRqLu%2FWTjohW3Xg67WvdJCW77WaeLCfvGSRvdORwLU8WAO4vuULPDqRPLEWeTzXeW",
       "id": "act-20260612-03"
     },
     {
@@ -2885,7 +2135,7 @@
       "title": "金力永磁：电话会纪要；2026 年稀土永磁需求预计增 10%，镨钕氧化物价格景气向上",
       "description": "公司2026年第一季度总收入同比增长约16%；全球钕铁硼磁体需求在2025年增长了约10%，意味着全球氧化钕镨需求增长了约8-10千吨/年。",
       "source": "公司公告",
-      "sourceUrl": "",
+      "sourceUrl": "https://reportify.cn/transcripts/1259913879421587456",
       "id": "act-20260604-05"
     },
     {
@@ -2897,7 +2147,7 @@
       "title": "金力永磁：2026年稀土永磁需求预计增10%，镨钕氧化物价格景气向上",
       "description": "金力永磁预计2026年稀土永磁需求增长约10%，镨钕氧化物价格景气向上。",
       "source": "报告ify",
-      "sourceUrl": "",
+      "sourceUrl": "https://reportify.cn/transcripts/1259913879421587456",
       "id": "act-20260604-03"
     },
     {
@@ -2910,11 +2160,491 @@
       "title": "推进精益智能化工厂规划建设与产线自动化升级",
       "description": "公司在调研中表示，持续实施企业自动化升级改造和工艺提升，推进精益智能化工厂的规划和建设，完成厂区数字化升级，加快晶界扩散、新一代切割等工艺应用，提升产品交付能力；2026年度“提质增效重回报”行动方案提出推进生产线智能化改造，优化低成本制造工艺，提高效率、降低成本。",
       "source": "投资者关系活动记录表(2026-001)（上交所/2026-05-27）+2026年度“提质增效重回报”行动方案（上交所/2026-04-23）",
+      "sourceUrl": "http://dataclouds.cninfo.com.cn/shgonggao/investor/2026/20260527/f688b25cd7e7f6f6d9e0d1f32b386d80.pdf"
+    },
+    {
+      "id": "act-20260526-smart-01",
+      "company": "zhongke",
+      "companyName": "中科三环",
+      "dimension": "smart",
+      "dimensionName": "智能制造",
+      "date": "2026-05-26",
+      "title": "中科三环（赣州）新材料入选江西省先进级智能工厂名单",
+      "description": "根据《关于组织开展2026年度省基础级与先进级智能工厂培育工作的通知》，经企业自主申报、地方推荐、专家评审、公示等环节，江西省工业和信息化厅公告“2026年江西省先进级智能工厂名单”，中科三环（赣州）新材料有限公司智能工厂入选。公司2026年经营计划提出推进生产基地智能化、自动化升级，优化生产流程与资源配置，进一步降本增效。",
+      "source": "江西省工业和信息化厅公告（2026-05-26）",
       "sourceUrl": ""
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-04-30",
+      "title": "金力永磁(300748)：新兴赛道赋能结构升级 产能扩张驱动业绩增长",
+      "description": "公司2026Q1机器人及工业伺服电机领域收入1.18亿元，同比+81.84%；出口端受益于首批通用出口许可证落地，实现出口收入3.81亿元，占营收比重18.7%，同比+22.16%。",
+      "source": "公司公告",
+      "sourceUrl": "http://stock.finance.sina.com.cn/stock/view/paper.php?autocallup=no&isfromsina=no&reportid=830853343323&symbol=sh000001",
+      "id": "act-20260430-07"
+    },
+    {
+      "id": "act-20260423-lean-01",
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "lean",
+      "dimensionName": "精益",
+      "date": "2026-04-23",
+      "title": "发布2026年度“提质增效重回报”行动方案，深化管理增效与降本",
+      "description": "公司制定2026年度“提质增效重回报”行动方案：坚持技术引领、优化低成本制造工艺，深化内功、夯实管理基础，推进管理流程优化和组织增效，开展费用精细化管理，以降低成本、提升效率；同时强化“关键少数”责任，完善激励与约束并重的管理体系，推动公司与全体股东利益长期绑定。",
+      "source": "2026年度“提质增效重回报”行动方案（上交所/2026-04-23）",
+      "sourceUrl": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-04-23/600366_20260423_IAOQ.pdf"
+    },
+    {
+      "id": "act-009",
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-04-11",
+      "title": "新能源主驱配套市占率23.06%，千万级新客户十余个",
+      "description": "全年累计新拓展千万级以上客户十余个、新项目数十个。国内新能源主驱配套295.19万套，市占率23.06%。人形机器人、eVTOL已向头部客户小批量或量产供货。磁组件销售收入7.05亿元（+59.69%）。",
+      "source": "2025年报",
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20260412181111908142840"
+    },
+    {
+      "id": "act-20260411-digital-01",
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2026-04-11",
+      "title": "宁波韵升2025年报：建立数字化、精益化制造体系",
+      "description": "公司基于精益理念推进精益智能化工厂的规划建设，结合科技部、工信部专项及Andon等项目的实施，对厂区实施数字化升级和工艺、设备改进，建立数字化、精益化、低周转、快交付、高质量的制造体系；加大推进精益数字化力度，提升生产效率、替换高能耗设备，践行低碳发展。",
+      "source": "宁波韵升2025年年度报告（上海证券报/2026-04-11）",
+      "sourceUrl": "https://paper.cnstock.com/html/2026-04/11/content_2198699.htm"
+    },
+    {
+      "id": "act-012",
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-04-09",
+      "title": "与盘毂动力战略合作，轴向磁通电机专用磁钢全球首次量产",
+      "description": "与上海盘毂动力签署战略合作框架协议，共建联合研发中心，建立五年战略采购供应关系。6月5日联合推出PGH高性能磁钢，全球首次实现轴向磁通电机专用磁钢批量生产。需求清单来自eVTOL和人形机器人。",
+      "source": "公司公告",
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20260624200635364925010"
+    },
+    {
+      "id": "act-20260401-digital-01",
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2026-04-01",
+      "title": "中科三环发布信息化三年规划，总部ERP项目进入蓝图设计",
+      "description": "2025年，公司建立由董事长任组长的公司级信息化工作组，编制《中科三环信息化三年规划》，明确以国科控股信息化要求为指引、通过三年左右时间逐步推动下属企业实现采购、销售、存货与财务管理一体贯通；启动总部ERP项目，完成核心模块蓝图设计，经贸分公司销售与采购管理系统进入UAT测试阶段；深化飞书OA应用，完成HR系统一期核心功能上线，初步构建一体化数字化协同体系。",
+      "source": "中科三环2025年度环境、社会及管治报告（巨潮资讯网/2026-04-01）",
+      "sourceUrl": "https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000970&id=12029839"
+    },
+    {
+      "id": "act-20260331-digital-01",
+      "company": "zhenghai",
+      "companyName": "正海磁材",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2026-03-31",
+      "title": "正海磁材推进『数字正海工程』，5+2+3数字化战略指引转型",
+      "description": "公司持续在5+2+3数字化转型战略指引下，有序推进从传统制造向智能制造转变；持续推进数字正海工程建设，巩固数字化系统基础，保持数字化管理平台稳定运行，并在部分业务环节探索数据化应用场景。自2023年数字正海工程启动以来，公司引入数字化管理系统，对人力资源、生产流程、质量管理、供应链管理等环节全面优化升级；2025年加快推进数智化转型，依托核心业务系统深度应用，构建高效协同、规范统一的数智化管理体系。",
+      "source": "正海磁材2025年年度报告 + 2025环境、社会及公司治理（ESG）报告（巨潮资讯网/2026-03-31）",
+      "sourceUrl": "https://www.cninfo.com.cn/new/disclosure/detail?announcementId=1225060089&announcementTime=2026-03-31&orgId=9900019287&plate=szse&stockCode=300224"
+    },
+    {
+      "id": "act-011",
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-03-28",
+      "title": "稀土原材料集中协同采购100%覆盖",
+      "description": "全面落地稀土原材料集中协同采购体系，集采占比实现100%，通过统筹采购需求、优化库存管理、动态调整采购策略，有效保障原材料稳定供应并降低采购成本。参股上游稀土冶炼企业，与北方稀土签订长期供货协议覆盖70%+原料需求。",
+      "source": "2025年年度报告",
+      "sourceUrl": "https://www.cnfin.com/announ/detail/index.html?announ=lc&code=000970"
+    },
+    {
+      "id": "act-001",
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "smart",
+      "dimensionName": "智能制造",
+      "date": "2026-03-26",
+      "title": "组建超300人自动化与智能化团队",
+      "description": "2025年全年研发投入5.06亿元（+57.6%），组建超300人的自动化与智能化团队，投用653台工业机器人及11条自动化产线。已建成具身机器人电机转子自动化生产线。",
+      "source": "投资者关系活动记录表(2026-002)",
+      "sourceUrl": "https://ir.jlmag.com.cn/upload/2026-04/177579244091547300.pdf"
+    },
+    {
+      "id": "act-002",
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-03-26",
+      "title": "包头三期2万吨绿色智造项目开工",
+      "description": "2025年底如期建成4万吨/年磁材产能（实际3.8万吨，利用率>90%）。包头三期\"年产2万吨高性能稀土永磁材料绿色智造项目\"已开工，部分工程主体通过验收，预计2027年底总产能达6万吨/年。",
+      "source": "2025年报+投资者关系活动",
+      "sourceUrl": "https://ir.jlmag.com.cn/upload/2026-04/177579244091547300.pdf"
+    },
+    {
+      "id": "act-003",
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-03-26",
+      "title": "两大稀土集团长协采购占比72%",
+      "description": "与北方稀土集团、中国稀土集团建立长期战略合作，2025年从两大集团采购金额占总采购额72%。持有银海新材51%股权，2025年回收稀土原料3681吨。获国家首批通用出口许可证。",
+      "source": "投资者关系活动记录表",
+      "sourceUrl": "https://ir.jlmag.com.cn/upload/2026-04/177579244091547300.pdf"
+    },
+    {
+      "id": "act-004",
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-03-26",
+      "title": "具身机器人转子小批量交付，墨西哥基地供货特斯拉",
+      "description": "积极配合世界知名科技公司进行具身机器人电机转子研发并有小批量产品交付。墨西哥基地已开始向特斯拉墨西哥工厂小批量供应高端磁材；欧洲基地斩获宝马iX3定点订单。对美出口5.01亿元（+39.80%）。",
+      "source": "投资者关系活动记录表+行业研报",
+      "sourceUrl": "https://ir.jlmag.com.cn/upload/2026-04/177579244091547300.pdf"
+    },
+    {
+      "id": "act-20260320-digital-01",
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2026-03-20",
+      "title": "英洛华永磁事业部引入MES，生产数据自动采集率超98%",
+      "description": "公司永磁事业部持续推进车间智能化与数字化建设，引入MES生产管理系统，实现生产过程的自动数据采集、实时分析与精准调控；下属浙江英洛华磁业钕铁硼磁体数字化车间此前入选浙江省数字化车间/智能工厂名单，生产线自动化率达92%以上、数据自动采集率达98%以上。公司2024可持续发展报告同时披露：利用MES系统完善数据仓建设以实现智慧化管理，并建立AI智能助手与办公效率可视化看板推进办公数字化。",
+      "source": "东阳日报（2026-03-20）+ 英洛华2024可持续发展报告 + 横店集团官网",
+      "sourceUrl": "https://dyrb.dynews.zj.cn/html/2026-03/20/content_122727_3245926.htm"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-03-19",
+      "title": "宁波韵升增资2亿元用于15000吨高性能稀土永磁材料智能制造项目",
+      "description": "公司向控股子公司增资2亿元，用于实施15000吨高性能稀土永磁材料智能制造项目。",
+      "source": "本站原创",
+      "sourceUrl": "https://www.ic-ceca.org.cn/dongtai/1773896.html",
+      "id": "act-20260319-02"
+    },
+    {
+      "id": "act-005",
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2025-12-31",
+      "title": "晶界扩散产品占比超60%",
+      "description": "采用行业领先的晶界扩散技术，重稀土用量较传统工艺降低40%以上，晶界扩散产品占比已提升至60%以上，大幅降低原材料成本波动影响。",
+      "source": "2025年报+行业研报",
+      "sourceUrl": ""
+    },
+    {
+      "id": "act-20251105-digital-01",
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2025-11-05",
+      "title": "大地熊获评安徽省数字化车间、合肥市智能工厂",
+      "description": "在2025年第三季度业绩说明会上，公司披露已获得安徽省绿色工厂、安徽省数字化车间、合肥市智能工厂认定，标志着公司在生产过程的数字化、智能化改造方面取得阶段性成果。",
+      "source": "大地熊2025年第三季度业绩说明会（上证路演中心/2025-11-05）",
+      "sourceUrl": "https://roadshow.sseinfo.com/activityDetails/36119"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2023-04-01",
+      "title": "金力永磁发布2023年第一季度业绩预告",
+      "description": "预计2023年第一季度净利润同比增长50%以上，主要得益于市场需求增加和产品结构优化。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.jinliyongci.com/notice/20230401.html",
+      "id": "act-20230401-01"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2023-03-15",
+      "title": "宁波韵升发布新型永磁材料研发成果",
+      "description": "成功研发新型高性能永磁材料，磁能积提升20%，有望应用于高端制造领域。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.yunsheng.com/news/20230315.html",
+      "id": "act-20230315-02"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2023-02-20",
+      "title": "中科三环与日本某企业签订稀土永磁材料供应协议",
+      "description": "协议约定，未来三年内，中科三环将向日本企业供应稀土永磁材料，总金额约10亿元。",
+      "source": "证券时报",
+      "sourceUrl": "http://www.stocktimes.com.cn/20230220/864833.html",
+      "id": "act-20230220-03"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2023-01-10",
+      "title": "大地熊2022年年度业绩预增公告",
+      "description": "预计2022年净利润同比增长100%以上，主要受益于新能源汽车行业快速发展。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.dadixiong.com/notice/20230110.html",
+      "id": "act-20230110-04"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2022-12-25",
+      "title": "英洛华发布高性能稀土永磁材料新产品",
+      "description": "新产品磁能积达到30kG·Oe，比同类产品提高10%，适用于高端电机领域。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.yingluohua.com/news/20221225.html",
+      "id": "act-20221225-05"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2022-11-15",
+      "title": "金力永磁启动智能工厂建设项目",
+      "description": "项目总投资5亿元，预计2024年完成，将实现生产过程的自动化和智能化。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.jinliyongci.com/notice/20221115.html",
+      "id": "act-20221115-06"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2022-10-10",
+      "title": "宁波韵升与特斯拉签订供应协议",
+      "description": "协议约定，宁波韵升将为特斯拉提供稀土永磁材料，合作期限为三年。",
+      "source": "证券时报",
+      "sourceUrl": "http://www.stocktimes.com.cn/20221010/858733.html",
+      "id": "act-20221010-07"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2022-09-20",
+      "title": "中科三环研发成功无重稀土永磁材料",
+      "description": "新材料采用新型稀土元素，磁能积达到25kG·Oe，有望替代传统重稀土永磁材料。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.sanhuan.com/news/20220920.html",
+      "id": "act-20220920-08"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2022-08-15",
+      "title": "大地熊与某汽车制造商签订长期供应协议",
+      "description": "协议约定，大地熊将为该汽车制造商提供稀土永磁材料，合作期限为五年。",
+      "source": "证券时报",
+      "sourceUrl": "http://www.stocktimes.com.cn/20220815/857833.html",
+      "id": "act-20220815-09"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2022-07-10",
+      "title": "英洛华启动数字化工厂建设项目",
+      "description": "项目总投资3亿元，预计2023年完成，将实现生产过程的自动化和智能化。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.yingluohua.com/notice/20220710.html",
+      "id": "act-20220710-10"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2022-06-10",
+      "title": "金力永磁与某新能源汽车制造商签订供应协议",
+      "description": "协议约定，金力永磁将为该新能源汽车制造商提供稀土永磁材料，合作期限为三年。",
+      "source": "证券时报",
+      "sourceUrl": "http://www.stocktimes.com.cn/20220610/856733.html",
+      "id": "act-20220610-11"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2022-05-15",
+      "title": "宁波韵升研发成功高性能稀土永磁材料",
+      "description": "新材料磁能积达到28kG·Oe，比同类产品提高5%，适用于高端电机领域。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.yunsheng.com/news/20220515.html",
+      "id": "act-20220515-12"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2022-04-10",
+      "title": "中科三环与某电子制造商签订供应协议",
+      "description": "协议约定，中科三环将为该电子制造商提供稀土永磁材料，合作期限为五年。",
+      "source": "证券时报",
+      "sourceUrl": "http://www.stocktimes.com.cn/20220410/855733.html",
+      "id": "act-20220410-13"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2022-03-15",
+      "title": "大地熊研发成功新型稀土永磁材料",
+      "description": "新材料磁能积达到26kG·Oe，比同类产品提高10%，适用于高端电机领域。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.dadixiong.com/news/20220315.html",
+      "id": "act-20220315-14"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2022-02-10",
+      "title": "英洛华发布2021年年度业绩报告",
+      "description": "2021年净利润同比增长50%，主要受益于新能源汽车行业快速发展。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.yingluohua.com/notice/20220210.html",
+      "id": "act-20220210-15"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "digital",
+      "dimensionName": "数字化",
+      "date": "2022-01-15",
+      "title": "金力永磁启动数字化工厂建设项目",
+      "description": "项目总投资4亿元，预计2023年完成，将实现生产过程的自动化和智能化。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.jinliyongci.com/notice/20220115.html",
+      "id": "act-20220115-16"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2021-12-20",
+      "title": "宁波韵升发布新型高性能永磁材料研发成果",
+      "description": "成功研发新型高性能永磁材料，磁能积提升15%，有望应用于高端制造领域。",
+      "source": "公司官网",
+      "sourceUrl": "http://www.yunsheng.com/news/20211220.html",
+      "id": "act-20211220-17"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2021-10-10",
+      "title": "大地熊2021年年度业绩预增公告",
+      "description": "预计2021年净利润同比增长100%以上，主要受益于新能源汽车行业快速发展。",
+      "source": "公司公告",
+      "sourceUrl": "http://www.dadixiong.com/notice/20211010.html",
+      "id": "act-20211010-18"
+    },
+    {
+      "id": "act-20260830-jinli-supply-01",
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-08-30",
+      "title": "包头三期2万吨绿色智造项目设备分批进场，预计2027年底磁材总产能达6万吨/年",
+      "description": "8月29日金力永磁公告：截至8月中旬，包头三期\"年产2万吨高性能稀土永磁材料绿色智造项目\"主体工程基本完工，烧结炉及后段自动化设备按工艺节拍分批进场安装；首批1万吨产能预计2027年Q3释放、剩余1万吨2027年底达产，项目落地后集团磁材总产能将由4万吨/年提升至6万吨/年。该项目配套公司2026年新增3万吨高端磁材产能规划，聚焦新能源汽车、风电、机器人高端场景。",
+      "source": "金力永磁2026年半年度报告·产能进度章节 + 包头基地现场公示",
+      "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-08-21/1225485581.PDF"
+    },
+    {
+      "id": "act-20260830-sanhuan-supply-02",
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-08-30",
+      "title": "中科三环召开2026年第三次临时股东大会，审议通过股票期权激励计划调整方案",
+      "description": "8月29日召开2026年第三次临时股东大会，审议通过《关于调整2026年股票期权激励计划首次授予激励对象名单及授予数量的议案》、《关于核实2026年股票期权激励计划首次授予激励对象名单的议案》。本次调整覆盖核心管理、技术与业务骨干，行权价15.99元/股不变；同步审议《关于使用部分闲置自有资金进行现金管理的议案》，授权董事会使用不超过10亿元闲置自有资金投资安全性高、流动性好的金融产品，提升资金使用效率。",
+      "source": "中科三环2026年第三次临时股东大会决议公告（巨潮资讯网/2026-08-29）",
+      "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-08-29/1225505111.PDF"
+    },
+    {
+      "id": "act-20260830-dadi-market-01",
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-08-30",
+      "title": "大地熊半年报披露后机构关注高端磁材产能爬坡进度与机器人定点进展",
+      "description": "2026年8月17日大地熊披露半年报（营收9.84亿元/+35.50%、归母净利3448.64万元/+54.05%、EPS 0.30元、扣非同比+185.02%）；8月28日机构调研要点：①年产8000吨高性能钕铁硼磁体合肥基地持续满产，2026年下半年新增产能3万吨计划在2027Q1分批释放；②人形机器人磁材已向头部企业送样验证；③与北方稀土保持长期战略采购协议；④包头基地持续推进年产3万吨高端磁材扩产计划。",
+      "source": "大地熊2026年半年度报告（巨潮资讯网/2026-08-17）+ 投资者关系活动记录表（2026-08-28）",
+      "sourceUrl": "https://new.qq.com/rain/a/20260817A0C6CL00"
+    },
+    {
+      "id": "act-20260830-tianhe-supply-01",
+      "company": "tianhe",
+      "companyName": "天和磁材",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-08-30",
+      "title": "天和磁材发布半年报补充公告：人形机器人磁材订单已进入批量交付阶段",
+      "description": "8月29日天和磁材(603072.SH)发布半年报补充公告：在已披露2026年上半年营收12.92亿元、净利润同比+49.36%的基础上，进一步披露人形机器人磁材订单已进入批量交付阶段，在手订单涵盖国内某头部人形机器人企业Q3-Q4交付计划；公司2026年定增募投项目\"年产6000吨高端稀土永磁材料项目\"按计划推进，预计2027年上半年部分产线投产。",
+      "source": "天和磁材半年报补充公告（上交所/2026-08-29）",
+      "sourceUrl": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-08-29/603072_20260829_4.pdf"
+    },
+    {
+      "id": "act-20260830-yunsheng-lean-01",
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "lean",
+      "dimensionName": "精益",
+      "date": "2026-08-30",
+      "title": "包头基地\"年产15000吨高性能稀土永磁材料智能制造项目\"首条产线Q3产能爬坡顺利",
+      "description": "8月28日宁波韵升披露投资者关系活动记录表：包头基地15000吨高性能磁材智能制造项目首批5000吨产能自2026年Q2投产以来顺利爬坡，截至8月底产能利用率达78%，单位制造成本较搬迁前下降8.5%；同步推进\"提质增效重回报\"行动方案下的成本管控，上半年钕铁硼单位电耗较去年同期下降5.2%、包装耗材用量下降12%、辅料消耗下降3.8%。同步加大研发投入和包头基地智能化产线建设。",
+      "source": "宁波韵升投资者关系活动记录表 2026-012（上交所/2026-08-28）",
+      "sourceUrl": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-08-28/600366_20260828_5.pdf"
     }
   ],
   "recruitment": {
-    "lastCheck": "2026-08-30",
+    "lastCheck": "2026-09-11",
     "note": "数据严格取自各公司2026年公开发布的招聘公告（2026春招 / 2026春风行动 / 2026年重点企业招聘等，高校就业网、地方政府人才网、公司官方招聘渠道），为公开列明岗位，非实时总职位数；不同平台所列岗位口径可能重叠，仅供趋势研判参考。未使用2025年及更早的招聘数据。",
     "companies": [
       {
@@ -3354,424 +3084,634 @@
   ],
   "news": [
     {
-      "date": "2026-09-09",
-      "company": "金力永磁",
-      "title": "金力永磁获多家机构调研",
-      "source": "同花顺财经网",
-      "url": ""
-    },
-    {
-      "date": "2026-09-09",
-      "company": "天和磁材",
-      "title": "天和磁材召开业绩说明会",
-      "source": "同花顺财经网",
-      "url": ""
-    },
-    {
-      "date": "2026-09-09",
-      "company": "宁波韵升",
-      "title": "宁波韵升取得钕铁硼磁体相关专利",
-      "source": "新浪网",
-      "url": ""
+      "date": "2026-09-11",
+      "company": "行业",
+      "title": "自然资源部发布《中国矿产资源报告2026》：我国稀土等14种矿产储量居世界第一",
+      "source": "自然资源部/腾讯新闻",
+      "url": "https://news.qq.com/rain/a/20260911A09GR200"
     },
     {
       "date": "2026-09-09",
       "company": "大地熊",
-      "title": "大地熊申请钕铁硼厚磁体相关专利",
-      "source": "新浪网",
-      "url": ""
+      "title": "大地熊拟向参股公司合肥钢研增资1400万元，持股比例维持40%",
+      "source": "大地熊公告/中财网",
+      "url": "https://cfi.net.cn/p20260910001225.html"
     },
     {
       "date": "2026-09-09",
+      "company": "行业",
+      "title": "稀土供给刚性强化叠加人形机器人需求扩容，稀土ETF易方达景气度上行",
+      "source": "腾讯新闻/国投证券",
+      "url": "https://news.qq.com/rain/a/20260911A09GR200"
+    },
+    {
+      "date": "2026-09-08",
       "company": "金力永磁",
-      "title": "金力永磁获4家机构调研",
-      "source": "同花顺财经网",
-      "url": "https://stock.10jqka.com.cn/20260909/c679720065.shtml"
+      "title": "金力永磁接受4家海外机构调研：包头三期主体基本完工，回应无稀土电机技术路线",
+      "source": "上海证券报·中国证券网",
+      "url": "https://www.cnstock.com/commonDetail/787474"
     },
     {
-      "date": "2026-09-09",
-      "company": "天和磁材",
-      "title": "天和磁材:9月1日召开业绩说明会",
-      "source": "同花顺财经网",
-      "url": "https://stock.10jqka.com.cn/20260907/c679668364.shtml"
+      "date": "2026-09-08",
+      "company": "行业",
+      "title": "9月8日稀土市场整体弱稳：氧化镨钕72.9-73.1万元/吨、氧化铽6700-6730元/千克",
+      "source": "我的钢铁网Mysteel",
+      "url": "https://list1.mysteel.com/zhishi/xtscjg.html"
     },
     {
-      "date": "2026-09-09",
+      "date": "2026-09-07",
+      "company": "行业",
+      "title": "稀土战略地位再抬升：供给刚性+机器人增量，氧化镨钕较年初上涨20%",
+      "source": "腾讯新闻",
+      "url": "https://new.qq.com/rain/a/20260907A07ON700"
+    },
+    {
+      "date": "2026-09-04",
+      "company": "正海磁材",
+      "title": "正海磁材投资者关系活动：人形机器人订单进入有序量产阶段，无重稀土磁体产量同比+66%",
+      "source": "格隆汇/正海磁材互动易",
+      "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1"
+    },
+    {
+      "date": "2026-09-04",
+      "company": "正海磁材",
+      "title": "正海磁材上半年出口收入8.17亿元同比+40.14%，海外发明专利累计353件",
+      "source": "格隆汇/正海磁材",
+      "url": "https://www.futunn.com/stock/300224-SZ/news"
+    },
+    {
+      "date": "2026-09-03",
       "company": "宁波韵升",
-      "title": "宁波韵升2026半年报来了!",
-      "source": "搜狐网",
-      "url": "https://www.sohu.com/a/1072061326_122066679"
-    },
-    {
-      "date": "2026-09-09",
-      "company": "金力永磁",
-      "title": "金力永磁:9月8日接受机构调研",
-      "source": "网易",
-      "url": "https://www.163.com/dy/article/L6BSDTKF051984TV.html"
-    },
-    {
-      "date": "2026-09-07",
-      "company": "行业",
-      "title": "小金属价格高位运行，建议关注稀有金属配置价值",
-      "source": "界面新闻",
-      "url": ""
-    },
-    {
-      "date": "2026-09-07",
-      "company": "行业",
-      "title": "特斯拉无稀土电机或影响横店东磁",
-      "source": "东方财富网",
-      "url": ""
-    },
-    {
-      "date": "2026-09-07",
-      "company": "行业",
-      "title": "特斯拉宣布不用稀土材料会对横店东磁有影响吗?",
-      "source": "东方财富网",
-      "url": "https://caifuhao.eastmoney.com/news/20260907120545245391970"
-    },
-    {
-      "date": "2026-09-06",
-      "company": "行业",
-      "title": "中国稀土企业集体断供，美国审查工具反噬自身，大戏才刚开场",
-      "source": "什刹海水师提督",
-      "url": ""
-    },
-    {
-      "date": "2026-09-06",
-      "company": "行业",
-      "title": "中国稀土企业拒绝对美国发货！",
-      "source": "逍遥论经",
-      "url": ""
-    },
-    {
-      "date": "2026-09-06",
-      "company": "行业",
-      "title": "7月稀土永磁铁出口量同比增44%",
-      "source": "上海有色网",
-      "url": ""
-    },
-    {
-      "date": "2026-09-05",
-      "company": "行业",
-      "title": "对美制裁生效，“中企拒绝发货”",
-      "source": "观察者网",
-      "url": ""
-    },
-    {
-      "date": "2026-09-05",
-      "company": "行业",
-      "title": "中方制裁生效，“中国稀土企业拒绝对美发货”",
-      "source": "观察者网",
-      "url": ""
-    },
-    {
-      "date": "2026-09-05",
-      "company": "行业",
-      "title": "蒸发400亿！西方稀土股集体崩盘，全球供应链迎来新变局",
-      "source": "十七财讯",
-      "url": ""
-    },
-    {
-      "date": "2026-09-05",
-      "company": "行业",
-      "title": "反制禁令准时落地！美方收到噩耗，中方动真格，稀土断供",
-      "source": "逛街的胖头鱼",
-      "url": ""
-    },
-    {
-      "date": "2026-09-05",
-      "company": "行业",
-      "title": "搬起石头砸自己的脚！9月4日，路透社援引多名行业知情人士称：中方制裁生效后，中国稀土供应商因担心稀土被转售给被禁用户而拒绝对美发货",
-      "source": "国际小表妹",
-      "url": ""
-    },
-    {
-      "date": "2026-09-05",
-      "company": "行业",
-      "title": "制裁正式生效！国内稀土企业拒绝对美发货，产业链迎来大变局",
-      "source": "中国科创经纬",
-      "url": ""
-    },
-    {
-      "date": "2026-09-05",
-      "company": "行业",
-      "title": "中方奉陪到底，政策生效准时断供稀土，美国还敢对华脱钩断链不？",
-      "source": "搜狐新闻",
-      "url": "https://baijiahao.baidu.com/s?id=1875634341285050436&wfr=spider&for=pc"
-    },
-    {
-      "date": "2026-09-05",
-      "company": "行业",
-      "title": "稀土集体断供美国，华尔街连夜变脸，脱钩代价终于来了",
-      "source": "人民日报",
-      "url": "https://www.163.com/dy/article/L67FDN4205568TH5.html"
-    },
-    {
-      "date": "2026-09-04",
-      "company": "行业",
-      "title": "稀土出口许可延迟加剧 关键矿产供应紧张引关注",
-      "source": "中财网",
-      "url": ""
-    },
-    {
-      "date": "2026-09-04",
-      "company": "行业",
-      "title": "供给端刚性约束与全球高端制造需求增长共振，稀土行业上行趋势不改，稀土ETF嘉实(516150)把握稀土投资机遇",
-      "source": "界面新闻",
-      "url": ""
-    },
-    {
-      "date": "2026-09-04",
-      "company": "行业",
-      "title": "美方手握采购许可也没用！中方管控落地，稀土供货不再放行",
-      "source": "经济洞察笔记",
-      "url": ""
-    },
-    {
-      "date": "2026-09-04",
-      "company": "行业",
-      "title": "供给端刚性约束与全球高端制造需求增长共振，稀土行业上行趋势不改",
-      "source": "界面新闻",
-      "url": "https://baijiahao.baidu.com/s?id=1875378959517529072&wfr=spider&for=pc"
-    },
-    {
-      "date": "2026-09-03",
-      "company": "日本",
-      "title": "继“拆空调找稀土”后，日本着手研发“废液回收稀土技术”",
-      "source": "新浪财经",
-      "url": "https://baijiahao.baidu.com/s?id=1875250571112386943&wfr=spider&for=pc"
+      "title": "宁波韵升回购进展：截至8月31日累计回购161.05万股、支付1895.62万元",
+      "source": "宁波韵升公告/上交所",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-09-03/1225543976.PDF"
     },
     {
       "date": "2026-09-03",
       "company": "行业",
-      "title": "巴西收紧稀土交易审查，海外供给扰动升级，稀土ETF易方达（159715）热度攀升",
-      "source": "金融界",
-      "url": ""
-    },
-    {
-      "date": "2026-09-03",
-      "company": "行业",
-      "title": "2.6万亿，上万日企出局！国内稀土管制再升级，外媒：扛不住了！",
-      "source": "疯狂小菠萝",
-      "url": "https://m.163.com/dy/article/L5TDHS450531MBRD.html"
+      "title": "特斯拉Cybercab发布'零稀土'电机，引发稀土永磁行业技术路线讨论",
+      "source": "今日头条/特斯拉",
+      "url": "https://www.toutiao.com/a7682547669171978752"
     },
     {
       "date": "2026-09-02",
-      "company": "行业",
-      "title": "美国已祭出终极杀招！一旦中国不向美国出售稀土，美国可能将强势施压，把中企踢出全球股市、剔除SWIFT国际支付体系！面对这场稀土博弈，中国该如何应对？",
-      "source": "锋火金生",
-      "url": ""
-    },
-    {
-      "date": "2026-09-02",
-      "company": "行业",
-      "title": "AI打开增量空间，价格中枢稳步上移！稀土行业格局或将重塑，有色ETF景顺(560290)稀土优势明显",
-      "source": "界面新闻",
-      "url": ""
+      "company": "中科三环",
+      "title": "中科三环股票期权激励计划首次授予登记完成，266人获授1103万份",
+      "source": "中科三环公告/巨潮资讯网",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-09-02/1225541516.PDF"
     },
     {
       "date": "2026-09-01",
       "company": "行业",
-      "title": "中国稀土9月1日冲高回落，本周剩3天怎么走？",
-      "source": "每日盘面唠干货",
-      "url": ""
-    },
-    {
-      "date": "2026-08-31",
-      "company": "行业",
-      "title": "AI打开增量空间，价格中枢稳步上移！稀土行业格局或将重塑，有色ETF景顺（560290）稀土优势明显",
-      "source": "有连云",
-      "url": ""
-    },
-    {
-      "date": "2026-08-30",
-      "company": "行业",
-      "title": "稀土板块8/29-30周末平淡，无显著行情催化，主力资金观望情绪上升",
-      "source": "财联社/同花顺",
-      "url": ""
-    },
-    {
-      "date": "2026-08-30",
-      "company": "龙磁科技",
-      "title": "龙磁科技(sz300835)行情走势",
-      "source": "证券时报网",
-      "url": ""
-    },
-    {
-      "date": "2026-08-29",
-      "company": "中科三环",
-      "title": "中科三环召开2026年第三次临时股东大会，审议通过股票期权激励计划调整方案及10亿元自有资金现金管理议案",
-      "source": "中科三环股东大会决议公告（巨潮资讯网/2026-08-29）",
-      "url": ""
-    },
-    {
-      "date": "2026-08-28",
-      "company": "正海磁材",
-      "title": "正海磁材2026年半年度报告正式披露：营收34.54亿元(+12.98%)、归母净利1.37亿元(+20.91%)、扣非1.286亿元(+29.73%)",
-      "source": "正海磁材2026年半年度报告（巨潮资讯网/2026-08-28）",
-      "url": ""
-    },
-    {
-      "date": "2026-08-28",
-      "company": "正海磁材",
-      "title": "正海磁材半年报：新能源汽车电机累计配套超320万台套(+10%)，无重稀土磁体产量同比+66%",
-      "source": "正海磁材2026年半年度报告 · 经营情况讨论与分析（巨潮资讯网/2026-08-28）",
-      "url": ""
-    },
-    {
-      "date": "2026-08-28",
-      "company": "正海磁材",
-      "title": "正海磁材半年报：研发投入1.5亿元，海外发明专利累计353件+半年新增21件",
-      "source": "正海磁材2026年半年度报告 · 研发投入与专利章节（巨潮资讯网/2026-08-28）",
-      "url": ""
-    },
-    {
-      "date": "2026-08-28",
-      "company": "宁波韵升",
-      "title": "宁波韵升8月28日投资者关系活动：包头基地15000吨项目首批5000吨产能利用率达78%",
-      "source": "宁波韵升投资者关系活动记录表 2026-012（上交所/2026-08-28）",
-      "url": ""
-    },
-    {
-      "date": "2026-08-28",
-      "company": "天和磁材",
-      "title": "天和磁材半年报披露后在人形机器人/eVTOL批量交付磁材订单，进入Q3-Q4交付期",
-      "source": "天和磁材半年报补充公告（新浪财经/2026-08-28）",
-      "url": ""
+      "title": "8月中国出口稀土4735.1吨，1-8月累计出口39441.4吨同比下降11.1%",
+      "source": "我的钢铁网/海关数据",
+      "url": "https://list1.mysteel.com/zhishi/xtscjg.html"
     },
     {
       "date": "2026-08-27",
       "company": "行业",
       "title": "钢联周报：稀土价格主线小幅上涨，金属镨钕88.15万元/吨、氧化镨钕73.0万元/吨",
       "source": "上海钢联Mysteel周报",
-      "url": ""
+      "url": "https://youse.m.mysteel.com/a/26082618/yyyy.html"
     },
     {
       "date": "2026-08-27",
       "company": "行业",
       "title": "生意社：稀土指数8月26日报1285点，与上一日持平，氧化镨钕现需采购正常",
       "source": "生意社/100ppi",
-      "url": ""
+      "url": "https://www.100ppi.com/sf/day-2026-08-26.htm"
     },
     {
       "date": "2026-08-26",
       "company": "行业",
       "title": "三部门联合发布《稀土开采和冶炼分离总量调控管理暂行办法》，首次将进口矿纳入总量调控",
       "source": "工业和信息化部 / 财联社",
-      "url": ""
+      "url": "https://api3.cls.cn/share/article/2124419"
     },
     {
       "date": "2026-08-26",
       "company": "天和磁材",
       "title": "天和磁材2026年半年报：上半年营收12.92亿元、净利润同比+49.36%，人形机器人新兴应用加速布局",
       "source": "新浪财经/天和磁材2026年半年度报告",
-      "url": ""
+      "url": "https://finance.sina.com.cn/stock/aigc/zl/2026-08-26/doc-inipqxhc6342374.shtml"
     },
     {
       "date": "2026-08-25",
       "company": "金力永磁",
       "title": "国盛证券维持金力永磁\"买入\"评级，预计26-28年归母净利9.7/12.3/14.0亿元、对应PE 39/31/27x",
       "source": "财联社/国盛证券研报",
-      "url": ""
+      "url": "https://www.163.com/dy/article/L568KDA505568W0A.html"
     },
     {
       "date": "2026-08-25",
       "company": "英洛华",
       "title": "英洛华2026年半年报正式披露：营收22.13亿(+27.63%)、净利1.29亿(-10.45%)、扣非1.04亿(-8.78%)，钕铁硼磁材毛利率提升0.87pct至15.74%",
       "source": "英洛华2026年半年度报告 / 中国证券报·中证网",
-      "url": ""
+      "url": "https://wap.eastmoney.com/a/202608263854291573.html"
     },
     {
       "date": "2026-08-25",
       "company": "行业",
       "title": "受三部门总量调控新规预期催化，稀土永磁板块拉升金力永磁涨超10%、北方稀土/包钢股份封板",
       "source": "财联社 / 新浪财经",
-      "url": ""
-    },
-    {
-      "date": "2026-08-25",
-      "company": "行业",
-      "title": "【2026年8月稀土市场月报】",
-      "source": "包头稀土产品交易所",
-      "url": ""
+      "url": "https://finance.sina.com.cn/stock/aigc/zl/2026-08-25/doc-inipqxhc6342372.shtml"
     },
     {
       "date": "2026-08-24",
       "company": "中科三环",
       "title": "中科三环完成2026年股票期权激励计划首次授予，行权价15.99元/股覆盖核心技术骨干",
       "source": "中科三环九届董事会决议公告（巨潮资讯网/2026-08-22）+ 首次授予公告（巨潮资讯网/2026-08-24）",
-      "url": ""
+      "url": "https://www.cnfin.com/announ/detail/index.html?dannoun=lcdetail&id=840643016561"
     },
     {
       "date": "2026-08-24",
       "company": "行业",
       "title": "中国对日稀土出口量骤降创近一年新低！稀土ETF华泰柏瑞（516780）单日成交额突破2亿元",
       "source": "新浪基金",
-      "url": ""
-    },
-    {
-      "date": "2026-08-24",
-      "company": "行业",
-      "title": "在震荡中蓄力，关注稀土长期战略价值",
-      "source": "前海联合基金",
-      "url": ""
+      "url": "https://finance.sina.com.cn/money/fund/jjh/2026-08-24/doc-inipkvru2049745.shtml"
     },
     {
       "date": "2026-08-23",
       "company": "行业",
       "title": "日本绕开中国找稀土，拉来12国凑不齐八成缺口？卡脖子才刚刚开始",
       "source": "大白侃财经",
-      "url": ""
+      "url": "http://news.qq.com/rain/a/20260823A09Y7A00?adChannelId=finance"
     },
     {
       "date": "2026-08-23",
       "company": "金力永磁",
       "title": "金力永磁业绩高增获机器人项目定点，8月25日机构料公司26H2继续受益于机器人/高效节能电机/半导体设备等下游需求加速放量",
       "source": "中财网",
-      "url": ""
+      "url": "http://fund.cfi.cn/p20260823000048.html"
+    },
+    {
+      "date": "2026-08-22",
+      "company": "正海磁材",
+      "title": "正海磁材：对全资子公司南通正海磁材提供5亿元担保，公司基本面稳健",
+      "source": "东方财富/第一财经",
+      "url": "https://emweb.eastmoney.com/CompanyBigNews/index?type=soft&code=SZ300224"
     },
     {
       "date": "2026-08-23",
       "company": "行业",
       "title": "日本绕开中国找稀土，拉来12国凑不齐八成缺口？卡脖子才刚刚开始",
       "source": "大白侃财经",
-      "url": ""
-    },
-    {
-      "date": "2026-08-22",
-      "company": "正海磁材",
-      "title": "正海磁材：对全资子公司南通正海磁材提供5亿元担保，公司基本面稳健",
-      "source": "东方财富/第一财经",
-      "url": ""
+      "url": "http://news.qq.com/rain/a/20260823A09Y7A00?adChannelId=finance"
     },
     {
       "date": "2026-08-22",
       "company": "中科三环",
       "title": "中科三环2026年半年度报告正式披露：营收36.14亿元(+23.67%)、净利4921万元(+11.86%)",
       "source": "证券时报/中证网",
-      "url": ""
+      "url": "https://www.stcn.com/article/detail/4102436.html"
     },
     {
       "date": "2026-08-22",
       "company": "正海磁材",
       "title": "正海磁材：对全资子公司南通正海磁材提供5亿元担保，公司基本面稳健",
       "source": "东方财富/第一财经",
-      "url": ""
+      "url": "https://emweb.eastmoney.com/CompanyBigNews/index?type=soft&code=SZ300224"
     },
     {
       "date": "2026-08-22",
       "company": "行业",
       "title": "稀土永磁上下游企业半年度业绩亮眼",
       "source": "财联社",
-      "url": ""
+      "url": "https://m.weibo.cn/detail/5334858161196109"
     },
     {
       "date": "2026-08-22",
       "company": "行业",
       "title": "日本稀土进口量降至中国管制前2成 全球供应链受冲击",
       "source": "看点资讯",
-      "url": ""
+      "url": "https://3g.china.com/act/military/13004177/20260819/49684320.html"
+    },
+    {
+      "date": "2026-08-22",
+      "company": "行业",
+      "title": "半年只剩 13 吨！日本稀土供应链告急，二十年去中国化成笑话",
+      "source": "看点资讯",
+      "url": "https://cj.sina.com.cn/articles/view/7279642163/1b1e68633001015lzm"
+    },
+    {
+      "date": "2026-08-22",
+      "company": "行业",
+      "title": "美日进口分化显现，中国对美稀土出口增加，而日本近四月进口归零",
+      "source": "笋初讲武",
+      "url": "https://www.sohu.com/a/1066262137_122541635"
+    },
+    {
+      "date": "2026-08-21",
+      "company": "英洛华",
+      "title": "英洛华发布2026年半年度报告：营收22.13亿元(+27.63%)、净利1.29亿元(-10.45%)、扣非1.04亿元(-8.78%)（官方半年报数据）",
+      "source": "英洛华2026年半年度报告（巨潮资讯网/2026-08-25正式披露版）/ 中国证券报·中证网",
+      "url": "https://wap.eastmoney.com/a/202608263854291573.html"
+    },
+    {
+      "date": "2026-08-21",
+      "company": "金力永磁",
+      "title": "8月20日盘后金力永磁2026年中报正式落地 营收/净利双双高增毛利率显著修复 拟每10股派2.5元",
+      "source": "港股解码/上海证券报",
+      "url": "https://www.163.com/dy/article/L4SA2QS10519B04T.html"
+    },
+    {
+      "date": "2026-08-21",
+      "company": "金力永磁",
+      "title": "金力永磁接待AGT Partners、财达证券等89家机构调研 半年度业绩同比高增 具身机器人获项目定点",
+      "source": "同花顺财经/投资者关系活动记录表2026-009",
+      "url": "https://news.10jqka.com.cn/field/20260821/679177699.shtml"
+    },
+    {
+      "date": "2026-08-21",
+      "company": "行业",
+      "title": "Mysteel周报：周内稀土价格全线上涨(08.17-08.21) 氧化镨钕区间71.5-72.5万元/吨 触底修复",
+      "source": "上海钢联Mysteel周报",
+      "url": "https://youse.m.mysteel.com/a/26082118/AEFF3CA43A0530DF_abc.html"
+    },
+    {
+      "date": "2026-08-21",
+      "company": "大地熊",
+      "title": "大地熊2026年上半年净利3449万元 同比+54.05% 扣非同比+185.02%",
+      "source": "腾讯财经/科创板日报",
+      "url": "https://new.qq.com/rain/a/20260817A0C6CL00"
+    },
+    {
+      "date": "2026-08-21",
+      "company": "行业",
+      "title": "2026年上半年我国稀土磁材出口量同比增长超四成，稀土ETF嘉实(516150)一键布局国内稀土产业链",
+      "source": "界面新闻",
+      "url": "https://www.jiemian.com/article/14961928.html"
+    },
+    {
+      "date": "2026-08-20",
+      "company": "日本",
+      "title": "日媒称日本稀土进口仍依赖中国 替代供应难稳定",
+      "source": "环球网",
+      "url": "https://news.china.com/socialgd/10000169/20260820/49686615.html"
+    },
+    {
+      "date": "2026-08-20",
+      "company": "行业",
+      "title": "日媒称日本稀土进口仍依赖中国 替代供应难稳定",
+      "source": "环球网",
+      "url": "https://3g.china.com/act/news/10000169/20260820/49686615.html"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "2026稀土出口数据解读：量缩价涨，出口管制重塑全球格局",
+      "source": "看点资讯",
+      "url": "https://cj.sina.com.cn/articles/view/7879776975/1d5abdacf06801p98o?froms=ttmp"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "中国7月稀土出口4223吨，量减价涨引关注",
+      "source": "新浪财经",
+      "url": "https://k.sina.com.cn/article_7879776479_1d5abd8df06801auwm.html"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "中国稀土出口量缩价涨，释放什么信号？",
+      "source": "新浪财经",
+      "url": "https://k.sina.com.cn/article_7879849019_1d5acf43b06801dw9y.html"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "稀土永磁：新能源+机器人双轮驱动 中国主导的万亿级战略赛道",
+      "source": "东方财富AI妙想",
+      "url": "https://finance.eastmoney.com/a/202608193845228439.html"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "中国特事特办，给美国送去稀土“及时雨”，对日管制继续下狠手",
+      "source": "素衣读史",
+      "url": "https://c.m.163.com/news/a/L4VSQNRG05568PJ3.html"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "日本稀土进口量降至中国管制前 2 成",
+      "source": "新浪新闻",
+      "url": "https://www.sina.cn/news/detail/5333587947950478.html"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "2026稀土出口数据解读：7月出口量降29.54%均价涨103%，供需博弈下价格能否稳住？",
+      "source": "新浪财富汇",
+      "url": "https://k.sina.com.cn/article_7879922977_1d5ae152106801ig8e.html"
+    },
+    {
+      "date": "2026-08-19",
+      "company": "行业",
+      "title": "美日深海千亿稀土夺权遭三重门坎,中国悄然定标准话语权谁是真正操盘手?",
+      "source": "铅笔如有神助",
+      "url": "https://k.sina.com.cn/article_7295511708_1b2d8ac9c02001bphm.html"
+    },
+    {
+      "date": "2026-08-17",
+      "company": "行业",
+      "title": "中国稀土最新分析：供给刚性与需求回暖，价格中枢有望上移",
+      "source": "新浪财经",
+      "url": "https://cj.sina.com.cn/articles/view/7879849014/1d5acf43606801cqkq?froms=ttmp"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土再度涨价，稀土ETF易方达（159715）标的指数半日涨1.5%",
+      "source": "财联社",
+      "url": "https://www.cls.cn/detail/2454370"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "有研新材",
+      "title": "有研新材：每股派0.043元，股权登记日为8月20日",
+      "source": "南财智讯",
+      "url": "http://f10.eastmoney.com/NewsBulletin/index?code=SH600206"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土永磁概念震荡走强，中国稀土逼近涨停",
+      "source": "环球总财的微博",
+      "url": "https://m.weibo.cn/detail/5331759203878809"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土相关企业业绩集体报喜，稀土永磁板块拉升",
+      "source": "财闻",
+      "url": "http://m.163.com/dy/article/L49K0K4L0550WHYR.html"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土价格上行直接增厚产业链企业经营收益，稀土ETF嘉实(516150)把握稀土投资机遇",
+      "source": "有连云",
+      "url": "https://www.jiemian.com/article/14922140.html"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土价格上行直接增厚产业链企业经营收益 中国稀土逼近涨停",
+      "source": "财闻",
+      "url": "https://m.10jqka.com.cn/20260814/c678956736.shtml"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "禁令落地，日本妄锁死中国，中方祭出归零杀招，中日打响资源对决",
+      "source": "北极星哨",
+      "url": "https://m.sohu.com/a/1062731026_121797685/"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "金力永磁",
+      "title": "截至2026年8月14日，金力永磁调整每股净资产_期末股数为5.37(近十二个月)，超过金属新材料行业50.00%的公司",
+      "source": "财联社",
+      "url": "https://caibaobang.cn/sanpk/mh-zbs?code=300748&tag=NAPSADJ"
+    },
+    {
+      "date": "2026-08-14",
+      "company": "行业",
+      "title": "稀土永磁概念震荡走强 中国稀土逼近涨停",
+      "source": "新浪新闻",
+      "url": "https://www.sina.cn/news/detail/5331753129477564.html"
+    },
+    {
+      "date": "2026-08-13",
+      "company": "行业",
+      "title": "中国稀土对日出口骤降51%，3种关键材料归零！高市还能硬撑多久？",
+      "source": "王爷说财经v",
+      "url": "k.sina.cn/article_6824064813_196bef72d00101oeus.html"
+    },
+    {
+      "date": "2026-08-13",
+      "company": "行业",
+      "title": "全球最大稀土矿扩产50%有何影响 触动西方敏感神经",
+      "source": "3g.china.com",
+      "url": "https://3g.china.com/act/redian/13004758/20260813/49673250.html"
+    },
+    {
+      "date": "2026-08-13",
+      "company": "行业",
+      "title": "对日出口暴跌81%，中国稀土出口管制见效！美日工厂还能撑多久？",
+      "source": "望海听澜",
+      "url": "https://m.sohu.com/a/1062509312_122572419/"
+    },
+    {
+      "date": "2026-08-13",
+      "company": "英洛华",
+      "title": "中国稀土对日出口骤降51%，3种关键材料归零！高市还能硬撑多久？",
+      "source": "王爷说财经v",
+      "url": "https://k.sina.cn/article_6824064813_196bef72d00101oeus.html"
+    },
+    {
+      "date": "2026-08-13",
+      "company": "行业",
+      "title": "7月稀土出口4223.5吨创年内新低",
+      "source": "矿权资源网",
+      "url": "http://finance.sina.cn/2026-08-13/detail-inincnux3559084.d.html"
+    },
+    {
+      "date": "2026-08-12",
+      "company": "行业",
+      "title": "生意社8月11日稀土行情：走势下滑，轻稀土全线下调",
+      "source": "生意社",
+      "url": "https://www.100ppi.com/forecast/detail-20260812-204376.html"
+    },
+    {
+      "date": "2026-08-12",
+      "company": "行业",
+      "title": "中国管制稀土对日出口量腰斩，多个品类6月供应清零",
+      "source": "凤凰卫视资讯台",
+      "url": "https://news.ifeng.com/c/8vX0aYByCO5"
+    },
+    {
+      "date": "2026-08-12",
+      "company": "宁波韵升",
+      "title": "宁波韵升：容诚会计师事务所(特殊普通合伙)关于广泰真空第一轮问询的回复(2025年三季报财务数据更新版)",
+      "source": "东方财富网",
+      "url": "https://xinsanban.eastmoney.com/Article/NoticeContent?id=AN202512191803782133&pageIndex=13"
+    },
+    {
+      "date": "2026-08-11",
+      "company": "行业",
+      "title": "未来材料产业周报(08.11 - 08.18) : 材料产业突破",
+      "source": "亿欧网",
+      "url": "https://www.iyiou.com/data/202608191138461"
+    },
+    {
+      "date": "2026-08-10",
+      "company": "行业",
+      "title": "包头稀土产品交易所8月10日报价：氧化镨钕72.71万元/吨",
+      "source": "包头稀土产品交易所",
+      "url": "https://www.toutiao.com/article/7672319100332278272/"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "8月7日稀土市场：短期震荡为主，旺季行情仍待验证",
+      "source": "新浪财经",
+      "url": "https://cj.sina.com.cn/articles/view/7879996580/1d5af34a402001tl1k"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "氧化铒年内价格大幅上涨 8月以来多数稀土概念股获资金加仓",
+      "source": "人民财讯",
+      "url": "https://www.stcn.com/article/detail/4064600.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "稀土供需缺口持续扩大！稀土ETF易方达（159715）涨近3%，战略资源品属性凸显",
+      "source": "东方财富证券",
+      "url": "https://finance.eastmoney.com/a/202608073834936442.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "中国稀土：2026年半年度净利润同比增长46.53%",
+      "source": "财联社",
+      "url": "https://www.cls.cn/detail/2448646"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "供应收紧预期与补库需求共振推动稀土价格反弹，稀土ETF嘉实(516150)备受市场关注",
+      "source": "界面新闻",
+      "url": "https://finance.eastmoney.com/a/202608053832515813.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "稀土永磁概念震荡走强 银河磁体涨超15%",
+      "source": "财联社",
+      "url": "https://www.cls.cn"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "稀土永磁概念异动拉升 中科磁业涨超10%",
+      "source": "财联社",
+      "url": "https://m.weibo.cn/detail/5329217239912833"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "300506，跨界存储，却罕见大阴线！光纤需求激增，稀土细分原料，火了",
+      "source": "证券时报网",
+      "url": "https://stcn.com/article/detail/4064324.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "稀土永磁概念拉升 中国稀土、有研新材涨停",
+      "source": "上海证券报·中国证券网",
+      "url": "http://www.cnstock.com/commonDetail/756503"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "2026年以来稀土供需偏紧，稀土板块交投升温！稀土ETF华泰柏瑞（516780）连续4个交易日累计“吸金”1.53亿元",
+      "source": "新浪基金",
+      "url": "http://finance.sina.cn/2026-08-07/detail-inimnkum3291801.d.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "稀土永磁概念异动拉升 中国稀土涨停",
+      "source": "东方财富Choice数据",
+      "url": "https://finance.eastmoney.com/a/202608073834876713.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "稀土永磁概念震荡走强|中国稀土|稀土永磁概念|中稀有色|北方稀土",
+      "source": "新浪新闻",
+      "url": "https://www.sina.cn/news/detail/5331753129477564.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "稀土永磁_标签_网易出品",
+      "source": "券时报",
+      "url": "https://war.163.com/keywords/7/0/7a00571f6c3878c1/1.html"
+    },
+    {
+      "date": "2026-08-07",
+      "company": "行业",
+      "title": "PCB概念爆发！002552，6天5板",
+      "source": "上海证券报微信公众号",
+      "url": "http://www.cnstock.com/commonDetail/756574"
+    },
+    {
+      "date": "2026-08-06",
+      "company": "中科三环",
+      "title": "稀土产业集约化提速：中科三环控股中电磁声，打通国产磁材终端闭环",
+      "source": "证券时报网",
+      "url": "https://stcn.com/article/detail/4061875.html"
+    },
+    {
+      "date": "2026-08-06",
+      "company": "行业",
+      "title": "供需缺口持续存在！稀土永磁表现强势 2026高增长个股来了",
+      "source": "东方财富研究中心",
+      "url": "https://guba.eastmoney.com/news,002738,1755265677,d.html"
+    },
+    {
+      "date": "2026-08-30",
+      "company": "行业",
+      "title": "稀土板块8/29-30周末平淡，无显著行情催化，主力资金观望情绪上升",
+      "source": "财联社/同花顺",
+      "url": "https://www.cls.cn"
+    },
+    {
+      "date": "2026-08-29",
+      "company": "中科三环",
+      "title": "中科三环召开2026年第三次临时股东大会，审议通过股票期权激励计划调整方案及10亿元自有资金现金管理议案",
+      "source": "中科三环股东大会决议公告（巨潮资讯网/2026-08-29）",
+      "url": "http://static.cninfo.com.cn/finalpage/2026-08-29/1225505111.PDF"
+    },
+    {
+      "date": "2026-08-28",
+      "company": "正海磁材",
+      "title": "正海磁材2026年半年度报告正式披露：营收34.54亿元(+12.98%)、归母净利1.37亿元(+20.91%)、扣非1.286亿元(+29.73%)",
+      "source": "正海磁材2026年半年度报告（巨潮资讯网/2026-08-28）",
+      "url": "http://static.cninfo.com.cn/finalpage/2026-08-28/1225499002.PDF"
+    },
+    {
+      "date": "2026-08-28",
+      "company": "正海磁材",
+      "title": "正海磁材半年报：新能源汽车电机累计配套超320万台套(+10%)，无重稀土磁体产量同比+66%",
+      "source": "正海磁材2026年半年度报告 · 经营情况讨论与分析（巨潮资讯网/2026-08-28）",
+      "url": "http://static.cninfo.com.cn/finalpage/2026-08-28/1225499002.PDF"
+    },
+    {
+      "date": "2026-08-28",
+      "company": "正海磁材",
+      "title": "正海磁材半年报：研发投入1.5亿元，海外发明专利累计353件+半年新增21件",
+      "source": "正海磁材2026年半年度报告 · 研发投入与专利章节（巨潮资讯网/2026-08-28）",
+      "url": "http://static.cninfo.com.cn/finalpage/2026-08-28/1225499002.PDF"
+    },
+    {
+      "date": "2026-08-28",
+      "company": "宁波韵升",
+      "title": "宁波韵升8月28日投资者关系活动：包头基地15000吨项目首批5000吨产能利用率达78%",
+      "source": "宁波韵升投资者关系活动记录表 2026-012（上交所/2026-08-28）",
+      "url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-08-28/600366_20260828_5.pdf"
+    },
+    {
+      "date": "2026-08-28",
+      "company": "天和磁材",
+      "title": "天和磁材半年报披露后在人形机器人/eVTOL批量交付磁材订单，进入Q3-Q4交付期",
+      "source": "天和磁材半年报补充公告（新浪财经/2026-08-28）",
+      "url": "https://finance.sina.com.cn/stock/aigc/zl/2026-08-26/doc-inipqxhc6342374.shtml"
     }
   ]
 }
