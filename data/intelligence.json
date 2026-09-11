@@ -1161,18 +1161,6 @@
   },
   "activities": [
     {
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "supply",
-      "dimensionName": "供应链",
-      "date": "2026-09-09",
-      "title": "中科三环包头三期项目主要工程主体基本完工",
-      "description": "中科三环包头三期“年产2万吨高性能稀土永磁材料绿色智造项目”主要工程主体基本完工，生产设备将按计划分批次安装，预计2027年底公司磁材产能将达到6万吨/年。",
-      "source": "财闻",
-      "sourceUrl": "",
-      "id": "act-20260909-05"
-    },
-    {
       "company": "dadi",
       "companyName": "大地熊",
       "dimension": "tech",
@@ -2407,42 +2395,6 @@
       "source": "雪球",
       "sourceUrl": "",
       "id": "act-20260820-05"
-    },
-    {
-      "company": "sanhuan",
-      "companyName": "中科三环",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-20",
-      "title": "北方稀土集团、中国稀土集团采购金额约占总采购额79.00%",
-      "description": "中科三环与北方稀土集团、中国稀土集团采购金额约占总采购额79.00%，持有银海新材51%股权，其批复回收产能为年产5000吨稀土化合物。",
-      "source": "公司公告",
-      "sourceUrl": "",
-      "id": "act-20260820-06"
-    },
-    {
-      "company": "dadi",
-      "companyName": "大地熊",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-20",
-      "title": "包头三期“年产2万吨高性能稀土永磁材料绿色智造项目”主体基本完工",
-      "description": "包头三期项目主体基本完工，设备分批安装，产能分批释放，预计2027年底磁材总产能达6万吨/年。",
-      "source": "公司公告",
-      "sourceUrl": "",
-      "id": "act-20260820-07"
-    },
-    {
-      "company": "yingluohua",
-      "companyName": "英洛华",
-      "dimension": "market",
-      "dimensionName": "市场",
-      "date": "2026-08-20",
-      "title": "与北方稀土集团、中国稀土集团采购金额约占总采购额79.00%",
-      "description": "英洛华与北方稀土集团、中国稀土集团采购金额约占总采购额79.00%，持有银海新材51%股权，其批复回收产能为年产5000吨稀土化合物。",
-      "source": "公司公告",
-      "sourceUrl": "",
-      "id": "act-20260820-08"
     },
     {
       "company": "yunsheng",
