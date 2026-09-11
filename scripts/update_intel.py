@@ -713,6 +713,8 @@ _SEARCH_REFS = []
 URL_MATCH_MIN_SCORE = 0.70
 # 归一化标题的最短长度：过短的泛标题（如「业绩说明会」）容易随机命中
 URL_MATCH_MIN_TITLE_LEN = 8
+# 跨公司重复事件拦截阈值：新条目描述与「另一家公司」名下已有描述相似度 ≥ 此值即判定为错标副本
+CROSS_COMPANY_DESC_MIN_SIM = 0.92
 # 条目日期与参考日期（含 URL 内嵌日期）的允许偏差：用于挡住「周期性模板标题」
 # （如「XX：海外监管公告内容摘要」每期同名）匹配到另一期、甚至去年同一模板的文章。
 URL_DATE_SLACK_DAYS = 45
@@ -942,6 +944,26 @@ def merge_activities(existing, new_items):
         dim = it.get("dimension")
         if dim not in VALID_DIMENSIONS:
             log(f"activities 新项 {i} 维度非法 {dim!r}，跳过")
+            continue
+        # 跨公司重复事件拦截（2026-09-11）：模型会把同一篇原文「复制 + 换公司名」生成多条。
+        # 实测「包头三期主体基本完工」（实为金力永磁）被同时挂到 中科三环 / 大地熊 名下。
+        # 若本条描述与【另一家公司】名下已有条目高度相似 -> 判定为错标副本，拒绝入库。
+        _nd = _norm(str(it.get("description") or ""))
+        _dup = None
+        if len(_nd) >= 20:
+            for _ex in existing:
+                if not isinstance(_ex, dict):
+                    continue
+                if str(_ex.get("companyName") or "").strip() == str(it.get("companyName") or "").strip():
+                    continue
+                _nd2 = _norm(str(_ex.get("description") or ""))
+                if len(_nd2) >= 20 and _title_sim(_nd, _nd2) >= CROSS_COMPANY_DESC_MIN_SIM:
+                    _dup = _ex
+                    break
+        if _dup is not None:
+            log(f"activities 新项 {i} 与【{_dup.get('companyName')}】名下已有条目为同一事件"
+                f"（相似度 ≥{CROSS_COMPANY_DESC_MIN_SIM}），判定为跨公司错标副本，跳过："
+                f"{(it.get('title') or '')[:40]}")
             continue
         valid.append({
             "company": str(it.get("company")).strip(),
