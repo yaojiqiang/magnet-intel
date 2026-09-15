@@ -19,6 +19,7 @@ update_intel.py
   GEMINI_API_KEY         Gemini 密钥
   DOUBAO_SEARCH_API_KEY  豆包搜索 API Key
   ZHIPU_API_KEY          智谱 API Key
+  SOGOU_COOKIE           搜狗微信搜索 Cookie（可选；配置后提升公众号检索稳定性，规避反爬验证码）
   LLM_BASE_URL / LLM_MODEL / DOUBAO_SEARCH_ENDPOINT / DATA_PATH  可选
 
 【数据安全核心原则】—— 防止免费模型把整份文档写坏：
@@ -37,6 +38,7 @@ import json
 import copy
 import datetime
 import re
+import html
 import urllib.parse
 import urllib.request
 
@@ -753,6 +755,12 @@ def _clean_url(u):
     return (u or "").strip() if _url_ok(u) else ""
 
 
+def _is_weixin_url(u):
+    """是否为微信公众号文章链接（含搜狗微信重定向链接 weixin.sogou.com/link）。"""
+    u = (u or "").strip().lower()
+    return "mp.weixin.qq.com" in u or "weixin.sogou.com/link" in u
+
+
 def _norm_title(s):
     """标题归一化：仅保留中文与字母数字，用于相似度比较。"""
     return re.sub(r"[^0-9a-z\u4e00-\u9fff]+", "", (s or "").lower())
@@ -870,6 +878,7 @@ def _match_ref_url(title, company_name="", item_date=""):
         return "", 0.0
     names = _item_company_names(title, company_name)
     best_url, best_score = "", 0.0
+    best_wx_url, best_wx_score = "", 0.0
     for r in _SEARCH_REFS:
         if _company_conflict(company_name, r["title"]):
             continue
@@ -880,6 +889,12 @@ def _match_ref_url(title, company_name="", item_date=""):
         sc = _title_sim(nt, r["nt"])
         if sc > best_score:
             best_score, best_url = sc, r["url"]
+        # 微信公众号原文优先：达到阈值的公众号链接，在分数与全局最优接近时胜出
+        if _is_weixin_url(r["url"]) and sc > best_wx_score:
+            best_wx_score, best_wx_url = sc, r["url"]
+    # 优先采用微信公众号原文链接（若存在达到阈值的公众号匹配，且分数与全局最优接近）
+    if best_wx_score >= URL_MATCH_MIN_SCORE and best_wx_score >= best_score - 0.05:
+        return best_wx_url, best_wx_score
     if best_score >= URL_MATCH_MIN_SCORE:
         return best_url, best_score
     return "", 0.0
@@ -1176,8 +1191,16 @@ def call_llm_news(prompt):
     provider = (os.environ.get("LLM_PROVIDER") or "openai").lower()
     if provider == "cn-free":
         ctx = gather_doubao_context_news(os.environ.get("DOUBAO_SEARCH_API_KEY"))
+        wx = gather_weixin_context()
         if ctx:
             full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出真实可核实的增量新闻）：\n" + ctx
+            if wx:
+                full += ("\n\n以下为【微信公众号】检索到的行业/公司原文线索（搜狗微信搜索），"
+                         "请优先参考，并在 source 中标注公众号名称：\n" + wx)
+            return call_zhipu(full)
+        if wx:
+            full = prompt + ("\n\n以下为【微信公众号】检索到的行业/公司原文线索（搜狗微信搜索），"
+                            "请据实抽取新闻，并在 source 中标注公众号名称：\n" + wx)
             return call_zhipu(full)
         # 联网检索无结果（Key 失效/接口异常）→ 改用智谱 web_search 自行联网检索，确保新闻段不靠幻觉
         log("news 联网检索无结果，改用智谱 web_search 自行联网检索最新新闻")
@@ -2188,6 +2211,124 @@ def _search_once(query, count=15):
     return ""
 
 
+# ---------------------------------------------------------------------------
+# 搜狗微信搜索（公众号专搜，2026-09-15）
+# 背景：竞社/行业深度内容大量发布在微信公众号（封闭生态），通用网页搜索（百度/豆包）几乎抓不到，
+#       导致竞社动态、行业协会、券商纪要类内容稀疏。搜狗与腾讯独家合作，weixin.sogou.com 几乎索引
+#       全部公众号文章，是免费获取公众号内容覆盖面最广的入口。
+# 方案：新增独立检索源，仅用于 activities/news 两块的公众号补充；失败（反爬/网络）不影响主流程。
+# ---------------------------------------------------------------------------
+
+_SOGOU_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+             "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
+
+
+def _strip_tags(s):
+    """去除 HTML 标签并反转义。"""
+    return html.unescape(re.sub(r"<[^>]+>", "", s or "")).strip()
+
+
+def _sogou_weixin_search_once(query, count=10):
+    """搜狗微信搜索（type=2 公众号文章）：抓取真实结果并登记到 _SEARCH_REFS，返回拼接上下文。
+    服务器 IP 易被反爬（验证码页），触发时抛 QuotaExhausted，由调用方降级；可设 SOGOU_COOKIE 提升稳定性。"""
+    q = (query or "").strip()
+    if not q:
+        return ""
+    url = "https://weixin.sogou.com/weixin?type=2&ie=utf8&page=1&query=" + urllib.parse.quote(q)
+    headers = {
+        "User-Agent": _SOGOU_UA,
+        "Accept": "text/html,application/xhtml+xml",
+        "Accept-Language": "zh-CN,zh;q=0.9",
+        "Referer": "https://weixin.sogou.com/",
+    }
+    cookie = os.environ.get("SOGOU_COOKIE")
+    if cookie:
+        headers["Cookie"] = cookie
+    req = urllib.request.Request(url, headers=headers)
+    try:
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            raw = resp.read().decode("utf-8", "ignore")
+    except Exception as e:
+        raise RuntimeError("搜狗微信搜索请求失败：%s" % e)
+    # 反爬/验证码页判定（页面无结果块即视为被拦截）
+    if "antispider" in raw or "请输入验证码" in raw or "网络环境异常" in raw:
+        raise QuotaExhausted("搜狗微信搜索触发反爬/验证码，本次跳过（可配置 SOGOU_COOKIE 提升稳定性）")
+    # 按结果容器切分
+    segs = raw.split('class="txt-box"')
+    out, seen = [], set()
+    for seg in segs[1:]:
+        m = re.search(r'<a[^>]+href="([^"]*weixin\.sogou\.com/link[^"]*)"[^>]*>(.*?)</a>', seg, re.S)
+        if not m:
+            continue
+        href, title_html = m.group(1), m.group(2)
+        title = _strip_tags(title_html)
+        if not title:
+            continue
+        sm = re.search(r'class="txt-info"[^>]*>(.*?)</(?:div|p)>', seg, re.S)
+        snippet = _strip_tags(sm.group(1)) if sm else ""
+        am = re.search(r'class="s-p"[^>]*>(.*?)</span>', seg, re.S)
+        account = _strip_tags(am.group(1)) if am else ""
+        dm = re.search(r'class="s-time"[^>]*>(.*?)</span>', seg, re.S)
+        date = _strip_tags(dm.group(1)) if dm else ""
+        if href in seen:
+            continue
+        seen.add(href)
+        _register_search_ref(title, href, account, date)
+        meta = "，".join(x for x in (
+            ("公众号：%s" % account if account else ""),
+            ("日期：%s" % date if date else ""),
+            ("链接：%s" % href),
+        ) if x)
+        out.append("- 【%s】%s（%s）" % (title, snippet, meta))
+        if len(out) >= int(count or 10):
+            break
+    return "\n".join(out)
+
+
+# 权威稀土/磁材公众号清单（定向监控的轻量实现）：用于构造定向检索词，提升公众号命中率
+WEIXIN_ACCOUNTS = [
+    "找磁材", "你好北方稀土", "包头稀土产品交易所", "瑞道稀土资讯",
+    "上海有色网", "百川资讯", "中国稀土行业协会",
+    "金力永磁", "宁波韵升", "中科三环", "大地熊", "英洛华", "正海磁材",
+]
+
+
+def gather_weixin_context(api_key=None):
+    """公众号（搜狗微信）定向检索：补齐竞社/行业在公众号上的内容。
+    失败（反爬/网络）不影响主流程 —— 仅视为『本次未拿到公众号结果』。"""
+    _ym = "%d年%d月" % (datetime.date.today().year, datetime.date.today().month)
+    queries = [
+        "稀土永磁 企业 公告 动态 投产 %s" % _ym,
+        "稀土 行业 政策 出口 收储 公众号 %s" % _ym,
+        "金力永磁 宁波韵升 中科三环 产能 项目 %s" % _ym,
+    ]
+    blocks = []
+    for q in queries:
+        try:
+            r = _sogou_weixin_search_once(q, count=8)
+            if r:
+                blocks.append("【微信公众号检索】查询「%s」：\n%s" % (q, r))
+        except Exception as e:
+            log("搜狗微信检索失败（降级，不影响主流程）：%s" % e)
+    ctx = "\n\n".join(blocks)
+    log("搜狗微信检索：%d/%d 个查询返回结果，上下文 %d 字" % (len(blocks), len(queries), len(ctx)))
+    return ctx
+
+
+def _cli_check_weixin(queries=None):
+    """自检：直接调用搜狗微信搜索并打印原文，验证可达性与反爬状态。"""
+    qs = queries or ["稀土永磁 动态", "金力永磁 公告"]
+    log("搜狗微信检索自检：COOKIE=%s，共 %d 条查询" %
+        ("已配置" if os.environ.get("SOGOU_COOKIE") else "未配置", len(qs)))
+    for q in qs:
+        try:
+            r = _sogou_weixin_search_once(q, count=8)
+            log("查询「%s」→ 返回 %d 字符" % (q, len(r)))
+            print(r or "（无结果/被反爬）")
+        except Exception as e:
+            log("查询「%s」失败：%s" % (q, e))
+
+
 def gather_doubao_context(api_key):
     """对若干查询调用豆包搜索，汇总为参考上下文。"""
     _ym = f"{datetime.date.today().year}年{datetime.date.today().month}月"
@@ -2341,8 +2482,16 @@ def call_llm_activities(prompt):
     provider = (os.environ.get("LLM_PROVIDER") or "openai").lower()
     if provider == "cn-free":
         ctx = gather_doubao_context_activities(os.environ.get("DOUBAO_SEARCH_API_KEY"))
+        wx = gather_weixin_context()
         if ctx:
             full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出真实可核实的增量动态）：\n" + ctx
+            if wx:
+                full += ("\n\n以下为【微信公众号】检索到的竞社/行业原文线索（搜狗微信搜索），"
+                         "请优先参考，并在 source 中标注公众号名称：\n" + wx)
+            return call_zhipu(full)
+        if wx:
+            full = prompt + ("\n\n以下为【微信公众号】检索到的竞社/行业原文线索（搜狗微信搜索），"
+                            "请据实抽取动态，并在 source 中标注公众号名称：\n" + wx)
             return call_zhipu(full)
         # 联网检索无结果 → 改用智谱 web_search 自行联网检索，确保动态段不靠幻觉
         log("activities 联网检索无结果，改用智谱 web_search 自行联网检索最新动态")
@@ -2682,5 +2831,7 @@ def _cli_check_search(queries=None):
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "--check-search":
         _cli_check_search(sys.argv[2:])
+    elif len(sys.argv) > 1 and sys.argv[1] == "--check-weixin":
+        _cli_check_weixin(sys.argv[2:])
     else:
         main()
