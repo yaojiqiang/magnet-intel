@@ -43,6 +43,9 @@ jobs:
           DOUBAO_SEARCH_API_KEY: ${{ secrets.DOUBAO_SEARCH_API_KEY }}
           BAIDU_SEARCH_API_KEY: ${{ secrets.BAIDU_SEARCH_API_KEY }}
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          # 搜狗微信搜索登录态 Cookie（可选）：配置后大幅提升公众号检索稳定性，规避反爬验证码。
+          # 获取方式：浏览器登录 https://weixin.sogou.com 后，从开发者工具复制请求头中的 Cookie 值。
+          SOGOU_COOKIE: ${{ secrets.SOGOU_COOKIE }}
           LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           DATA_PATH: data/intelligence.json
