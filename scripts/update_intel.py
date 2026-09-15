@@ -1239,6 +1239,9 @@ def call_llm_news(prompt):
         wx = gather_weixin_context()
         if not wx:
             wx = _extract_weixin_block(ctx)  # 搜狗被反爬时，改用百度 site: 捞回的公众号条目
+            if wx:
+                _n = wx.count("\n- ") + (1 if wx.startswith("- ") else 0)
+                log("百度 site:mp.weixin.qq.com 命中公众号条目 %d 条，已加入『优先参考公众号』分支" % _n)
         if ctx:
             full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出真实可核实的增量新闻）：\n" + ctx
             if wx:
@@ -2539,6 +2542,9 @@ def call_llm_activities(prompt):
         wx = gather_weixin_context()
         if not wx:
             wx = _extract_weixin_block(ctx)  # 搜狗被反爬时，改用百度 site: 捞回的公众号条目
+            if wx:
+                _n = wx.count("\n- ") + (1 if wx.startswith("- ") else 0)
+                log("百度 site:mp.weixin.qq.com 命中公众号条目 %d 条，已加入『优先参考公众号』分支" % _n)
         if ctx:
             full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出真实可核实的增量动态）：\n" + ctx
             if wx:
