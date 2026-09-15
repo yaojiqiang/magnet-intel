@@ -1208,11 +1208,37 @@ def gather_doubao_context_news(api_key):
     return ctx
 
 
+def _extract_weixin_block(ctx, limit=12):
+    """从百度/豆包检索上下文里抽出公众号（mp.weixin.qq.com）条目。
+
+    背景：搜狗微信在服务器 IP 上必被反爬（实测带 cookie 仍 0/3），但百度/豆包作为合法
+    搜索 API 支持 site: 限定，实测 `site:mp.weixin.qq.com` 单次可返回 10+ 条真实公众号
+    链接。这些链接原先只是混在通用上下文里、模型不被要求优先采用，导致绑定率极低。
+    这里把它们单独抽出，交给提示词中『优先参考公众号』的分支，提升公众号命中与绑定。
+    """
+    if not ctx:
+        return ""
+    items, cur = [], []
+    for ln in (ctx or "").splitlines():
+        if ln.strip().startswith("- "):
+            if cur:
+                items.append("\n".join(cur))
+            cur = [ln.rstrip()]
+        elif cur:
+            cur.append(ln.rstrip())
+    if cur:
+        items.append("\n".join(cur))
+    hits = [i for i in items if "mp.weixin.qq.com" in i]
+    return "\n".join(hits[:limit])
+
+
 def call_llm_news(prompt):
     provider = (os.environ.get("LLM_PROVIDER") or "openai").lower()
     if provider == "cn-free":
         ctx = gather_doubao_context_news(os.environ.get("DOUBAO_SEARCH_API_KEY"))
         wx = gather_weixin_context()
+        if not wx:
+            wx = _extract_weixin_block(ctx)  # 搜狗被反爬时，改用百度 site: 捞回的公众号条目
         if ctx:
             full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出真实可核实的增量新闻）：\n" + ctx
             if wx:
@@ -2379,14 +2405,13 @@ def gather_doubao_context_activities(api_key):
     _names = ["金力永磁", "宁波韵升", "中科三环", "大地熊", "英洛华"]
     _off = _t.toordinal() % len(_names)
     _names = _names[_off:] + _names[:_off]
-    _wxsite = ["mp.weixin.qq.com"] + MIRROR_SITES
     queries = [
         f"{_names[0]} {_names[1]} 公告 业绩 {_ym}",
         f"{_names[2]} {_names[3]} {_names[4]} 公告 技术 {_ym}",
         f"稀土永磁 企业 产能 项目 投产 {_ym}",
         f"稀土永磁 机构调研 智能工厂 {_ym}",
         f"稀土 出口 供应链 政策 收储 {_ym}",
-        f"site:{_wxsite[datetime.date.today().toordinal() % len(_wxsite)]} {_names[0]} {_names[1]} 动态 {_ym}",
+        f"site:mp.weixin.qq.com {_names[0]} {_names[1]} {_ym}",
     ]
     blocks = []
     for q in queries:
@@ -2512,6 +2537,8 @@ def call_llm_activities(prompt):
     if provider == "cn-free":
         ctx = gather_doubao_context_activities(os.environ.get("DOUBAO_SEARCH_API_KEY"))
         wx = gather_weixin_context()
+        if not wx:
+            wx = _extract_weixin_block(ctx)  # 搜狗被反爬时，改用百度 site: 捞回的公众号条目
         if ctx:
             full = prompt + "\n\n以下是联网搜索到的参考信息（请据此核对，只输出真实可核实的增量动态）：\n" + ctx
             if wx:
