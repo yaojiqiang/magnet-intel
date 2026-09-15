@@ -309,6 +309,17 @@ FRESH_BACKFILL_FLOOR = "2020-01-01"  # 回填模式（BACKFILL=1）下的最早�
 # ⚠ 改动查询清单时请同步更新这里的预算，以免超出 500 次/月导致整月失去联网检索能力。
 DOUBAO_QUERIES_PER_RUN = 14
 
+# 公众号 / 同源转载站「定向检索」（每日轮换目标域名）
+# 背景：直接请求 weixin.sogou.com 在服务器/数据中心 IP 上必被反爬 —— 实测携带正确登录
+# cookie 仍返回「搜狗微信检索：0/3 个查询返回结果」。故改为借助已接入的百度/豆包
+# 「合法搜索 API」间接覆盖公众号内容：用 site: 限定域名让搜索引擎代抓，返回真实
+# mp.weixin.qq.com 链接；命中后由既有 _is_weixin_url 逻辑在绑定原文时优先采用。
+# 同源/转载站（雪球、今日头条、百家号、新浪、巨潮）常同步发布公众号深度内容，一并纳入。
+MIRROR_SITES = [
+    "xueqiu.com", "toutiao.com", "baijiahao.baidu.com",
+    "sina.com.cn", "cninfo.com.cn",
+]
+
 # 竞社经营数据（companies）每日增量“报告刷新”相关
 KNOWN_COMPANY_IDS = {"jinli", "yunsheng", "sanhuan", "zhenghai"}
 FIN_BANDS = {
@@ -1163,9 +1174,13 @@ def gather_doubao_context_news(api_key):
     """新闻联网搜索：按『每家公司 + 行业多维』拆细查询，覆盖面远大于原先 3 个泛查询。"""
     _ym = f"{datetime.date.today().year}年{datetime.date.today().month}月"
     # 精简至 2 条；额度预算见 DOUBAO_QUERIES_PER_RUN；查询词控制在 72 字符内
+    _t = datetime.date.today()
+    _mirror = MIRROR_SITES[_t.toordinal() % len(MIRROR_SITES)]
     queries = [
         f"稀土永磁 行业 新闻 政策 {_ym}",
         f"钕铁硼 企业 公告 业绩 {_ym}",
+        f"site:mp.weixin.qq.com 稀土 永磁 行业 {_ym}",
+        f"site:{_mirror} 稀土永磁 {_ym}",
     ]
     blocks = []
     for q in queries:
@@ -2358,12 +2373,14 @@ def gather_doubao_context_activities(api_key):
     _names = ["金力永磁", "宁波韵升", "中科三环", "大地熊", "英洛华"]
     _off = _t.toordinal() % len(_names)
     _names = _names[_off:] + _names[:_off]
+    _wxsite = ["mp.weixin.qq.com"] + MIRROR_SITES
     queries = [
         f"{_names[0]} {_names[1]} 公告 业绩 {_ym}",
         f"{_names[2]} {_names[3]} {_names[4]} 公告 技术 {_ym}",
         f"稀土永磁 企业 产能 项目 投产 {_ym}",
         f"稀土永磁 机构调研 智能工厂 {_ym}",
         f"稀土 出口 供应链 政策 收储 {_ym}",
+        f"site:{_wxsite[datetime.date.today().toordinal() % len(_wxsite)]} {_names[0]} {_names[1]} 动态 {_ym}",
     ]
     blocks = []
     for q in queries:
