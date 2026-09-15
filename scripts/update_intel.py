@@ -1188,6 +1188,12 @@ def gather_doubao_context_news(api_key):
             r = _search_once(q, count=15)
             if r:
                 blocks.append(f"查询「{q}」：\n{r}")
+                _doms = {}
+                for _d in re.findall(r"https?://([A-Za-z0-9.\-]+)", r or ""):
+                    _doms[_d] = _doms.get(_d, 0) + 1
+                if _doms:
+                    log("  域名分布「%s」：" % q + "，".join(
+                        "%s×%d" % (k, v) for k, v in sorted(_doms.items(), key=lambda x: -x[1])[:8]))
         except Exception as e:
             log(f"{_search_label()}(news)失败（{q}）：{e}")
     # 上下文长度保护：按整块累积，最多约 32000 字，避免单次输入过长
@@ -2388,6 +2394,12 @@ def gather_doubao_context_activities(api_key):
             r = _search_once(q, count=15)
             if r:
                 blocks.append(f"查询「{q}」：\n{r}")
+                _doms = {}
+                for _d in re.findall(r"https?://([A-Za-z0-9.\-]+)", r or ""):
+                    _doms[_d] = _doms.get(_d, 0) + 1
+                if _doms:
+                    log("  域名分布「%s」：" % q + "，".join(
+                        "%s×%d" % (k, v) for k, v in sorted(_doms.items(), key=lambda x: -x[1])[:8]))
         except Exception as e:
             log(f"{_search_label()}(activities)失败（{q}）：{e}")
     kept, total = [], 0
