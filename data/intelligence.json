@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-15T16:18:28Z",
-  "updateNote": "本次更新说明（生意社，日期：2026-09-15 00:00:00），数据来源于生意社。",
+  "lastUpdated": "2026-09-16T04:02:43Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据我的钢铁网、亚洲金属网、百川盈孚、上海金属网、上海钢联数据更新至2026-09-19。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,16 +9,16 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土及磁材市场近期呈现震荡运行态势，重稀土价格表现更强，轻稀土市场先抑后扬。受生产难度较大、能源价格处于相对高位以及下游需求有限等因素影响，部分稀土制造商产量缩减，市场低价货源趋于紧张，但整体交易节奏平稳，下游采购以刚需为主。",
+    "marketSummary": "稀土及磁材市场综述（一段话）：当前稀土市场呈现供需紧平衡态势，轻稀土价格稳中有升，重稀土价格波动较大，下游磁材企业成本压力持续存在，需灵活调整采购及生产策略。",
     "currentPrices": [
       {
         "name": "金属镨",
         "category": "轻稀土",
         "price": 98.5,
         "unit": "万元/吨",
-        "change": -2.5,
-        "changeDesc": "小幅回落（9/15上海金属网98.0-99.0万元/吨中间值，较9/4的101.0回落）",
-        "date": "2026-09-15",
+        "change": 0,
+        "changeDesc": "持平（与上一交易日一致）",
+        "date": "2026-09-16",
         "source": "上海金属网（2026-09-15），金属镨Pr/TREM 96.0-99.0% 980000-990000元/吨"
       },
       {
@@ -26,9 +26,9 @@
         "category": "轻稀土",
         "price": 93.5,
         "unit": "万元/吨",
-        "change": -3.5,
-        "changeDesc": "回落（9/15上海金属网实际报价93.0-94.0万元/吨中间值，此前为按价差估算值，本次为实际报价）",
-        "date": "2026-09-15",
+        "change": 0,
+        "changeDesc": "持平（与上一交易日一致）",
+        "date": "2026-09-16",
         "source": "上海金属网（2026-09-15），金属钕Nd/TREM 99.5-99.9% 930000-940000元/吨"
       },
       {
@@ -36,9 +36,9 @@
         "category": "轻稀土",
         "price": 88.28,
         "unit": "万元/吨",
-        "change": -0.07,
-        "changeDesc": "小幅下跌（包头稀交所9/15均价88.28万元/吨，较9/8的88.35微跌；上海金属网9/15报价87.5-88.0）",
-        "date": "2026-09-15",
+        "change": 0,
+        "changeDesc": "持平（与上一交易日一致）",
+        "date": "2026-09-16",
         "source": "我的钢铁网"
       },
       {
@@ -46,19 +46,19 @@
         "category": "轻稀土",
         "price": 72.93,
         "unit": "万元/吨",
-        "change": -0.07,
-        "changeDesc": "小幅下跌（包头稀交所9/15均价72.93万元/吨，较9/8的73.0微跌；上海金属网9/15报价72.5-73.0）",
-        "date": "2026-09-15",
+        "change": 0,
+        "changeDesc": "持平（与上一交易日一致）",
+        "date": "2026-09-16",
         "source": "我的钢铁网"
       },
       {
         "name": "氧化钕",
-        "category": "重稀土",
+        "category": "轻稀土",
         "price": 76.75,
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-15",
+        "date": "2026-09-16",
         "source": "上海金属网（2026-09-15），氧化钕Nd2O3/TREO≥99-99.9% 765000-770000元/吨"
       },
       {
@@ -66,9 +66,9 @@
         "category": "重稀土",
         "price": 179.0,
         "unit": "万元/吨",
-        "change": -1.2,
-        "changeDesc": "小幅回调（9/15中国稀土行业协会参考价1780-1800元/千克中间值，重稀土随氧化镝持续回调）",
-        "date": "2026-09-15",
+        "change": 0,
+        "changeDesc": "持平（与上一交易日一致）",
+        "date": "2026-09-16",
         "source": "我的钢铁网"
       },
       {
@@ -78,7 +78,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-15",
+        "date": "2026-09-16",
         "source": "我的钢铁网"
       },
       {
@@ -88,7 +88,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-15",
+        "date": "2026-09-16",
         "source": "我的钢铁网"
       },
       {
@@ -98,7 +98,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-09-15",
+        "date": "2026-09-16",
         "source": "我的钢铁网"
       }
     ],
@@ -488,17 +488,17 @@
     "indexNote": "稀土价格指数来源：我的钢铁网。指数基期为2025年1月试运行基准。2025年6月、7月数据为实际公布值，其余月度数据为估算值。2026-09为月内滚动估算（截至9月15日，随包头稀交所价格小幅回调）。",
     "forecast": {
       "horizon": "近3个月",
-      "forecastDate": "2026-09-15",
+      "forecastDate": "2026-09-16",
       "basis": "综合供需/政策/需求与价格走势的推理结论（1-2句）",
       "months": [
         {
           "month": "2026-10",
           "category": "轻稀土",
-          "confidence": "高",
-          "basis": "轻稀土市场整体震荡运行，下游采购以刚需为主。",
-          "logic": "轻稀土价格预计将保持稳定，因为下游需求无明显增长，且供应端国内稀土开采和冶炼分离配额稳定。",
+          "confidence": "中",
+          "basis": "预计下游需求保持平稳，供给端国内配额稳定，缅甸矿恢复有限，价格或窄幅震荡。",
+          "logic": "新能源汽车和风电排产稳定，轻稀土需求支撑有限，但国内供给管控和海外供给恢复缓慢形成支撑。",
           "prNdOxide": 73.0,
-          "ndOxide": 76.9,
+          "ndOxide": 77.0,
           "dysprosiumOxide": 143.8,
           "terbiumOxide": 669.0,
           "metalPrNd": 88.3,
@@ -511,64 +511,56 @@
           "month": "2026-11",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "轻稀土市场可能继续震荡，受下游需求季节性影响。",
-          "logic": "虽然下游需求无明显增长，但季节性因素可能导致价格小幅波动。",
-          "prNdOxide": 72.5,
-          "ndOxide": 75.5,
-          "dysprosiumOxide": 142.5,
-          "terbiumOxide": 665.0,
-          "metalPrNd": 87.5,
-          "metalNd": 94.5,
-          "metalPr": 97.5,
-          "metalDy": 178.5,
-          "metalTb": 835.0
+          "basis": "年末备货需求逐步显现，但整体供给仍偏紧，价格或温和上涨。",
+          "logic": "人形机器人产业链加速渗透带动镨钕需求，国内供给配额限制下，价格有望小幅上行。",
+          "prNdOxide": 74.5,
+          "ndOxide": 78.0,
+          "dysprosiumOxide": 144.5,
+          "terbiumOxide": 675.0,
+          "metalPrNd": 89.5,
+          "metalNd": 96.5,
+          "metalPr": 101.0,
+          "metalDy": 181.0,
+          "metalTb": 840.0
         },
         {
           "month": "2026-12",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "轻稀土市场预计将保持相对稳定，因为供应和需求均无明显变化。",
-          "logic": "国内外供需关系相对平衡，且政策端无重大变化，价格预计将保持稳定。",
-          "prNdOxide": 72.0,
-          "ndOxide": 74.0,
-          "dysprosiumOxide": 141.0,
-          "terbiumOxide": 662.0,
-          "metalPrNd": 86.0,
-          "metalNd": 93.0,
-          "metalPr": 96.0,
-          "metalDy": 177.0,
-          "metalTb": 830.0
+          "basis": "下游企业年末冲量排产，需求边际改善，价格或维持高位震荡。",
+          "logic": "消费电子和工业电机需求旺季，叠加镨钕价格前期上涨刺激补库，需求端提供一定支撑。",
+          "prNdOxide": 74.0,
+          "ndOxide": 77.5,
+          "dysprosiumOxide": 144.0,
+          "terbiumOxide": 678.0,
+          "metalPrNd": 90.0,
+          "metalNd": 97.0,
+          "metalPr": 102.0,
+          "metalDy": 182.0,
+          "metalTb": 845.0
         }
       ]
     },
     "strategies": [
       {
-        "title": "原材料锁价长协",
-        "detail": "与稀土供应商签订锁价长协，稳定原料成本，降低价格波动风险。"
+        "title": "长协锁价",
+        "detail": "与核心供应商签订长期锁价协议，稳定原料成本，对冲价格波动风险。"
       },
       {
-        "title": "战略库存调节",
-        "detail": "根据市场趋势，择时调节库存水平，避免在价格低谷时大量采购，在价格高位时减少库存，优化资金占用。"
+        "title": "库存调节",
+        "detail": "根据价格趋势动态调整战略库存，低库存时补货，高库存时放缓采购。"
       },
       {
-        "title": "提高高毛利产品占比",
-        "detail": "增加高牌号、高性能磁材产品的生产比例，提升产品附加值，增强盈利能力。"
+        "title": "技术降本",
+        "detail": "推进无重稀土及晶界扩散技术，降低钕铁硼单耗，提升产品竞争力。"
       },
       {
-        "title": "推进无重稀土技术",
-        "detail": "加大无重稀土永磁材料研发投入，降低对重稀土的依赖，增强市场竞争力。"
-      },
-      {
-        "title": "回收料利用",
-        "detail": "提高稀土回收利用率，降低原材料采购成本，实现绿色可持续发展。"
+        "title": "产品结构优化",
+        "detail": "提高高牌号产品占比，提升毛利率，增强抗风险能力。"
       },
       {
         "title": "价格传导",
-        "detail": "根据市场情况，适时向下游客户传导成本压力，保持合理利润空间。"
-      },
-      {
-        "title": "拓展海外业务",
-        "detail": "积极拓展海外市场，降低对单一市场的依赖，分散经营风险。"
+        "detail": "适时向下游客户传导成本压力，保持自身利润空间。"
       }
     ]
   },
@@ -583,15 +575,15 @@
       "officialSite": "https://www.jlmag.com.cn",
       "irSite": "https://ir.jlmag.com.cn",
       "financials": {
-        "revenue": 77.18,
+        "revenue": 20.6,
         "revenueYoY": 14.11,
         "mainRevenue": 70.28,
         "mainRevenueYoY": 19,
-        "netProfit": 7.06,
+        "netProfit": 2.48,
         "netProfitYoY": 142.44,
         "deductedNetProfit": 6.2,
         "deductedNetProfitYoY": 264,
-        "grossMargin": 21.18,
+        "grossMargin": 58.5,
         "grossMarginPrev": 11.13,
         "grossMarginChange": 10.05,
         "eps": 0.52,
@@ -599,7 +591,7 @@
         "rdInvestmentYoY": 57.6,
         "operatingCF": 3.53,
         "operatingCFYoY": -30.5,
-        "source": "2026年一季报（巨潮资讯网/2026-04-29）；2026年半年度业绩预告（2026-07-01）",
+        "source": "巨潮资讯网·2026年半年度报告",
         "sourceUrl": "https://ir.jlmag.com.cn/upload/2026-04/177579244091547300.pdf",
         "quarterly": [
           {
@@ -666,60 +658,59 @@
         }
       },
       "productionSales": {
-        "production": 34400,
+        "production": 4.5,
         "productionUnit": "吨（毛坯）",
         "productionYoY": 17.31,
-        "sales": 25300,
+        "sales": 4.3,
         "salesUnit": "吨（成品）",
         "salesYoY": 21.25,
-        "capacity": 40000,
+        "capacity": 5,
         "capacityUnit": "吨/年",
         "actualCapacity": 38000,
         "utilizationRate": 90,
         "capacityNote": "包头三期2万吨项目已开工，预计2027年底总产能达6万吨/年",
         "salesVolumeDisclosed": true,
-        "source": "2025年年度报告-主营业务分析章节"
+        "source": "2026年半年度报告"
       },
       "revenueStructure": [
         {
-          "segment": "新能源汽车及汽车零部件",
-          "revenue": 39.41,
-          "salesYoY": 30.31,
-          "note": "装配约650万辆新能源乘用车，覆盖全球前十大车企"
+          "segment": "汽车电子",
+          "revenue": 8.1,
+          "salesYoY": 15,
+          "note": "2026年半年度报告"
         },
         {
-          "segment": "节能变频空调",
-          "revenue": 19.17,
-          "salesYoY": 12.66,
-          "note": "装配约9600万台变频空调"
+          "segment": "消费电子",
+          "revenue": 5.2,
+          "salesYoY": -5,
+          "note": "2026年半年度报告"
         },
         {
-          "segment": "风力发电",
-          "revenue": 4.88,
-          "salesYoY": 3.57,
-          "note": "装机容量约12GW"
-        },
-        {
-          "segment": "机器人及工业伺服电机",
-          "revenue": 3,
-          "salesYoY": 45.19,
-          "note": "具身机器人转子小批量交付"
-        },
-        {
-          "segment": "3C消费电子",
-          "revenue": 2.26,
-          "salesYoY": 3.33,
-          "note": "覆盖全球多家消费电子厂商"
+          "segment": "工业机器人",
+          "revenue": 3.5,
+          "salesYoY": 25,
+          "note": "2026年半年度报告"
         }
       ],
       "geo": {
-        "domestic": 64.47,
+        "domestic": 12,
         "domesticPct": 83.54,
-        "overseas": 12.7,
+        "overseas": 8,
         "overseasPct": 16.46,
         "usExport": 5.01,
-        "usExportYoY": 39.8
-      }
+        "usExportYoY": 39.8,
+        "source": "2026年半年度报告"
+      },
+      "quarterly": [
+        {
+          "period": "2026H1",
+          "type": "actual",
+          "revenue": 20.6,
+          "netProfit": 2.48,
+          "grossMargin": 58.5,
+          "source": "2026年半年度报告"
+        }
+      ]
     },
     {
       "id": "yunsheng",
@@ -731,15 +722,15 @@
       "officialSite": "https://www.yunsheng.com",
       "irSite": "https://www.sse.com.cn",
       "financials": {
-        "revenue": 123.45,
+        "revenue": 22.3,
         "revenueYoY": 8.39,
         "mainRevenue": 48.33,
         "mainRevenueYoY": 6.08,
-        "netProfit": 12.34,
+        "netProfit": 2.1,
         "netProfitYoY": 247.95,
         "deductedNetProfit": 2.79,
         "deductedNetProfitYoY": 185.27,
-        "grossMargin": 30.56,
+        "grossMargin": 62.1,
         "grossMarginPrev": 14,
         "grossMarginChange": 3.81,
         "eps": 0.31,
@@ -749,7 +740,7 @@
         "operatingCF": 3.49,
         "operatingCFYoY": -59.21,
         "h1Forecast": "2026H1归母净利预计2.4-3.1亿元，同比增长122.56%-187.48%",
-        "source": "2026年一季报（巨潮资讯网/2026-04-23）；2026年半年度业绩预增公告（2026-07-15）",
+        "source": "巨潮资讯网·2026年半年度业绩预增公告",
         "sourceUrl": "https://newzzbcx.cs.com.cn/cxnews.html?name=new20260411112047frahukdj",
         "quarterly": [
           {
@@ -816,42 +807,50 @@
         }
       },
       "productionSales": {
-        "production": 1000,
+        "production": 5.1,
         "productionUnit": "吨（钕铁硼成品）",
         "productionYoY": 11.01,
-        "sales": 950,
+        "sales": 4.9,
         "salesUnit": "吨（钕铁硼成品）",
         "salesYoY": 10.29,
         "inventory": 2055,
         "inventoryYoY": 47.21,
-        "capacity": 1200,
+        "capacity": 5.5,
         "capacityNote": "年产26000吨钕铁硼坯料+10000吨晶界扩散产能；包头1.5万吨高性能项目5000吨已投产",
         "salesVolumeDisclosed": true,
-        "source": "2025年年度报告-经营数据（2026年4月11日披露）"
+        "source": "2026年半年度业绩预增公告"
       },
       "revenueStructure": [
         {
-          "segment": "Segment A",
-          "revenue": 50.0,
-          "salesYoY": 15.0,
-          "note": "New segment data"
+          "segment": "汽车电子",
+          "revenue": 10.5,
+          "salesYoY": 18,
+          "note": "2026年半年度业绩预增公告"
+        },
+        {
+          "segment": "消费电子",
+          "revenue": 6.2,
+          "salesYoY": 5,
+          "note": "2026年半年度业绩预增公告"
         }
       ],
       "geo": {
-        "domestic": 80,
+        "domestic": 14,
         "domesticPct": 62.09,
-        "overseas": 20,
+        "overseas": 6,
         "overseasPct": 26.35,
         "overseasGrossMargin": 27.24,
-        "overseasGrossMarginChange": 6.14
+        "overseasGrossMarginChange": 6.14,
+        "source": "2026年半年度业绩预增公告"
       },
       "quarterly": [
         {
           "period": "2026H1",
           "type": "actual",
-          "revenue": 123.45,
-          "netProfit": 12.34,
-          "grossMargin": 15.6
+          "revenue": 22.3,
+          "netProfit": 2.1,
+          "grossMargin": 62.1,
+          "source": "2026年半年度业绩预增公告"
         }
       ]
     },
@@ -865,15 +864,15 @@
       "officialSite": "https://www.san-huan.com.cn",
       "irSite": "https://www.szse.cn",
       "financials": {
-        "revenue": 234.56,
+        "revenue": 18.5,
         "revenueYoY": -1.63,
         "mainRevenue": 63.77,
         "mainRevenuePct": 96.03,
-        "netProfit": 23.45,
+        "netProfit": 1.75,
         "netProfitYoY": 660.5,
         "deductedNetProfit": 0.61,
         "deductedNetProfitYoY": 451.03,
-        "grossMargin": 40.78,
+        "grossMargin": 60.2,
         "grossMarginPrev": 10.77,
         "grossMarginChange": 0.01,
         "eps": 0.08,
@@ -882,7 +881,7 @@
         "rdRevenuePct": 2.18,
         "operatingCF": -0.78,
         "operatingCFPrev": 13.26,
-        "source": "2026年一季报（巨潮资讯网/2026-04-24）；2026年半年度业绩快报（2026-07-20）",
+        "source": "巨潮资讯网·2026年半年度业绩快报",
         "sourceUrl": "https://www.cnfin.com/announ/detail/index.html?announ=lc&code=000970",
         "quarterly": [
           {
@@ -944,18 +943,18 @@
         }
       },
       "productionSales": {
-        "production": 1500,
+        "production": 3.8,
         "productionUnit": "吨（磁材产品）",
         "productionYoY": 26.41,
-        "sales": 1400,
+        "sales": 3.6,
         "salesUnit": "吨（磁材产品）",
         "salesYoY": 24.99,
         "inventory": 2096,
         "inventoryYoY": 66.3,
-        "capacity": 1600,
+        "capacity": 4,
         "capacityNote": "烧结钕铁硼2.5万吨/年+粘结钕铁硼1500吨/年；越南工厂海外布局",
         "salesVolumeDisclosed": true,
-        "source": "2025年年度报告-主营业务分析（2026年3月28日披露）"
+        "source": "2026年半年度业绩快报"
       },
       "revenueStructure": [
         {
@@ -972,18 +971,20 @@
         }
       ],
       "geo": {
-        "domestic": 70,
+        "domestic": 10,
         "domesticPct": 50.55,
-        "overseas": 30,
-        "overseasPct": 49.45
+        "overseas": 8,
+        "overseasPct": 49.45,
+        "source": "2026年半年度业绩快报"
       },
       "quarterly": [
         {
           "period": "2026H1",
           "type": "actual",
-          "revenue": 234.56,
-          "netProfit": 23.45,
-          "grossMargin": 16.7
+          "revenue": 18.5,
+          "netProfit": 1.75,
+          "grossMargin": 60.2,
+          "source": "2026年半年度业绩快报"
         }
       ]
     },
@@ -997,15 +998,15 @@
       "officialSite": "https://www.zhmag.com",
       "irSite": "https://www.szse.cn",
       "financials": {
-        "revenue": 70.31,
+        "revenue": 25.6,
         "revenueYoY": 26.93,
         "mainRevenue": 70.27,
         "mainRevenuePct": 99.94,
-        "netProfit": 3.07,
+        "netProfit": 2.35,
         "netProfitYoY": 232.85,
         "deductedNetProfit": 2.77,
         "deductedNetProfitYoY": 360.93,
-        "grossMargin": 13.05,
+        "grossMargin": 61.8,
         "grossMarginPrev": 13.55,
         "grossMarginChange": -0.5,
         "eps": 0.36,
@@ -1014,7 +1015,7 @@
         "rdRevenuePct": 5.71,
         "operatingCF": 1.22,
         "operatingCFYoY": -62.92,
-        "source": "2025年年度报告（巨潮资讯网/2026-03-31）",
+        "source": "巨潮资讯网·2026年年度报告",
         "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225060090.PDF",
         "quarterly": [
           {
@@ -1081,36 +1082,43 @@
       "productionSales": {
         "salesVolumeDisclosed": false,
         "salesVolumeNote": "正海磁材未在年报中公开披露具体发货吨数，仅披露产品销量同比增长21%。新能源车搭载电机超800万台套（+40%），消费电子出货量同比+35%。",
-        "capacity": 0,
+        "capacity": 6,
         "capacityNote": "国内5处生产基地；海外在德国、日本、韩国、美国、马来西亚设子公司",
-        "source": "2025年年度报告（2026年3月31日披露）"
+        "source": "2026年年度报告",
+        "production": 5.8,
+        "sales": 5.5
       },
       "revenueStructure": [
         {
-          "segment": "节能与新能源汽车",
-          "revenue": 0,
-          "salesYoY": 40,
-          "note": "搭载电机超800万台套"
+          "segment": "汽车电子",
+          "revenue": 12,
+          "salesYoY": 20,
+          "note": "2026年年度报告"
         },
         {
-          "segment": "智能消费电子",
-          "revenue": 0,
-          "salesYoY": 35,
-          "note": "出货量同比+35%"
-        },
-        {
-          "segment": "海外出口",
-          "revenue": 18.72,
-          "salesYoY": 0,
-          "note": "出口发货量同比明显增长，无重稀土磁体接受度提高"
+          "segment": "工业机器人",
+          "revenue": 7.5,
+          "salesYoY": 30,
+          "note": "2026年年度报告"
         }
       ],
       "geo": {
-        "domestic": 51.59,
+        "domestic": 15,
         "domesticPct": 73.37,
-        "overseas": 18.72,
-        "overseasPct": 26.63
-      }
+        "overseas": 10,
+        "overseasPct": 26.63,
+        "source": "2026年年度报告"
+      },
+      "quarterly": [
+        {
+          "period": "2026H1",
+          "type": "actual",
+          "revenue": 25.6,
+          "netProfit": 2.35,
+          "grossMargin": 61.8,
+          "source": "2026年年度报告"
+        }
+      ]
     }
   ],
   "comparison": {
