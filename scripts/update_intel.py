@@ -1229,6 +1229,12 @@ def _extract_weixin_block(ctx, limit=12):
     if cur:
         items.append("\n".join(cur))
     hits = [i for i in items if "mp.weixin.qq.com" in i]
+    try:
+        _sample = " ‖ ".join((h.replace("\n", " ")[:110]) for h in hits[:3])
+        log("公众号抽取诊断：候选条目 %d 条，含 mp.weixin 链接 %d 条；样例：%s"
+            % (len(items), len(hits), _sample or "(无)"))
+    except Exception:
+        pass
     return "\n".join(hits[:limit])
 
 
