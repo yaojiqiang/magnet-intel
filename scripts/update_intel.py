@@ -287,18 +287,18 @@ SOURCE_WHITELIST = {"我的钢铁网", "亚洲金属网", "百川盈孚", "上�
 # 竞社动态（activities）每日增量更新相关
 ACTIVITY_REQUIRED = {"company", "companyName", "dimension", "dimensionName", "date", "title", "description", "source"}
 VALID_DIMENSIONS = {"market", "tech", "supply", "digital"}
-ACTIVITY_MAX = 150  # 动态列表上限：保留最新的 150 条（竞社动态本就应是较长的信息流）
+# 竞社动态不设条数上限：保留全部历史条目（信息流越长越有价值）
 # 新闻动态（news）每日增量更新相关
 # 只强制 date/title：company/source 在 validate_news_item 里已有默认兜底（"行业"/"公开信息"），
 # 旧写法要求四者齐全却在返回时才兜底，自相矛盾 —— 弱模型少给一个字段就会被静默丢弃，
 # 表现为「news 无有效新项」而日志无任何拒绝原因（2026-09-10 实测）。
 NEWS_REQUIRED = {"date", "title"}
-NEWS_MAX = 60  # 新闻列表上限：保留最新的 60 条（新闻流应尽可能覆盖多源信息）
+# 新闻动态不设条数上限：保留全部历史条目（尽可能覆盖多源信息）
 
 # ── 时效守卫（新增动态/新闻的日期必须落在合理时间窗内）────────────────────
 # 背景（2026-09-10 事故）：豆包搜索免费额度耗尽后，免费模型在“无联网检索”状态下
-# 会编造 2022/2023 年的“旧闻”，或把日期写到未来；由于列表按日期倒序截断，
-# 未来日期还会永久占住列表顶部。此处统一拦截此类脏数据。
+# 会编造 2022/2023 年的“旧闻”，或把日期写到未来；由于列表按日期倒序排列，
+# 未来日期会占住列表顶部。此处统一拦截此类脏数据。
 FRESH_MAX_AGE_DAYS = 30              # 日常模式：新增条目最早可回溯天数
 FRESH_FUTURE_SLACK_DAYS = 1          # 允许的“未来”容差（吸收 UTC/北京时区差）
 FRESH_BACKFILL_FLOOR = "2020-01-01"  # 回填模式（BACKFILL=1）下的最早允许日期
@@ -941,7 +941,7 @@ def merge_activities(existing, new_items):
       - 逐条结构校验（必备字段、日期格式、维度合法性），非法项直接跳过；
       - 自动过滤禁收录企业（正海磁材）；
       - 去重：以 (company, 归一化标题) 为键，已收录的保留原值、不覆盖；
-      - 合并后按日期倒序，截断到最新的 ACTIVITY_MAX(50) 条；
+      - 合并后按日期倒序，保留全部条目（不截断，不设条数上限）；
       - 若没有任何有效新增，则【原样返回 existing】（不重排、不改动），
         从而 data_fingerprint 不变、lastUpdated 不无辜推进。
     返回合并后的列表。
@@ -1028,14 +1028,12 @@ def merge_activities(existing, new_items):
         return existing
 
     combined.sort(key=lambda a: a.get("date", ""), reverse=True)
-    if len(combined) > ACTIVITY_MAX:
-        combined = combined[:ACTIVITY_MAX]
-    log(f"activities 合并完成：原有 {len(existing)} + 新增 {added} = {len(combined)}（上限 {ACTIVITY_MAX}）")
+    log(f"activities 合并完成：原有 {len(existing)} + 新增 {added} = {len(combined)}（不设置上限，保留全部条目）")
     return combined
 
 
 def update_activities(existing):
-    """每日增量更新竞社动态：联网找最新增量 → 校验 → 去重 → 合并 → 截断到 50。"""
+    """每日增量更新竞社动态：联网找最新增量 → 校验 → 去重 → 合并（保留全部，不设条数上限）。"""
     prompt = build_activities_prompt(existing)
     try:
         raw = call_llm_activities(prompt)
@@ -1084,7 +1082,7 @@ def validate_news_item(it):
 
 
 def merge_news(existing, new_items):
-    """新闻动态增量合并：校验 + 去重 + 按日期倒序 + 截断到 NEWS_MAX。"""
+    """新闻动态增量合并：校验 + 去重 + 按日期倒序（保留全部条目，不设条数上限）。"""
     if not isinstance(new_items, list):
         log("news 新数据非数组，保留现有")
         return existing if isinstance(existing, list) else []
@@ -1111,14 +1109,12 @@ def merge_news(existing, new_items):
         log("news 无新增（均为已收录或重复），保持原列表与顺序，不推进日期")
         return existing
     combined.sort(key=lambda n: n.get("date", ""), reverse=True)
-    if len(combined) > NEWS_MAX:
-        combined = combined[:NEWS_MAX]
-    log(f"news 合并完成：原有 {len(existing)} + 新增 {added} = {len(combined)}（上限 {NEWS_MAX}）")
+    log(f"news 合并完成：原有 {len(existing)} + 新增 {added} = {len(combined)}（不设置上限，保留全部条目）")
     return combined
 
 
 def update_news(existing):
-    """每日增量更新新闻动态：联网找最新增量 → 校验 → 去重 → 合并 → 截断到 20。"""
+    """每日增量更新新闻动态：联网找最新增量 → 校验 → 去重 → 合并（保留全部，不设条数上限）。"""
     prompt = build_news_prompt(existing)
     try:
         raw = call_llm_news(prompt)
@@ -1158,7 +1154,7 @@ def build_news_prompt(existing):
         "大地熊、英洛华、正海磁材等）的新闻。\n\n"
         "【时间范围】" + window + "\n\n"
         "【输出要求】\n"
-        "仅输出 JSON：{\"news\": [ 最多6条，按日期倒序（最新在前） ]}\n"
+        "仅输出 JSON：{\"news\": [ 完整收录本次检索到的所有相关新闻，不限制条数，按日期倒序（最新在前） ]}\n"
         "每条对象必须包含字段：\n"
         "  date(新闻日期，格式 YYYY-MM-DD), company(涉及企业名或\"行业\"), "
         "title(新闻标题，严格不超过 30 个字，必须是标题而不是段落摘要——过长的 title 会导致本次输出被截断), "
@@ -2006,7 +2002,7 @@ def build_activities_prompt(existing):
         "【维度归类澄清】工艺/技术类内容（晶界扩散、无重稀土、磁能积提升、研发工艺突破、新产品工艺等）必须归 tech（工艺技术）；只有明确属于智能工厂、AI 质检、自动化产线、工业互联网/数字化管控等智能制造/数字化内容才归 digital（数字化），二者不可混用。\n"
         "【时间范围】" + window + "\n\n"
         "【输出要求】\n"
-        "仅输出 JSON：{\"activities\": [ 最多12条，按日期倒序（最新在前） ]}\n"
+        "仅输出 JSON：{\"activities\": [ 完整收录本次检索到的所有相关动态，不限制条数，按日期倒序（最新在前） ]}\n"
         "每条对象必须包含字段：\n"
         "  company(上述代码), companyName(企业中文名), dimension(上述4个值之一), dimensionName(对应中文),\n"
         "  date(事件发生日期，格式 YYYY-MM-DD), title(动态标题), description(1-2句客观描述，含关键数字/金额/比例),\n"
@@ -2903,3 +2899,4 @@ if __name__ == "__main__":
         _cli_check_weixin(sys.argv[2:])
     else:
         main()
+
