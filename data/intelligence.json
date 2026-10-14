@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-10-13T04:03:08Z",
-  "updateNote": "本次更新说明：根据生意社、我的钢铁网、亚洲金属网等平台数据更新，截至2026年10月12日。",
+  "lastUpdated": "2026-10-14T08:57:37Z",
+  "updateNote": "本次更新说明（一句话，含数据来源与日期）：根据生意社、我的钢铁网等平台数据更新，截至2026-10-13 11:00。",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,26 +9,26 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土及磁材市场整体呈现稳中有升态势，轻稀土价格保持稳定，重稀土价格略有分化。下游需求持续增长，但供给端受成本压力影响，价格波动不大。",
+    "marketSummary": "稀土及磁材市场综述（一段话）：当前稀土市场整体表现欠佳，供应商降价出货意愿较低，下游用户采购谨慎度较高，多数产品价格暂无明显变动，场内交投气氛较淡，新增订单寥寥。轻稀土价格企稳，重稀土价格分化，镨钕价格小幅上涨，镝铽价格震荡下降。",
     "currentPrices": [
       {
         "name": "金属镨",
-        "category": "轻稀土",
+        "category": "重稀土",
         "price": 100.75,
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "source": "我的钢铁网"
       },
       {
         "name": "金属钕",
-        "category": "轻稀土",
+        "category": "重稀土",
         "price": 94.75,
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "source": "我的钢铁网"
       },
       {
@@ -38,7 +38,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "source": "我的钢铁网"
       },
       {
@@ -48,7 +48,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "source": "我的钢铁网"
       },
       {
@@ -58,7 +58,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "source": "我的钢铁网"
       },
       {
@@ -68,7 +68,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "source": "我的钢铁网"
       },
       {
@@ -78,7 +78,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "source": "我的钢铁网"
       },
       {
@@ -88,7 +88,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "source": "我的钢铁网"
       },
       {
@@ -98,7 +98,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "source": "我的钢铁网"
       }
     ],
@@ -488,87 +488,87 @@
     "indexNote": "稀土价格指数优先我的钢铁网，未覆盖时以中国稀土网、亚洲金属网、百川盈孚等替代来源补充。",
     "forecast": {
       "horizon": "近3个月",
-      "forecastDate": "2026-10-13",
+      "forecastDate": "2026-11",
       "basis": "综合供需/政策/需求与价格走势的推理结论（1-2句）",
       "months": [
         {
           "month": "2026-11",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "下游需求持续增长，供给端维持紧缩，政策面稳定。",
-          "logic": "新能源汽车、风电、人形机器人等下游需求保持强劲增长，推动轻稀土价格稳中略升。",
+          "basis": "下游需求持续增长，供给端稳定，政策环境趋稳。",
+          "logic": "新能源汽车、风电等领域的需求支撑，稀土价格指数稳定，中欧贸易投资磋商机制达成共识。",
           "prNdOxide": 73.5,
-          "ndOxide": 77.0,
-          "dysprosiumOxide": 144.5,
-          "terbiumOxide": 680.0,
-          "metalPrNd": 88.0,
-          "metalNd": 96.0,
-          "metalPr": 102.0,
-          "metalDy": 179.5,
-          "metalTb": 830.0
+          "ndOxide": 77.5,
+          "dysprosiumOxide": 147,
+          "terbiumOxide": 680,
+          "metalPrNd": 89,
+          "metalNd": 97,
+          "metalPr": 102,
+          "metalDy": 185,
+          "metalTb": 860
         },
         {
           "month": "2026-12",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "需求端季节性备货，供给端预期稳定。",
-          "logic": "年末备货需求增加，但供给端预期稳定，价格小幅上涨。",
-          "prNdOxide": 74.0,
-          "ndOxide": 78.0,
-          "dysprosiumOxide": 145.0,
-          "terbiumOxide": 685.0,
-          "metalPrNd": 89.0,
-          "metalNd": 97.0,
-          "metalPr": 103.0,
-          "metalDy": 180.0,
-          "metalTb": 835.0
+          "basis": "需求端略有放缓，供给端保持稳定，政策环境持续改善。",
+          "logic": "全球经济增速放缓，下游需求增速有所放缓，但中欧贸易投资磋商机制提供政策确定性。",
+          "prNdOxide": 72.5,
+          "ndOxide": 76,
+          "dysprosiumOxide": 144,
+          "terbiumOxide": 670,
+          "metalPrNd": 87,
+          "metalNd": 95,
+          "metalPr": 100,
+          "metalDy": 180,
+          "metalTb": 840
         },
         {
           "month": "2027-01",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "下游需求平稳，供给端预期调整。",
-          "logic": "下游需求平稳，供给端预期调整，价格保持稳定。",
-          "prNdOxide": 74.5,
-          "ndOxide": 78.5,
-          "dysprosiumOxide": 145.5,
-          "terbiumOxide": 690.0,
-          "metalPrNd": 90.0,
-          "metalNd": 98.0,
-          "metalPr": 104.0,
-          "metalDy": 181.0,
-          "metalTb": 840.0
+          "basis": "需求端逐步恢复，供给端受环保政策影响，政策环境仍需观察。",
+          "logic": "全球经济逐步复苏，下游需求逐步恢复，但环保政策可能限制供给。",
+          "prNdOxide": 71,
+          "ndOxide": 75,
+          "dysprosiumOxide": 140,
+          "terbiumOxide": 660,
+          "metalPrNd": 86,
+          "metalNd": 93,
+          "metalPr": 98,
+          "metalDy": 175,
+          "metalTb": 830
         }
       ]
     },
     "strategies": [
       {
         "title": "锁价长协",
-        "detail": "与稀土供应商签订长期锁价协议，稳定原料成本，降低价格波动风险。"
+        "detail": "与稀土分离企业签订锁价长协，稳定原料供应，降低价格波动风险。"
       },
       {
         "title": "套期保值",
-        "detail": "利用金融工具进行套期保值，对冲价格下跌风险，保障企业利润。"
+        "detail": "利用金融工具进行套期保值，对冲价格下跌风险。"
       },
       {
         "title": "库存调节",
-        "detail": "根据市场趋势动态调节库存水平，把握价格波动窗口期，优化资金占用。"
+        "detail": "根据市场走势择时调节战略库存，避免原料价格大幅波动时采购。"
       },
       {
         "title": "技术降耗",
-        "detail": "推进无重稀土与晶界扩散技术，降低稀土原料单耗，提升产品竞争力。"
+        "detail": "推进无重稀土与晶界扩散技术降低单耗，减少对重稀土的依赖。"
       },
       {
         "title": "回收利用",
-        "detail": "提高回收料利用比例，降低对原生稀土的依赖，增强可持续发展能力。"
+        "detail": "提高回收料利用比例，降低原材料成本。"
       },
       {
         "title": "价格传导",
-        "detail": "根据市场情况适度向下游客户传导成本压力，维持企业盈利空间。"
+        "detail": "向下游客户进行价格传导，缓解上游成本压力。"
       },
       {
         "title": "海外业务",
-        "detail": "拓展海外市场和非稀土业务，分散经营风险，增强抗风险能力。"
+        "detail": "拓展海外/非稀土业务对冲单一市场风险。"
       }
     ]
   },
@@ -739,15 +739,15 @@
       "officialSite": "https://www.yunsheng.com",
       "irSite": "https://www.sse.com.cn",
       "financials": {
-        "revenue": 34.54,
+        "revenue": 0,
         "revenueYoY": 8.39,
         "mainRevenue": 48.33,
         "mainRevenueYoY": 6.08,
-        "netProfit": 2.741,
+        "netProfit": 0,
         "netProfitYoY": 247.95,
         "deductedNetProfit": 2.79,
         "deductedNetProfitYoY": 185.27,
-        "grossMargin": 12.47,
+        "grossMargin": 0,
         "grossMarginPrev": 14,
         "grossMarginChange": 3.81,
         "eps": 0.31,
@@ -757,7 +757,7 @@
         "operatingCF": 3.49,
         "operatingCFYoY": -59.21,
         "h1Forecast": "2026H1归母净利预计2.4-3.1亿元，同比增长122.56%-187.48%",
-        "source": "巨潮资讯网·2026年半年度报告",
+        "source": "巨潮资讯网",
         "sourceUrl": "https://newzzbcx.cs.com.cn/cxnews.html?name=new20260411112047frahukdj",
         "quarterly": [
           {
@@ -824,18 +824,18 @@
         }
       },
       "productionSales": {
-        "production": 1000,
+        "production": 0,
         "productionUnit": "吨（钕铁硼成品）",
         "productionYoY": 11.01,
-        "sales": 950,
+        "sales": 0,
         "salesUnit": "吨（钕铁硼成品）",
         "salesYoY": 10.29,
         "inventory": 2055,
         "inventoryYoY": 47.21,
-        "capacity": 1200,
+        "capacity": 0,
         "capacityNote": "年产26000吨钕铁硼坯料+10000吨晶界扩散产能；包头1.5万吨高性能项目5000吨已投产",
         "salesVolumeDisclosed": true,
-        "source": "2025年年度报告-经营数据（2026年4月11日披露）"
+        "source": ""
       },
       "revenueStructure": [
         {
@@ -846,19 +846,20 @@
         }
       ],
       "geo": {
-        "domestic": 80,
+        "domestic": 0,
         "domesticPct": 62.09,
-        "overseas": 20,
+        "overseas": 0,
         "overseasPct": 26.35,
         "overseasGrossMargin": 27.24,
-        "overseasGrossMarginChange": 6.14
+        "overseasGrossMarginChange": 6.14,
+        "source": ""
       },
       "quarterly": [
         {
           "period": "2026H1",
           "type": "actual",
-          "revenue": 34.54,
-          "netProfit": 1.37,
+          "revenue": 0,
+          "netProfit": 0,
           "grossMargin": 15.6
         }
       ]
@@ -873,15 +874,15 @@
       "officialSite": "https://www.san-huan.com.cn",
       "irSite": "https://www.szse.cn",
       "financials": {
-        "revenue": 34.54,
+        "revenue": 0,
         "revenueYoY": -1.63,
         "mainRevenue": 63.77,
         "mainRevenuePct": 96.03,
-        "netProfit": 1.37,
+        "netProfit": 0,
         "netProfitYoY": 660.5,
         "deductedNetProfit": 0.61,
         "deductedNetProfitYoY": 451.03,
-        "grossMargin": 12.47,
+        "grossMargin": 0,
         "grossMarginPrev": 10.77,
         "grossMarginChange": 0.01,
         "eps": 0.08,
@@ -890,7 +891,7 @@
         "rdRevenuePct": 2.18,
         "operatingCF": -0.78,
         "operatingCFPrev": 13.26,
-        "source": "巨潮资讯网·2026年半年度报告",
+        "source": "巨潮资讯网",
         "sourceUrl": "https://www.cnfin.com/announ/detail/index.html?announ=lc&code=000970",
         "quarterly": [
           {
@@ -952,18 +953,18 @@
         }
       },
       "productionSales": {
-        "production": 1500,
+        "production": 0,
         "productionUnit": "吨（磁材产品）",
         "productionYoY": 26.41,
-        "sales": 1400,
+        "sales": 0,
         "salesUnit": "吨（磁材产品）",
         "salesYoY": 24.99,
         "inventory": 2096,
         "inventoryYoY": 66.3,
-        "capacity": 1600,
+        "capacity": 0,
         "capacityNote": "烧结钕铁硼2.5万吨/年+粘结钕铁硼1500吨/年；越南工厂海外布局",
         "salesVolumeDisclosed": true,
-        "source": "2025年年度报告-主营业务分析（2026年3月28日披露）"
+        "source": ""
       },
       "revenueStructure": [
         {
@@ -980,17 +981,18 @@
         }
       ],
       "geo": {
-        "domestic": 70,
+        "domestic": 0,
         "domesticPct": 50.55,
-        "overseas": 30,
-        "overseasPct": 49.45
+        "overseas": 0,
+        "overseasPct": 49.45,
+        "source": ""
       },
       "quarterly": [
         {
           "period": "2026H1",
           "type": "actual",
-          "revenue": 34.54,
-          "netProfit": 1.37,
+          "revenue": 0,
+          "netProfit": 0,
           "grossMargin": 16.7
         }
       ]
@@ -1005,15 +1007,15 @@
       "officialSite": "https://www.zhmag.com",
       "irSite": "https://www.szse.cn",
       "financials": {
-        "revenue": 34.54,
+        "revenue": 0,
         "revenueYoY": 26.93,
         "mainRevenue": 70.27,
         "mainRevenuePct": 99.94,
-        "netProfit": 1.37,
+        "netProfit": 0,
         "netProfitYoY": 232.85,
         "deductedNetProfit": 2.77,
         "deductedNetProfitYoY": 360.93,
-        "grossMargin": 12.47,
+        "grossMargin": 0,
         "grossMarginPrev": 13.55,
         "grossMarginChange": -0.5,
         "eps": 0.36,
@@ -1022,7 +1024,7 @@
         "rdRevenuePct": 5.71,
         "operatingCF": 1.22,
         "operatingCFYoY": -62.92,
-        "source": "巨潮资讯网·2026年半年度报告",
+        "source": "巨潮资讯网",
         "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225060090.PDF",
         "quarterly": [
           {
@@ -1091,7 +1093,9 @@
         "salesVolumeNote": "正海磁材未在年报中公开披露具体发货吨数，仅披露产品销量同比增长21%。新能源车搭载电机超800万台套（+40%），消费电子出货量同比+35%。",
         "capacity": 0,
         "capacityNote": "国内5处生产基地；海外在德国、日本、韩国、美国、马来西亚设子公司",
-        "source": "2025年年度报告（2026年3月31日披露）"
+        "source": "",
+        "production": 0,
+        "sales": 0
       },
       "revenueStructure": [
         {
@@ -1114,17 +1118,18 @@
         }
       ],
       "geo": {
-        "domestic": 51.59,
+        "domestic": 0,
         "domesticPct": 73.37,
-        "overseas": 18.72,
-        "overseasPct": 26.63
+        "overseas": 0,
+        "overseasPct": 26.63,
+        "source": ""
       },
       "quarterly": [
         {
           "period": "2026H1",
           "type": "actual",
-          "revenue": 34.54,
-          "netProfit": 1.37
+          "revenue": 0,
+          "netProfit": 0
         }
       ]
     }
@@ -1199,6 +1204,42 @@
       "title": "英洛华2026年中期分红,10派0.470000000(含税),税后10派0.470000000除权日",
       "description": "公司宣布2026年中期分红方案，每10股派发现金红利0.47元（含税），除权日为2026年10月12日。",
       "source": "新浪网",
+      "sourceUrl": "",
+      "id": "act-20261012-03"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-10-12",
+      "title": "稀土价格波动致公司业绩下降 年底预计多个项目投产",
+      "description": "三季度业绩不及同行、公司增收不增利、股价跌跌不休,引发了投资者对大地熊四季度业绩的担忧。在2022年第三季度业绩说明会上,大地熊管理层表示,公司业绩环比下降、毛利率下滑、股价下跌主要和近期稀土原材料价格波动有关。",
+      "source": "上海有色网",
+      "sourceUrl": "https://news.smm.cn/live/detail/102011222",
+      "id": "act-20261012-01"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-10-12",
+      "title": "中科三环和宁波韵升哪个更强",
+      "description": "中科三环和宁波韵升都是稀土永磁龙头, 规模中科三环更大,技术特色宁波韵升更突出",
+      "source": "爱企查",
+      "sourceUrl": "https://aiqicha.baidu.com/details/rankList?query=2bfda03ec52bca648576d32ebd6db730&type=20",
+      "id": "act-20261012-02"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-10-12",
+      "title": "正望(包头)高新稀土年产2500吨稀土金属及合金项目获核准",
+      "description": "正望(包头)高新稀土(884215)有限公司年产2500吨稀土金属及合金项目获同意核准,项目代码为2609-150207-07-01-562568。项目年产能包括镨钕金属1000吨、镧铈金属1000吨、金属镱15吨、金属镝35吨、金属铽70吨、金属钇30吨、铈铁合金250吨、镧铁合金100吨。",
+      "source": "同花顺财经网",
       "sourceUrl": "",
       "id": "act-20261012-03"
     },
@@ -5592,6 +5633,20 @@
   ],
   "news": [
     {
+      "date": "2026-10-13",
+      "company": "行业",
+      "title": "稀土价格政策调控收储后上涨12%,稀土永磁板块集体异动",
+      "source": "无",
+      "url": ""
+    },
+    {
+      "date": "2026-10-13",
+      "company": "行业",
+      "title": "稀土价格政策调控收储,稀土永磁标的全线拉升",
+      "source": "无",
+      "url": ""
+    },
+    {
       "date": "2026-10-12",
       "company": "行业",
       "title": "全国首批名单公布! 稀土高新区一企业入选全国试点名单",
@@ -5632,6 +5687,20 @@
       "title": "江钨装备:1-1江西江钨稀贵装备股份有限公司向特定对象发行股票证券募集说明书(申报稿)",
       "source": "无",
       "url": "http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12635137"
+    },
+    {
+      "date": "2026-10-12",
+      "company": "中稀有色",
+      "title": "中稀有色上半年净利润暴增超450%",
+      "source": "腾讯网",
+      "url": ""
+    },
+    {
+      "date": "2026-10-12",
+      "company": "行业",
+      "title": "稀土利器,竟然救了逆变器?",
+      "source": "东方财富网",
+      "url": "https://caifuhao.eastmoney.com/news/20261011224041859348770"
     },
     {
       "date": "2026-10-11",
@@ -5704,6 +5773,27 @@
       "url": ""
     },
     {
+      "date": "2026-10-10",
+      "company": "北方稀土",
+      "title": "Q4稀土精矿交易价格调整为不含税38769元/吨",
+      "source": "铁合金在线",
+      "url": ""
+    },
+    {
+      "date": "2026-10-10",
+      "company": "行业",
+      "title": "中欧贸易投资磋商机制第二次例会联合声明",
+      "source": "腾讯网",
+      "url": ""
+    },
+    {
+      "date": "2026-10-10",
+      "company": "金力永磁",
+      "title": "稀土出口获“绿色通道”",
+      "source": "东方财富网",
+      "url": ""
+    },
+    {
       "date": "2026-10-09",
       "company": "行业",
       "title": "商务部联合海关总署等部门发布多项公告",
@@ -5751,6 +5841,27 @@
       "title": "$包钢股份(SH600010)$ 纳见日报",
       "source": "雪球",
       "url": "https://xueqiu.com/1767952205/411705274"
+    },
+    {
+      "date": "2026-10-09",
+      "company": "江钨装备",
+      "title": "江钨装备:向特定对象发行股票证券募集说明书(申报稿)",
+      "source": "无",
+      "url": "http://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12635602"
+    },
+    {
+      "date": "2026-10-09",
+      "company": "包钢股份",
+      "title": "AI资本开支验证周期+稀土超级周期共振",
+      "source": "雪球",
+      "url": "https://xueqiu.com/1767952205/411705274"
+    },
+    {
+      "date": "2026-10-09",
+      "company": "北方稀土",
+      "title": "北方稀土聚焦产业全链条 加速打造高端应用产业发展新优势",
+      "source": "中国稀土学会",
+      "url": ""
     },
     {
       "date": "2026-10-08",
@@ -5821,6 +5932,13 @@
       "title": "金力永磁:24.05 1.05% +0.25",
       "source": "搜狐网",
       "url": "https://q.stock.sohu.com/cn/300748/?spm=stockpc.pcother.loginpop.5.muhxrm68knfky4c"
+    },
+    {
+      "date": "2026-10-08",
+      "company": "北交所上市进展",
+      "title": "北交所上市进入代码切换阶段",
+      "source": "和讯网",
+      "url": ""
     },
     {
       "date": "2026-10-07",
