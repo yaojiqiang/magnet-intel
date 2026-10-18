@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-10-17T04:03:48Z",
-  "updateNote": "本次更新说明（生意社，日期：2026-10-14 16:13:00）",
+  "lastUpdated": "2026-10-18T04:03:51Z",
+  "updateNote": "本次更新说明（生意社，日期：2026-10-16 16:38:17）",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,7 +9,7 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土及磁材市场综述：当前稀土市场呈现供需格局改善、价格持续上涨态势，但部分重稀土品种价格承压。轻稀土价格相对稳定，镨钕系稀土价格走高，而镝铽系稀土价格下滑。",
+    "marketSummary": "稀土及磁材市场综述：近期稀土市场呈现分化态势，轻稀土价格相对稳定，重稀土价格有所波动。钕铁硼永磁材料作为下游应用需求的主要驱动力，其价格走势受原材料成本传导和供需关系影响较大。",
     "currentPrices": [
       {
         "name": "金属镨",
@@ -18,7 +18,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-17",
+        "date": "2026-10-18",
         "source": "我的钢铁网"
       },
       {
@@ -28,7 +28,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-17",
+        "date": "2026-10-18",
         "source": "我的钢铁网"
       },
       {
@@ -38,27 +38,27 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-17",
+        "date": "2026-10-18",
         "source": "我的钢铁网"
       },
       {
         "name": "氧化镨钕",
-        "category": "重稀土",
+        "category": "轻稀土",
         "price": 74.25,
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-17",
+        "date": "2026-10-18",
         "source": "我的钢铁网"
       },
       {
         "name": "氧化钕",
-        "category": "重稀土",
+        "category": "轻稀土",
         "price": 76.75,
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-17",
+        "date": "2026-10-18",
         "source": "我的钢铁网"
       },
       {
@@ -68,7 +68,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-17",
+        "date": "2026-10-18",
         "source": "我的钢铁网"
       },
       {
@@ -78,7 +78,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-17",
+        "date": "2026-10-18",
         "source": "我的钢铁网"
       },
       {
@@ -88,7 +88,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-17",
+        "date": "2026-10-18",
         "source": "我的钢铁网"
       },
       {
@@ -98,7 +98,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-10-17",
+        "date": "2026-10-18",
         "source": "我的钢铁网"
       }
     ],
@@ -488,17 +488,17 @@
     "indexNote": "稀土价格指数优先我的钢铁网，未覆盖时以中国稀土网、亚洲金属网、百川盈孚等替代来源补充。",
     "forecast": {
       "horizon": "近3个月",
-      "forecastDate": "2026-10-17",
+      "forecastDate": "2026-10-18",
       "basis": "综合供需/政策/需求与价格走势的推理结论（1-2句）",
       "months": [
         {
           "month": "2026-11",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "下游需求稳定增长，供给端维持管控，预计价格稳中有升。",
-          "logic": "新能源汽车和风电需求持续拉动，稀土供给端受出口管制影响，预计价格稳中有升。",
+          "basis": "下游需求稳定增长，供给端配额管制，价格预计稳中有升。",
+          "logic": "新能源汽车、风电等新兴领域需求拉动，国内稀土开采配额收紧，预计价格稳中有升。",
           "prNdOxide": 74.8,
-          "ndOxide": 77,
+          "ndOxide": 80.78,
           "dysprosiumOxide": 145,
           "terbiumOxide": 673,
           "metalPrNd": 90.9,
@@ -511,64 +511,56 @@
           "month": "2026-12",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "下游需求季节性调整，供给端政策影响持续，价格或有小幅波动。",
-          "logic": "下游需求季节性调整，供给端政策影响持续，价格或有小幅波动。",
-          "prNdOxide": 73.5,
-          "ndOxide": 76.5,
-          "dysprosiumOxide": 144.5,
-          "terbiumOxide": 662,
-          "metalPrNd": 88,
-          "metalNd": 96.5,
-          "metalPr": 100.5,
-          "metalDy": 178,
-          "metalTb": 820
+          "basis": "下游需求持续增长，供给端政策稳定，价格预计保持稳定。",
+          "logic": "新能源汽车、风电等领域需求持续增长，国内稀土供给端政策稳定，预计价格保持稳定。",
+          "prNdOxide": 75,
+          "ndOxide": 81,
+          "dysprosiumOxide": 145,
+          "terbiumOxide": 680,
+          "metalPrNd": 91,
+          "metalNd": 100,
+          "metalPr": 106,
+          "metalDy": 181,
+          "metalTb": 810
         },
         {
           "month": "2027-01",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "下游需求逐步恢复，供给端政策影响减弱，价格或稳中略降。",
-          "logic": "下游需求逐步恢复，供给端政策影响减弱，价格或稳中略降。",
-          "prNdOxide": 72.5,
-          "ndOxide": 75.5,
-          "dysprosiumOxide": 143,
-          "terbiumOxide": 661,
-          "metalPrNd": 87.5,
-          "metalNd": 95.5,
-          "metalPr": 100,
-          "metalDy": 177,
-          "metalTb": 810
+          "basis": "下游需求预期平稳，供给端维持紧缩，价格预计小幅波动。",
+          "logic": "下游需求预期平稳，国内稀土供给端维持紧缩政策，预计价格小幅波动。",
+          "prNdOxide": 76,
+          "ndOxide": 82,
+          "dysprosiumOxide": 146,
+          "terbiumOxide": 690,
+          "metalPrNd": 92,
+          "metalNd": 101,
+          "metalPr": 107,
+          "metalDy": 182,
+          "metalTb": 820
         }
       ]
     },
     "strategies": [
       {
-        "title": "原材料锁价长协",
-        "detail": "与稀土供应商签订长期锁价协议，稳定原料成本，降低价格波动风险。"
+        "title": "锁价长协",
+        "detail": "与稀土供应商签订长期锁价协议，稳定原材料采购成本，降低价格波动风险。"
       },
       {
         "title": "套期保值",
-        "detail": "利用金融衍生品进行套期保值，对冲价格下跌风险，保障企业利润。"
+        "detail": "利用金融衍生品工具进行套期保值，对冲稀土价格波动风险。"
       },
       {
-        "title": "战略库存调节",
-        "detail": "根据市场趋势动态调节库存水平，在价格低谷时增加采购，高位时减少库存，优化资金占用。"
+        "title": "库存调节",
+        "detail": "根据市场趋势动态调节原材料库存，避免库存积压或短缺。"
       },
       {
         "title": "技术降耗",
-        "detail": "推进无重稀土与晶界扩散技术，降低稀土原料单耗，提升产品竞争力。"
-      },
-      {
-        "title": "回收料利用",
-        "detail": "增加回收料的利用比例，降低对原生稀土的依赖，缓解成本压力。"
+        "detail": "推进无重稀土或晶界扩散技术，降低对重稀土的依赖，提升产品竞争力。"
       },
       {
         "title": "价格传导",
-        "detail": "根据成本变化适时向下游客户传导成本压力，维持合理利润空间。"
-      },
-      {
-        "title": "拓展海外业务",
-        "detail": "拓展海外市场和非稀土业务，对冲单一市场风险，实现多元化发展。"
+        "detail": "根据原材料成本变化，适时向下游客户传导成本压力，维持企业利润空间。"
       }
     ]
   },
@@ -685,33 +677,15 @@
       "revenueStructure": [
         {
           "segment": "新能源汽车及汽车零部件",
-          "revenue": 39.41,
-          "salesYoY": 30.31,
-          "note": "装配约650万辆新能源乘用车，覆盖全球前十大车企"
-        },
-        {
-          "segment": "节能变频空调",
-          "revenue": 19.17,
-          "salesYoY": 12.66,
-          "note": "装配约9600万台变频空调"
-        },
-        {
-          "segment": "风力发电",
-          "revenue": 4.88,
-          "salesYoY": 3.57,
-          "note": "装机容量约12GW"
+          "revenue": 18.96,
+          "salesYoY": 40,
+          "note": "2026年半年度报告"
         },
         {
           "segment": "机器人及工业伺服电机",
-          "revenue": 3,
-          "salesYoY": 45.19,
-          "note": "具身机器人转子小批量交付"
-        },
-        {
-          "segment": "3C消费电子",
-          "revenue": 2.26,
-          "salesYoY": 3.33,
-          "note": "覆盖全球多家消费电子厂商"
+          "revenue": 4.65,
+          "salesYoY": 100,
+          "note": "2026年半年度报告"
         }
       ],
       "geo": {
@@ -1188,6 +1162,42 @@
     {
       "company": "dadi",
       "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-10-18",
+      "title": "大户当日巨幅流出 两融余额9日内流出7日 散户当日巨幅流入 融资9日内流出7日",
+      "description": "今开 -- 最高（来源：无，日期：2026-10-15 17:32:00，链接：https://stock.9fzt.com/index/sh_688077.html）",
+      "source": "无",
+      "sourceUrl": "",
+      "id": "act-20261018-01"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-10-16",
+      "title": "跌0.86%,成交额6431.02万元,今日主力净流入-452.28万",
+      "description": "成交额6431.02万元,换手率0.71%,总市值90.53亿元",
+      "source": "英洛华",
+      "sourceUrl": "http://finance.sina.com.cn/stock/aiassist/ggsp/2026-10-16/doc-inivmazr8346641.shtml",
+      "id": "act-20261016-03"
+    },
+    {
+      "company": "yingluohua",
+      "companyName": "英洛华",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-10-16",
+      "title": "拟披露季报",
+      "description": "2026-10-24 英洛华:拟披露季报",
+      "source": "英洛华",
+      "sourceUrl": "",
+      "id": "act-20261016-12"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
       "dimension": "supply",
       "dimensionName": "供应链",
       "date": "2026-10-15",
@@ -1196,6 +1206,18 @@
       "source": "同花顺财经网",
       "sourceUrl": "https://doctor.10jqka.com.cn/688077/",
       "id": "act-20261015-08"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-10-15",
+      "title": "今开 -- 最高（来源：无，日期：2026-10-15 17:32:00，链接：https://stock.9fzt.com/index/sh_688077.html）",
+      "description": "今开 -- 最高（来源：无，日期：2026-10-15 17:32:00，链接：https://stock.9fzt.com/index/sh_688077.html）",
+      "source": "无",
+      "sourceUrl": "",
+      "id": "act-20261015-11"
     },
     {
       "company": "jinli",
@@ -1330,6 +1352,42 @@
       "id": "act-20261013-03"
     },
     {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-10-13",
+      "title": "2026年半年度报告摘要",
+      "description": "业绩披露:2026年中报每股收益0.04元,净利润4921.27万元,同比增长11.86%",
+      "source": "中科三环-公告大事",
+      "sourceUrl": "",
+      "id": "act-20261013-04"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "tech",
+      "dimensionName": "工艺技术",
+      "date": "2026-10-13",
+      "title": "净利润增速近55%,金力永磁靠什么跑出第二曲线?",
+      "description": "预计今年前三季度实现归属于上市公司股东的净利润7.35亿到8.00亿元,同比增长42.59%到55.20%",
+      "source": "雪球",
+      "sourceUrl": "https://xueqiu.com/2509537588/412134145",
+      "id": "act-20261013-09"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-10-13",
+      "title": "2026年三季报预盈16亿 锻造科研长板年内申报18项国家级项目",
+      "description": "公司预计实现归母净利润 36.20亿元到36.80亿元,同比增长134.95%到138.84%",
+      "source": "长江商报",
+      "sourceUrl": "",
+      "id": "act-20261013-10"
+    },
+    {
       "company": "yingluohua",
       "companyName": "英洛华",
       "dimension": "market",
@@ -1412,6 +1470,18 @@
       "source": "你好北方稀土",
       "sourceUrl": "",
       "id": "act-20261012-07"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-10-12",
+      "title": "中科三环2026年半年度权益分派实施公告",
+      "description": "10派0.470000000(含税),税后10派0.470000000红利发放日 2026-10-12 除权日 2026-10-09 登记日 2026-09-29",
+      "source": "中科三环-公告大事",
+      "sourceUrl": "",
+      "id": "act-20261012-05"
     },
     {
       "company": "yunsheng",
@@ -1640,6 +1710,18 @@
       "source": "公司公告",
       "sourceUrl": "",
       "id": "act-20261009-01"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-10-09",
+      "title": "2026年第三次临时股东会决议公告",
+      "description": "审议通过《关于选举陈栢鸿为公司第十一届董事会独立董事的议案》",
+      "source": "宁波韵升-公告",
+      "sourceUrl": "https://baijiahao.baidu.com/s?id=1878572789746926852&wfr=spider&for=pc",
+      "id": "act-20261009-02"
     },
     {
       "company": "jinli",
@@ -2664,6 +2746,18 @@
     {
       "company": "sanhuan",
       "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-09-24",
+      "title": "关于受让私募基金份额暨与专业机构共同投资的关联交易的公告",
+      "description": "无",
+      "source": "中科三环-公告大事",
+      "sourceUrl": "",
+      "id": "act-20260924-06"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
       "dimension": "supply",
       "dimensionName": "供应链",
       "date": "2026-09-23",
@@ -2756,6 +2850,18 @@
       "source": "无",
       "sourceUrl": "",
       "id": "act-20260923-04"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-09-23",
+      "title": "召开2026年度第2次临时股东大会",
+      "description": "无",
+      "source": "中科三环-公告大事",
+      "sourceUrl": "",
+      "id": "act-20260923-07"
     },
     {
       "company": "yingluohua",
@@ -3116,6 +3222,18 @@
       "source": "无",
       "sourceUrl": "http://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=688077&id=12592276",
       "id": "act-20260918-03"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-09-18",
+      "title": "关于为全资子公司提供担保的公告",
+      "description": "无",
+      "source": "中科三环-公告大事",
+      "sourceUrl": "",
+      "id": "act-20260918-08"
     },
     {
       "company": "jinli",
