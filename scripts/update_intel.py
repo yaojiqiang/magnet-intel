@@ -1504,6 +1504,14 @@ def _cninfo_direct_url(code, period, qtype=None):
             return _cninfo_search_pdf(code, org_id, "半年度业绩快报", "2026-07-01", "2026-08-31")
         if qtype == "forecast":
             return _cninfo_search_pdf(code, org_id, "半年度业绩预告", "2026-06-01", "2026-08-15")
+    if period == "2026Q3":
+        if qtype == "actual":
+            return _cninfo_search_pdf(code, org_id, "三季度报告", "2026-10-01", "2026-11-15")
+        if qtype == "preliminary":
+            return _cninfo_search_pdf(code, org_id, "三季度业绩快报", "2026-10-01", "2026-10-31")
+        if qtype == "forecast":
+            return _cninfo_search_pdf(code, org_id, "前三季度业绩预告", "2026-10-01", "2026-10-31")
+        return _cninfo_search_pdf(code, org_id, "三季度报告", "2026-10-01", "2026-11-15")
     return None
 
 
@@ -1715,7 +1723,7 @@ def build_companies_prompt(existing):
         "5) 若某公司已正式发布 2026 年半年度报告（非预告），必须将 financials.quarterly 中 period=\"2026H1\" 的对象 type 由 \"forecast\" 改为 \"actual\"，"
         "并按正式报告填入实际营收/净利/经营现金流等数值（不要保留 netProfitMin/Max 等预告区间字段）；"
         "同时据正式半年报修正 financials 顶层与 revenueStructure/geo 的半年口径，并将 financials.source 注明\"2026年半年度报告\"。\n"
-        "仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
+        "6) 若某公司已发布 2026 年三季报或前三季度报告/预告，须在 financials.quarterly 新增 period=\"2026Q3\" 的对象：type 按 实际/快报/预告 填写；归母净利润区间用 netProfitMin/Max，同比用形如 \"42.59%~55.20%\" 的字符串区间（netProfitYoY），营收同比用 revenueYoY 数字；source 注明具体报告（如\"2026年前三季度业绩预告\"）。该对象会在后续每日更新中持续刷新。\n仅返回 JSON 对象，不要任何解释文字或 Markdown 围栏。"
     )
 
 
@@ -1728,11 +1736,12 @@ def gather_doubao_context_companies(api_key):
     # 精简至 2 条：按轮换后的顺序两两分组，一条查询覆盖两家公司；查询词控制在 72 字符内
     queries = []
     _half = max(1, len(_order) // 2)
+    _month = datetime.date.today().month
+    _q_suffix = " 2026年三季度报告/前三季度报告 营收 净利" if 10 <= _month <= 11 else " 2026年半年度报告 营收 净利"
     for _grp in (_order[:_half], _order[_half:]):
         if not _grp:
             continue
-        queries.append(" ".join(f"{_n} {_code[_n]}" for _n in _grp) +
-                       " 2026年半年度报告 营收 净利")
+        queries.append(" ".join(f"{_n} {_code[_n]}" for _n in _grp) + _q_suffix)
     blocks = []
     for q in queries:
         try:
