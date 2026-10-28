@@ -1595,6 +1595,133 @@ def _add_q2_all(companies):
     return companies
 
 
+def fetch_em_quarterly(security_code):
+    """直连东方财富业绩报表（RPT_LICO_FN_CPD）抓取某公司 2026 三季度单季数据。
+    返回 2026Q3 单季 quarterly 条目（dict）；若尚未披露 2026-09-30 报告则返回 None。
+    单季口径：第三季度单季 = 前三季度累计(2026-09-30) - 半年报累计(2026-06-30)；
+    同比 = 今年单季 - 去年单季(2025-09-30 - 2025-06-30)。
+    """
+    import requests
+    code = str(security_code).split(".")[0].strip()
+    if not code:
+        return None
+    url = ("https://datacenter-web.eastmoney.com/api/data/v1/get"
+           "?reportName=RPT_LICO_FN_CPD"
+           "&columns=SECURITY_CODE,SECURITY_NAME_ABBR,REPORTDATE,QDATE,"
+           "TOTAL_OPERATE_INCOME,YSTZ,PARENT_NETPROFIT,YSHZ"
+           f"&filter=(SECURITY_CODE=%22{code}%22)"
+           "&pageSize=30&source=WEB&client=WEB")
+    try:
+        resp = requests.get(url, headers={
+            "User-Agent": "Mozilla/5.0",
+            "Referer": "https://data.eastmoney.com/",
+        }, timeout=30)
+        resp.raise_for_status()
+        j = resp.json()
+    except Exception as e:
+        log(f"东方财富接口请求失败({code}): {e}")
+        return None
+    if not j.get("success"):
+        log(f"东方财富接口返回失败({code}): {j.get('message')}")
+        return None
+    rows = (j.get("result") or {}).get("data") or []
+    by_date = {}
+    for r in rows:
+        rd = str(r.get("REPORTDATE") or "")[:10]
+        if rd in ("2026-09-30", "2026-06-30", "2025-09-30", "2025-06-30"):
+            by_date[rd] = r
+    cur = by_date.get("2026-09-30")
+    if not cur:
+        return None  # 三季报尚未披露
+    h1 = by_date.get("2026-06-30")
+    prev = by_date.get("2025-09-30")
+    prev_h1 = by_date.get("2025-06-30")
+
+    def num(r, key):
+        v = r.get(key)
+        return float(v) if isinstance(v, (int, float)) else None
+
+    rev_cur = num(cur, "TOTAL_OPERATE_INCOME")
+    rev_h1 = num(h1, "TOTAL_OPERATE_INCOME") if h1 else None
+    rev_prev = num(prev, "TOTAL_OPERATE_INCOME") if prev else None
+    rev_prev_h1 = num(prev_h1, "TOTAL_OPERATE_INCOME") if prev_h1 else None
+    np_cur = num(cur, "PARENT_NETPROFIT")
+    np_h1 = num(h1, "PARENT_NETPROFIT") if h1 else None
+    np_prev = num(prev, "PARENT_NETPROFIT") if prev else None
+    np_prev_h1 = num(prev_h1, "PARENT_NETPROFIT") if prev_h1 else None
+
+    def single(cur_v, h1_v):
+        if cur_v is None or h1_v is None:
+            return None
+        return round((cur_v - h1_v) / 1e8, 2)
+
+    def yoy(cur_v, h1_v, prev_v, prev_h1_v):
+        if None in (cur_v, h1_v, prev_v, prev_h1_v):
+            return None
+        q = cur_v - h1_v
+        pq = prev_v - prev_h1_v
+        if pq == 0:
+            return None
+        return round((q - pq) / abs(pq) * 100, 2)
+
+    rev_q = single(rev_cur, rev_h1)
+    np_q = single(np_cur, np_h1)
+    rev_yoy = yoy(rev_cur, rev_h1, rev_prev, rev_prev_h1)
+    np_yoy = yoy(np_cur, np_h1, np_prev, np_prev_h1)
+
+    entry = {
+        "period": "2026Q3",
+        "periodLabel": "2026年三季度（实际，单季）",
+        "type": "actual",
+        "source": "东方财富业绩报表（单季=前三季度累计-半年报累计）",
+        "sourceUrl": f"https://quote.eastmoney.com/{'sh' if code.startswith('6') else 'sz'}{code}.html",
+        "note": "数据来自东方财富业绩报表接口；第三季度单季=前三季度累计-半年报累计，同比为单季同比。",
+    }
+    if rev_q is not None:
+        entry["revenue"] = rev_q
+    if rev_yoy is not None:
+        entry["revenueYoY"] = rev_yoy
+    if np_q is not None:
+        entry["netProfit"] = np_q
+    if np_yoy is not None:
+        entry["netProfitYoY"] = np_yoy
+    if _validate_quarterly_item(entry):
+        return entry
+    log(f"东方财富 {code} 2026Q3 校验未通过，跳过: {entry}")
+    return None
+
+def _add_q3_from_em_all(companies):
+    """为所有带股票代码的竞社公司，用东方财富接口补齐/覆盖 2026Q3 单季数据。"""
+    out = []
+    for c in (companies or []):
+        if not isinstance(c, dict):
+            out.append(c)
+            continue
+        code = (c.get("code") or "").split(".")[0].strip()
+        if not code:
+            out.append(c)
+            continue
+        try:
+            entry = fetch_em_quarterly(code)
+        except Exception as e:
+            log(f"东方财富抓取 {c.get('name')} Q3 异常: {e}")
+            entry = None
+        if entry:
+            fin = c.setdefault("financials", {})
+            qs = fin.setdefault("quarterly", [])
+            replaced = False
+            for i, q in enumerate(qs):
+                if isinstance(q, dict) and q.get("period") == "2026Q3":
+                    qs[i] = entry
+                    replaced = True
+                    break
+            if not replaced:
+                qs.append(entry)
+            log(f"东方财富写入 {c.get('name')} 2026Q3(单季): 营收{entry.get('revenue')}亿 归母{entry.get('netProfit')}亿")
+        out.append(c)
+    return out
+
+
 def _ensure_all_companies_present(new, existing):
     """完整性校验：四家已知公司不能整段缺失（免费 LLM 长输出常截断末尾公司）。
 
@@ -2823,6 +2950,13 @@ def main():
     except Exception as e:
         log(f"companies 更新异常，保留现有: {e}")
         merged["companies"] = (existing.get("companies") if isinstance(existing, dict) else [])
+
+    # Q3（2026 三季度）改为直连东方财富业绩报表结构化接口抓取（单季=前三季度累计-半年报累计），
+    # 不再依赖豆包搜索+LLM 抽取，避免漏抓/口径错误；覆盖 update_companies 可能写入的 2026Q3。
+    try:
+        merged["companies"] = _add_q3_from_em_all(merged["companies"])
+    except Exception as e:
+        log(f"Q3 东方财富接口更新异常，保留现有: {e}")
 
 
     # 未来 3 个月价格预测：基于联网检索 + 多因子推理独立生成，覆盖 safe_merge 结果，
