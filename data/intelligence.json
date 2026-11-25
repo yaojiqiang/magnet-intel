@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-11-24T04:03:44Z",
-  "updateNote": "根据我的钢铁网、亚洲金属网、生意社、上海钢联网数据更新至2026年11月16日",
+  "lastUpdated": "2026-11-25T04:04:07Z",
+  "updateNote": "本次更新说明（氧化镨钕、氧化钕、氧化镝、氧化铽价格来源于我的钢铁网，日期为2026-11-12；金属镨、金属钕、金属镨钕、金属镝、金属铽价格来源于我的钢铁网，日期为2026-11-12；钕铁硼毛坯价格来源于我的钢铁网，日期为2026-11-23）",
   "meta": {
     "title": "磁材行业竞社情报监测站",
     "subtitle": "稀土永磁材料行业上市公司竞争情报可视化看板",
@@ -9,26 +9,26 @@
     "updateSchedule": "每日 12:00 自动更新"
   },
   "rareEarth": {
-    "marketSummary": "稀土及磁材市场近期呈现分化格局，氧化镨钕价格下跌，镝铽类产品价格上涨。磁材企业订单依旧不多，采购意愿偏弱，大多维持按需采购、低库存运行，观望情绪浓厚。原料端有补库支撑，应用端需求跟进不足，市场成交整体有限。",
+    "marketSummary": "稀土及磁材市场综述：当前稀土市场活跃度尚可，但买方畏高情绪有所显现，成交情况受到一定影响。中重稀土价格整体上行，下游需求良好、原料现货增量有限以及业者对短期市场抱有较大期待，多重因素共同促使持货商报价上涨。轻稀土市场相对平稳，场内走销正常，下游采购情况一般。磁材企业延续按需采购，但受原料成本上涨，报价略有上调。",
     "currentPrices": [
       {
         "name": "金属镨",
         "category": "轻稀土",
-        "price": 96.5,
+        "price": 96.0,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-11-24",
+        "change": 0.0,
+        "changeDesc": "持平",
+        "date": "2026-11-25",
         "source": "我的钢铁网"
       },
       {
         "name": "金属钕",
         "category": "轻稀土",
-        "price": 92.0,
+        "price": 92.75,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-11-24",
+        "change": 0.0,
+        "changeDesc": "持平",
+        "date": "2026-11-25",
         "source": "我的钢铁网"
       },
       {
@@ -38,27 +38,27 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-11-24",
+        "date": "2026-11-25",
         "source": "上海钢联网"
       },
       {
         "name": "氧化镨钕",
         "category": "轻稀土",
-        "price": 71.9,
+        "price": 72.2,
         "unit": "万元/吨",
-        "change": -0.1,
-        "changeDesc": "下跌",
-        "date": "2026-11-24",
+        "change": 0.0,
+        "changeDesc": "持平",
+        "date": "2026-11-25",
         "source": "我的钢铁网"
       },
       {
         "name": "氧化钕",
         "category": "轻稀土",
-        "price": 74.5,
+        "price": 73.25,
         "unit": "万元/吨",
         "change": 0.0,
         "changeDesc": "持平",
-        "date": "2026-11-24",
+        "date": "2026-11-25",
         "source": "我的钢铁网"
       },
       {
@@ -68,7 +68,7 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-11-24",
+        "date": "2026-11-25",
         "source": "我的钢铁网"
       },
       {
@@ -78,28 +78,28 @@
         "unit": "万元/吨",
         "change": 0,
         "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-11-24",
+        "date": "2026-11-25",
         "source": "上海钢联网"
       },
       {
         "name": "氧化镝",
         "category": "重稀土",
-        "price": 153.0,
+        "price": 155.0,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-11-24",
+        "change": 0.0,
+        "changeDesc": "持平",
+        "date": "2026-11-25",
         "source": "我的钢铁网"
       },
       {
         "name": "氧化铽",
         "category": "重稀土",
-        "price": 780,
+        "price": 678.9,
         "unit": "万元/吨",
-        "change": 0,
-        "changeDesc": "持平（与上一交易日一致）",
-        "date": "2026-11-24",
-        "source": "上海钢联"
+        "change": 0.0,
+        "changeDesc": "持平",
+        "date": "2026-11-25",
+        "source": "我的钢铁网"
       }
     ],
     "priceHistory": [
@@ -513,80 +513,80 @@
           "month": "2026-12",
           "category": "轻稀土",
           "confidence": "高",
-          "basis": "下游需求稳健，供给端受限，政策利好。",
-          "logic": "新能源汽车、风电等下游需求持续增长，稀土供给端受配额和指标限制，出口管制暂停实施，市场预期价格稳中向好。",
-          "prNdOxide": 72.5,
-          "ndOxide": 77.5,
-          "dysprosiumOxide": 145.5,
-          "terbiumOxide": 677.5,
-          "metalPrNd": 88.0,
-          "metalNd": 96.0,
-          "metalPr": 100.0,
-          "metalDy": 178.0,
-          "metalTb": 832.0
+          "basis": "下游需求稳定增长，供给端维持调控，预计价格稳中有升。",
+          "logic": "新能源汽车、风电等下游需求稳定增长，供给端维持调控，预计价格稳中有升。",
+          "prNdOxide": 73.25,
+          "ndOxide": 76.64,
+          "dysprosiumOxide": 144.55,
+          "terbiumOxide": 668.5,
+          "metalPrNd": 88.5,
+          "metalNd": 94.3,
+          "metalPr": 99.7,
+          "metalDy": 179.0,
+          "metalTb": 822.0
         },
         {
           "month": "2027-01",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "下游需求保持稳定，供给端持续调控。",
-          "logic": "下游需求保持稳定，供给端持续调控，出口管制暂停期接近尾声，市场预期价格小幅波动。",
-          "prNdOxide": 73.0,
-          "ndOxide": 78.0,
-          "dysprosiumOxide": 146.0,
-          "terbiumOxide": 688.0,
-          "metalPrNd": 88.5,
-          "metalNd": 97.0,
-          "metalPr": 101.0,
-          "metalDy": 179.0,
-          "metalTb": 840.0
+          "basis": "下游需求预期平稳，供给端或有微调，预计价格窄幅波动。",
+          "logic": "下游需求预期平稳，供给端或有微调，预计价格窄幅波动。",
+          "prNdOxide": 72.5,
+          "ndOxide": 75.0,
+          "dysprosiumOxide": 143.0,
+          "terbiumOxide": 660.0,
+          "metalPrNd": 88.0,
+          "metalNd": 93.0,
+          "metalPr": 98.0,
+          "metalDy": 178.0,
+          "metalTb": 815.0
         },
         {
           "month": "2027-02",
           "category": "轻稀土",
           "confidence": "中",
-          "basis": "下游需求略有回升，供给端政策影响显现。",
-          "logic": "下游需求略有回升，供给端政策影响显现，出口管制暂停期结束，市场预期价格稳中略升。",
-          "prNdOxide": 73.5,
-          "ndOxide": 78.5,
-          "dysprosiumOxide": 146.5,
-          "terbiumOxide": 690.0,
-          "metalPrNd": 89.0,
-          "metalNd": 98.0,
-          "metalPr": 102.0,
-          "metalDy": 180.0,
-          "metalTb": 848.0
+          "basis": "下游需求略有回升，供给端维持稳定，预计价格稳中略升。",
+          "logic": "下游需求略有回升，供给端维持稳定，预计价格稳中略升。",
+          "prNdOxide": 73.0,
+          "ndOxide": 74.0,
+          "dysprosiumOxide": 142.0,
+          "terbiumOxide": 655.0,
+          "metalPrNd": 87.0,
+          "metalNd": 92.0,
+          "metalPr": 97.0,
+          "metalDy": 177.0,
+          "metalTb": 810.0
         }
       ]
     },
     "strategies": [
       {
         "title": "原材料锁价长协",
-        "detail": "与稀土供应商签订长期锁价协议，锁定部分原料成本，降低价格波动风险。"
+        "detail": "与稀土供应商签订长期锁价协议，锁定原料成本，降低价格波动风险。"
       },
       {
         "title": "战略库存调节",
-        "detail": "根据市场趋势，择时增加或减少库存，应对价格波动，优化资金占用。"
+        "detail": "根据市场趋势，适时增加或减少库存，以应对价格波动，优化资金使用效率。"
       },
       {
         "title": "提高高毛利产品占比",
-        "detail": "加大对高附加值、高毛利产品的研发和生产，提升整体盈利能力。"
+        "detail": "增加高附加值、高毛利产品的生产比例，提升整体盈利能力。"
       },
       {
         "title": "推进无重稀土技术",
-        "detail": "研发和推广无重稀土或低重稀土含量的磁材产品，降低对重稀土的依赖。"
+        "detail": "研发和应用无重稀土或低重稀土含量的磁材产品，降低对高价格稀土的依赖。"
       },
       {
         "title": "回收料利用",
-        "detail": "提高废旧磁材的回收利用率，降低原材料成本。"
+        "detail": "提高稀土废料的回收利用率，降低原料成本。"
       },
       {
         "title": "价格传导",
-        "detail": "根据市场情况，适时向下游客户传导成本压力，保持自身利润空间。"
+        "detail": "根据原料成本上涨情况，适度向下游客户传导成本压力。"
       },
       {
         "title": "拓展海外业务",
-        "detail": "积极拓展海外市场和业务，分散风险，寻找新的增长点。"
+        "detail": "积极拓展海外市场和业务，分散市场风险，寻找新的增长点。"
       }
     ]
   },
@@ -1319,6 +1319,66 @@
       "id": "act-2026115-15"
     },
     {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-11-25",
+      "title": "宁波韵升公告954.17万元募投项目款项置换方案 以银行承兑汇票支付后等额划转募集资金",
+      "description": "宁波韵升股份有限公司发布公告称，公司于11月24日召开第十一届董事会第二十八次会议，审议通过了使用银行承兑汇票支付部分募投项目款项并以募集资金等额置换的议案，涉及前期已通过银行承兑汇票支付的合计954.17万元项目款项，保荐机构国泰海通证券已出具同意的专项核查意见。",
+      "source": "证券之星",
+      "sourceUrl": "https://finance.sina.cn/2026-11-24/detail-inizvqtm4858027.d.html",
+      "id": "act-20261125-01"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-11-24",
+      "title": "富国中证稀土产业ETF(159713)2026年11月24日申赎清单调整:科恒股份减持居前,其余成份股数量未现明显增持",
+      "description": "富国中证稀土产业ETF(159713)发布最新申购赎回清单，相较11月23日的清单，仅科恒股份(300340)的数量变动幅度超过±0.5%，该个股11月23日的持股数量为300股，11月24日降至200股，变化率为-33.33%。其余43只成份股数量变动幅度均位于±0.5%以内。",
+      "source": "新浪网",
+      "sourceUrl": "",
+      "id": "act-20261124-03"
+    },
+    {
+      "company": "dadi",
+      "companyName": "大地熊",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-11-24",
+      "title": "大地熊(688077) 4.6 综合诊断:4.6分 打败了23%的股票!",
+      "description": "大地熊(688077)近期的平均成本为18.80元，空头行情中，目前反弹趋势有所减缓，投资者可适当关注。该公司运营状况尚可，暂时未获得多数机构的显著认同，后续可继续关注。",
+      "source": "同花顺财经网",
+      "sourceUrl": "https://doctor.10jqka.com.cn/688077/",
+      "id": "act-20261124-04"
+    },
+    {
+      "company": "yunsheng",
+      "companyName": "宁波韵升",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-11-23",
+      "title": "宁波韵升(600366)11月23日主力资金净买入601.50万元",
+      "description": "截至2026年11月23日收盘，宁波韵升(600366)报收于9.05元，上涨4.5%，换手率2.1%，成交量23.08万手，成交额2.03亿元。11月23日的资金流向数据方面，主力资金净流入601.5万元，占总成交额2.97%，游资资金净流出1224.15万元，占总成交额6.04%，散户资金净流入622.64万元，占总成交额3.07%。",
+      "source": "证券之星",
+      "sourceUrl": "https://stock.stockstar.com/RB2026112300019895.shtml",
+      "id": "act-20261123-02"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-11-23",
+      "title": "富国中证稀土产业ETF(159713)2026年11月23日申赎清单调整:包钢股份减持居前,其余成份股数量未现明显增持",
+      "description": "富国中证稀土产业ETF(159713)发布最新申购赎回清单，相较11月20日的清单，仅包钢股份(600010)单只个股减持幅度超过0.5%，其余成份股数量未出现明显增持，同时部分现金类指标出现边际变动。",
+      "source": "新浪网",
+      "sourceUrl": "",
+      "id": "act-20261123-06"
+    },
+    {
       "company": "dadi",
       "companyName": "大地熊",
       "dimension": "supply",
@@ -1353,6 +1413,18 @@
       "source": "网易",
       "sourceUrl": "https://www.163.com/dy/article/LCDK51A005568W0A.html",
       "id": "act-20261120-05"
+    },
+    {
+      "company": "sanhuan",
+      "companyName": "中科三环",
+      "dimension": "market",
+      "dimensionName": "市场",
+      "date": "2026-11-20",
+      "title": "易方达中证稀土产业ETF(159715)2026年11月20日申赎清单调整:中国稀土减持居前,其余成份股数量未现明显增持",
+      "description": "易方达中证稀土产业ETF(159715)发布最新申购赎回清单，相较11月19日的清单，仅中国稀土(000831)出现明显减持，变化率达-14.29%，其余成份股数量均未出现超过±0.5%的调整。",
+      "source": "新浪网",
+      "sourceUrl": "",
+      "id": "act-20261120-07"
     },
     {
       "company": "yunsheng",
@@ -1521,6 +1593,30 @@
       "source": "新浪网",
       "sourceUrl": "",
       "id": "act-20261118-09"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-11-18",
+      "title": "金力永磁称在手订单充足,至2027年末磁材总产能有望达6万吨/年",
+      "description": "金力永磁(300748.SZ)在互动平台称，目前在手订单充足，产能利用率保持较高水平；在现有4万吨/年磁体产能基础上，至2027年末，随着新增产能持续释放，磁材总产能有望提升至6万吨/年。",
+      "source": "网易",
+      "sourceUrl": "https://www.163.com/dy/article/LC39E8K70519QIKK.html",
+      "id": "act-20261118-05"
+    },
+    {
+      "company": "jinli",
+      "companyName": "金力永磁",
+      "dimension": "supply",
+      "dimensionName": "供应链",
+      "date": "2026-11-18",
+      "title": "金力永磁(300748.SZ):在手订单充足,产能利用率保持较高水平",
+      "description": "金力永磁(300748.SZ)在互动平台表示，公司在手订单充足，产能利用率保持较高水平。2026年11月，公司在包头投资建设的“年产20000吨高性能稀土永磁材料绿色智造项目”已完成工程竣工及消防验收，下一阶将按计划分批次安装生产设备、逐步释放产能。",
+      "source": "东方财富网",
+      "sourceUrl": "https://caifuhao.eastmoney.com/news/20261118230856889523090",
+      "id": "act-20261118-08"
     },
     {
       "company": "dadi",
@@ -6215,6 +6311,13 @@
       "url": "http://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12244877&stockid=600259"
     },
     {
+      "date": "2026-11-20",
+      "company": "上海交通大学等",
+      "title": "上海交通大学等3家公司共同申请钕铁硼磁粉相关专利",
+      "source": "新浪网",
+      "url": "http://finance.sina.com.cn/stock/aigc/zl/2026-11-21/doc-iniznakn3588119.shtml"
+    },
+    {
       "date": "2026-11-19",
       "company": "中科磁业",
       "title": "中科磁业跌1.89%",
@@ -6376,6 +6479,34 @@
       "url": ""
     },
     {
+      "date": "2026-11-18",
+      "company": "金力永磁",
+      "title": "金力永磁包头三期2万吨高性能钕铁硼项目已竣工",
+      "source": "每日财经",
+      "url": ""
+    },
+    {
+      "date": "2026-11-18",
+      "company": "中信证券",
+      "title": "稀土行业供需向好 关注板块配置价值",
+      "source": "东方财富网",
+      "url": "https://baijiahao.baidu.com/s?id=1882153876523031231&wfr=spider&for=pc"
+    },
+    {
+      "date": "2026-11-18",
+      "company": "横店东磁",
+      "title": "横店东磁取得磁组件单面胶粘贴设备相关专利",
+      "source": "新浪网",
+      "url": ""
+    },
+    {
+      "date": "2026-11-18",
+      "company": "横店东磁",
+      "title": "横店东磁取得磁铁除尘设备相关专利",
+      "source": "新浪网",
+      "url": ""
+    },
+    {
       "date": "2026-11-17",
       "company": "中国稀土",
       "title": "中国稀土跌停分析",
@@ -6416,6 +6547,20 @@
       "title": "稀土政策与产业端迎来哪些新变化",
       "source": "商务部",
       "url": "https://caifuhao.eastmoney.com/news/20261117110833293187920"
+    },
+    {
+      "date": "2026-11-17",
+      "company": "行业",
+      "title": "稀土政策与产业端迎来哪些新变化?",
+      "source": "商务部",
+      "url": "https://caifuhao.eastmoney.com/news/20261117110833293187920"
+    },
+    {
+      "date": "2026-11-17",
+      "company": "行业",
+      "title": "20261116-20261120稀土市场资讯周报（2026年第24期 总第354期）",
+      "source": "云媒体",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzU5MDI2NDI0OA==&mid=2247530718&idx=1&sn=729807126267628e9aa07675dcc9f7f0&chksm=fc4eb853e67a27871536e537ed9c0c087361b90f1faa6844502ed82e29649d8b6f89a4aba8cf&scene=27"
     },
     {
       "date": "2026-11-16",
@@ -6479,6 +6624,13 @@
       "title": "2026年11月15日稀土价格指数",
       "source": "中国稀土行业协会",
       "url": "https://mp.weixin.qq.com/s?__biz=MzAwNDI3MDU3Nw==&mid=2651184054&idx=2&sn=45f60de2bb26b65b1ce0b0374ea45ef1&chksm=819fc90cd9c699e493ac3a144c91e6fdb565a1fa622986575b3da923cfb3cd5266eecc59ed89&scene=27"
+    },
+    {
+      "date": "2026-11-15",
+      "company": "行业",
+      "title": "多项出口管制,暂缓",
+      "source": "东方财富网",
+      "url": ""
     },
     {
       "date": "2026-11-14",
@@ -6880,6 +7032,20 @@
       "url": "https://mp.weixin.qq.com/s?__biz=MzU5MDI2NDI0OA==&mid=2247530551&idx=3&sn=429396690c19f0f030f79fdb287f915a&chksm=fcd96c71fc220c31efab2ba05a4de8271dc26d7d04afad4f31499e4d96a8486a866b2b314ae1&scene=27"
     },
     {
+      "date": "2026-11-12",
+      "company": "紫金矿业",
+      "title": "紫金矿业在福建成立稀贵金属科技公司",
+      "source": "云媒体",
+      "url": ""
+    },
+    {
+      "date": "2026-11-12",
+      "company": "澳洲稀土公司",
+      "title": "南澳州奥弗兰铌稀土矿潜力初现",
+      "source": "自然资源部",
+      "url": ""
+    },
+    {
       "date": "2026-11-11",
       "company": "中国稀土行业协会",
       "title": "日本稀土短缺蔓延 信越停接含镝磁体订单",
@@ -6997,6 +7163,13 @@
       "title": "正海磁材连吃两函背后,是一场持续多年的业务收缩",
       "source": "百家号",
       "url": "https://baijiahao.baidu.com/s?id=1881546690871173006&wfr=spider&for=pc"
+    },
+    {
+      "date": "2026-11-11",
+      "company": "李卫院士团队",
+      "title": "李卫院士团队在富铁2:17型钐钴永磁材料研究方面取得重要进展",
+      "source": "中国钢研",
+      "url": ""
     },
     {
       "date": "2026-11-10",
